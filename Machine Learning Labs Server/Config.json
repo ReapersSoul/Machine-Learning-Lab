@@ -1,0 +1,24 @@
+{
+	"Excluded Core DLLs":[
+		"DynamicCodeExecutionEngine.dll"
+	],
+	"Core Libs Load Order":[
+		"brotlicommon.dll",
+		"brotlidec.dll",
+		"bz2d.dll",
+		"zlibd1.dll",
+		"libpng16d.dll"
+	],
+	"Engines":[
+		"UIEngine.dll",
+		"DynamicCodeExecutionEngine.dll",
+		"GraphEngine.dll",
+		"ActivationEngine.dll",
+		"LossEngine.dll",
+		"NetworkEngine.dll",
+		"OptimizationEngine.dll",
+		"APIEngine.dll"
+	]
+
+
+}

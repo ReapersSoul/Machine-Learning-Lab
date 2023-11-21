@@ -1,0 +1,5 @@
+def Init(__NodePtr__):{
+    global NodePtr
+    NodePtr = __NodePtr__
+    }
+
