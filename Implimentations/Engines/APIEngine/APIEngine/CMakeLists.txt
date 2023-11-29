@@ -47,8 +47,8 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 ################################################################################
 if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")
     set_target_properties(${PROJECT_NAME} PROPERTIES
-        OUTPUT_DIRECTORY_DEBUG   "${CMAKE_CURRENT_SOURCE_DIR}/../../../../Machine Learning Labs/Core"
-        OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}/../../../../Machine Learning Labs/Core"
+        OUTPUT_DIRECTORY_DEBUG   "${CMAKE_CURRENT_SOURCE_DIR}/../../../../Machine-Learning-Labs/Core"
+        OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}/../../../../Machine-Learning-Labs/Core"
     )
 endif()
 if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")

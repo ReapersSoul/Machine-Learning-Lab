@@ -137,7 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Machine Learning Labs Server.cpp" />
+    <ClCompile Include="Machine-Learning-Labs-Server.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

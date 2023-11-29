@@ -43,7 +43,7 @@ public:
 
 		version = request.version();
 		b_beast::http::response<b_beast::http::string_body> response{b_beast::http::status::ok, request.version()};
-		response.set(b_beast::http::field::server, "Machine Learning Labs Server");
+		response.set(b_beast::http::field::server, "Machine-Learning-Labs-Server");
 		//convert buffer to string
 		std::string message = std::string(request.body().c_str());
 

@@ -1,10 +1,10 @@
-set(PROJECT_NAME MachineLearningLabs)
+set(PROJECT_NAME Machine-Learning-Labs)
 
 ################################################################################
 # Source groups
 ################################################################################
 set(Source_Files
-    "Machine Learning Labs.cpp"
+    "Machine-Learning-Labs.cpp"
 )
 source_group("Source Files" FILES ${Source_Files})
 

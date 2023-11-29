@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Machine Learning Labs", "Machine Learning Labs\Machine Learning Labs.vcxproj", "{DF354DD2-4CE1-4447-805C-16695D200279}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Machine-Learning-Labs", "Machine-Learning-Labs\Machine-Learning-Labs.vcxproj", "{DF354DD2-4CE1-4447-805C-16695D200279}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interfaces", "Interfaces", "{F5D7E586-3BCC-4CE7-8B81-04B7B48FB17D}"
 EndProject
@@ -167,7 +167,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClientInterface", "ClientIn
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ClientInterface", "Interfaces\Engines\NetworkEngine\Client\ClientInterface\ClientInterface.vcxitems", "{6B8BE870-B309-4F1C-9028-E22462AAA8AB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Machine Learning Labs Server", "Machine Learning Labs Server\Machine Learning Labs Server.vcxproj", "{04EFCF3A-E26F-456E-B06C-C743F931DAB4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Machine-Learning-Labs-Server", "Machine-Learning-Labs-Server\Machine-Learning-Labs-Server.vcxproj", "{04EFCF3A-E26F-456E-B06C-C743F931DAB4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBaseEngine", "DataBaseEngine", "{5A4BE0F7-20F3-4DDE-BAB2-38512D98C508}"
 EndProject

@@ -72,10 +72,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>..\..\..\..\..\Machine Learning Labs\Core\Losses</OutDir>
+    <OutDir>..\..\..\..\..\Machine-Learning-Labs\Core\Losses</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\..\..\..\..\Machine Learning Labs\Core\Losses</OutDir>
+    <OutDir>..\..\..\..\..\Machine-Learning-Labs\Core\Losses</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16.0 FATAL_ERROR)
 
 set(CMAKE_SYSTEM_VERSION 10.0 CACHE STRING "" FORCE)
 
-project(Machine Learning Labs CXX)
+project(Machine-Learning-Labs CXX)
 
 ################################################################################
 # Set target arch type if empty. Visual studio solution generator provides it.
@@ -138,7 +138,7 @@ add_subdirectory(Implimentations/Engines/LossEngine/Losses/ScriptLoss)
 add_subdirectory(Implimentations/Engines/NetworkEngine/NetworkEngine)
 add_subdirectory(Implimentations/Engines/OptimizationEngine/OptimizationEngine)
 add_subdirectory(Implimentations/Engines/UIEngine/UIEngine)
-add_subdirectory(Machine Learning Labs)
-add_subdirectory(Machine Learning Labs Server)
+add_subdirectory(Machine-Learning-Labs)
+add_subdirectory(Machine-Learning-Labs-Server)
 add_subdirectory(MnistDatabaseMaker)
 

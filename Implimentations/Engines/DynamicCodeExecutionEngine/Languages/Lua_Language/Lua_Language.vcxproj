@@ -78,10 +78,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>..\..\..\..\..\Machine Learning Labs\Plugins\Languages</OutDir>
+    <OutDir>..\..\..\..\..\Machine-Learning-Labs\Plugins\Languages</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\..\..\..\..\Machine Learning Labs\Plugins\Languages</OutDir>
+    <OutDir>..\..\..\..\..\Machine-Learning-Labs\Plugins\Languages</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

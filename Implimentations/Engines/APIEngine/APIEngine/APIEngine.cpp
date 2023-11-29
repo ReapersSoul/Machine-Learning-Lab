@@ -253,7 +253,7 @@ private:
 		{
 		case http::verb::get:
 			response_.result(http::status::ok);
-			response_.set(http::field::server, "Machine Learning Labs");
+			response_.set(http::field::server, "Machine-Learning-Labs");
 			create_response();
 			break;
 
