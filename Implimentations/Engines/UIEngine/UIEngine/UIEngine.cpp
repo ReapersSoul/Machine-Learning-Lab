@@ -212,7 +212,6 @@ class UIEngine : public UIEngineInterface
 	std::thread processingthread;
 
 	int mode = 0;
-	ImGuiIO& io=ImGui::GetIO();
 public:
 
 	int GetItteration() override {
@@ -360,7 +359,6 @@ public:
 		// Setup Node Editor
 		config.SettingsFile = "NodeGraphConfig.json";
 		g_Context = ed::CreateEditor(&config);
-		(void)io;
 
 		ImGui::StyleColorsDark();
 		//enable docking
