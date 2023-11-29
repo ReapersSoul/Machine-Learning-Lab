@@ -125,15 +125,15 @@ class UIEngine : public UIEngineInterface
 		}
 		ed::EndDelete();
 
-		
+
 		//if right click
 		if (ed::ShowBackgroundContextMenu()) {
 			//open context menu
-			ImGui::OpenPopup("Node Context Menu");
+			ImGui::OpenPopup("Background Context Menu");
 		}
 
 		//if context menu is open
-		if (ImGui::BeginPopup("Node Context Menu")) {
+		if (ImGui::BeginPopup("Background Context Menu")) {
 			char* tmptText = new char[SearchText.size() + 2];
 			memcpy_s(tmptText, SearchText.size() + 2, SearchText.c_str(), SearchText.size() + 1);
 			ImGui::InputText("Search", tmptText, SearchText.size() + 2);
@@ -169,6 +169,35 @@ class UIEngine : public UIEngineInterface
 			}
 			ImGui::EndPopup();
 		}
+
+		ed::NodeId ContextNode;
+		if (ed::ShowNodeContextMenu(&ContextNode)) {
+			//open context menu
+			ImGui::OpenPopup("Node Context Menu");
+		}
+
+		//if context menu is open
+		if (ImGui::BeginPopup("Node Context Menu")) {
+			std::vector<ed::NodeId> nodes(ed::GetActionContextSize());
+			int nodeCount = ed::GetActionContextNodes(nodes.data(), ed::GetActionContextSize());
+			//if node is clicked
+			if (ImGui::MenuItem("Delete")) {
+				//delete node
+				GraphEngine->GetGraphs()["main"]->GetMutex().lock();
+				//delete edges
+				for (auto edge : GraphEngine->GetGraphs()["main"]->GetNodes()[ContextNode.Get()]->GetInputEdges()) {
+					GraphEngine->GetGraphs()["main"]->DeleteEdge(edge->GetUID());
+				}
+				for (auto edge : GraphEngine->GetGraphs()["main"]->GetNodes()[ContextNode.Get()]->GetOutputEdges()) {
+					GraphEngine->GetGraphs()["main"]->DeleteEdge(edge->GetUID());
+				}
+				//delete node
+				GraphEngine->GetGraphs()["main"]->DeleteNode((unsigned int)ContextNode.Get());
+				GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
+			}
+			ImGui::EndPopup();
+		}
+
 
 		////Node Properties window
 		//if (ImGui::Begin("Node Properties")) {
