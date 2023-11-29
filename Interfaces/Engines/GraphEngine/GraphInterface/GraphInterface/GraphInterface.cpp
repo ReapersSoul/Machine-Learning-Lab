@@ -91,15 +91,11 @@ void GraphInterface::DeleteNode(NodeInterface* Node) {
 }
 
 void GraphInterface::DeleteNode(unsigned int NodeUID) {
-	Nodes.erase(NodeUID);
-}
-
-void GraphInterface::DeleteNode(int NodeUID) {
 	Nodes[NodeUID]->~NodeInterface();
 	Nodes.erase(NodeUID);
 }
 
-void GraphInterface::Process(bool DirectionForward, std::vector<int> SelectedNodes, std::vector<int> SelectedEdges) {
+void GraphInterface::Process(bool DirectionForward, std::vector<unsigned int> SelectedNodes, std::vector<unsigned int> SelectedEdges) {
 	ProcessingOrder PO = Sorter->SortGraph(this, DirectionForward);
 	for (int i = 0; i < PO.Nodes.size(); i++)
 	{

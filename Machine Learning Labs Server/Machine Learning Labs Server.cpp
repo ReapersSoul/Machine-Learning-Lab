@@ -7,7 +7,11 @@
 #include <filesystem>
 
 int main() {
-    Sleep(10000);
+    int SleepTimeInSec = 10;
+    std::this_thread::sleep_for(std::chrono::seconds(SleepTimeInSec));
+    //wait for keypress
+    std::cin.get();
+
     DynamicCodeExecutionEngineInterface::ReLoadEngine();
     DynamicCodeExecutionEngineInterface* instance = DynamicCodeExecutionEngineInterface::GetInstance();
 

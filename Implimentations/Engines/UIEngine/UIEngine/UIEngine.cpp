@@ -14,14 +14,17 @@
 //glm
 #include <glm/glm.hpp>
 
-//dear imgui
-#include <imgui_internal.h>
+//imgui
+#define IMGUI_DEFINE_MATH_OPERATORS
 #include <imgui.h>
+#include <imgui_internal.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 
-//imnodes
-#include <imnodes.h>
+//imgui node editor
+#include <imgui-node-editor/imgui_node_editor.h>
+#include <imgui-node-editor/imgui_node_editor_internal.h>
+namespace ed = ax::NodeEditor;
 
 //json
 #include <nlohmann/json.hpp>
@@ -31,7 +34,6 @@
 
 //filesystem	
 #include <filesystem>
-
 #include <iostream>
 
 class UIEngine : public UIEngineInterface
@@ -42,11 +44,15 @@ class UIEngine : public UIEngineInterface
 
 	std::string SelectedTheme = "DarkMode";
 
+	ed::Config config;
+	ed::EditorContext* g_Context = nullptr;
+
 	int itteration = -1;
 	int MaxItterations = 1000;
 	bool ConstantProcess = false;
 	bool ConstantTrain = false;
 	int last_hovered_id = -1;
+	std::string SearchText;
 
 	std::string RegexClean(std::string str) {
 		std::regex r("[^a-zA-Z0-9_]");
@@ -61,82 +67,132 @@ class UIEngine : public UIEngineInterface
 
 	void HandleGraphInputEvents() {
 
-		//if edge created
-		int FirstNode;
-		int FirstNodeIO;
-		int SecondNode;
-		int SecondNodeIO;
-		if (ImNodes::IsLinkCreated(&FirstNode, &FirstNodeIO, &SecondNode, &SecondNodeIO)) {
-			GraphEngine->GetGraphs()["main"]->GetMutex().lock();
+		if (ed::BeginCreate()) {
 
-			//create edge
-			EdgeInterface* edge = GraphEngine->GetGraphs()["main"]->CreateEdge(FirstNode, SecondNode, FirstNodeIO, SecondNodeIO);
-			if (edge != nullptr) {
-				GraphEngine->GetGraphs()["main"]->GetNodes()[FirstNode]->GetOutputEdges().push_back(edge);
-				GraphEngine->GetGraphs()["main"]->GetNodes()[SecondNode]->GetInputEdges().push_back(edge);
-			}
-
-			GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
-		}
-
-		//if hovering over edge
-		int HoveredEdge;
-		if (ImNodes::IsLinkHovered(&HoveredEdge)) {
-			//if delete key is pressed
-			if (ImGui::IsKeyPressed(ImGuiKey_Delete)) {
+			ed::PinId inputPinId, outputPinId;
+			if (ed::QueryNewLink(&inputPinId, &outputPinId))
+			{
 				GraphEngine->GetGraphs()["main"]->GetMutex().lock();
-				//delete edge
-				GraphEngine->GetGraphs()["main"]->DeleteEdge(HoveredEdge);
+				//find the node that the pin belongs to
+				unsigned int inputNode = -1;
+				unsigned int outputNode = -1;
+				for (auto node : GraphEngine->GetGraphs()["main"]->GetNodes()) {
+					if (node.second->HasInput(inputPinId.Get())) {
+						inputNode = node.second->GetUID();
+					}
+					if (node.second->HasOutput(outputPinId.Get())) {
+						outputNode = node.second->GetUID();
+					}
+				}
+
+				//create edge
+				EdgeInterface* edge = GraphEngine->GetGraphs()["main"]->CreateEdge(inputNode, outputNode, inputPinId.Get(), outputPinId.Get());
+				if (edge != nullptr) {
+					GraphEngine->GetGraphs()["main"]->GetNodes()[inputNode]->GetOutputEdges().push_back(edge);
+					GraphEngine->GetGraphs()["main"]->GetNodes()[outputNode]->GetInputEdges().push_back(edge);
+				}
+
 				GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
 			}
 		}
+		ed::EndCreate();
 
-		//if hovering over node
-		int HoveredNode;
-		if (ImNodes::IsNodeHovered(&HoveredNode)) {
-			//if delete key is pressed
-			if (ImGui::IsKeyPressed(ImGuiKey_Delete)) {
+		if (ed::BeginDelete()) {
+			ed::LinkId deletedLinkId;
+			while (ed::QueryDeletedLink(&deletedLinkId))
+			{
+				GraphEngine->GetGraphs()["main"]->GetMutex().lock();
+				//delete edge
+				GraphEngine->GetGraphs()["main"]->DeleteEdge(deletedLinkId.Get());
+				GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
+			}
+
+			ed::NodeId deletedNodeId;
+			while (ed::QueryDeletedNode(&deletedNodeId)) {
 				GraphEngine->GetGraphs()["main"]->GetMutex().lock();
 				//delete edges
-				for (auto edge : GraphEngine->GetGraphs()["main"]->GetNodes()[HoveredNode]->GetInputEdges()) {
+				for (auto edge : GraphEngine->GetGraphs()["main"]->GetNodes()[deletedNodeId.Get()]->GetInputEdges()) {
 					GraphEngine->GetGraphs()["main"]->DeleteEdge(edge->GetUID());
 				}
-				for (auto edge : GraphEngine->GetGraphs()["main"]->GetNodes()[HoveredNode]->GetOutputEdges()) {
+				for (auto edge : GraphEngine->GetGraphs()["main"]->GetNodes()[deletedNodeId.Get()]->GetOutputEdges()) {
 					GraphEngine->GetGraphs()["main"]->DeleteEdge(edge->GetUID());
 				}
 
 				//delete node
-				GraphEngine->GetGraphs()["main"]->DeleteNode(HoveredNode);
+				GraphEngine->GetGraphs()["main"]->DeleteNode((unsigned int)deletedNodeId.Get());
 				GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
 			}
 		}
+		ed::EndDelete();
 
+		
 		//if right click
-		if (ImGui::IsMouseClicked(1)) {
+		if (ed::ShowBackgroundContextMenu()) {
 			//open context menu
 			ImGui::OpenPopup("Node Context Menu");
 		}
 
 		//if context menu is open
 		if (ImGui::BeginPopup("Node Context Menu")) {
-			char* SearchText = new char[100] {""};
-			ImGui::InputText("Search", SearchText, 100);
+			char* tmptText = new char[SearchText.size() + 2];
+			memcpy_s(tmptText, SearchText.size() + 2, SearchText.c_str(), SearchText.size() + 1);
+			ImGui::InputText("Search", tmptText, SearchText.size() + 2);
+			SearchText = tmptText;
 
-				//loop through all available nodes
+			//check if SearchText is full of \0
+			//loop through all available nodes
+			if (SearchText.empty()) {
 				for (auto node : GraphEngine->GetAvailableNodes()) {
-					if (RegexMatch(std::string(SearchText)+".*", node.TypeID) || std::string(SearchText) == "") {
+					//if node is clicked
+					if (ImGui::MenuItem(node.TypeID.c_str())) {
+						//add node to graph
+						GraphEngine->GetGraphs()["main"]->GetMutex().lock();
+						int uuid = GraphEngine->GetGraphs()["main"]->AddNode(node.CreateNode());
+						GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
+						ed::SetNodePosition(uuid, ImGui::GetMousePos());
+					}
+				}
+			}
+			else {
+				for (auto node : GraphEngine->GetAvailableNodes()) {
+					if (RegexMatch(SearchText + ".*", node.TypeID)) {
 						//if node is clicked
 						if (ImGui::MenuItem(node.TypeID.c_str())) {
 							//add node to graph
 							GraphEngine->GetGraphs()["main"]->GetMutex().lock();
 							int uuid = GraphEngine->GetGraphs()["main"]->AddNode(node.CreateNode());
 							GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
-							ImNodes::SetNodeScreenSpacePos(uuid, ImGui::GetMousePos());
+							ed::SetNodePosition(uuid, ImGui::GetMousePos());
 						}
 					}
 				}
+			}
 			ImGui::EndPopup();
 		}
+
+		//Node Properties window
+		if (ImGui::Begin("Node Properties")) {
+			if (ed::GetSelectedObjectCount() > 0) {
+				std::vector<ed::NodeId> SelectedNodes(ed::GetSelectedObjectCount());
+				std::vector<ed::LinkId> SelectedEdges(ed::GetSelectedObjectCount());
+				int nodeCount = ed::GetSelectedNodes(SelectedNodes.data(), ed::GetSelectedObjectCount());
+				int edgeCount = ed::GetSelectedLinks(SelectedEdges.data(), ed::GetSelectedObjectCount());
+				SelectedNodes.resize(nodeCount);
+				SelectedEdges.resize(edgeCount);
+				std::vector<unsigned int> SelectedNodesUID;
+				std::vector<unsigned int> SelectedEdgesUID;
+				for (auto node : SelectedNodes) {
+					SelectedNodesUID.push_back(node.Get());
+				}
+				for (auto edge : SelectedEdges) {
+					SelectedEdgesUID.push_back(edge.Get());
+				}
+				if (GraphEngine->GetGraphs()["main"]->GetNodes().find(SelectedNodesUID[0]) != GraphEngine->GetGraphs()["main"]->GetNodes().end()) {
+					GraphEngine->GetGraphs()["main"]->GetNodes()[SelectedNodesUID[0]]->DrawNodeProperties(ImGui::GetCurrentContext());
+				}
+			}
+		}
+		ImGui::End();
 	}
 
 	std::map<std::string, ImColor> IoTypeColors;
@@ -156,6 +212,7 @@ class UIEngine : public UIEngineInterface
 	std::thread processingthread;
 
 	int mode = 0;
+	ImGuiIO& io=ImGui::GetIO();
 public:
 
 	int GetItteration() override {
@@ -198,6 +255,7 @@ public:
 				}
 			}
 			});
+		SearchText.resize(100);
 		//processingthread.detach();
 	}
 
@@ -273,33 +331,40 @@ public:
 		NetworkEngine->SetDCEEngine(DCEEngine);
 		NetworkEngine->Init(true);
 
-		glfwInit();
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-
-		window = glfwCreateWindow(800, 600, "Machine Learning Lab", NULL, NULL);
-		if (window == NULL)
-		{
-			printf("Failed to create GLFW window");
+		// Initialize GLFW
+		if (!glfwInit()) {
+			throw std::runtime_error("Failed to initialize GLFW!");
 		}
+
+		// Create a GLFW window
+		window = glfwCreateWindow(800, 600, "ImGui Node Editor Example", nullptr, nullptr);
+		if (!window) {
+			glfwTerminate();
+			throw std::runtime_error("Failed to create GLFW window!");
+		}
+
+		// Make the window's context current
 		glfwMakeContextCurrent(window);
 
-		glewInit();
+		// Initialize GLEW
+		if (glewInit() != GLEW_OK) {
+			throw std::runtime_error("Failed to initialize GLEW!");
+		}
 
+		// Setup ImGui
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
-		ImGuiIO& io = ImGui::GetIO(); (void)io;
-
-		ImGui::StyleColorsDark();
-
 		ImGui_ImplGlfw_InitForOpenGL(window, true);
 		ImGui_ImplOpenGL3_Init("#version 330");
+
+		// Setup Node Editor
+		config.SettingsFile = "NodeGraphConfig.json";
+		g_Context = ed::CreateEditor(&config);
+		(void)io;
+
+		ImGui::StyleColorsDark();
 		//enable docking
 		ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-
-
-		//init imnodes
-		ImNodes::CreateContext();
 	}
 
 	void Run() override{
@@ -308,6 +373,7 @@ public:
 		// render loop
 		while (!glfwWindowShouldClose(window))
 		{
+			glfwPollEvents();
 			if (DCEEngine->IsReloading()) {
 				continue;
 			}
@@ -347,7 +413,9 @@ public:
 					if (ImGui::MenuItem("Load")) {
 						GraphEngine->GetGraphs()["main"]->DeSerializeFromFile("STATE.dat", DCEEngine);
 						for (auto node : GraphEngine->GetGraphs()["main"]->GetNodes()) {
-							ImNodes::SetNodeGridSpacePos(node.second->GetUID(), ImVec2(node.second->getX(), node.second->getY()));
+							ed::SetCurrentEditor(g_Context);
+							ed::SetNodePosition(node.second->GetUID(), ImVec2(node.second->getX(), node.second->getY()));
+							ed::SetCurrentEditor(nullptr);
 						}
 					}
 					if (ImGui::MenuItem("Save As")) {
@@ -372,48 +440,69 @@ public:
 					ImGui::EndMenu();
 				}
 				if (ImGui::MenuItem("Forward Step")) {
-					std::vector<int> SelectedNodes(ImNodes::NumSelectedNodes());
-					if (ImNodes::NumSelectedNodes() > 0) {
-						ImNodes::GetSelectedNodes(SelectedNodes.data());
+					if (ed::GetSelectedObjectCount() > 0) {
+						std::vector<ed::NodeId> SelectedNodes(ed::GetSelectedObjectCount());
+						std::vector<ed::LinkId> SelectedEdges(ed::GetSelectedObjectCount());
+						int nodeCount = ed::GetSelectedNodes(SelectedNodes.data(), ed::GetSelectedObjectCount());
+						int edgeCount = ed::GetSelectedLinks(SelectedEdges.data(), ed::GetSelectedObjectCount());
+						SelectedNodes.resize(nodeCount);
+						SelectedEdges.resize(edgeCount);
+						std::vector<unsigned int> SelectedNodesUID;
+						std::vector<unsigned int> SelectedEdgesUID;
+						for (auto node : SelectedNodes) {
+							SelectedNodesUID.push_back(node.Get());
+						}
+						for (auto edge : SelectedEdges) {
+							SelectedEdgesUID.push_back(edge.Get());
+						}
+
+						std::thread([&, SelectedNodesUID, SelectedEdgesUID]() {
+							while (GraphEngine->GetGraphs()["main"]->GetMutex().try_lock()) {};
+							GraphEngine->GetGraphs()["main"]->Process(true, SelectedNodesUID, SelectedEdgesUID);
+							GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
+							}).detach();
 					}
-					std::vector<int> SelectedEdges(ImNodes::NumSelectedLinks());
-					if (ImNodes::NumSelectedLinks() > 0) {
-						ImNodes::GetSelectedLinks(SelectedEdges.data());
-					}
-					std::thread([&,SelectedNodes,SelectedEdges]() {
-						while (GraphEngine->GetGraphs()["main"]->GetMutex().try_lock()) {};
-						GraphEngine->GetGraphs()["main"]->Process(true, SelectedNodes, SelectedEdges);
-						GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
-						}).detach();
 				}
 				if (ImGui::MenuItem("Backward Step")) {
-					std::vector<int> SelectedNodes(ImNodes::NumSelectedNodes());
-					if (ImNodes::NumSelectedNodes() > 0) {
-						ImNodes::GetSelectedNodes(SelectedNodes.data());
+					std::vector<ed::NodeId> SelectedNodes(ed::GetSelectedObjectCount());
+					std::vector<ed::LinkId> SelectedEdges(ed::GetSelectedObjectCount());
+					int nodeCount = ed::GetSelectedNodes(SelectedNodes.data(), ed::GetSelectedObjectCount());
+					int edgeCount = ed::GetSelectedLinks(SelectedEdges.data(), ed::GetSelectedObjectCount());
+					SelectedNodes.resize(nodeCount);
+					SelectedEdges.resize(edgeCount);
+					std::vector<unsigned int> SelectedNodesUID;
+					std::vector<unsigned int> SelectedEdgesUID;
+					for (auto node : SelectedNodes) {
+						SelectedNodesUID.push_back(node.Get());
 					}
-					std::vector<int> SelectedEdges(ImNodes::NumSelectedLinks());
-					if (ImNodes::NumSelectedLinks() > 0) {
-						ImNodes::GetSelectedLinks(SelectedEdges.data());
+					for (auto edge : SelectedEdges) {
+						SelectedEdgesUID.push_back(edge.Get());
 					}
-					std::thread([&, SelectedNodes, SelectedEdges]() {
+					std::thread([&, SelectedNodesUID, SelectedEdgesUID]() {
 						GraphEngine->GetGraphs()["main"]->GetMutex().lock();
-						GraphEngine->GetGraphs()["main"]->Process(false, SelectedNodes, SelectedEdges);
+						GraphEngine->GetGraphs()["main"]->Process(false, SelectedNodesUID, SelectedEdgesUID);
 						GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
 						}).detach();
 				}
 				if (ImGui::MenuItem("Full/Train Step")) {
-					std::vector<int> SelectedNodes(ImNodes::NumSelectedNodes());
-					if (ImNodes::NumSelectedNodes() > 0) {
-						ImNodes::GetSelectedNodes(SelectedNodes.data());
+					std::vector<ed::NodeId> SelectedNodes(ed::GetSelectedObjectCount());
+					std::vector<ed::LinkId> SelectedEdges(ed::GetSelectedObjectCount());
+					int nodeCount = ed::GetSelectedNodes(SelectedNodes.data(), ed::GetSelectedObjectCount());
+					int edgeCount = ed::GetSelectedLinks(SelectedEdges.data(), ed::GetSelectedObjectCount());
+					SelectedNodes.resize(nodeCount);
+					SelectedEdges.resize(edgeCount);
+					std::vector<unsigned int> SelectedNodesUID;
+					std::vector<unsigned int> SelectedEdgesUID;
+					for (auto node : SelectedNodes) {
+						SelectedNodesUID.push_back(node.Get());
 					}
-					std::vector<int> SelectedEdges(ImNodes::NumSelectedLinks());
-					if (ImNodes::NumSelectedLinks() > 0) {
-						ImNodes::GetSelectedLinks(SelectedEdges.data());
+					for (auto edge : SelectedEdges) {
+						SelectedEdgesUID.push_back(edge.Get());
 					}
-					std::thread([&, SelectedNodes, SelectedEdges]() {
+					std::thread([&, SelectedNodesUID, SelectedEdgesUID]() {
 						GraphEngine->GetGraphs()["main"]->GetMutex().lock();
-					GraphEngine->GetGraphs()["main"]->Process(true, SelectedNodes, SelectedEdges);
-					GraphEngine->GetGraphs()["main"]->Process(false, SelectedNodes, SelectedEdges);
+					GraphEngine->GetGraphs()["main"]->Process(true, SelectedNodesUID, SelectedEdgesUID);
+					GraphEngine->GetGraphs()["main"]->Process(false, SelectedNodesUID, SelectedEdgesUID);
 					GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
 					}).detach();
 				}
@@ -434,37 +523,49 @@ public:
 				ImGui::Text("Current Itt: %i", itteration);
 				ImGui::Checkbox("Constant Forward", &ConstantProcess);
 				if (ConstantProcess) {
-					std::vector<int> SelectedNodes(ImNodes::NumSelectedNodes());
-					if (ImNodes::NumSelectedNodes() > 0) {
-						ImNodes::GetSelectedNodes(SelectedNodes.data());
+					std::vector<ed::NodeId> SelectedNodes(ed::GetSelectedObjectCount());
+					std::vector<ed::LinkId> SelectedEdges(ed::GetSelectedObjectCount());
+					int nodeCount = ed::GetSelectedNodes(SelectedNodes.data(), ed::GetSelectedObjectCount());
+					int edgeCount = ed::GetSelectedLinks(SelectedEdges.data(), ed::GetSelectedObjectCount());
+					SelectedNodes.resize(nodeCount);
+					SelectedEdges.resize(edgeCount);
+					std::vector<unsigned int> SelectedNodesUID;
+					std::vector<unsigned int> SelectedEdgesUID;
+					for (auto node : SelectedNodes) {
+						SelectedNodesUID.push_back(node.Get());
 					}
-					std::vector<int> SelectedEdges(ImNodes::NumSelectedLinks());
-					if (ImNodes::NumSelectedLinks() > 0) {
-						ImNodes::GetSelectedLinks(SelectedEdges.data());
+					for (auto edge : SelectedEdges) {
+						SelectedEdgesUID.push_back(edge.Get());
 					}
-					std::thread([&, SelectedNodes, SelectedEdges]() {
+					std::thread([&, SelectedNodesUID, SelectedEdgesUID]() {
 						if (ConstantProcess) {
 							GraphEngine->GetGraphs()["main"]->GetMutex().lock();
-							GraphEngine->GetGraphs()["main"]->Process(true, SelectedNodes, SelectedEdges);
+							GraphEngine->GetGraphs()["main"]->Process(true, SelectedNodesUID, SelectedEdgesUID);
 							GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
 						}
 						}).detach();
 				}
 				ImGui::Checkbox("Constant Train", &ConstantTrain);
 				if (ConstantTrain) {
-					std::vector<int> SelectedNodes(ImNodes::NumSelectedNodes());
-					if (ImNodes::NumSelectedNodes() > 0) {
-						ImNodes::GetSelectedNodes(SelectedNodes.data());
+					std::vector<ed::NodeId> SelectedNodes(ed::GetSelectedObjectCount());
+					std::vector<ed::LinkId> SelectedEdges(ed::GetSelectedObjectCount());
+					int nodeCount = ed::GetSelectedNodes(SelectedNodes.data(), ed::GetSelectedObjectCount());
+					int edgeCount = ed::GetSelectedLinks(SelectedEdges.data(), ed::GetSelectedObjectCount());
+					SelectedNodes.resize(nodeCount);
+					SelectedEdges.resize(edgeCount);
+					std::vector<unsigned int> SelectedNodesUID;
+					std::vector<unsigned int> SelectedEdgesUID;
+					for (auto node : SelectedNodes) {
+						SelectedNodesUID.push_back(node.Get());
 					}
-					std::vector<int> SelectedEdges(ImNodes::NumSelectedLinks());
-					if (ImNodes::NumSelectedLinks() > 0) {
-						ImNodes::GetSelectedLinks(SelectedEdges.data());
+					for (auto edge : SelectedEdges) {
+						SelectedEdgesUID.push_back(edge.Get());
 					}
-					std::thread([&, SelectedNodes, SelectedEdges]() {
+					std::thread([&, SelectedNodesUID, SelectedEdgesUID]() {
 						if (ConstantTrain) {
 							GraphEngine->GetGraphs()["main"]->GetMutex().lock();
-							GraphEngine->GetGraphs()["main"]->Process(true, SelectedNodes, SelectedEdges);
-							GraphEngine->GetGraphs()["main"]->Process(false, SelectedNodes, SelectedEdges);
+							GraphEngine->GetGraphs()["main"]->Process(true, SelectedNodesUID, SelectedEdgesUID);
+							GraphEngine->GetGraphs()["main"]->Process(false, SelectedNodesUID, SelectedEdgesUID);
 							GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
 						}
 						}).detach();
@@ -479,7 +580,7 @@ public:
 			ImGui::PushStyleColor(ImGuiCol_TabUnfocusedActive, ImVec4(Theme["Title Bar Color"][0], Theme["Title Bar Color"][1], Theme["Title Bar Color"][2], Theme["Title Bar Color"][3]));
 			ImGui::PushStyleColor(ImGuiCol_TabActive, ImVec4(Theme["Title Bar Color"][0], Theme["Title Bar Color"][1], Theme["Title Bar Color"][2], Theme["Title Bar Color"][3]));
 			ImGui::PushStyleColor(ImGuiCol_TabHovered, ImVec4(Theme["Title Bar Color"][0], Theme["Title Bar Color"][1], Theme["Title Bar Color"][2], Theme["Title Bar Color"][3]));
-			ImNodes::PushColorStyle(ImNodesCol_TitleBar, ImColor(ImVec4(Theme["Title Bar Color"][0], Theme["Title Bar Color"][1], Theme["Title Bar Color"][2], Theme["Title Bar Color"][3])));
+			
 			//settings window
 			if (ImGui::Begin("Settings")) {
 				//reload all engines
@@ -569,121 +670,100 @@ public:
 			ImGui::End();
 
 			//Node editor window
-			if (ImGui::Begin("Node Editor")) {
-				ImNodes::BeginNodeEditor();
-				std::map<std::string, GraphInterface*> graphs = GraphEngine->GetGraphs();
-				std::map<unsigned int, NodeInterface*> nodes = graphs["main"]->GetNodes();
-				std::map<unsigned int, EdgeInterface*> edges = graphs["main"]->GetEdges();
+			ed::SetCurrentEditor(g_Context);
+			ed::Begin("NodeEditor");
 
-				//draw nodes
-				for (auto node : nodes) {
-					ImNodes::BeginNode(node.second->GetUID());
-					ImNodes::BeginNodeTitleBar();
-					node.second->DrawNodeTitle(ImGui::GetCurrentContext());
-					ImNodes::EndNodeTitleBar();
 
-					for (int i = 0; i < node.second->GetDescription().size(); i++) {
-						if (node.second->GetDescription()[i].find("Input") != node.second->GetDescription()[i].end()) {
-							//get color
-							if (IoTypeColors.find(node.second->GetDescription()[i]["Input"]["TypeID"]) == IoTypeColors.end()) {
-								ImColor col = ImColor(RandRange(0, 255), RandRange(0, 255), RandRange(0, 255));
-								while (true) {
-									bool valid = true;
-									for (auto color : IoTypeColors) {
-										if (Distance(color.second, col).Value.x < ColorDistance && Distance(color.second, col).Value.y < ColorDistance && Distance(color.second, col).Value.z < ColorDistance) {
-											valid = false;
-											break;
-										}
-									}
-									if (valid) {
+			std::map<std::string, GraphInterface*> graphs = GraphEngine->GetGraphs();
+			std::map<unsigned int, NodeInterface*> nodes = graphs["main"]->GetNodes();
+			std::map<unsigned int, EdgeInterface*> edges = graphs["main"]->GetEdges();
+			//draw nodes
+			for (auto node : nodes) {
+				ed::BeginNode(node.second->GetUID());
+				node.second->DrawNodeTitle(ImGui::GetCurrentContext());
+
+				for (int i = 0; i < node.second->GetDescription().size(); i++) {
+					if (node.second->GetDescription()[i].find("Input") != node.second->GetDescription()[i].end()) {
+						//get color
+						if (IoTypeColors.find(node.second->GetDescription()[i]["Input"]["TypeID"]) == IoTypeColors.end()) {
+							ImColor col = ImColor(RandRange(0, 255), RandRange(0, 255), RandRange(0, 255));
+							while (true) {
+								bool valid = true;
+								for (auto color : IoTypeColors) {
+									if (Distance(color.second, col).Value.x < ColorDistance && Distance(color.second, col).Value.y < ColorDistance && Distance(color.second, col).Value.z < ColorDistance) {
+										valid = false;
 										break;
 									}
-									col = ImColor(RandRange(0, 255), RandRange(0, 255), RandRange(0, 255));
 								}
-								IoTypeColors[node.second->GetDescription()[i]["Input"]["TypeID"]] = col;
-							}
-
-							//apply input color
-							ImNodes::PushColorStyle(ImNodesCol_Pin, IoTypeColors[node.second->GetDescription()[i]["Input"]["TypeID"]]);
-							ImNodes::BeginInputAttribute(node.second->GetDescription()[i]["Input"]["UID"]);
-							ImGui::Text(node.second->GetDescription()[i]["Input"]["Name"].get<std::string>().c_str());
-							ImNodes::EndInputAttribute();
-							ImNodes::PopColorStyle();
-						}
-						if (node.second->GetDescription()[i].find("Attribute") != node.second->GetDescription()[i].end()&& node.second->GetDescription()[i].find("Input") != node.second->GetDescription()[i].end()) {
-							ImGui::SameLine();
-						}
-						if (node.second->GetDescription()[i].find("Attribute") != node.second->GetDescription()[i].end()) {
-							//pass imgui context to attribute and opengl context to attribute
-							node.second->GetAttributes()[node.second->GetDescription()[i]["Attribute"]]->Draw(ImGui::GetCurrentContext(), window);
-						}
-						if (node.second->GetDescription()[i].find("Output") != node.second->GetDescription()[i].end() && node.second->GetDescription()[i].find("Attribute") != node.second->GetDescription()[i].end()||
-							node.second->GetDescription()[i].find("Output") != node.second->GetDescription()[i].end() && node.second->GetDescription()[i].find("Input") != node.second->GetDescription()[i].end()) {
-							ImGui::SameLine();
-						}
-						if (node.second->GetDescription()[i].find("Output") != node.second->GetDescription()[i].end()) {
-							//get color
-							if (IoTypeColors.find(node.second->GetDescription()[i]["Output"]["TypeID"]) == IoTypeColors.end()) {
-								ImColor col = ImColor(RandRange(0, 255), RandRange(0, 255), RandRange(0, 255));
-								while (true) {
-									bool valid = true;
-									for (auto color : IoTypeColors) {
-										if (Distance(color.second, col).Value.x < ColorDistance && Distance(color.second, col).Value.y < ColorDistance && Distance(color.second, col).Value.z < ColorDistance) {
-											valid = false;
-											break;
-										}
-									}
-									if (valid) {
-										break;
-									}
-									col = ImColor(RandRange(0, 255), RandRange(0, 255), RandRange(0, 255));
+								if (valid) {
+									break;
 								}
-								IoTypeColors[node.second->GetDescription()[i]["Output"]["TypeID"]] = col;
+								col = ImColor(RandRange(0, 255), RandRange(0, 255), RandRange(0, 255));
 							}
-
-							//apply output color
-							ImNodes::PushColorStyle(ImNodesCol_Pin, IoTypeColors[node.second->GetDescription()[i]["Output"]["TypeID"]]);
-							ImNodes::BeginOutputAttribute(node.second->GetDescription()[i]["Output"]["UID"]);
-							ImGui::Text(node.second->GetDescription()[i]["Output"]["Name"].get<std::string>().c_str());
-							ImNodes::EndOutputAttribute();
-							ImNodes::PopColorStyle();
+							IoTypeColors[node.second->GetDescription()[i]["Input"]["TypeID"]] = col;
 						}
+
+						//TODO:: color and icon
+						ed::BeginPin((ed::PinId)node.second->GetInputByIndex(i)["UID"], ed::PinKind::Input);
+						ImGui::Text(node.second->GetInputByIndex(i)["Name"].get<std::string>().c_str());
+						ed::EndPin();
+
 					}
-					ImNodes::EndNode();
-					node.second->Update();
+					if (node.second->GetDescription()[i].find("Attribute") != node.second->GetDescription()[i].end() && node.second->GetDescription()[i].find("Input") != node.second->GetDescription()[i].end()) {
+						ImGui::SameLine();
+					}
+					if (node.second->GetDescription()[i].find("Attribute") != node.second->GetDescription()[i].end()) {
+						//pass imgui context to attribute and opengl context to attribute
+						node.second->GetAttributes()[node.second->GetDescription()[i]["Attribute"]]->Draw(ImGui::GetCurrentContext(), window);
+					}
+					if (node.second->GetDescription()[i].find("Output") != node.second->GetDescription()[i].end() && node.second->GetDescription()[i].find("Attribute") != node.second->GetDescription()[i].end() ||
+						node.second->GetDescription()[i].find("Output") != node.second->GetDescription()[i].end() && node.second->GetDescription()[i].find("Input") != node.second->GetDescription()[i].end()) {
+						ImGui::SameLine();
+					}
+					if (node.second->GetDescription()[i].find("Output") != node.second->GetDescription()[i].end()) {
+						//get color
+						if (IoTypeColors.find(node.second->GetDescription()[i]["Output"]["TypeID"]) == IoTypeColors.end()) {
+							ImColor col = ImColor(RandRange(0, 255), RandRange(0, 255), RandRange(0, 255));
+							while (true) {
+								bool valid = true;
+								for (auto color : IoTypeColors) {
+									if (Distance(color.second, col).Value.x < ColorDistance && Distance(color.second, col).Value.y < ColorDistance && Distance(color.second, col).Value.z < ColorDistance) {
+										valid = false;
+										break;
+									}
+								}
+								if (valid) {
+									break;
+								}
+								col = ImColor(RandRange(0, 255), RandRange(0, 255), RandRange(0, 255));
+							}
+							IoTypeColors[node.second->GetDescription()[i]["Output"]["TypeID"]] = col;
+						}
+
+						//TODO: color and icon
+						ed::BeginPin((ed::PinId)node.second->GetOutputByIndex(i)["UID"], ed::PinKind::Output);
+						ImGui::Text(node.second->GetOutputByIndex(i)["Name"].get<std::string>().c_str());
+						ed::EndPin();
+					}
 				}
-
-				//draw links
-				for (auto edge : edges)
-				{
-					ImNodes::Link(edge.second->GetUID(), edge.second->GetFirstIO()["UID"], edge.second->GetSecondIO()["UID"]);
-				}
-
-
-				ImNodes::EndNodeEditor();
-
-				for (auto node : nodes) {
-					node.second->setXY(ImNodes::GetNodeGridSpacePos(node.second->GetUID()).x, ImNodes::GetNodeGridSpacePos(node.second->GetUID()).y);
-				}
+				ed::EndNode();
+				node.second->Update();
 			}
-			ImGui::End();
+			//draw links
+			for (auto edge : edges)
+			{
+				ed::Link(edge.second->GetUID(), (ed::PinId)edge.second->GetFirstIO()["UID"], (ed::PinId)edge.second->GetSecondIO()["UID"]);
+			}
+			for (auto node : nodes) {
+				ImVec2 pos = ed::GetNodePosition(node.second->GetUID());
+				node.second->setXY(pos.x, pos.y);
+			}
+			
+			HandleGraphInputEvents();
+			ed::End();
 
 			//Node Search window
 			if (ImGui::Begin("Node Search")) {
-			}
-			ImGui::End();
-
-			//Node Properties window
-			if (ImGui::Begin("Node Properties")) {
-				int numSelected = ImNodes::NumSelectedNodes();
-				int* selected = new int[numSelected];
-				ImNodes::GetSelectedNodes(selected);
-				if (numSelected > 0) {
-					if (GraphEngine->GetGraphs()["main"]->GetNodes().find(selected[0]) != GraphEngine->GetGraphs()["main"]->GetNodes().end()) {
-						GraphEngine->GetGraphs()["main"]->GetNodes()[selected[0]]->DrawNodeProperties(ImGui::GetCurrentContext());
-					}
-				}
-				delete[] selected;
 			}
 			ImGui::End();
 
@@ -730,9 +810,6 @@ public:
 			}
 			ImGui::End();
 
-			//handle input events
-			HandleGraphInputEvents();
-
 			//pop window title color
 			ImGui::PopStyleColor();
 			ImGui::PopStyleColor();
@@ -740,8 +817,9 @@ public:
 			ImGui::PopStyleColor();
 			ImGui::PopStyleColor();
 			ImGui::PopStyleColor();
-			ImNodes::PopColorStyle();
 
+
+			ed::SetCurrentEditor(nullptr);
 			//clear screen
 			glClear(GL_COLOR_BUFFER_BIT);
 			glClearColor(255, 0, 0, 255);
@@ -750,7 +828,6 @@ public:
 			ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
 			glfwSwapBuffers(window);
-			glfwPollEvents();
 		}
 	}
 

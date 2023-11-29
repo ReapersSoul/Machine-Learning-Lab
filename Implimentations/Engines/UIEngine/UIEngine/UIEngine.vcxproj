@@ -58,7 +58,6 @@
   <ImportGroup Label="Shared">
     <Import Project="..\..\..\..\Interfaces\Engines\UIEngine\UIEngineInterface\UIEngineInterface.vcxitems" Label="Shared" />
     <Import Project="..\..\..\..\Interfaces\Engines\GraphEngine\GraphEngineInterface\GraphEngineInterface.vcxitems" Label="Shared" />
-    <Import Project="..\..\..\..\ImNodes\ImNodes.vcxitems" Label="Shared" />
     <Import Project="..\..\..\..\Interfaces\Engines\DynamicCodeExecutionEngine\DynamicCodeExecutionEngineInterface\DynamicCodeExecutionEngineInterface.vcxitems" Label="Shared" />
     <Import Project="..\..\..\..\Interfaces\Engines\GraphEngine\Nodes\NodeInterface\NodeInterface.vcxitems" Label="Shared" />
     <Import Project="..\..\..\..\Interfaces\Engines\GraphEngine\Attributes\AttributeInterface\AttributeInterface.vcxitems" Label="Shared" />

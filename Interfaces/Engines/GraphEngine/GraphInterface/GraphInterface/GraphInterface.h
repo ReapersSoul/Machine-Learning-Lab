@@ -52,9 +52,7 @@ public:
 
 	void DeleteNode(unsigned int NodeUID);
 
-	void DeleteNode(int NodeUID);
-
-	void Process(bool DirectionForward, std::vector<int> SelectedNodes =std::vector<int>(), std::vector<int> SelectedEdges = std::vector<int>());
+	void Process(bool DirectionForward, std::vector<unsigned int> SelectedNodes =std::vector<unsigned int>(), std::vector<unsigned int> SelectedEdges = std::vector<unsigned int>());
 
 	void SetSorter(SorterInterface * Sorter);
 

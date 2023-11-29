@@ -49,6 +49,7 @@ void CleanDir(std::string base_path, std::vector<std::string> excluded_folders, 
 				//check if the current file has an extension that is in the ext to delete list
 				if (entry.path().extension().string() == ext)
 				{
+					printf("Deleting %s\n", entry.path().string().c_str());
 					//delete the file
 					std::filesystem::remove(entry.path());
 				}
@@ -63,6 +64,7 @@ void CopyFiles(std::string basepath,std::vector<std::string> paths, std::string 
 		if (std::filesystem::exists(Destenation + "/" + path)) {
 			std::filesystem::remove_all(Destenation + "/" + path);
 		}
+		printf("Copying %s\n", path.c_str());
 		//copy recursively
 		std::filesystem::copy(basepath + "/" + path, Destenation + "/" + path, std::filesystem::copy_options::recursive);
 	}

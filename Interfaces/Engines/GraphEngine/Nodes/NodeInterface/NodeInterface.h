@@ -1,6 +1,12 @@
 #pragma once
 #include "../../SerializationEngine/SerializableInterface/SerializableInterface/SerializableInterface.h"
+
+//imgui
+#define IMGUI_DEFINE_MATH_OPERATORS
 #include <imgui.h>
+#include <imgui_internal.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
 #include <string>
 #include <vector>
 #include <nlohmann/json.hpp>
@@ -32,6 +38,10 @@ protected:
 	ActivationEngineInterface* AE;
 	LossEngineInterface* LE;
 public:
+	bool HasInput(unsigned int UID);
+
+	bool HasOutput(unsigned int UID);
+
 	void setXY(int x, int y);
 
 	void setX(int x);

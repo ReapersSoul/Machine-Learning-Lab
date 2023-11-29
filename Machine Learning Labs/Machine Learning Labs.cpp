@@ -11,8 +11,11 @@
 #include <thread>
 
 int main() {
-	int sleep_time_in_seconds = 10;
+	int sleep_time_in_seconds = 15;
 	std::this_thread::sleep_for(std::chrono::seconds(sleep_time_in_seconds));
+	//wait for keypress
+	std::cin.get();
+
 	DynamicCodeExecutionEngineInterface::ReLoadEngine();
 	DynamicCodeExecutionEngineInterface* instance = DynamicCodeExecutionEngineInterface::GetInstance();
 	instance->DefaultLoad();

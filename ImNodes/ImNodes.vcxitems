@@ -13,11 +13,4 @@
   <ItemGroup>
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)imnodes.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)imnodes.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)imnodes_internal.h" />
-  </ItemGroup>
 </Project>

@@ -5,8 +5,6 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Machine Learning Labs", "Machine Learning Labs\Machine Learning Labs.vcxproj", "{DF354DD2-4CE1-4447-805C-16695D200279}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImNodes", "ImNodes\ImNodes.vcxitems", "{BE8BCB93-0CD3-4E6E-9578-CA4D42370DB1}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interfaces", "Interfaces", "{F5D7E586-3BCC-4CE7-8B81-04B7B48FB17D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Implimentations", "Implimentations", "{BBC828E6-C5D7-451C-9536-CF7CF94C08A0}"
@@ -275,6 +273,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KernelInterface", "Interfaces\Engines\DynamicCodeExecutionEngine\KernelInterface\KernelInterface.vcxitems", "{21E8083C-FFE6-4439-85ED-166BCA5CC9D1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Convolution2DNetworkNode", "Implimentations\Engines\GraphEngine\Nodes\Convolution2DNetworkNode\Convolution2DNetworkNode.vcxproj", "{C3F8D4BE-F72C-41F1-839C-4AD188212007}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SubGraphNode", "Implimentations\Engines\GraphEngine\Nodes\SubGraphNode\SubGraphNode.vcxproj", "{689E6AFC-0864-47EE-A8AE-6804E3F204A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -748,6 +748,14 @@ Global
 		{C3F8D4BE-F72C-41F1-839C-4AD188212007}.Release|x64.Build.0 = Release|x64
 		{C3F8D4BE-F72C-41F1-839C-4AD188212007}.Release|x86.ActiveCfg = Release|Win32
 		{C3F8D4BE-F72C-41F1-839C-4AD188212007}.Release|x86.Build.0 = Release|Win32
+		{689E6AFC-0864-47EE-A8AE-6804E3F204A0}.Debug|x64.ActiveCfg = Debug|x64
+		{689E6AFC-0864-47EE-A8AE-6804E3F204A0}.Debug|x64.Build.0 = Debug|x64
+		{689E6AFC-0864-47EE-A8AE-6804E3F204A0}.Debug|x86.ActiveCfg = Debug|Win32
+		{689E6AFC-0864-47EE-A8AE-6804E3F204A0}.Debug|x86.Build.0 = Debug|Win32
+		{689E6AFC-0864-47EE-A8AE-6804E3F204A0}.Release|x64.ActiveCfg = Release|x64
+		{689E6AFC-0864-47EE-A8AE-6804E3F204A0}.Release|x64.Build.0 = Release|x64
+		{689E6AFC-0864-47EE-A8AE-6804E3F204A0}.Release|x86.ActiveCfg = Release|Win32
+		{689E6AFC-0864-47EE-A8AE-6804E3F204A0}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -881,6 +889,7 @@ Global
 		{0021D74A-8149-4972-922B-8E8B486787D1} = {18E69413-6E2B-48EC-88A7-45F9F2A24EA4}
 		{21E8083C-FFE6-4439-85ED-166BCA5CC9D1} = {76DE2DB2-6FD3-4584-9A51-70791E1C1F59}
 		{C3F8D4BE-F72C-41F1-839C-4AD188212007} = {18E69413-6E2B-48EC-88A7-45F9F2A24EA4}
+		{689E6AFC-0864-47EE-A8AE-6804E3F204A0} = {18E69413-6E2B-48EC-88A7-45F9F2A24EA4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7CAE0A74-F3D9-4908-B3D5-E426A574743C}
@@ -1035,7 +1044,6 @@ Global
 		Interfaces\Engines\DynamicCodeExecutionEngine\ScriptInterface\ScriptInterface.vcxitems*{636eb13d-3a04-4b53-96e4-5532949cb1ee}*SharedItemsImports = 9
 		Interfaces\Engines\APIEngine\Endpoint\EndpointInterface\EndpointInterface.vcxitems*{6393dae2-2f55-46ef-ab2e-64999e63388e}*SharedItemsImports = 9
 		Interfaces\Engines\NetworkEngine\NetworkObject\NetworkObjectInterface\NetworkObjectInterface.vcxitems*{649ffaf9-0053-447b-8945-4c29892dd79f}*SharedItemsImports = 9
-		ImNodes\ImNodes.vcxitems*{672d3b17-3a19-4a01-b33f-c52fca753568}*SharedItemsImports = 4
 		Interfaces\Engines\DynamicCodeExecutionEngine\DynamicCodeExecutionEngineInterface\DynamicCodeExecutionEngineInterface.vcxitems*{672d3b17-3a19-4a01-b33f-c52fca753568}*SharedItemsImports = 4
 		Interfaces\Engines\DynamicCodeExecutionEngine\LibraryInterface\LibraryInterface.vcxitems*{672d3b17-3a19-4a01-b33f-c52fca753568}*SharedItemsImports = 4
 		Interfaces\Engines\GraphEngine\Attributes\AttributeInterface\AttributeInterface.vcxitems*{672d3b17-3a19-4a01-b33f-c52fca753568}*SharedItemsImports = 4
@@ -1049,6 +1057,14 @@ Global
 		Interfaces\Engines\NetworkEngine\Server\ServerInterface\ServerInterface.vcxitems*{672d3b17-3a19-4a01-b33f-c52fca753568}*SharedItemsImports = 4
 		Interfaces\Engines\SerializationEngine\SerializableInterface\SerializableInterface\SerializableInterface.vcxitems*{672d3b17-3a19-4a01-b33f-c52fca753568}*SharedItemsImports = 4
 		Interfaces\Engines\UIEngine\UIEngineInterface\UIEngineInterface.vcxitems*{672d3b17-3a19-4a01-b33f-c52fca753568}*SharedItemsImports = 4
+		Interfaces\Engines\DynamicCodeExecutionEngine\DynamicCodeExecutionEngineInterface\DynamicCodeExecutionEngineInterface.vcxitems*{689e6afc-0864-47ee-a8ae-6804e3f204a0}*SharedItemsImports = 4
+		Interfaces\Engines\DynamicCodeExecutionEngine\Languages\LanguageInterface\LanguageInterface.vcxitems*{689e6afc-0864-47ee-a8ae-6804e3f204a0}*SharedItemsImports = 4
+		Interfaces\Engines\GraphEngine\Attributes\AttributeInterface\AttributeInterface.vcxitems*{689e6afc-0864-47ee-a8ae-6804e3f204a0}*SharedItemsImports = 4
+		Interfaces\Engines\GraphEngine\EdgeInterface\EdgeInterface\EdgeInterface.vcxitems*{689e6afc-0864-47ee-a8ae-6804e3f204a0}*SharedItemsImports = 4
+		Interfaces\Engines\GraphEngine\GraphEngineInterface\GraphEngineInterface.vcxitems*{689e6afc-0864-47ee-a8ae-6804e3f204a0}*SharedItemsImports = 4
+		Interfaces\Engines\GraphEngine\GraphInterface\GraphInterface\GraphInterface.vcxitems*{689e6afc-0864-47ee-a8ae-6804e3f204a0}*SharedItemsImports = 4
+		Interfaces\Engines\GraphEngine\Nodes\NodeInterface\NodeInterface.vcxitems*{689e6afc-0864-47ee-a8ae-6804e3f204a0}*SharedItemsImports = 4
+		Interfaces\Engines\SerializationEngine\SerializableInterface\SerializableInterface\SerializableInterface.vcxitems*{689e6afc-0864-47ee-a8ae-6804e3f204a0}*SharedItemsImports = 4
 		Interfaces\Engines\DynamicCodeExecutionEngine\DynamicCodeExecutionEngineInterface\DynamicCodeExecutionEngineInterface.vcxitems*{6b868812-6aac-4932-af49-dcdae0933d1a}*SharedItemsImports = 4
 		Interfaces\Engines\DynamicCodeExecutionEngine\Languages\LanguageInterface\LanguageInterface.vcxitems*{6b868812-6aac-4932-af49-dcdae0933d1a}*SharedItemsImports = 4
 		Interfaces\Engines\GraphEngine\Attributes\AttributeInterface\AttributeInterface.vcxitems*{6b868812-6aac-4932-af49-dcdae0933d1a}*SharedItemsImports = 4
@@ -1202,7 +1218,6 @@ Global
 		Interfaces\Engines\GraphEngine\GraphInterface\GraphInterface\GraphInterface.vcxitems*{bde36bef-7e28-4e97-bbb1-2d3f70d97e89}*SharedItemsImports = 4
 		Interfaces\Engines\GraphEngine\Nodes\NodeInterface\NodeInterface.vcxitems*{bde36bef-7e28-4e97-bbb1-2d3f70d97e89}*SharedItemsImports = 4
 		Interfaces\Engines\SerializationEngine\SerializableInterface\SerializableInterface\SerializableInterface.vcxitems*{bde36bef-7e28-4e97-bbb1-2d3f70d97e89}*SharedItemsImports = 4
-		ImNodes\ImNodes.vcxitems*{be8bcb93-0cd3-4e6e-9578-ca4d42370db1}*SharedItemsImports = 9
 		Interfaces\Engines\ActivationEngine\ActivationEngineInterface\ActivationEngineInterface.vcxitems*{bebda623-ade9-4773-96a7-d21c72ac3f48}*SharedItemsImports = 4
 		Interfaces\Engines\ActivationEngine\Activations\ActivationInterface\ActivationInterface.vcxitems*{bebda623-ade9-4773-96a7-d21c72ac3f48}*SharedItemsImports = 4
 		Interfaces\Engines\DynamicCodeExecutionEngine\DynamicCodeExecutionEngineInterface\DynamicCodeExecutionEngineInterface.vcxitems*{bebda623-ade9-4773-96a7-d21c72ac3f48}*SharedItemsImports = 4

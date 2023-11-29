@@ -4,6 +4,30 @@
 #include "../GraphInterface/GraphInterface.h"
 #include <stack>
 
+bool NodeInterface::HasInput(unsigned int UID)
+{
+	for (int i = 0; i < Description.size(); i++)
+	{
+		if (Description[i].find("Input") != Description[i].end()) {
+			if(Description[i]["Input"]["UID"]==UID)
+				return true;
+		}
+	}
+	return false;
+}
+
+bool NodeInterface::HasOutput(unsigned int UID)
+{
+	for (int i = 0; i < Description.size(); i++)
+	{
+		if (Description[i].find("Output") != Description[i].end()) {
+			if (Description[i]["Output"]["UID"] == UID)
+				return true;
+		}
+	}
+	return false;
+}
+
 void NodeInterface::setXY(int x, int y) {
 	this->x = x;
 	this->y = y;

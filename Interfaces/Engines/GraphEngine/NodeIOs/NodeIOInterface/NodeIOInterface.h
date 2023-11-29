@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#define IMGUI_DEFINE_MATH_OPERATORS
 #include <imgui.h>
 #include "../DynamicCodeExecutionEngineInterface/DynamicCodeExecutionEngineInterface.h"
 #include "../../ActivationEngine/ActivationEngineInterface/ActivationEngineInterface.h"
