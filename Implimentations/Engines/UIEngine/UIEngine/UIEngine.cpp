@@ -44,7 +44,7 @@ class UIEngine : public UIEngineInterface
 
 	std::string SelectedTheme = "DarkMode";
 
-	ed::Config config;
+	ed::Config* config;
 	ed::EditorContext* g_Context = nullptr;
 
 	int itteration = -1;
@@ -170,29 +170,29 @@ class UIEngine : public UIEngineInterface
 			ImGui::EndPopup();
 		}
 
-		//Node Properties window
-		if (ImGui::Begin("Node Properties")) {
-			if (ed::GetSelectedObjectCount() > 0) {
-				std::vector<ed::NodeId> SelectedNodes(ed::GetSelectedObjectCount());
-				std::vector<ed::LinkId> SelectedEdges(ed::GetSelectedObjectCount());
-				int nodeCount = ed::GetSelectedNodes(SelectedNodes.data(), ed::GetSelectedObjectCount());
-				int edgeCount = ed::GetSelectedLinks(SelectedEdges.data(), ed::GetSelectedObjectCount());
-				SelectedNodes.resize(nodeCount);
-				SelectedEdges.resize(edgeCount);
-				std::vector<unsigned int> SelectedNodesUID;
-				std::vector<unsigned int> SelectedEdgesUID;
-				for (auto node : SelectedNodes) {
-					SelectedNodesUID.push_back(node.Get());
-				}
-				for (auto edge : SelectedEdges) {
-					SelectedEdgesUID.push_back(edge.Get());
-				}
-				if (GraphEngine->GetGraphs()["main"]->GetNodes().find(SelectedNodesUID[0]) != GraphEngine->GetGraphs()["main"]->GetNodes().end()) {
-					GraphEngine->GetGraphs()["main"]->GetNodes()[SelectedNodesUID[0]]->DrawNodeProperties(ImGui::GetCurrentContext());
-				}
-			}
-		}
-		ImGui::End();
+		////Node Properties window
+		//if (ImGui::Begin("Node Properties")) {
+		//	if (ed::GetSelectedObjectCount() > 0) {
+		//		std::vector<ed::NodeId> SelectedNodes(ed::GetSelectedObjectCount());
+		//		std::vector<ed::LinkId> SelectedEdges(ed::GetSelectedObjectCount());
+		//		int nodeCount = ed::GetSelectedNodes(SelectedNodes.data(), ed::GetSelectedObjectCount());
+		//		int edgeCount = ed::GetSelectedLinks(SelectedEdges.data(), ed::GetSelectedObjectCount());
+		//		SelectedNodes.resize(nodeCount);
+		//		SelectedEdges.resize(edgeCount);
+		//		std::vector<unsigned int> SelectedNodesUID;
+		//		std::vector<unsigned int> SelectedEdgesUID;
+		//		for (auto node : SelectedNodes) {
+		//			SelectedNodesUID.push_back(node.Get());
+		//		}
+		//		for (auto edge : SelectedEdges) {
+		//			SelectedEdgesUID.push_back(edge.Get());
+		//		}
+		//		if (GraphEngine->GetGraphs()["main"]->GetNodes().find(SelectedNodesUID[0]) != GraphEngine->GetGraphs()["main"]->GetNodes().end()) {
+		//			GraphEngine->GetGraphs()["main"]->GetNodes()[SelectedNodesUID[0]]->DrawNodeProperties(ImGui::GetCurrentContext());
+		//		}
+		//	}
+		//}
+		//ImGui::End();
 	}
 
 	std::map<std::string, ImColor> IoTypeColors;
@@ -357,8 +357,10 @@ public:
 		ImGui_ImplOpenGL3_Init("#version 330");
 
 		// Setup Node Editor
-		config.SettingsFile = "NodeGraphConfig.json";
-		g_Context = ed::CreateEditor(&config);
+		config=new ed::Config();
+		config->SettingsFile = "NodeGraphConfig.json";
+		g_Context = ed::CreateEditor(config);
+
 
 		ImGui::StyleColorsDark();
 		//enable docking
@@ -438,6 +440,7 @@ public:
 					ImGui::EndMenu();
 				}
 				if (ImGui::MenuItem("Forward Step")) {
+					ed::SetCurrentEditor(g_Context);
 					if (ed::GetSelectedObjectCount() > 0) {
 						std::vector<ed::NodeId> SelectedNodes(ed::GetSelectedObjectCount());
 						std::vector<ed::LinkId> SelectedEdges(ed::GetSelectedObjectCount());
@@ -460,8 +463,10 @@ public:
 							GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
 							}).detach();
 					}
+					ed::SetCurrentEditor(nullptr);
 				}
 				if (ImGui::MenuItem("Backward Step")) {
+					ed::SetCurrentEditor(g_Context);
 					std::vector<ed::NodeId> SelectedNodes(ed::GetSelectedObjectCount());
 					std::vector<ed::LinkId> SelectedEdges(ed::GetSelectedObjectCount());
 					int nodeCount = ed::GetSelectedNodes(SelectedNodes.data(), ed::GetSelectedObjectCount());
@@ -483,6 +488,7 @@ public:
 						}).detach();
 				}
 				if (ImGui::MenuItem("Full/Train Step")) {
+					ed::SetCurrentEditor(g_Context);
 					std::vector<ed::NodeId> SelectedNodes(ed::GetSelectedObjectCount());
 					std::vector<ed::LinkId> SelectedEdges(ed::GetSelectedObjectCount());
 					int nodeCount = ed::GetSelectedNodes(SelectedNodes.data(), ed::GetSelectedObjectCount());
@@ -668,6 +674,7 @@ public:
 			ImGui::End();
 
 			//Node editor window
+			ImGui::Separator();
 			ed::SetCurrentEditor(g_Context);
 			ed::Begin("NodeEditor");
 
