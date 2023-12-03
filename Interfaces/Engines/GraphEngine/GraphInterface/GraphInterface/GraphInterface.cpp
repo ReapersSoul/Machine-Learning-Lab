@@ -242,6 +242,13 @@ void GraphInterface::UpdateSaveForCurrentVersion(std::string oldversion)
 			ChangeNodeUID(Node->GetUID(), starting_uid);
 			starting_uid++;
 		}
+
+		std::map<unsigned int, unsigned int> oldIOUID= IOUIDs;
+
+		for (auto& IO : oldIOUID) {
+			ChangeIOUID(IO.first, starting_uid);
+			starting_uid++;
+		}
 	}
 }
 

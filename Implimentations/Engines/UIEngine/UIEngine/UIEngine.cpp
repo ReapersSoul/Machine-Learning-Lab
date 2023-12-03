@@ -783,7 +783,12 @@ public:
 							ed::BeginPin((ed::PinId)node.second->GetInputByIndex(i)["UID"].get<unsigned int>(), ed::PinKind::Input);
 							ImGui::Text(node.second->GetInputByIndex(i)["Name"].get<std::string>().c_str());
 							ImGui::SameLine();
-							ImGui::Text(node.second->GetInputByIndex(i)["UID"].get<std::string>().c_str());
+							if (node.second->GetInputByIndex(i).contains("UID")) {
+								ImGui::Text(std::to_string(node.second->GetInputByIndex(i)["UID"].get<unsigned int>()).c_str());
+							}
+							else {
+								ImGui::Text("N/A");
+							}
 							ed::EndPin();
 
 						}
@@ -822,7 +827,12 @@ public:
 							ed::BeginPin((ed::PinId)node.second->GetOutputByIndex(i)["UID"].get<unsigned int>(), ed::PinKind::Output);
 							ImGui::Text(node.second->GetOutputByIndex(i)["Name"].get<std::string>().c_str());
 							ImGui::SameLine();
-							ImGui::Text(std::to_string(node.second->GetOutputByIndex(i)["UID"].get<unsigned int>()).c_str());
+							if (node.second->GetOutputByIndex(i).contains("UID")) {
+								ImGui::Text(std::to_string(node.second->GetOutputByIndex(i)["UID"].get<unsigned int>()).c_str());
+							}
+							else {
+								ImGui::Text("N/A");
+							}
 							ed::EndPin();
 						}
 					}
