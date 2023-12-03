@@ -755,6 +755,8 @@ public:
 				for (auto node : nodes) {
 					ed::BeginNode(node.second->GetUID());
 					node.second->DrawNodeTitle(ImGui::GetCurrentContext());
+					ImGui::SameLine();
+					ImGui::Text(std::to_string(node.second->GetUID()).c_str());
 
 					for (int i = 0; i < node.second->GetDescription().size(); i++) {
 						if (node.second->GetDescription()[i].find("Input") != node.second->GetDescription()[i].end()) {
@@ -780,10 +782,8 @@ public:
 							//TODO:: color and icon
 							ed::BeginPin((ed::PinId)node.second->GetInputByIndex(i)["UID"].get<unsigned int>(), ed::PinKind::Input);
 							ImGui::Text(node.second->GetInputByIndex(i)["Name"].get<std::string>().c_str());
-							//icon
 							ImGui::SameLine();
-							ed::PinPivotAlignment(ImVec2(0.5f, 0.0f));
-							ed::PinPivotSize(ImVec2(10, 10));
+							ImGui::Text(node.second->GetInputByIndex(i)["UID"].get<std::string>().c_str());
 							ed::EndPin();
 
 						}
@@ -821,6 +821,8 @@ public:
 							//TODO: color and icon
 							ed::BeginPin((ed::PinId)node.second->GetOutputByIndex(i)["UID"].get<unsigned int>(), ed::PinKind::Output);
 							ImGui::Text(node.second->GetOutputByIndex(i)["Name"].get<std::string>().c_str());
+							ImGui::SameLine();
+							ImGui::Text(std::to_string(node.second->GetOutputByIndex(i)["UID"].get<unsigned int>()).c_str());
 							ed::EndPin();
 						}
 					}
