@@ -72,10 +72,7 @@ void GraphInterface::DeleteEdge(unsigned int EdgeInterface) {
 }
 
 int GraphInterface::AddNode(NodeInterface* Node) {
-	int UID = 0;
-	while (Nodes.find(UID) != Nodes.end()) {
-		UID++;
-	}
+	unsigned int UID = GetNextUID();
 	Node->SetUID(UID);
 	Node->SetParentGraph(this);
 	Node->SetDCEE(DCEE);
@@ -93,6 +90,38 @@ void GraphInterface::DeleteNode(NodeInterface* Node) {
 void GraphInterface::DeleteNode(unsigned int NodeUID) {
 	Nodes[NodeUID]->~NodeInterface();
 	Nodes.erase(NodeUID);
+}
+
+void GraphInterface::ChangeNodeUID(unsigned int OldUID, unsigned int NewUID)
+{
+	NodeInterface* Node = Nodes[OldUID];
+	for (auto& Edge : Edges) {
+		if (Edge.second->GetFirst()->GetUID() == OldUID) {
+			Edge.second->SetFirst(NewUID);
+		}
+		if (Edge.second->GetSecond()->GetUID() == OldUID) {
+			Edge.second->SetSecond(NewUID);
+		}
+	}
+	Nodes.erase(OldUID);
+	Nodes[NewUID] = Node;
+	Node->SetUID(NewUID);
+}
+
+void GraphInterface::ChangeEdgeUID(unsigned int OldUID, unsigned int NewUID)
+{
+	EdgeInterface* Edge = Edges[OldUID];
+	Edges.erase(OldUID);
+	Edges[NewUID] = Edge;
+	Edge->SetUID(NewUID);
+}
+
+void GraphInterface::ChangeIOUID(unsigned int OldUID, unsigned int NewUID)
+{
+	unsigned int NodeUID= IOUIDs[OldUID];
+	Nodes[NodeUID]->ChangeIOUID(OldUID, NewUID);
+	IOUIDs.erase(OldUID);
+	IOUIDs[NewUID] = NodeUID;
 }
 
 void GraphInterface::Process(bool DirectionForward, std::vector<unsigned int> SelectedNodes, std::vector<unsigned int> SelectedEdges) {
@@ -168,11 +197,18 @@ std::map<unsigned int, EdgeInterface*>& GraphInterface::GetEdges() {
 }
 
 unsigned int GraphInterface::GetNextIOUID(unsigned int nodeID) {
+	unsigned int UID = GetNextUID();
+	IOUIDs[UID] = nodeID;
+	return UID;
+}
+
+unsigned int GraphInterface::GetNextUID()
+{
 	unsigned int UID = 0;
-	while (IOUIDs.find(UID) != IOUIDs.end()) {
+	while (std::find(UsedUIDs.begin(), UsedUIDs.end(), UID) != UsedUIDs.end()) {
 		UID++;
 	}
-	IOUIDs[UID] = nodeID;
+	UsedUIDs.push_back(UID);
 	return UID;
 }
 
@@ -185,8 +221,33 @@ unsigned int GraphInterface::GetIOAssociatedWith(unsigned int UID)
 	return IOUIDs[UID];
 }
 
+std::string GraphInterface::GetCurrentVersion() {
+	return "0.0.1";
+}
+
+void GraphInterface::UpdateSaveForCurrentVersion(std::string oldversion)
+{
+	if (oldversion == GetCurrentVersion()) {
+		return;
+	}
+
+	if (oldversion == "0.0.0") {
+		int starting_uid = Edges.size();
+		std::vector<NodeInterface*> nNodes;
+		for (auto& Node : this->Nodes) {
+			nNodes.push_back(Node.second);
+		}
+		//update to 0.0.1
+		for (auto& Node : nNodes) {
+			ChangeNodeUID(Node->GetUID(), starting_uid);
+			starting_uid++;
+		}
+	}
+}
+
 nlohmann::json GraphInterface::Serialize() {
 	nlohmann::json data;
+	data["Version"] = GetCurrentVersion();
 	//graph name
 	data["GraphName"] = Name;
 	//edges
@@ -211,6 +272,13 @@ void GraphInterface::DeSerialize(nlohmann::json data, void* DCEE) {
 	this->AE = ((DynamicCodeExecutionEngineInterface*)DCEE)->GetEngineInstanceAs<ActivationEngineInterface>("ActivationEngine");
 	//set LE
 	this->LE = ((DynamicCodeExecutionEngineInterface*)DCEE)->GetEngineInstanceAs<LossEngineInterface>("LossEngine");
+	//check version
+	//if version doesnt exist set to 0.0.0
+	if (data["Version"].is_null()) {
+		data["Version"] = "0.0.0";
+	}
+
+	
 	//graph name
 	Name = data["GraphName"];
 
@@ -251,6 +319,6 @@ void GraphInterface::DeSerialize(nlohmann::json data, void* DCEE) {
 		}
 	}
 
-
+	UpdateSaveForCurrentVersion(data["Version"]);
 	return;
 }

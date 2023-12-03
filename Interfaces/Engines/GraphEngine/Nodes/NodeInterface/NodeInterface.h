@@ -38,9 +38,13 @@ protected:
 	ActivationEngineInterface* AE;
 	LossEngineInterface* LE;
 public:
+	void PrintIOUID();
+
 	bool HasInput(unsigned int UID);
 
 	bool HasOutput(unsigned int UID);
+
+	void ChangeIOUID(unsigned int OldUID, unsigned int NewUID);
 
 	void setXY(int x, int y);
 

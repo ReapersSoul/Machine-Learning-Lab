@@ -31,7 +31,7 @@ struct CustomException : public std::exception {
 	}
 };
 
-class Convolution2DNode : public NodeInterface {
+class Convolution2DNetworkNode : public NodeInterface {
 	std::vector<double> K;
 	std::vector<double> Y;
 	std::vector<double> X;
@@ -456,7 +456,7 @@ class Convolution2DNode : public NodeInterface {
 	cl::CommandQueue queue;
 	cl::Device device;
 public:
-	Convolution2DNode() {
+	Convolution2DNetworkNode() {
 		//setup gpu
 		cl::Platform platform = cl::Platform::getDefault();
 		std::vector<cl::Device> devices;
@@ -486,7 +486,7 @@ public:
 			file.close();
 			return;
 		}
-		TypeID = "Convolution2DNode";
+		TypeID = "Convolution2DNetworkNode";
 		K.resize(K_size.x * K_size.y, 0.001);
 		RandomizeK();
 		//K = BlurK(K_size.x, K_size.y);
@@ -759,7 +759,7 @@ public:
 	}
 
 	NodeInterface* GetInstance() {
-		return new Convolution2DNode();
+		return new Convolution2DNetworkNode();
 	}
 };
 
@@ -767,6 +767,6 @@ public:
 extern "C" {
 	// Define a function that returns the result of adding two numbers
 	__declspec(dllexport) NodeInterface* GetInstance() {
-		return new Convolution2DNode();
+		return new Convolution2DNetworkNode();
 	}
 }

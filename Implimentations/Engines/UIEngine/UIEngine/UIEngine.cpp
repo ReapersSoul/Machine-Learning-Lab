@@ -66,96 +66,34 @@ class UIEngine : public UIEngineInterface
 	}
 
 	void HandleGraphInputEvents() {
-
-		if (ed::BeginCreate()) {
-
-			ed::PinId inputPinId, outputPinId;
-			if (ed::QueryNewLink(&inputPinId, &outputPinId))
-			{
-				GraphEngine->GetGraphs()["main"]->GetMutex().lock();
-				//find the node that the pin belongs to
-				unsigned int inputNode = -1;
-				unsigned int outputNode = -1;
-				for (auto node : GraphEngine->GetGraphs()["main"]->GetNodes()) {
-					if (node.second->HasInput(inputPinId.Get())) {
-						inputNode = node.second->GetUID();
-					}
-					if (node.second->HasOutput(outputPinId.Get())) {
-						outputNode = node.second->GetUID();
-					}
-				}
-
-				//create edge
-				EdgeInterface* edge = GraphEngine->GetGraphs()["main"]->CreateEdge(inputNode, outputNode, inputPinId.Get(), outputPinId.Get());
-				if (edge != nullptr) {
-					GraphEngine->GetGraphs()["main"]->GetNodes()[inputNode]->GetOutputEdges().push_back(edge);
-					GraphEngine->GetGraphs()["main"]->GetNodes()[outputNode]->GetInputEdges().push_back(edge);
-				}
-
-				GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
-			}
-		}
-		ed::EndCreate();
-
-		if (ed::BeginDelete()) {
-			ed::LinkId deletedLinkId;
-			while (ed::QueryDeletedLink(&deletedLinkId))
-			{
-				GraphEngine->GetGraphs()["main"]->GetMutex().lock();
-				//delete edge
-				GraphEngine->GetGraphs()["main"]->DeleteEdge(deletedLinkId.Get());
-				GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
+		try {
+			//if right click
+			if (ed::ShowBackgroundContextMenu()) {
+				//open context menu
+				ImGui::OpenPopup("Background Context Menu");
 			}
 
-			ed::NodeId deletedNodeId;
-			while (ed::QueryDeletedNode(&deletedNodeId)) {
-				GraphEngine->GetGraphs()["main"]->GetMutex().lock();
-				//delete edges
-				for (auto edge : GraphEngine->GetGraphs()["main"]->GetNodes()[deletedNodeId.Get()]->GetInputEdges()) {
-					GraphEngine->GetGraphs()["main"]->DeleteEdge(edge->GetUID());
-				}
-				for (auto edge : GraphEngine->GetGraphs()["main"]->GetNodes()[deletedNodeId.Get()]->GetOutputEdges()) {
-					GraphEngine->GetGraphs()["main"]->DeleteEdge(edge->GetUID());
-				}
-
-				//delete node
-				GraphEngine->GetGraphs()["main"]->DeleteNode((unsigned int)deletedNodeId.Get());
-				GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
-			}
-		}
-		ed::EndDelete();
-
-
-		//if right click
-		if (ed::ShowBackgroundContextMenu()) {
-			//open context menu
-			ImGui::OpenPopup("Background Context Menu");
-		}
-
-		//if context menu is open
-		if (ImGui::BeginPopup("Background Context Menu")) {
-			char* tmptText = new char[SearchText.size() + 2];
-			memcpy_s(tmptText, SearchText.size() + 2, SearchText.c_str(), SearchText.size() + 1);
-			ImGui::InputText("Search", tmptText, SearchText.size() + 2);
-			SearchText = tmptText;
-
-			//check if SearchText is full of \0
-			//loop through all available nodes
-			if (SearchText.empty()) {
-				for (auto node : GraphEngine->GetAvailableNodes()) {
-					//if node is clicked
-					if (ImGui::MenuItem(node.TypeID.c_str())) {
-						//add node to graph
-						GraphEngine->GetGraphs()["main"]->GetMutex().lock();
-						int uuid = GraphEngine->GetGraphs()["main"]->AddNode(node.CreateNode());
-						GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
-						ed::SetNodePosition(uuid, ImGui::GetMousePos());
+			ed::Suspend();
+			static int firstCall = 0;
+			static const int maxItterations = 2;
+			//if context menu is open
+			if (ImGui::BeginPopup("Background Context Menu")) {
+				if (firstCall < maxItterations) {
+					ImGui::SetWindowPos(ImVec2(ImGui::GetMousePos().x, ImGui::GetMousePos().y));
+					if (firstCall < maxItterations) {
+						firstCall++;
 					}
 				}
-			}
-			else {
-				for (auto node : GraphEngine->GetAvailableNodes()) {
-					if (RegexMatch(SearchText + ".*", node.TypeID)) {
+				//if the context menu is clicked
+				char* tmptText = new char[SearchText.size() + 2];
+				memcpy_s(tmptText, SearchText.size() + 2, SearchText.c_str(), SearchText.size() + 1);
+				ImGui::InputText("Search", tmptText, SearchText.size() + 2);
+				SearchText = tmptText;
+
+				//check if SearchText is full of \0
+				//loop through all available nodes
+				if (SearchText.empty()) {
+					for (auto node : GraphEngine->GetAvailableNodes()) {
 						//if node is clicked
 						if (ImGui::MenuItem(node.TypeID.c_str())) {
 							//add node to graph
@@ -166,62 +104,163 @@ class UIEngine : public UIEngineInterface
 						}
 					}
 				}
-			}
-			ImGui::EndPopup();
-		}
-
-		ed::NodeId ContextNode;
-		if (ed::ShowNodeContextMenu(&ContextNode)) {
-			//open context menu
-			ImGui::OpenPopup("Node Context Menu");
-		}
-
-		//if context menu is open
-		if (ImGui::BeginPopup("Node Context Menu")) {
-			std::vector<ed::NodeId> nodes(ed::GetActionContextSize());
-			int nodeCount = ed::GetActionContextNodes(nodes.data(), ed::GetActionContextSize());
-			//if node is clicked
-			if (ImGui::MenuItem("Delete")) {
-				//delete node
-				GraphEngine->GetGraphs()["main"]->GetMutex().lock();
-				//delete edges
-				for (auto edge : GraphEngine->GetGraphs()["main"]->GetNodes()[ContextNode.Get()]->GetInputEdges()) {
-					GraphEngine->GetGraphs()["main"]->DeleteEdge(edge->GetUID());
+				else {
+					for (auto node : GraphEngine->GetAvailableNodes()) {
+						if (RegexMatch(SearchText + ".*", node.TypeID)) {
+							//if node is clicked
+							if (ImGui::MenuItem(node.TypeID.c_str())) {
+								//add node to graph
+								GraphEngine->GetGraphs()["main"]->GetMutex().lock();
+								int uuid = GraphEngine->GetGraphs()["main"]->AddNode(node.CreateNode());
+								GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
+								ed::SetNodePosition(uuid, ImGui::GetMousePos());
+							}
+						}
+					}
 				}
-				for (auto edge : GraphEngine->GetGraphs()["main"]->GetNodes()[ContextNode.Get()]->GetOutputEdges()) {
-					GraphEngine->GetGraphs()["main"]->DeleteEdge(edge->GetUID());
-				}
-				//delete node
-				GraphEngine->GetGraphs()["main"]->DeleteNode((unsigned int)ContextNode.Get());
-				GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
+				ImGui::EndPopup();
 			}
-			ImGui::EndPopup();
+			else {
+				firstCall = 0;
+			}
+
+			ed::NodeId ContextNode;
+			if (ed::ShowNodeContextMenu(&ContextNode)) {
+				//open context menu
+				ImGui::OpenPopup("Node Context Menu");
+			}
+
+			//if context menu is open
+			if (ImGui::BeginPopup("Node Context Menu")) {
+				std::vector<ed::NodeId> nodes(ed::GetActionContextSize());
+				int nodeCount = ed::GetActionContextNodes(nodes.data(), ed::GetActionContextSize());
+				//if node is clicked
+				if (ImGui::MenuItem("Delete")) {
+					//delete node
+					GraphEngine->GetGraphs()["main"]->GetMutex().lock();
+					//delete edges
+					for (auto edge : GraphEngine->GetGraphs()["main"]->GetNodes()[ContextNode.Get()]->GetInputEdges()) {
+						GraphEngine->GetGraphs()["main"]->DeleteEdge(edge->GetUID());
+					}
+					for (auto edge : GraphEngine->GetGraphs()["main"]->GetNodes()[ContextNode.Get()]->GetOutputEdges()) {
+						GraphEngine->GetGraphs()["main"]->DeleteEdge(edge->GetUID());
+					}
+					//delete node
+					GraphEngine->GetGraphs()["main"]->DeleteNode((unsigned int)ContextNode.Get());
+					GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
+				}
+				ImGui::EndPopup();
+			}
+
+			//Node Properties window
+			if (ImGui::Begin("Node Properties")) {
+				if (ed::GetSelectedObjectCount() > 0) {
+					std::vector<ed::NodeId> SelectedNodes(ed::GetSelectedObjectCount());
+					std::vector<ed::LinkId> SelectedEdges(ed::GetSelectedObjectCount());
+					int nodeCount = ed::GetSelectedNodes(SelectedNodes.data(), ed::GetSelectedObjectCount());
+					int edgeCount = ed::GetSelectedLinks(SelectedEdges.data(), ed::GetSelectedObjectCount());
+					SelectedNodes.resize(nodeCount);
+					SelectedEdges.resize(edgeCount);
+					std::vector<unsigned int> SelectedNodesUID;
+					std::vector<unsigned int> SelectedEdgesUID;
+					for (auto node : SelectedNodes) {
+						SelectedNodesUID.push_back(node.Get());
+					}
+					for (auto edge : SelectedEdges) {
+						SelectedEdgesUID.push_back(edge.Get());
+					}
+					if (GraphEngine->GetGraphs()["main"]->GetNodes().find(SelectedNodesUID[0]) != GraphEngine->GetGraphs()["main"]->GetNodes().end()) {
+						GraphEngine->GetGraphs()["main"]->GetNodes()[SelectedNodesUID[0]]->DrawNodeProperties(ImGui::GetCurrentContext());
+					}
+				}
+			}
+			ImGui::End();
+
+			ed::Resume();
+
+			if (ed::BeginCreate())
+			{
+				ed::PinId inputPinId, outputPinId;
+				if (ed::QueryNewLink(&inputPinId, &outputPinId))
+				{
+					if (inputPinId && outputPinId) // both are valid, let's accept link
+					{
+						if (inputPinId != outputPinId)
+						{
+							GraphEngine->GetGraphs()["main"]->GetMutex().lock();
+							//find the node that the pin belongs to
+							unsigned int inputNode = -1;
+							unsigned int inputIO = inputPinId.Get();
+							unsigned int outputNode = -1;
+							unsigned int outputIO = outputPinId.Get();
+							for (auto node : GraphEngine->GetGraphs()["main"]->GetNodes()) {
+								if (node.second->HasInput(outputIO)) {
+									outputNode = node.second->GetUID();
+								}
+								if (node.second->HasOutput(inputIO)) {
+									inputNode = node.second->GetUID();
+								}
+							}
+							if (inputNode != -1 || outputNode != -1) {
+								if (ed::AcceptNewItem())
+								{
+									//create edge
+									EdgeInterface* edge = GraphEngine->GetGraphs()["main"]->CreateEdge(inputNode, outputNode, inputIO, outputIO);
+									if (edge != nullptr) {
+										GraphEngine->GetGraphs()["main"]->GetNodes()[inputNode]->GetOutputEdges().push_back(edge);
+										GraphEngine->GetGraphs()["main"]->GetNodes()[outputNode]->GetInputEdges().push_back(edge);
+									}
+								}
+							}
+							else {
+								ed::RejectNewItem();
+							}
+							GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
+						}
+					}
+				}
+			}
+			ed::EndCreate();
+
+			if (ed::BeginDelete()) {
+				ed::LinkId deletedLinkId;
+				while (ed::QueryDeletedLink(&deletedLinkId))
+				{
+					if (ed::AcceptDeletedItem())
+					{
+						GraphEngine->GetGraphs()["main"]->GetMutex().lock();
+						//delete edge
+						GraphEngine->GetGraphs()["main"]->DeleteEdge(deletedLinkId.Get());
+						GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
+					}
+				}
+
+				ed::NodeId deletedNodeId;
+				while (ed::QueryDeletedNode(&deletedNodeId)) {
+					GraphEngine->GetGraphs()["main"]->GetMutex().lock();
+					//delete edges
+					for (auto edge : GraphEngine->GetGraphs()["main"]->GetNodes()[deletedNodeId.Get()]->GetInputEdges()) {
+						GraphEngine->GetGraphs()["main"]->DeleteEdge(edge->GetUID());
+					}
+					for (auto edge : GraphEngine->GetGraphs()["main"]->GetNodes()[deletedNodeId.Get()]->GetOutputEdges()) {
+						GraphEngine->GetGraphs()["main"]->DeleteEdge(edge->GetUID());
+					}
+
+					//delete node
+					GraphEngine->GetGraphs()["main"]->DeleteNode((unsigned int)deletedNodeId.Get());
+					GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
+				}
+			}
+			ed::EndDelete();
+
+			
 		}
-
-
-		////Node Properties window
-		//if (ImGui::Begin("Node Properties")) {
-		//	if (ed::GetSelectedObjectCount() > 0) {
-		//		std::vector<ed::NodeId> SelectedNodes(ed::GetSelectedObjectCount());
-		//		std::vector<ed::LinkId> SelectedEdges(ed::GetSelectedObjectCount());
-		//		int nodeCount = ed::GetSelectedNodes(SelectedNodes.data(), ed::GetSelectedObjectCount());
-		//		int edgeCount = ed::GetSelectedLinks(SelectedEdges.data(), ed::GetSelectedObjectCount());
-		//		SelectedNodes.resize(nodeCount);
-		//		SelectedEdges.resize(edgeCount);
-		//		std::vector<unsigned int> SelectedNodesUID;
-		//		std::vector<unsigned int> SelectedEdgesUID;
-		//		for (auto node : SelectedNodes) {
-		//			SelectedNodesUID.push_back(node.Get());
-		//		}
-		//		for (auto edge : SelectedEdges) {
-		//			SelectedEdgesUID.push_back(edge.Get());
-		//		}
-		//		if (GraphEngine->GetGraphs()["main"]->GetNodes().find(SelectedNodesUID[0]) != GraphEngine->GetGraphs()["main"]->GetNodes().end()) {
-		//			GraphEngine->GetGraphs()["main"]->GetNodes()[SelectedNodesUID[0]]->DrawNodeProperties(ImGui::GetCurrentContext());
-		//		}
-		//	}
-		//}
-		//ImGui::End();
+		catch (std::exception e) {
+			printf("%s\n", e.what());
+		}
+		catch (...) {
+			printf("Unknown error\n");
+		}
 	}
 
 	std::map<std::string, ImColor> IoTypeColors;
@@ -703,98 +742,105 @@ public:
 			ImGui::End();
 
 			//Node editor window
-			ImGui::Separator();
-			ed::SetCurrentEditor(g_Context);
-			ed::Begin("NodeEditor");
+			if (ImGui::Begin("Node Editor")) {
+				ImGui::Separator();
+				ed::SetCurrentEditor(g_Context);
+				ed::Begin("NodeEditor");
 
 
-			std::map<std::string, GraphInterface*> graphs = GraphEngine->GetGraphs();
-			std::map<unsigned int, NodeInterface*> nodes = graphs["main"]->GetNodes();
-			std::map<unsigned int, EdgeInterface*> edges = graphs["main"]->GetEdges();
-			//draw nodes
-			for (auto node : nodes) {
-				ed::BeginNode(node.second->GetUID());
-				node.second->DrawNodeTitle(ImGui::GetCurrentContext());
+				std::map<std::string, GraphInterface*> graphs = GraphEngine->GetGraphs();
+				std::map<unsigned int, NodeInterface*> nodes = graphs["main"]->GetNodes();
+				std::map<unsigned int, EdgeInterface*> edges = graphs["main"]->GetEdges();
+				//draw nodes
+				for (auto node : nodes) {
+					ed::BeginNode(node.second->GetUID());
+					node.second->DrawNodeTitle(ImGui::GetCurrentContext());
 
-				for (int i = 0; i < node.second->GetDescription().size(); i++) {
-					if (node.second->GetDescription()[i].find("Input") != node.second->GetDescription()[i].end()) {
-						//get color
-						if (IoTypeColors.find(node.second->GetDescription()[i]["Input"]["TypeID"]) == IoTypeColors.end()) {
-							ImColor col = ImColor(RandRange(0, 255), RandRange(0, 255), RandRange(0, 255));
-							while (true) {
-								bool valid = true;
-								for (auto color : IoTypeColors) {
-									if (Distance(color.second, col).Value.x < ColorDistance && Distance(color.second, col).Value.y < ColorDistance && Distance(color.second, col).Value.z < ColorDistance) {
-										valid = false;
+					for (int i = 0; i < node.second->GetDescription().size(); i++) {
+						if (node.second->GetDescription()[i].find("Input") != node.second->GetDescription()[i].end()) {
+							//get color
+							if (IoTypeColors.find(node.second->GetDescription()[i]["Input"]["TypeID"]) == IoTypeColors.end()) {
+								ImColor col = ImColor(RandRange(0, 255), RandRange(0, 255), RandRange(0, 255));
+								while (true) {
+									bool valid = true;
+									for (auto color : IoTypeColors) {
+										if (Distance(color.second, col).Value.x < ColorDistance && Distance(color.second, col).Value.y < ColorDistance && Distance(color.second, col).Value.z < ColorDistance) {
+											valid = false;
+											break;
+										}
+									}
+									if (valid) {
 										break;
 									}
+									col = ImColor(RandRange(0, 255), RandRange(0, 255), RandRange(0, 255));
 								}
-								if (valid) {
-									break;
-								}
-								col = ImColor(RandRange(0, 255), RandRange(0, 255), RandRange(0, 255));
+								IoTypeColors[node.second->GetDescription()[i]["Input"]["TypeID"]] = col;
 							}
-							IoTypeColors[node.second->GetDescription()[i]["Input"]["TypeID"]] = col;
+
+							//TODO:: color and icon
+							ed::BeginPin((ed::PinId)node.second->GetInputByIndex(i)["UID"].get<unsigned int>(), ed::PinKind::Input);
+							ImGui::Text(node.second->GetInputByIndex(i)["Name"].get<std::string>().c_str());
+							//icon
+							ImGui::SameLine();
+							ed::PinPivotAlignment(ImVec2(0.5f, 0.0f));
+							ed::PinPivotSize(ImVec2(10, 10));
+							ed::EndPin();
+
 						}
-
-						//TODO:: color and icon
-						ed::BeginPin((ed::PinId)node.second->GetInputByIndex(i)["UID"], ed::PinKind::Input);
-						ImGui::Text(node.second->GetInputByIndex(i)["Name"].get<std::string>().c_str());
-						ed::EndPin();
-
-					}
-					if (node.second->GetDescription()[i].find("Attribute") != node.second->GetDescription()[i].end() && node.second->GetDescription()[i].find("Input") != node.second->GetDescription()[i].end()) {
-						ImGui::SameLine();
-					}
-					if (node.second->GetDescription()[i].find("Attribute") != node.second->GetDescription()[i].end()) {
-						//pass imgui context to attribute and opengl context to attribute
-						node.second->GetAttributes()[node.second->GetDescription()[i]["Attribute"]]->Draw(ImGui::GetCurrentContext(), window);
-					}
-					if (node.second->GetDescription()[i].find("Output") != node.second->GetDescription()[i].end() && node.second->GetDescription()[i].find("Attribute") != node.second->GetDescription()[i].end() ||
-						node.second->GetDescription()[i].find("Output") != node.second->GetDescription()[i].end() && node.second->GetDescription()[i].find("Input") != node.second->GetDescription()[i].end()) {
-						ImGui::SameLine();
-					}
-					if (node.second->GetDescription()[i].find("Output") != node.second->GetDescription()[i].end()) {
-						//get color
-						if (IoTypeColors.find(node.second->GetDescription()[i]["Output"]["TypeID"]) == IoTypeColors.end()) {
-							ImColor col = ImColor(RandRange(0, 255), RandRange(0, 255), RandRange(0, 255));
-							while (true) {
-								bool valid = true;
-								for (auto color : IoTypeColors) {
-									if (Distance(color.second, col).Value.x < ColorDistance && Distance(color.second, col).Value.y < ColorDistance && Distance(color.second, col).Value.z < ColorDistance) {
-										valid = false;
+						if (node.second->GetDescription()[i].find("Attribute") != node.second->GetDescription()[i].end() && node.second->GetDescription()[i].find("Input") != node.second->GetDescription()[i].end()) {
+							ImGui::SameLine();
+						}
+						if (node.second->GetDescription()[i].find("Attribute") != node.second->GetDescription()[i].end()) {
+							//pass imgui context to attribute and opengl context to attribute
+							node.second->GetAttributes()[node.second->GetDescription()[i]["Attribute"]]->Draw(ImGui::GetCurrentContext(), window);
+						}
+						if (node.second->GetDescription()[i].find("Output") != node.second->GetDescription()[i].end() && node.second->GetDescription()[i].find("Attribute") != node.second->GetDescription()[i].end() ||
+							node.second->GetDescription()[i].find("Output") != node.second->GetDescription()[i].end() && node.second->GetDescription()[i].find("Input") != node.second->GetDescription()[i].end()) {
+							ImGui::SameLine();
+						}
+						if (node.second->GetDescription()[i].find("Output") != node.second->GetDescription()[i].end()) {
+							//get color
+							if (IoTypeColors.find(node.second->GetDescription()[i]["Output"]["TypeID"]) == IoTypeColors.end()) {
+								ImColor col = ImColor(RandRange(0, 255), RandRange(0, 255), RandRange(0, 255));
+								while (true) {
+									bool valid = true;
+									for (auto color : IoTypeColors) {
+										if (Distance(color.second, col).Value.x < ColorDistance && Distance(color.second, col).Value.y < ColorDistance && Distance(color.second, col).Value.z < ColorDistance) {
+											valid = false;
+											break;
+										}
+									}
+									if (valid) {
 										break;
 									}
+									col = ImColor(RandRange(0, 255), RandRange(0, 255), RandRange(0, 255));
 								}
-								if (valid) {
-									break;
-								}
-								col = ImColor(RandRange(0, 255), RandRange(0, 255), RandRange(0, 255));
+								IoTypeColors[node.second->GetDescription()[i]["Output"]["TypeID"]] = col;
 							}
-							IoTypeColors[node.second->GetDescription()[i]["Output"]["TypeID"]] = col;
-						}
 
-						//TODO: color and icon
-						ed::BeginPin((ed::PinId)node.second->GetOutputByIndex(i)["UID"], ed::PinKind::Output);
-						ImGui::Text(node.second->GetOutputByIndex(i)["Name"].get<std::string>().c_str());
-						ed::EndPin();
+							//TODO: color and icon
+							ed::BeginPin((ed::PinId)node.second->GetOutputByIndex(i)["UID"].get<unsigned int>(), ed::PinKind::Output);
+							ImGui::Text(node.second->GetOutputByIndex(i)["Name"].get<std::string>().c_str());
+							ed::EndPin();
+						}
 					}
+					ed::EndNode();
+					node.second->Update();
 				}
-				ed::EndNode();
-				node.second->Update();
+				//draw links
+				for (auto edge : edges)
+				{
+					ed::Link(edge.second->GetUID(), (ed::PinId)edge.second->GetFirstIO()["UID"].get<unsigned int>(), (ed::PinId)edge.second->GetSecondIO()["UID"]);
+				}
+				for (auto node : nodes) {
+					ImVec2 pos = ed::GetNodePosition(node.second->GetUID());
+					node.second->setXY(pos.x, pos.y);
+				}
+
+				HandleGraphInputEvents();
+				ed::End();
 			}
-			//draw links
-			for (auto edge : edges)
-			{
-				ed::Link(edge.second->GetUID(), (ed::PinId)edge.second->GetFirstIO()["UID"], (ed::PinId)edge.second->GetSecondIO()["UID"]);
-			}
-			for (auto node : nodes) {
-				ImVec2 pos = ed::GetNodePosition(node.second->GetUID());
-				node.second->setXY(pos.x, pos.y);
-			}
-			
-			HandleGraphInputEvents();
-			ed::End();
+			ImGui::End();
 
 			//Node Search window
 			if (ImGui::Begin("Node Search")) {

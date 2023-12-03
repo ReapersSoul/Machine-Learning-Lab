@@ -13,6 +13,7 @@
 class GraphInterface : public SerializableInterface
 {
 protected:
+	std::vector<unsigned int> UsedUIDs;
 	std::map<unsigned int,unsigned int> IOUIDs;
 	std::map<unsigned int, NodeInterface*> Nodes;
 	std::map<unsigned int, EdgeInterface*> Edges;
@@ -52,11 +53,18 @@ public:
 
 	void DeleteNode(unsigned int NodeUID);
 
+	void ChangeNodeUID(unsigned int OldUID, unsigned int NewUID);
+
+	void ChangeEdgeUID(unsigned int OldUID, unsigned int NewUID);
+
+	void ChangeIOUID(unsigned int OldUID, unsigned int NewUID);
+
 	void Process(bool DirectionForward, std::vector<unsigned int> SelectedNodes =std::vector<unsigned int>(), std::vector<unsigned int> SelectedEdges = std::vector<unsigned int>());
 
 	void SetSorter(SorterInterface * Sorter);
 
 	unsigned int GetNextIOUID(unsigned int);
+	unsigned int GetNextUID();
 
 	void RemoveIOUID(unsigned int UID);
 
@@ -66,6 +74,10 @@ public:
 	std::map<unsigned int, NodeInterface*>& GetNodes();
 
 	std::map<unsigned int, EdgeInterface*>& GetEdges();
+
+	std::string GetCurrentVersion();
+
+	void UpdateSaveForCurrentVersion(std::string oldversion);
 
 	nlohmann::json Serialize() override;
 	void DeSerialize(nlohmann::json data, void* DCEE) override;

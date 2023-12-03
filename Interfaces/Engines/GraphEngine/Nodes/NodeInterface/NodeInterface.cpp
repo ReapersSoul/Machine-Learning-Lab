@@ -16,6 +16,22 @@ bool NodeInterface::HasInput(unsigned int UID)
 	return false;
 }
 
+void NodeInterface::PrintIOUID() {
+	for (int i = 0; i < Description.size(); i++)
+	{
+		if (Description[i].find("Input") != Description[i].end()) {
+			if (Description[i]["Input"].find("UID") != Description[i]["Input"].end()) {
+				printf("Input UID: %d\n", Description[i]["Input"]["UID"].get<unsigned int>());
+			}
+		}
+		if (Description[i].find("Output") != Description[i].end()) {
+			if (Description[i]["Output"].find("UID") != Description[i]["Output"].end()) {
+				printf("Output UID: %d\n", Description[i]["Output"]["UID"].get<unsigned int>());
+			}
+		}
+	}
+}
+
 bool NodeInterface::HasOutput(unsigned int UID)
 {
 	for (int i = 0; i < Description.size(); i++)
@@ -26,6 +42,21 @@ bool NodeInterface::HasOutput(unsigned int UID)
 		}
 	}
 	return false;
+}
+
+void NodeInterface::ChangeIOUID(unsigned int OldUID, unsigned int NewUID)
+{
+	for (int i = 0; i < Description.size(); i++)
+	{
+		if (Description[i].find("Input") != Description[i].end()) {
+			if (Description[i]["Input"]["UID"] == OldUID)
+				Description[i]["Input"]["UID"] = NewUID;
+		}
+		if (Description[i].find("Output") != Description[i].end()) {
+			if (Description[i]["Output"]["UID"] == OldUID)
+				Description[i]["Output"]["UID"] = NewUID;
+		}
+	}
 }
 
 void NodeInterface::setXY(int x, int y) {
@@ -254,13 +285,15 @@ nlohmann::json& NodeInterface::GetDescription()
 }
 
 void NodeInterface::MakeInput(int line, std::string Name, std::string TypeID, nlohmann::json Data) {
-	Description[line]["Input"]["UID"] = ParentGraph->GetNextIOUID(UID);
+	unsigned int IOUID = ParentGraph->GetNextIOUID(UID);
+	Description[line]["Input"]["UID"] = IOUID;
 	Description[line]["Input"]["Name"] = Name;
 	Description[line]["Input"]["TypeID"] = TypeID;
 	Description[line]["Input"]["Data"] = Data;
 }
 void NodeInterface::MakeOutput(int line, std::string Name, std::string TypeID, nlohmann::json Data) {
-	Description[line]["Output"]["UID"] = ParentGraph->GetNextIOUID(UID);
+	unsigned int IOUID = ParentGraph->GetNextIOUID(UID);
+	Description[line]["Output"]["UID"] = IOUID;
 	Description[line]["Output"]["Name"] = Name;
 	Description[line]["Output"]["TypeID"] = TypeID;
 	Description[line]["Output"]["Data"] = Data;
