@@ -280,6 +280,7 @@ class UIEngine : public UIEngineInterface
 	std::thread processingthread;
 
 	int mode = 0;
+	bool Debug = false;
 public:
 
 	int GetItteration() override {
@@ -655,6 +656,11 @@ public:
 			
 			//settings window
 			if (ImGui::Begin("Settings")) {
+				ImGui::Checkbox("Debug Mode", &Debug);
+				if (Debug) {
+
+				}
+
 				//reload all engines
 				if (ImGui::Button("Reload Engines")) {
 					DCEEngine->FullReload();
@@ -755,8 +761,10 @@ public:
 				for (auto node : nodes) {
 					ed::BeginNode(node.second->GetUID());
 					node.second->DrawNodeTitle(ImGui::GetCurrentContext());
-					ImGui::SameLine();
-					ImGui::Text(std::to_string(node.second->GetUID()).c_str());
+					if (Debug) {
+						ImGui::SameLine();
+						ImGui::Text(std::to_string(node.second->GetUID()).c_str());
+					}
 
 					for (int i = 0; i < node.second->GetDescription().size(); i++) {
 						if (node.second->GetDescription()[i].find("Input") != node.second->GetDescription()[i].end()) {
@@ -782,12 +790,14 @@ public:
 							//TODO:: color and icon
 							ed::BeginPin((ed::PinId)node.second->GetInputByIndex(i)["UID"].get<unsigned int>(), ed::PinKind::Input);
 							ImGui::Text(node.second->GetInputByIndex(i)["Name"].get<std::string>().c_str());
-							ImGui::SameLine();
-							if (node.second->GetInputByIndex(i).contains("UID")) {
-								ImGui::Text(std::to_string(node.second->GetInputByIndex(i)["UID"].get<unsigned int>()).c_str());
-							}
-							else {
-								ImGui::Text("N/A");
+							if (Debug) {
+								ImGui::SameLine();
+								if (node.second->GetInputByIndex(i).contains("UID")) {
+									ImGui::Text(std::to_string(node.second->GetInputByIndex(i)["UID"].get<unsigned int>()).c_str());
+								}
+								else {
+									ImGui::Text("N/A");
+								}
 							}
 							ed::EndPin();
 
@@ -826,12 +836,14 @@ public:
 							//TODO: color and icon
 							ed::BeginPin((ed::PinId)node.second->GetOutputByIndex(i)["UID"].get<unsigned int>(), ed::PinKind::Output);
 							ImGui::Text(node.second->GetOutputByIndex(i)["Name"].get<std::string>().c_str());
-							ImGui::SameLine();
-							if (node.second->GetOutputByIndex(i).contains("UID")) {
-								ImGui::Text(std::to_string(node.second->GetOutputByIndex(i)["UID"].get<unsigned int>()).c_str());
-							}
-							else {
-								ImGui::Text("N/A");
+							if (Debug) {
+								ImGui::SameLine();
+								if (node.second->GetOutputByIndex(i).contains("UID")) {
+									ImGui::Text(std::to_string(node.second->GetOutputByIndex(i)["UID"].get<unsigned int>()).c_str());
+								}
+								else {
+									ImGui::Text("N/A");
+								}
 							}
 							ed::EndPin();
 						}

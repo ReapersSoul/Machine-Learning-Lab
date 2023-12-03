@@ -103,6 +103,12 @@ void GraphInterface::ChangeNodeUID(unsigned int OldUID, unsigned int NewUID)
 			Edge.second->SetSecond(NewUID);
 		}
 	}
+	for (auto& IOUID : IOUIDs) {
+		if (IOUID.second == OldUID) {
+			IOUID.second = NewUID;
+		}
+	}
+
 	Nodes.erase(OldUID);
 	Nodes[NewUID] = Node;
 	Node->SetUID(NewUID);
@@ -119,7 +125,11 @@ void GraphInterface::ChangeEdgeUID(unsigned int OldUID, unsigned int NewUID)
 void GraphInterface::ChangeIOUID(unsigned int OldUID, unsigned int NewUID)
 {
 	unsigned int NodeUID= IOUIDs[OldUID];
-	Nodes[NodeUID]->ChangeIOUID(OldUID, NewUID);
+	for (auto& Node : Nodes) {
+		if (Node.second->HasInput(OldUID) || Node.second->HasOutput(OldUID)) {
+			Node.second->ChangeIOUID(OldUID, NewUID);
+		}
+	}
 	IOUIDs.erase(OldUID);
 	IOUIDs[NewUID] = NodeUID;
 }
@@ -233,22 +243,26 @@ void GraphInterface::UpdateSaveForCurrentVersion(std::string oldversion)
 
 	if (oldversion == "0.0.0") {
 		int starting_uid = Edges.size();
+
+		std::map<unsigned int, unsigned int> oldIOUID = IOUIDs;
+
+		for (auto& IO : oldIOUID) {
+			ChangeIOUID(IO.first, starting_uid);
+			starting_uid++;
+		}
+
 		std::vector<NodeInterface*> nNodes;
 		for (auto& Node : this->Nodes) {
 			nNodes.push_back(Node.second);
 		}
+
 		//update to 0.0.1
 		for (auto& Node : nNodes) {
 			ChangeNodeUID(Node->GetUID(), starting_uid);
 			starting_uid++;
 		}
 
-		std::map<unsigned int, unsigned int> oldIOUID= IOUIDs;
 
-		for (auto& IO : oldIOUID) {
-			ChangeIOUID(IO.first, starting_uid);
-			starting_uid++;
-		}
 	}
 }
 

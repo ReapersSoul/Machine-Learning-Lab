@@ -57,6 +57,15 @@ void NodeInterface::ChangeIOUID(unsigned int OldUID, unsigned int NewUID)
 				Description[i]["Output"]["UID"] = NewUID;
 		}
 	}
+
+	for (auto& Edge : InputEdges) {
+		if (Edge->GetSecondIO()["UID"] == OldUID)
+			Edge->SetSecondIO(NewUID);
+	}
+	for (auto& Edge : OutputEdges) {
+		if (Edge->GetFirstIO()["UID"] == OldUID)
+			Edge->SetFirstIO(NewUID);
+	}
 }
 
 void NodeInterface::setXY(int x, int y) {
@@ -327,6 +336,8 @@ nlohmann::json& NodeInterface::GetInputByUID(unsigned int i) {
 			}
 		}
 	}
+	//return empty json if not found
+	return Description.end().value();
 }
 
 nlohmann::json& NodeInterface::GetInputByName(std::string name) {
@@ -339,6 +350,8 @@ nlohmann::json& NodeInterface::GetInputByName(std::string name) {
 			}
 		}
 	}
+	//return empty json if not found
+	return Description.end().value();
 }
 
 void NodeInterface::ClearOutputData(int i) {
