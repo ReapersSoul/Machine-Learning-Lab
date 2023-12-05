@@ -457,6 +457,42 @@ void GraphInterface::Process(bool DirectionForward, std::vector<unsigned int> Se
 	}
 }
 
+void GraphInterface::Train()
+{
+	ProcessingOrder PO = Sorter->SortGraph(this, true);
+	//node, optimizer for layer
+	std::map<unsigned int, Optimizer*> Optimizers;
+	for (int i = 0; i < PO.Nodes.size(); i++)
+	{
+		for (int j = 0; j < PO.Nodes[i].size(); j++)
+		{
+			PO.Nodes[i][j]->ResetIO();
+		}
+	}
+
+	for (int i = 0; i < PO.Nodes.size(); i++)
+	{
+		for (int j = 0; j < PO.Nodes[i].size(); j++) {
+			PO.Nodes[i][j]->ClearAllOutputData();
+			PO.Nodes[i][j]->ClearAllInputData();
+		}
+	}
+
+	for (int i = 0; i < PO.Nodes.size(); i++)
+	{
+		for (int j = 0; j < PO.Nodes[i].size(); j++)
+		{
+			PO.Nodes[i][j]->Process(DirectionForward);
+		}
+		if (i < PO.Edges.size()) {
+			for (int j = 0; j < PO.Edges[i].size(); j++)
+			{
+				PO.Edges[i][j]->Process(DirectionForward);
+			}
+		}
+	}
+}
+
 void GraphInterface::SetSorter(SorterInterface* Sorter) {
 	this->Sorter = Sorter;
 }

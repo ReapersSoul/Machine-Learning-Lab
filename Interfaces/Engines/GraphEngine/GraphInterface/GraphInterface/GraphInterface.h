@@ -91,6 +91,8 @@ public:
 
 	void Process(bool DirectionForward, std::vector<unsigned int> SelectedNodes =std::vector<unsigned int>(), std::vector<unsigned int> SelectedEdges = std::vector<unsigned int>());
 
+	void Train();
+
 	void SetSorter(SorterInterface * Sorter);
 
 	unsigned int GetNextIOUID(unsigned int);
