@@ -1,5 +1,269 @@
 #include "GraphInterface.h"
 
+nlohmann::json GraphInterface::GetInputDescriptors()
+{
+	nlohmann::json Inputs= nlohmann::json::array();
+	//find input nodes output io and the unconeccted input io
+	for (auto& Node : Nodes) {
+		if (Node.second->InputCount() == 0)
+			Inputs.push_back(Node.second->GetOutputDescriptors());
+		if (Node.second->InputCount() > 0) {
+			//get the InputEdges
+			std::vector<EdgeInterface*> InputEdges = Node.second->GetInputEdges();
+			//collect the ids of the IOUID's
+			std::vector<unsigned int> InputIOUIDs;
+			for (auto& InputEdge : InputEdges) {
+				InputIOUIDs.push_back(InputEdge->GetSecondIO());
+			}
+			for (unsigned int i = 0; i < Node.second->InputCount(); i++) {
+				bool isConnected = false;
+				nlohmann::json InputDescriptors = Node.second->GetInputDescriptors();
+				for (auto& InputIOUID : InputIOUIDs) {
+					if (InputDescriptors[i]["IOUID"] == InputIOUID) {
+						isConnected = true;
+						break;
+					}
+				}
+				if (!isConnected)
+					Inputs.push_back(InputDescriptors[i]);
+			}
+		}
+	}
+	return Inputs;
+}
+
+nlohmann::json GraphInterface::GetOutputDescriptors()
+{
+	nlohmann::json Outputs = nlohmann::json::array();
+	for (auto& Node : Nodes) {
+		if (Node.second->OutputCount() == 0)
+			Outputs.push_back(Node.second->GetOutputDescriptors());
+		if (Node.second->OutputCount() > 0) {
+			//get the OutputEdges
+			std::vector<EdgeInterface*> OutputEdges = Node.second->GetOutputEdges();
+			//collect the ids of the IOUID's
+			std::vector<unsigned int> OutputIOUIDs;
+			for (auto& OutputEdge : OutputEdges) {
+				OutputIOUIDs.push_back(OutputEdge->GetFirstIO());
+			}
+			for (unsigned int i = 0; i < Node.second->OutputCount(); i++) {
+				bool isConnected = false;
+				nlohmann::json OutputDescriptors = Node.second->GetOutputDescriptors();
+				for (auto& OutputIOUID : OutputIOUIDs) {
+					if (OutputDescriptors[i]["IOUID"] == OutputIOUID) {
+						isConnected = true;
+						break;
+					}
+				}
+				if (!isConnected)
+					Outputs.push_back(OutputDescriptors[i]);
+			}
+		}
+	}
+	return Outputs;
+}
+
+void GraphInterface::SetInputs(nlohmann::json Inputs)
+{
+	//find input nodes output io and the unconeccted input io and set their data 
+	for (auto& Node : Nodes) {
+		bool HasInput = false;
+		for (auto& Input : Inputs) {
+			if (Node.second->HasInput(Input["UID"])) {
+				Node.second->GetInputByUID(Input["UID"])["Data"] = Input["Data"];
+				Node.second->LockInput(Input["UID"]);
+			}
+			if (Node.second->HasOutput(Input["UID"])) {
+				Node.second->GetOutputByUID(Input["UID"])["Data"] = Input["Data"];
+				Node.second->LockOutput(Input["UID"]);
+			}
+		}		
+	}
+}
+
+void GraphInterface::SetOutputs(nlohmann::json Outputs)
+{
+	//find output nodes input io and the unconeccted output io and set their data 
+	for (auto& Node : Nodes) {
+		bool HasOutput = false;
+		for (auto& Output : Outputs) {
+			if (Node.second->HasOutput(Output["UID"])) {
+				Node.second->GetOutputByUID(Output["UID"])["Data"] = Output["Data"];
+				Node.second->LockOutput(Output["UID"]);
+			}
+			if (Node.second->HasInput(Output["UID"])) {
+				Node.second->GetInputByUID(Output["UID"])["Data"] = Output["Data"];
+				Node.second->LockInput(Output["UID"]);
+			}
+		}
+	}
+}
+
+void GraphInterface::LockInput(unsigned int UID) {
+	for (auto& Node : Nodes) {
+		if (Node.second->HasInput(UID)) {
+			Node.second->LockInput(UID);
+			return;
+		}
+	}
+}
+void GraphInterface::LockOutput(unsigned int UID) {
+	for (auto& Node : Nodes) {
+		if (Node.second->HasOutput(UID)) {
+			Node.second->LockOutput(UID);
+			return;
+		}
+	}
+}
+void GraphInterface::UnlockInput(unsigned int UID) {
+	for (auto& Node : Nodes) {
+		if (Node.second->HasInput(UID)) {
+			Node.second->UnlockInput(UID);
+			return;
+		}
+	}
+}
+void GraphInterface::UnlockOutput(unsigned int UID) {
+	for (auto& Node : Nodes) {
+		if (Node.second->HasOutput(UID)) {
+			Node.second->UnlockOutput(UID);
+			return;
+		}
+	}
+}
+bool GraphInterface::InputIsLocked(unsigned int UID) {
+	for (auto& Node : Nodes) {
+		if (Node.second->HasInput(UID)) {
+			return Node.second->InputIsLocked(UID);
+		}
+	}
+	return false;
+}
+bool GraphInterface::OutputIsLocked(unsigned int UID) {
+	for (auto& Node : Nodes) {
+		if (Node.second->HasOutput(UID)) {
+			return Node.second->OutputIsLocked(UID);
+		}
+	}
+	return false;
+}
+
+void GraphInterface::LockInputs(std::vector<unsigned int> UIDs) {
+	for (auto& Node : Nodes) {
+		for (auto& UID : UIDs) {
+			if (Node.second->HasInput(UID)) {
+				Node.second->LockInput(UID);
+			}
+		}
+	}
+}
+void GraphInterface::LockOutputs(std::vector<unsigned int> UIDs) {
+	for (auto& Node : Nodes) {
+		for (auto& UID : UIDs) {
+			if (Node.second->HasOutput(UID)) {
+				Node.second->LockOutput(UID);
+			}
+		}
+	}
+}
+void GraphInterface::UnlockInputs(std::vector<unsigned int> UIDs) {
+	for (auto& Node : Nodes) {
+		for (auto& UID : UIDs) {
+			if (Node.second->HasInput(UID)) {
+				Node.second->UnlockInput(UID);
+			}
+		}
+	}
+}
+void GraphInterface::UnlockOutputs(std::vector<unsigned int> UIDs) {
+	for (auto& Node : Nodes) {
+		for (auto& UID : UIDs) {
+			if (Node.second->HasOutput(UID)) {
+				Node.second->UnlockOutput(UID);
+			}
+		}
+	}
+}
+bool GraphInterface::InputsAreLocked(std::vector<unsigned int> UIDs) {
+	for (auto& Node : Nodes) {
+		for (auto& UID : UIDs) {
+			if (Node.second->HasInput(UID)) {
+				if (!Node.second->InputIsLocked(UID)) {
+					return false;
+				}
+			}
+		}
+	}
+	return true;
+}
+bool GraphInterface::OutputsAreLocked(std::vector<unsigned int> UIDs) {
+	for (auto& Node : Nodes) {
+		for (auto& UID : UIDs) {
+			if (Node.second->HasOutput(UID)) {
+				if (!Node.second->OutputIsLocked(UID)) {
+					return false;
+				}
+			}
+		}
+	}
+	return true;
+}
+
+void GraphInterface::ResetIOLocks() {
+	for (auto& Node : Nodes) {
+		Node.second->ResetIOLocks();
+	}
+}
+
+GraphInterface* GraphInterface::SubGraph(std::vector<unsigned int> SelectedNodes, std::vector<unsigned int> SelectedEdges)
+{
+	GraphInterface* SubGraph = new GraphInterface();
+	SubGraph->SetName(Name + "SubGraph");
+	for (auto& Node : Nodes) {
+		if (std::find(SelectedNodes.begin(), SelectedNodes.end(), Node.first) != SelectedNodes.end()) {
+			SubGraph->AddNode(Node.second->Clone());
+		}
+	}
+	for (auto& Edge : Edges) {
+		if (std::find(SelectedEdges.begin(), SelectedEdges.end(), Edge.first) != SelectedEdges.end()) {
+			SubGraph->AddEdge(Edge.second->Clone());
+		}
+	}
+	return SubGraph;
+}
+
+void GraphInterface::ReplaceSubGraph(GraphInterface* SubGraph)
+{
+	//if it has the nodes and edges, replace them
+	for (auto& Node : SubGraph->GetNodes()) {
+		if (HasNode(Node.first)) {
+			DeleteNode(Node.first);
+		}
+		AddNode(Node.second);
+	}
+	for (auto& Edge : SubGraph->GetEdges()) {
+		if (HasEdge(Edge.first)) {
+			DeleteEdge(Edge.first);
+		}
+		AddEdge(Edge.second);
+	}
+}
+
+void GraphInterface::AddEdge(EdgeInterface* EdgeInterface)
+{
+	Edges[EdgeInterface->GetUID()] = EdgeInterface;
+}
+
+bool GraphInterface::HasNode(unsigned int NodeUID)
+{
+	return Nodes.find(NodeUID) != Nodes.end();
+}
+
+bool GraphInterface::HasEdge(unsigned int EdgeUID)
+{
+	return Edges.find(EdgeUID) != Edges.end();
+}
+
 void GraphInterface::Clear() {
 	for (auto& Node : Nodes) {
 		delete Node.second;

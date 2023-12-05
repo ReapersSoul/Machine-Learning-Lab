@@ -32,6 +32,30 @@ void NodeInterface::PrintIOUID() {
 	}
 }
 
+nlohmann::json NodeInterface::GetInputDescriptors()
+{
+	nlohmann::json InputDescriptors;
+	for (int i = 0; i < Description.size(); i++)
+	{
+		if (Description[i].find("Input") != Description[i].end()) {
+			InputDescriptors.push_back(Description[i]["Input"]);
+		}
+	}
+	return InputDescriptors;
+}
+
+nlohmann::json NodeInterface::GetOutputDescriptors()
+{
+	nlohmann::json OutputDescriptors;
+	for (int i = 0; i < Description.size(); i++)
+	{
+		if (Description[i].find("Output") != Description[i].end()) {
+			OutputDescriptors.push_back(Description[i]["Output"]);
+		}
+	}
+	return OutputDescriptors;
+}
+
 bool NodeInterface::HasOutput(unsigned int UID)
 {
 	for (int i = 0; i < Description.size(); i++)
@@ -42,6 +66,30 @@ bool NodeInterface::HasOutput(unsigned int UID)
 		}
 	}
 	return false;
+}
+
+int NodeInterface::InputCount()
+{
+	int count = 0;
+	for (int i = 0; i < Description.size(); i++)
+	{
+		if (Description[i].find("Input") != Description[i].end()) {
+			count++;
+		}
+	}
+	return count;
+}
+
+int NodeInterface::OutputCount()
+{
+	int count = 0;
+	for (int i = 0; i < Description.size(); i++)
+	{
+		if (Description[i].find("Output") != Description[i].end()) {
+			count++;
+		}
+	}
+	return count;
 }
 
 void NodeInterface::ChangeIOUID(unsigned int OldUID, unsigned int NewUID)
@@ -221,7 +269,16 @@ void NodeInterface::ResetInputs() {
 	for (int i = 0; i < Description.size(); i++)
 	{
 		if (Description[i].find("Input") != Description[i].end()) {
-			Description[i]["Input"]["Data"]=nlohmann::json();
+			bool Locked = false;
+			for (int j = 0; j < LockedInputs.size(); j++)
+			{
+				if (Description[i]["Input"]["UID"].get<unsigned int>() == LockedInputs[j]) {
+					Locked = true;
+				}
+			}
+			if (!Locked) {
+				Description[i]["Input"]["Data"] = nlohmann::json();
+			}
 		}
 	}
 }
@@ -230,9 +287,52 @@ void NodeInterface::ResetOutputs() {
 	for (int i = 0; i < Description.size(); i++)
 	{
 		if (Description[i].find("Output") != Description[i].end()) {
-			Description[i]["Output"]["Data"] = nlohmann::json();
+			bool Locked = false;
+			for (int j = 0; j < LockedOutputs.size(); j++)
+			{
+				if (Description[i]["Output"]["UID"].get<unsigned int>() == LockedOutputs[j]) {
+					Locked = true;
+				}
+			}
+			if (!Locked) {
+				Description[i]["Output"]["Data"] = nlohmann::json();
+			}
 		}
 	}
+}
+
+void NodeInterface::LockInput(unsigned int UID) {
+	LockedInputs.push_back(UID);
+}
+
+void NodeInterface::LockOutput(unsigned int UID) {
+	LockedOutputs.push_back(UID);
+}
+
+void NodeInterface::UnlockInput(unsigned int UID) {
+	std::vector<unsigned int>::iterator it = std::find(LockedInputs.begin(), LockedInputs.end(), UID);
+	LockedInputs.erase(it);
+}
+
+void NodeInterface::UnlockOutput(unsigned int UID) {
+	std::vector<unsigned int>::iterator it = std::find(LockedOutputs.begin(), LockedOutputs.end(), UID);
+	LockedOutputs.erase(it);
+}
+
+bool NodeInterface::InputIsLocked(unsigned int UID) {
+	std::vector<unsigned int>::iterator it = std::find(LockedInputs.begin(), LockedInputs.end(), UID);
+	return it != LockedInputs.end();
+}
+
+bool NodeInterface::OutputIsLocked(unsigned int UID) {
+	std::vector<unsigned int>::iterator it = std::find(LockedOutputs.begin(), LockedOutputs.end(), UID);
+	return it != LockedOutputs.end();
+}
+
+void NodeInterface::ResetIOLocks()
+{
+	LockedInputs.clear();
+	LockedOutputs.clear();
 }
 
 void NodeInterface::ResetIO() {

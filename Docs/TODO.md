@@ -1,3 +1,4 @@
+- [ ] Feature training groups 
 - [ ] Fix the backward pass for the self attention layer
 - [ ] Fix the scripting node languages (chai, python, java, JS, lua, angel script)
 	- [ ] Chai (create)

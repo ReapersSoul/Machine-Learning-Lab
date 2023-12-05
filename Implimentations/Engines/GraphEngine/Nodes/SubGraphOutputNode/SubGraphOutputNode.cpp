@@ -1,5 +1,5 @@
 #include <DynamicCodeExecutionEngineInterface.h>
-#include <SubGraphNodeInterface.h>
+#include <NodeInterface.h>
 #include <LanguageInterface.h>
 #include <GraphEngineInterface.h>
 #include <AttributeInterface.h>
@@ -10,13 +10,13 @@
 
 #include <typeinfo>
 
-class SubGraphNode : public SubGraphNodeInterface {
-	GraphInterface * Graph;
+class SubGraphOutputNode : public NodeInterface {
+	GraphInterface* Graph;
 	std::string FilePath;
 
 public:
-	SubGraphNode() {
-		TypeID = "SubGraphNode";
+	SubGraphOutputNode() {
+		TypeID = "SubGraphOutputNode";
 	}
 
 	void Process(bool DirectionForward) override {
@@ -55,7 +55,7 @@ public:
 	}
 
 	NodeInterface* GetInstance() {
-		return new SubGraphNode();
+		return new SubGraphOutputNode();
 	}
 };
 
@@ -63,6 +63,6 @@ public:
 extern "C" {
 	// Define a function that returns the result of adding two numbers
 	__declspec(dllexport) NodeInterface* GetInstance() {
-		return new SubGraphNode();
+		return new SubGraphOutputNode();
 	}
 }

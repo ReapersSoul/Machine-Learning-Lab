@@ -150,6 +150,11 @@ nlohmann::json EdgeInterface::Serialize() {
 	return data;
 }
 
+EdgeInterface* EdgeInterface::Clone()
+{
+	return new EdgeInterface(*this);
+}
+
 void EdgeInterface::DeSerialize(nlohmann::json data, void* DCEE) {
 	UID = data["UID"];
 	TypeID = data["TypeID"];

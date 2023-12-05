@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="OptimizationEngine.cpp">
+    <ClCompile Include="BackPropigationOptimizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

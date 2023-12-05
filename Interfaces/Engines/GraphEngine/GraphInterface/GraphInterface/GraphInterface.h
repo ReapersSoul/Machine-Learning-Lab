@@ -24,9 +24,30 @@ protected:
 	LossEngineInterface* LE;
 	//mutex for multithreading
 	std::mutex GraphMutex;
-
 public:
 	
+	nlohmann::json GetInputDescriptors();
+	nlohmann::json GetOutputDescriptors();
+
+	void SetInputs(nlohmann::json Inputs);
+	void SetOutputs(nlohmann::json Outputs);
+
+	void LockInput(unsigned int UID);
+	void LockOutput(unsigned int UID);
+	void UnlockInput(unsigned int UID);
+	void UnlockOutput(unsigned int UID);
+	bool InputIsLocked(unsigned int UID);
+	bool OutputIsLocked(unsigned int UID);
+
+	void LockInputs(std::vector<unsigned int> UIDs);
+	void LockOutputs(std::vector<unsigned int> UIDs);
+	void UnlockInputs(std::vector<unsigned int> UIDs);
+	void UnlockOutputs(std::vector<unsigned int> UIDs);
+	bool InputsAreLocked(std::vector<unsigned int> UIDs);
+	bool OutputsAreLocked(std::vector<unsigned int> UIDs);
+
+	void ResetIOLocks();
+
 	std::mutex& GetMutex();
 
 	void Clear();
@@ -41,7 +62,12 @@ public:
 
 	void SetLE(LossEngineInterface* LE);
 
+	GraphInterface * SubGraph(std::vector<unsigned int> SelectedNodes = std::vector<unsigned int>(), std::vector<unsigned int> SelectedEdges = std::vector<unsigned int>());
+	void ReplaceSubGraph(GraphInterface* SubGraph);
+
 	EdgeInterface* CreateEdge(unsigned int First, unsigned int Second, unsigned int FirstIO, unsigned int SecondIO);
+
+	void AddEdge(EdgeInterface* EdgeInterface);
 	
 	void DeleteEdge(EdgeInterface* EdgeInterface);
 
@@ -52,6 +78,10 @@ public:
 	void DeleteNode(NodeInterface* Node);
 
 	void DeleteNode(unsigned int NodeUID);
+
+	bool HasNode(unsigned int NodeUID);
+
+	bool HasEdge(unsigned int EdgeUID);
 
 	void ChangeNodeUID(unsigned int OldUID, unsigned int NewUID);
 

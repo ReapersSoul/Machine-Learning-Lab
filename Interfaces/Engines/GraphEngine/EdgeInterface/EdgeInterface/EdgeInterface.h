@@ -50,5 +50,7 @@ public:
 
 	nlohmann::json Serialize()override;
 
+	EdgeInterface* Clone();
+
 	void DeSerialize(nlohmann::json data, void* DCEE)override;
 };

@@ -34,15 +34,40 @@ protected:
 	std::vector<EdgeInterface*> InputEdges;
 	std::vector<AttributeInterface*> Attributes;
 	std::vector<EdgeInterface*> OutputEdges;
+	std::vector<unsigned int> LockedInputs;
+	std::vector<unsigned int> LockedOutputs;
 	DynamicCodeExecutionEngineInterface* DCEE;
 	ActivationEngineInterface* AE;
 	LossEngineInterface* LE;
+	bool UnlockAfterProcessing;
 public:
 	void PrintIOUID();
 
 	bool HasInput(unsigned int UID);
 
 	bool HasOutput(unsigned int UID);
+
+	int InputCount();
+
+	int OutputCount();
+
+	void LockInput(unsigned int UID);
+
+	void LockOutput(unsigned int UID);
+
+	void UnlockInput(unsigned int UID);
+
+	void UnlockOutput(unsigned int UID);
+
+	bool InputIsLocked(unsigned int UID);
+
+	bool OutputIsLocked(unsigned int UID);
+
+	void ResetIOLocks();
+
+	nlohmann::json GetInputDescriptors();
+
+	nlohmann::json GetOutputDescriptors();
 
 	void ChangeIOUID(unsigned int OldUID, unsigned int NewUID);
 
@@ -162,6 +187,7 @@ public:
 	virtual void DrawNodeProperties(ImGuiContext* Context);
 
 	virtual NodeInterface* GetInstance() = 0;
+	virtual NodeInterface* Clone() = 0;
 
 	virtual nlohmann::json Serialize();
 	virtual void DeSerialize(nlohmann::json data, void* DCEE);

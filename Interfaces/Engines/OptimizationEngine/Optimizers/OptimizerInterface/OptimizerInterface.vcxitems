@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <ItemsProjectGuid>{c3cb7397-7f35-4735-8d92-01daec448657}</ItemsProjectGuid>
+    <ItemsProjectGuid>{889894ca-c99e-4ed4-8274-8615c09e8020}</ItemsProjectGuid>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -14,6 +14,9 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)OptimizationEngineInterface.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)OptimizerInterface.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)OptimizerInterface.cpp" />
   </ItemGroup>
 </Project>

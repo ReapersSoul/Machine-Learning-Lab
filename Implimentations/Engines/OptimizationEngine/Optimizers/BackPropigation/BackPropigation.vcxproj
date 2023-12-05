@@ -19,11 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
+    <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{689e6afc-0864-47ee-a8ae-6804e3f204a0}</ProjectGuid>
-    <RootNamespace>SubGraphNode</RootNamespace>
+    <ProjectGuid>{6483b154-613f-42d5-84e5-1a10f438ba7f}</ProjectGuid>
+    <RootNamespace>BackPropigation</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>BackPropigationOptimizer</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -56,15 +57,9 @@
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Label="Shared">
+    <Import Project="..\..\..\..\..\Interfaces\Engines\OptimizationEngine\Optimizers\OptimizerInterface\OptimizerInterface.vcxitems" Label="Shared" />
     <Import Project="..\..\..\..\..\Interfaces\Engines\SerializationEngine\SerializableInterface\SerializableInterface\SerializableInterface.vcxitems" Label="Shared" />
-    <Import Project="..\..\..\..\..\Interfaces\Engines\GraphEngine\Attributes\AttributeInterface\AttributeInterface.vcxitems" Label="Shared" />
-    <Import Project="..\..\..\..\..\Interfaces\Engines\DynamicCodeExecutionEngine\DynamicCodeExecutionEngineInterface\DynamicCodeExecutionEngineInterface.vcxitems" Label="Shared" />
-    <Import Project="..\..\..\..\..\Interfaces\Engines\GraphEngine\EdgeInterface\EdgeInterface\EdgeInterface.vcxitems" Label="Shared" />
-    <Import Project="..\..\..\..\..\Interfaces\Engines\GraphEngine\GraphEngineInterface\GraphEngineInterface.vcxitems" Label="Shared" />
     <Import Project="..\..\..\..\..\Interfaces\Engines\GraphEngine\GraphInterface\GraphInterface\GraphInterface.vcxitems" Label="Shared" />
-    <Import Project="..\..\..\..\..\Interfaces\Engines\DynamicCodeExecutionEngine\Languages\LanguageInterface\LanguageInterface.vcxitems" Label="Shared" />
-    <Import Project="..\..\..\..\..\Interfaces\Engines\GraphEngine\Nodes\NodeInterface\NodeInterface.vcxitems" Label="Shared" />
-    <Import Project="..\..\..\..\..\Interfaces\Engines\GraphEngine\Nodes\SubGraphNodeInterface\SubGraphNodeInterface.vcxitems" Label="Shared" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -80,16 +75,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>..\..\..\..\..\Machine-Learning-Labs\Core\Graph\Nodes</OutDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\..\..\..\..\Machine-Learning-Labs\Core\Graph\Nodes</OutDir>
+    <OutDir>..\..\..\..\..\Machine-Learning-Labs\Core\Optimizers</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;SUBGRAPHNODE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;BACKPROPIGATION_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -106,7 +98,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;SUBGRAPHNODE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;BACKPROPIGATION_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -123,7 +115,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;SUBGRAPHNODE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;BACKPROPIGATION_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -141,11 +133,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;SUBGRAPHNODE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;BACKPROPIGATION_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -156,7 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="SubGraphNode.cpp" />
+    <ClCompile Include="BackPropigationOptimizer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

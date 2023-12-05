@@ -11,14 +11,11 @@
             "id": "b96a4bcc320bc58e",
             "type": "leaf",
             "state": {
-              "type": "canvas",
+              "type": "markdown",
               "state": {
-                "file": "Goal.canvas",
-                "viewState": {
-                  "x": 624.7518096613969,
-                  "y": 247.06099435169475,
-                  "zoom": -0.6424977197676762
-                }
+                "file": "TODO.md",
+                "mode": "source",
+                "source": false
               }
             }
           }
@@ -88,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Goal.canvas",
+                "file": "TODO.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Goal.canvas",
+                "file": "TODO.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -128,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Goal.canvas"
+                "file": "TODO.md"
               }
             }
           }
@@ -152,8 +149,8 @@
   },
   "active": "b96a4bcc320bc58e",
   "lastOpenFiles": [
-    "TODO.md",
     "Goal.canvas",
+    "TODO.md",
     "Untitled.md"
   ]
 }
