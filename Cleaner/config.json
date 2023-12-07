@@ -1,5 +1,5 @@
 {
-	"base_path": "I:/Machine-Learning-Lab/Machine-Learning-Labs",
+	"base_path": "D:/Machine-Learning-Lab/Machine-Learning-Labs",
 	"excluded_folders": [
 		"Libs"
 	],
@@ -29,5 +29,5 @@
 		"Plugins",
 		"Scripts"
 	],
-	"destenation_to_copy":"I:/Machine-Learning-Lab/Machine-Learning-Labs-Server"
+	"destenation_to_copy":"D:/Machine-Learning-Lab/Machine-Learning-Labs-Server"
 }
