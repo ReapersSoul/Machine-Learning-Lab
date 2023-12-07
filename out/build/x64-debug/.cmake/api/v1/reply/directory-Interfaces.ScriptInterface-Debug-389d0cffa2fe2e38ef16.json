@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "Interfaces/ScriptInterface",
+		"source" : "Interfaces/Engines/DynamicCodeExecutionEngine/ScriptInterface"
+	}
+}

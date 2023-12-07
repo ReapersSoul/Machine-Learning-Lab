@@ -445,6 +445,10 @@ extern "C" {
 		}
 	}
 
+	__declspec(dllexport) std::string GetTypeID() {
+		return "KinectNode";
+	}
+
 	// Define a function that returns the result of adding two numbers
 	__declspec(dllexport) NodeInterface* GetInstance() {
 		if (sensor == NULL) {

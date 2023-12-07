@@ -3,7 +3,7 @@
 #include <nlohmann/json.hpp>
 #include <fstream>
 
-void CleanDir(std::string base_path, std::vector<std::string> excluded_folders, std::vector<std::string> files_to_delete, std::vector<std::string> ext_to_delete) {
+void CleanDir(std::string base_path, std::vector<std::string> excluded_folders, std::vector<std::string> files_to_delete, std::vector<std::string> ext_to_delete, std::vector<std::string> files_to_ignore_in_main) {
 	//recursively iterate through the base path and subfolders and delete files
 	for (const auto& entry : std::filesystem::directory_iterator(base_path))
 	{
@@ -20,18 +20,36 @@ void CleanDir(std::string base_path, std::vector<std::string> excluded_folders, 
 					skip = true;
 				}
 			}
+
 			if (skip)
 			{
 				continue;
 			}
 			else {
-				CleanDir(entry.path().string(), excluded_folders, files_to_delete,ext_to_delete);
+				CleanDir(entry.path().string(), excluded_folders, files_to_delete,ext_to_delete,files_to_ignore_in_main);
 			}
 		}
 
 		//check if the current path is a file
 		if (entry.is_regular_file())
 		{
+			bool skip = false;
+			//check if the current file is in the files to ignore in main list
+			for (auto file : files_to_ignore_in_main)
+			{
+				//check if the current file is in the files to ignore in main list
+				if (entry.path().filename().string() == file)
+				{
+					//skip the file
+					skip = true;
+				}
+			}
+
+			if (skip)
+			{
+				continue;
+			}
+
 			//check if the current file is in the files to delete list
 			for (auto file : files_to_delete)
 			{
@@ -114,8 +132,11 @@ int main()
 	//get extensions to delete
 	std::vector<std::string> ext_to_delete = j["ext_to_delete"];
 
+	//get files to ignore in main
+	std::vector<std::string> files_to_ignore_in_main = j["files_to_ignore_in_main"];
+
 	//recursively iterate through the base path and subfolders and delete files
-	CleanDir(base_path, excluded_folders, files_to_delete, ext_to_delete);
+	CleanDir(base_path, excluded_folders, files_to_delete, ext_to_delete, files_to_ignore_in_main);
 
 	std::vector<std::string> FilesToCopy = j["files_to_copy"];
 

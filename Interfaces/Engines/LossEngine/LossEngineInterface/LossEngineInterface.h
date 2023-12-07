@@ -1,7 +1,7 @@
 #pragma once
 #include "../../EngineInterface/EngineInterface.h"
 #include "../../DynamicCodeExecutionEngine/DynamicCodeExecutionEngineInterface/DynamicCodeExecutionEngineInterface.h"
-#include "../Losses/LossInterface/LossInterface.h"
+#include "../LossInterface/LossInterface.h"
 
 class LossEngineInterface : public EngineInterface {
 protected:

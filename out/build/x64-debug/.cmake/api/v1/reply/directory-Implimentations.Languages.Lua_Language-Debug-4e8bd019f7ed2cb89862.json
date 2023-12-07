@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "Implimentations/Languages/Lua_Language",
+		"source" : "Implimentations/Engines/DynamicCodeExecutionEngine/Languages/Lua_Language"
+	}
+}

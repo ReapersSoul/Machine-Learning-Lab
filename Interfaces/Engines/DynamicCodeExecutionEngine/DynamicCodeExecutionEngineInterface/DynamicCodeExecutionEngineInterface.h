@@ -12,7 +12,7 @@
 #include "../LibraryInterface/LibraryInterface.h"
 #include "../Languages/LanguageInterface/LanguageInterface.h"
 #include "../ScriptInterface/ScriptInterface.h"
-#include "../../SerializationEngine/SerializableInterface/SerializableInterface/SerializableInterface.h"
+#include "../../../SerializableInterface/SerializableInterface.h"
 #include "../KernelInterface/KernelInterface.h"
 
 struct GPUPlatform {

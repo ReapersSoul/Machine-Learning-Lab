@@ -1,0 +1,25 @@
+{
+    "base_path": "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Machine-Learning-Labs-CrossPlatform-V2",
+    "excluded_folders": [
+        "Libs"
+    ],
+    "files_to_delete": [
+        "boost_filesystem-vc143-mt-gd-x64-1_83.dll",
+        "glew32d.dll",
+        "glfw3.dll",
+        "OpenCL.dll",
+        "sqlite3.dll",
+        "lua.dll"
+    ],
+    "files_to_ignore_in_main":[
+        "boost_filesystem-vc143-mt-gd-x64-1_83.dll"
+    ],
+	"ext_to_delete":[
+	],
+	"files_to_copy":[
+		"Core",
+		"Plugins",
+		"Scripts"
+	],
+    "destenation_to_copy":"I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Machine-Learning-Labs-CrossPlatform-Server-V2"
+}

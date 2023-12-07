@@ -1,8 +1,6 @@
 #include <SorterInterface.h>
 #include <GraphEngineInterface.h>
 
-
-
 class DefaultSorter : public SorterInterface {
 public:
 	ProcessingOrder SortGraph(GraphInterface* graph,bool DirectionForward) override {

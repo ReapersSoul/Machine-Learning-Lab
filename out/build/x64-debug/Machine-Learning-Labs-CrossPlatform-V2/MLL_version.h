@@ -1,0 +1,2 @@
+#define MLL_VERSION_MAJOR 
+#define MLL_VERSION_MINOR 

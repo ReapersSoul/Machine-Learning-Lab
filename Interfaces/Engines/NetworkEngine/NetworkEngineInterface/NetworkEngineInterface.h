@@ -1,8 +1,8 @@
 #include "../../EngineInterface/EngineInterface.h"
-#include "../NetworkObject/NetworkObjectInterface/NetworkObjectInterface.h"
+#include "../NetworkObjectInterface/NetworkObjectInterface.h"
 #include "../Client/ClientInterface/ClientInterface.h"
 #include "../Server/ServerInterface/ServerInterface.h"
-#include "../LedgerInterface/LedgerInterface/LedgerInterface.h"
+#include "../LedgerInterface/LedgerInterface.h"
 
 #include <string>
 #include <vector>

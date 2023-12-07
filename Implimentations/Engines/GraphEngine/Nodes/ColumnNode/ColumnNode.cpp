@@ -74,4 +74,7 @@ extern "C" {
 	__declspec(dllexport) NodeInterface* GetInstance() {
 		return new ColumnNode();
 	}
+	__declspec(dllexport) std::string GetTypeID() {
+		return "ColumnNode";
+	}
 }

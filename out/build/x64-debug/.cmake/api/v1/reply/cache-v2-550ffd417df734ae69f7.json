@@ -1,0 +1,5367 @@
+{
+	"entries" : 
+	[
+		{
+			"name" : "APINode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/APINode"
+		},
+		{
+			"name" : "APINode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "APINode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;general;APIEngineInterface;general;APINodeInterface;"
+		},
+		{
+			"name" : "APINode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/APINode"
+		},
+		{
+			"name" : "ActivationEngineInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/ActivationEngineInterface"
+		},
+		{
+			"name" : "ActivationEngineInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "ActivationEngineInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/ActivationEngine/ActivationEngineInterface"
+		},
+		{
+			"name" : "ActivationEngine_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/ActivationEngine"
+		},
+		{
+			"name" : "ActivationEngine_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "ActivationEngine_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;"
+		},
+		{
+			"name" : "ActivationEngine_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/ActivationEngine/ActivationEngine"
+		},
+		{
+			"name" : "ActivationInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/ActivationInterface"
+		},
+		{
+			"name" : "ActivationInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "ActivationInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/ActivationEngine/ActivationInterface"
+		},
+		{
+			"name" : "AtIndexNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/AtIndexNode"
+		},
+		{
+			"name" : "AtIndexNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "AtIndexNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "AtIndexNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/AtIndexNode"
+		},
+		{
+			"name" : "AttributeInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/AttributeInterface"
+		},
+		{
+			"name" : "AttributeInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "AttributeInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/GraphEngine/AttributeInterface"
+		},
+		{
+			"name" : "Boost_FILESYSTEM_LIBRARY_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Boost filesystem library (debug)"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "E:/vcpkg/installed/x64-windows/debug/lib/boost_filesystem-vc140-mt-gd.lib"
+		},
+		{
+			"name" : "Boost_FILESYSTEM_LIBRARY_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Boost filesystem library (release)"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "E:/vcpkg/installed/x64-windows/lib/boost_filesystem-vc140-mt.lib"
+		},
+		{
+			"name" : "Boost_INCLUDE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a file."
+				}
+			],
+			"type" : "PATH",
+			"value" : "E:/vcpkg/installed/x64-windows/include"
+		},
+		{
+			"name" : "Boost_LIBRARY_DIR_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Boost library directory DEBUG"
+				}
+			],
+			"type" : "PATH",
+			"value" : "E:/vcpkg/installed/x64-windows/debug/lib"
+		},
+		{
+			"name" : "Boost_LIBRARY_DIR_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Boost library directory RELEASE"
+				}
+			],
+			"type" : "PATH",
+			"value" : "E:/vcpkg/installed/x64-windows/lib"
+		},
+		{
+			"name" : "Boost_SYSTEM_LIBRARY_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Boost system library (debug)"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "E:/vcpkg/installed/x64-windows/debug/lib/boost_system-vc140-mt-gd.lib"
+		},
+		{
+			"name" : "Boost_SYSTEM_LIBRARY_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Boost system library (release)"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "E:/vcpkg/installed/x64-windows/lib/boost_system-vc140-mt.lib"
+		},
+		{
+			"name" : "CMAKE_AR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.37.32822/bin/Hostx64/x64/lib.exe"
+		},
+		{
+			"name" : "CMAKE_BUILD_TYPE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "No help, variable specified on the command line."
+				}
+			],
+			"type" : "STRING",
+			"value" : "Debug"
+		},
+		{
+			"name" : "CMAKE_CACHEFILE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "This is the directory where this CMakeCache.txt was created"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "i:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug"
+		},
+		{
+			"name" : "CMAKE_CACHE_MAJOR_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Major version of cmake used to create the current loaded cache"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "3"
+		},
+		{
+			"name" : "CMAKE_CACHE_MINOR_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Minor version of cmake used to create the current loaded cache"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "26"
+		},
+		{
+			"name" : "CMAKE_CACHE_PATCH_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Patch version of cmake used to create the current loaded cache"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "4"
+		},
+		{
+			"name" : "CMAKE_COMMAND",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to CMake executable."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe"
+		},
+		{
+			"name" : "CMAKE_CPACK_COMMAND",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to cpack program executable."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cpack.exe"
+		},
+		{
+			"name" : "CMAKE_CTEST_COMMAND",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to ctest program executable."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe"
+		},
+		{
+			"name" : "CMAKE_CXX_COMPILER",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "No help, variable specified on the command line."
+				}
+			],
+			"type" : "STRING",
+			"value" : "cl.exe"
+		},
+		{
+			"name" : "CMAKE_CXX_FLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the CXX compiler during all build types."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+		},
+		{
+			"name" : "CMAKE_CXX_FLAGS_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the CXX compiler during DEBUG builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/MDd /Ob0 /Od /RTC1"
+		},
+		{
+			"name" : "CMAKE_CXX_FLAGS_MINSIZEREL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the CXX compiler during MINSIZEREL builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/MD /O1 /Ob1 /DNDEBUG"
+		},
+		{
+			"name" : "CMAKE_CXX_FLAGS_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the CXX compiler during RELEASE builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/MD /O2 /Ob2 /DNDEBUG"
+		},
+		{
+			"name" : "CMAKE_CXX_FLAGS_RELWITHDEBINFO",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the CXX compiler during RELWITHDEBINFO builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/MD /O2 /Ob1 /DNDEBUG"
+		},
+		{
+			"name" : "CMAKE_CXX_STANDARD_LIBRARIES",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Libraries linked by default with all C++ applications."
+				}
+			],
+			"type" : "STRING",
+			"value" : "kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib"
+		},
+		{
+			"name" : "CMAKE_C_COMPILER",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "No help, variable specified on the command line."
+				}
+			],
+			"type" : "STRING",
+			"value" : "cl.exe"
+		},
+		{
+			"name" : "CMAKE_C_FLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the C compiler during all build types."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/DWIN32 /D_WINDOWS /W3"
+		},
+		{
+			"name" : "CMAKE_C_FLAGS_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the C compiler during DEBUG builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/MDd /Ob0 /Od /RTC1"
+		},
+		{
+			"name" : "CMAKE_C_FLAGS_MINSIZEREL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the C compiler during MINSIZEREL builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/MD /O1 /Ob1 /DNDEBUG"
+		},
+		{
+			"name" : "CMAKE_C_FLAGS_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the C compiler during RELEASE builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/MD /O2 /Ob2 /DNDEBUG"
+		},
+		{
+			"name" : "CMAKE_C_FLAGS_RELWITHDEBINFO",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the C compiler during RELWITHDEBINFO builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/MD /O2 /Ob1 /DNDEBUG"
+		},
+		{
+			"name" : "CMAKE_C_STANDARD_LIBRARIES",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Libraries linked by default with all C applications."
+				}
+			],
+			"type" : "STRING",
+			"value" : "kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib"
+		},
+		{
+			"name" : "CMAKE_EXECUTABLE_FORMAT",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Executable file format"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "Unknown"
+		},
+		{
+			"name" : "CMAKE_EXE_LINKER_FLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during all build types."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/machine:x64"
+		},
+		{
+			"name" : "CMAKE_EXE_LINKER_FLAGS_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during DEBUG builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/debug /INCREMENTAL"
+		},
+		{
+			"name" : "CMAKE_EXE_LINKER_FLAGS_MINSIZEREL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during MINSIZEREL builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/INCREMENTAL:NO"
+		},
+		{
+			"name" : "CMAKE_EXE_LINKER_FLAGS_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during RELEASE builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/INCREMENTAL:NO"
+		},
+		{
+			"name" : "CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during RELWITHDEBINFO builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/debug /INCREMENTAL"
+		},
+		{
+			"name" : "CMAKE_EXPORT_COMPILE_COMMANDS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Enable/Disable output of compile commands during generation."
+				}
+			],
+			"type" : "BOOL",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_EXTRA_GENERATOR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Name of external makefile project generator."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_FIND_PACKAGE_REDIRECTS_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake."
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/CMakeFiles/pkgRedirects"
+		},
+		{
+			"name" : "CMAKE_GENERATOR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Name of generator."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "Ninja"
+		},
+		{
+			"name" : "CMAKE_GENERATOR_INSTANCE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Generator instance identifier."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_GENERATOR_PLATFORM",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Name of generator platform."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_GENERATOR_TOOLSET",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Name of generator toolset."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_HOME_DIRECTORY",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Source directory with the top level CMakeLists.txt file for this project"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2"
+		},
+		{
+			"name" : "CMAKE_INSTALL_PREFIX",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "No help, variable specified on the command line."
+				}
+			],
+			"type" : "PATH",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/install/x64-debug"
+		},
+		{
+			"name" : "CMAKE_LINKER",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.37.32822/bin/Hostx64/x64/link.exe"
+		},
+		{
+			"name" : "CMAKE_MAKE_PROGRAM",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "make program"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe"
+		},
+		{
+			"name" : "CMAKE_MODULE_LINKER_FLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of modules during all build types."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/machine:x64"
+		},
+		{
+			"name" : "CMAKE_MODULE_LINKER_FLAGS_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of modules during DEBUG builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/debug /INCREMENTAL"
+		},
+		{
+			"name" : "CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of modules during MINSIZEREL builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/INCREMENTAL:NO"
+		},
+		{
+			"name" : "CMAKE_MODULE_LINKER_FLAGS_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of modules during RELEASE builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/INCREMENTAL:NO"
+		},
+		{
+			"name" : "CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of modules during RELWITHDEBINFO builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/debug /INCREMENTAL"
+		},
+		{
+			"name" : "CMAKE_MT",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Program Files (x86)/Windows Kits/10/bin/10.0.22621.0/x64/mt.exe"
+		},
+		{
+			"name" : "CMAKE_NUMBER_OF_MAKEFILES",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "number of local generators"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "74"
+		},
+		{
+			"name" : "CMAKE_PLATFORM_INFO_INITIALIZED",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Platform information initialized"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "1"
+		},
+		{
+			"name" : "CMAKE_PROJECT_DESCRIPTION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_PROJECT_HOMEPAGE_URL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_PROJECT_NAME",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "Machine-Learning-Labs-CrossPlatform-V2"
+		},
+		{
+			"name" : "CMAKE_PROJECT_VERSION",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "2.0"
+		},
+		{
+			"name" : "CMAKE_PROJECT_VERSION_MAJOR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "2"
+		},
+		{
+			"name" : "CMAKE_PROJECT_VERSION_MINOR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "0"
+		},
+		{
+			"name" : "CMAKE_PROJECT_VERSION_PATCH",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_PROJECT_VERSION_TWEAK",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_RANLIB",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "noop for ranlib"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : ":"
+		},
+		{
+			"name" : "CMAKE_RC_COMPILER",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "RC compiler"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Program Files (x86)/Windows Kits/10/bin/10.0.22621.0/x64/rc.exe"
+		},
+		{
+			"name" : "CMAKE_RC_COMPILER_WORKS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "1"
+		},
+		{
+			"name" : "CMAKE_RC_FLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags for Windows Resource Compiler during all build types."
+				}
+			],
+			"type" : "STRING",
+			"value" : "-DWIN32"
+		},
+		{
+			"name" : "CMAKE_RC_FLAGS_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags for Windows Resource Compiler during DEBUG builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "-D_DEBUG"
+		},
+		{
+			"name" : "CMAKE_RC_FLAGS_MINSIZEREL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags for Windows Resource Compiler during MINSIZEREL builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_RC_FLAGS_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags for Windows Resource Compiler during RELEASE builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_RC_FLAGS_RELWITHDEBINFO",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags for Windows Resource Compiler during RELWITHDEBINFO builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_ROOT",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to CMake installation."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26"
+		},
+		{
+			"name" : "CMAKE_SHARED_LINKER_FLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of shared libraries during all build types."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/machine:x64"
+		},
+		{
+			"name" : "CMAKE_SHARED_LINKER_FLAGS_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of shared libraries during DEBUG builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/debug /INCREMENTAL"
+		},
+		{
+			"name" : "CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of shared libraries during MINSIZEREL builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/INCREMENTAL:NO"
+		},
+		{
+			"name" : "CMAKE_SHARED_LINKER_FLAGS_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of shared libraries during RELEASE builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/INCREMENTAL:NO"
+		},
+		{
+			"name" : "CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of shared libraries during RELWITHDEBINFO builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/debug /INCREMENTAL"
+		},
+		{
+			"name" : "CMAKE_SKIP_INSTALL_RPATH",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "If set, runtime paths are not added when installing shared libraries, but are added when building."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "NO"
+		},
+		{
+			"name" : "CMAKE_SKIP_RPATH",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "If set, runtime paths are not added when using shared libraries."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "NO"
+		},
+		{
+			"name" : "CMAKE_STATIC_LINKER_FLAGS",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of static libraries during all build types."
+				}
+			],
+			"type" : "STRING",
+			"value" : "/machine:x64"
+		},
+		{
+			"name" : "CMAKE_STATIC_LINKER_FLAGS_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of static libraries during DEBUG builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of static libraries during MINSIZEREL builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_STATIC_LINKER_FLAGS_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of static libraries during RELEASE builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Flags used by the linker during the creation of static libraries during RELWITHDEBINFO builds."
+				}
+			],
+			"type" : "STRING",
+			"value" : ""
+		},
+		{
+			"name" : "CMAKE_TOOLCHAIN_FILE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "No help, variable specified on the command line."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "E:/vcpkg/scripts/buildsystems/vcpkg.cmake"
+		},
+		{
+			"name" : "CMAKE_VERBOSE_MAKEFILE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "If this value is on, makefiles will be generated without the .SILENT directive, and all commands will be echoed to the console during the make.  This is useful for debugging only. With Visual Studio IDE projects all commands are done without /nologo."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "FALSE"
+		},
+		{
+			"name" : "ChaiScript_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for ChaiScript."
+				}
+			],
+			"type" : "PATH",
+			"value" : "ChaiScript_DIR-NOTFOUND"
+		},
+		{
+			"name" : "Chai_Language_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Languages/Chai_Language"
+		},
+		{
+			"name" : "Chai_Language_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "Chai_Language_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/DynamicCodeExecutionEngine/Languages/Chai_Language"
+		},
+		{
+			"name" : "Cleaner_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Cleaner"
+		},
+		{
+			"name" : "Cleaner_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "Cleaner_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Cleaner"
+		},
+		{
+			"name" : "ClientInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/ClientInterface"
+		},
+		{
+			"name" : "ClientInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "ClientInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/NetworkEngine/Client/ClientInterface"
+		},
+		{
+			"name" : "ColumnNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/ColumnNode"
+		},
+		{
+			"name" : "ColumnNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "ColumnNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "ColumnNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/ColumnNode"
+		},
+		{
+			"name" : "ControllerNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/ControllerNode"
+		},
+		{
+			"name" : "ControllerNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "ControllerNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "ControllerNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/ControllerNode"
+		},
+		{
+			"name" : "ConversionNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/ConversionNode"
+		},
+		{
+			"name" : "ConversionNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "ConversionNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "ConversionNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/ConversionNode"
+		},
+		{
+			"name" : "Convolution2DNetworkNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/Convolution2DNetworkNode"
+		},
+		{
+			"name" : "Convolution2DNetworkNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "Convolution2DNetworkNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "Convolution2DNetworkNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/Convolution2DNetworkNode"
+		},
+		{
+			"name" : "Convolution2DNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/Convolution2DNode"
+		},
+		{
+			"name" : "Convolution2DNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "Convolution2DNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "Convolution2DNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/Convolution2DNode"
+		},
+		{
+			"name" : "Convolution3DNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/Convolution3DNode"
+		},
+		{
+			"name" : "Convolution3DNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "Convolution3DNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "Convolution3DNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/Convolution3DNode"
+		},
+		{
+			"name" : "DatabaseInputNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/DatabaseInputNode"
+		},
+		{
+			"name" : "DatabaseInputNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "DatabaseInputNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;unofficial::sqlite3::sqlite3;optimized;E:/vcpkg/installed/x64-windows/lib/glew32.lib;debug;E:/vcpkg/installed/x64-windows/debug/lib/glew32d.lib;general;glfw;general;imgui::imgui;general;glfw;general;unofficial::imgui-node-editor::imgui-node-editor;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "DatabaseInputNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/DatabaseInputNode"
+		},
+		{
+			"name" : "DefaultSorter_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/DefaultSorter"
+		},
+		{
+			"name" : "DefaultSorter_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "DefaultSorter_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "DefaultSorter_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Sorters/DefaultSorter"
+		},
+		{
+			"name" : "DelayOutputNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/DelayOutputNode"
+		},
+		{
+			"name" : "DelayOutputNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "DelayOutputNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "DelayOutputNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/DelayOutputNode"
+		},
+		{
+			"name" : "DictionaryNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/DictionaryNode"
+		},
+		{
+			"name" : "DictionaryNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "DictionaryNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "DictionaryNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/DictionaryNode"
+		},
+		{
+			"name" : "DynamicCodeExecutionEngineInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/DynamicCodeExecutionEngineInterface"
+		},
+		{
+			"name" : "DynamicCodeExecutionEngineInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "DynamicCodeExecutionEngineInterface_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;"
+		},
+		{
+			"name" : "DynamicCodeExecutionEngineInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/DynamicCodeExecutionEngine/DynamicCodeExecutionEngineInterface"
+		},
+		{
+			"name" : "DynamicCodeExecutionEngine_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/DynamicCodeExecutionEngine"
+		},
+		{
+			"name" : "DynamicCodeExecutionEngine_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "DynamicCodeExecutionEngine_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;"
+		},
+		{
+			"name" : "DynamicCodeExecutionEngine_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/DynamicCodeExecutionEngine/DynamicCodeExecutionEngine"
+		},
+		{
+			"name" : "EdgeInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/EdgeInterface"
+		},
+		{
+			"name" : "EdgeInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "EdgeInterface_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;GraphInterface;"
+		},
+		{
+			"name" : "EdgeInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/GraphEngine/EdgeInterface"
+		},
+		{
+			"name" : "EngineInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/EngineInterface"
+		},
+		{
+			"name" : "EngineInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "EngineInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/EngineInterface"
+		},
+		{
+			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_Boost",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Details about finding Boost"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "[E:/vcpkg/installed/x64-windows/include][cfound components: system filesystem ][v1.83.0()]"
+		},
+		{
+			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_OpenCL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Details about finding OpenCL"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "[E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib][E:/vcpkg/installed/x64-windows/include][v3.0()]"
+		},
+		{
+			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_OpenGL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Details about finding OpenGL"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "[opengl32][c ][v()]"
+		},
+		{
+			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_SQLite3",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Details about finding SQLite3"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "[E:/vcpkg/installed/x64-windows/include][E:/vcpkg/installed/x64-windows/debug/lib/sqlite3.lib][v3.43.1()]"
+		},
+		{
+			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_nlohmann_json",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Details about finding nlohmann_json"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "[E:/vcpkg/installed/x64-windows/share/nlohmann_json/nlohmann_jsonConfig.cmake][v3.11.2()]"
+		},
+		{
+			"name" : "FileVisualizationNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/FileVisualizationNode"
+		},
+		{
+			"name" : "FileVisualizationNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "FileVisualizationNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "FileVisualizationNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/FileVisualizationNode"
+		},
+		{
+			"name" : "FlattenNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/FlattenNode"
+		},
+		{
+			"name" : "FlattenNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "FlattenNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "FlattenNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/FlattenNode"
+		},
+		{
+			"name" : "FullyConnectedNetworkNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/FullyConnectedNetworkNode"
+		},
+		{
+			"name" : "FullyConnectedNetworkNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "FullyConnectedNetworkNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "FullyConnectedNetworkNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/FullyConnectedNetworkNode"
+		},
+		{
+			"name" : "GLEW_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for GLEW."
+				}
+			],
+			"type" : "PATH",
+			"value" : "E:/vcpkg/installed/x64-windows/share/glew"
+		},
+		{
+			"name" : "GLEW_LIBRARY_DEBUG",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "(This variable does not exist and should not be used)"
+				}
+			],
+			"type" : "UNINITIALIZED",
+			"value" : ""
+		},
+		{
+			"name" : "GLEW_LIBRARY_RELEASE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "(This variable does not exist and should not be used)"
+				}
+			],
+			"type" : "UNINITIALIZED",
+			"value" : ""
+		},
+		{
+			"name" : "GraphEngineInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/GraphEngineInterface"
+		},
+		{
+			"name" : "GraphEngineInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "GraphEngineInterface_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;"
+		},
+		{
+			"name" : "GraphEngineInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/GraphEngine/GraphEngineInterface"
+		},
+		{
+			"name" : "GraphEngine_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/GraphEngine"
+		},
+		{
+			"name" : "GraphEngine_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "GraphEngine_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "GraphEngine_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/GraphEngine"
+		},
+		{
+			"name" : "GraphInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/GraphInterface"
+		},
+		{
+			"name" : "GraphInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "GraphInterface_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;optimized;E:/vcpkg/installed/x64-windows/lib/glew32.lib;debug;E:/vcpkg/installed/x64-windows/debug/lib/glew32d.lib;general;glfw;general;imgui::imgui;general;unofficial::imgui-node-editor::imgui-node-editor;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;EdgeInterface;general;NodeInterface;general;AttributeInterface;"
+		},
+		{
+			"name" : "GraphInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/GraphEngine/GraphInterface"
+		},
+		{
+			"name" : "ImageLossNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/ImageLossNode"
+		},
+		{
+			"name" : "ImageLossNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "ImageLossNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "ImageLossNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/ImageLossNode"
+		},
+		{
+			"name" : "ImageNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/ImageNode"
+		},
+		{
+			"name" : "ImageNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "ImageNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "ImageNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/ImageNode"
+		},
+		{
+			"name" : "InputDataSetNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/InputDataSetNode"
+		},
+		{
+			"name" : "InputDataSetNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "InputDataSetNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "InputDataSetNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/InputDataSetNode"
+		},
+		{
+			"name" : "KinectNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/KinectNode"
+		},
+		{
+			"name" : "KinectNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "KinectNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;optimized;E:/vcpkg/installed/x64-windows/lib/glew32.lib;debug;E:/vcpkg/installed/x64-windows/debug/lib/glew32d.lib;general;glfw;general;imgui::imgui;general;glfw;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "KinectNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/KinectNode"
+		},
+		{
+			"name" : "LanguageInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/LanguageInterface"
+		},
+		{
+			"name" : "LanguageInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "LanguageInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/DynamicCodeExecutionEngine/Languages/LanguageInterface"
+		},
+		{
+			"name" : "LayerNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/LayerNode"
+		},
+		{
+			"name" : "LayerNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "LayerNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "LayerNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/LayerNode"
+		},
+		{
+			"name" : "LeakyReLUActivation_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Activations/LeakyReLUActivation"
+		},
+		{
+			"name" : "LeakyReLUActivation_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "LeakyReLUActivation_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/ActivationEngine/Activations/LeakyReLUActivation"
+		},
+		{
+			"name" : "LedgerInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/LedgerInterface"
+		},
+		{
+			"name" : "LedgerInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "LedgerInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/NetworkEngine/LedgerInterface"
+		},
+		{
+			"name" : "LibraryInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/LibraryInterface"
+		},
+		{
+			"name" : "LibraryInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "LibraryInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/DynamicCodeExecutionEngine/LibraryInterface"
+		},
+		{
+			"name" : "LossDataSetNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/LossDataSetNode"
+		},
+		{
+			"name" : "LossDataSetNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "LossDataSetNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "LossDataSetNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/LossDataSetNode"
+		},
+		{
+			"name" : "LossEngineInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/LossEngineInterface"
+		},
+		{
+			"name" : "LossEngineInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "LossEngineInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/LossEngine/LossEngineInterface"
+		},
+		{
+			"name" : "LossEngine_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/LossEngine"
+		},
+		{
+			"name" : "LossEngine_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "LossEngine_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;"
+		},
+		{
+			"name" : "LossEngine_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/LossEngine/LossEngine"
+		},
+		{
+			"name" : "LossInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/LossInterface"
+		},
+		{
+			"name" : "LossInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "LossInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/LossEngine/LossInterface"
+		},
+		{
+			"name" : "LossNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/LossNode"
+		},
+		{
+			"name" : "LossNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "LossNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "LossNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/LossNode"
+		},
+		{
+			"name" : "Lua_Language_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Languages/Lua_Language"
+		},
+		{
+			"name" : "Lua_Language_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "Lua_Language_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;lua;optimized;E:/vcpkg/installed/x64-windows/lib/glew32.lib;debug;E:/vcpkg/installed/x64-windows/debug/lib/glew32d.lib;general;glfw;general;imgui::imgui;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;EdgeInterface;general;GraphInterface;general;NodeIOInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "Lua_Language_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/DynamicCodeExecutionEngine/Languages/Lua_Language"
+		},
+		{
+			"name" : "MSELoss_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Losses/MSELoss"
+		},
+		{
+			"name" : "MSELoss_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "MSELoss_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/LossEngine/Losses/MSELoss"
+		},
+		{
+			"name" : "Machine-Learning-Labs-CrossPlatform-V2_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Machine-Learning-Labs-CrossPlatform-V2"
+		},
+		{
+			"name" : "Machine-Learning-Labs-CrossPlatform-V2_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "Machine-Learning-Labs-CrossPlatform-V2_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Machine-Learning-Labs-CrossPlatform-V2"
+		},
+		{
+			"name" : "MathNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/MathNode"
+		},
+		{
+			"name" : "MathNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "MathNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "MathNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/MathNode"
+		},
+		{
+			"name" : "NetworkEngineInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/NetworkEngineInterface"
+		},
+		{
+			"name" : "NetworkEngineInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "NetworkEngineInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/NetworkEngine/NetworkEngineInterface"
+		},
+		{
+			"name" : "NetworkEngine_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/NetworkEngine"
+		},
+		{
+			"name" : "NetworkEngine_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "NetworkEngine_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;optimized;E:/vcpkg/installed/x64-windows/lib/glew32.lib;debug;E:/vcpkg/installed/x64-windows/debug/lib/glew32d.lib;general;glfw;general;imgui::imgui;general;glfw;general;unofficial::imgui-node-editor::imgui-node-editor;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;EdgeInterface;general;GraphInterface;general;NodeIOInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "NetworkEngine_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/NetworkEngine/NetworkEngine"
+		},
+		{
+			"name" : "NetworkObjectInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/NetworkObjectInterface"
+		},
+		{
+			"name" : "NetworkObjectInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "NetworkObjectInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/NetworkEngine/NetworkObjectInterface"
+		},
+		{
+			"name" : "NodeIOInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/NodeIOInterface"
+		},
+		{
+			"name" : "NodeIOInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "NodeIOInterface_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "optimized;E:/vcpkg/installed/x64-windows/lib/glew32.lib;debug;E:/vcpkg/installed/x64-windows/debug/lib/glew32d.lib;general;glfw;general;imgui::imgui;general;DynamicCodeExecutionEngineInterface;general;ActivationEngineInterface;general;LossEngineInterface;general;GraphInterface;"
+		},
+		{
+			"name" : "NodeIOInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/GraphEngine/NodeIOInterface"
+		},
+		{
+			"name" : "NodeInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/NodeInterface"
+		},
+		{
+			"name" : "NodeInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "NodeInterface_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "optimized;E:/vcpkg/installed/x64-windows/lib/glew32.lib;debug;E:/vcpkg/installed/x64-windows/debug/lib/glew32d.lib;general;glfw;general;imgui::imgui;general;glfw;general;unofficial::imgui-node-editor::imgui-node-editor;general;EdgeInterface;"
+		},
+		{
+			"name" : "NodeInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/GraphEngine/NodeInterface"
+		},
+		{
+			"name" : "NormalizeNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/NormalizeNode"
+		},
+		{
+			"name" : "NormalizeNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "NormalizeNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "NormalizeNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/NormalizeNode"
+		},
+		{
+			"name" : "OPENCL_VERSION_3_0",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Have symbol CL_VERSION_3_0"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "1"
+		},
+		{
+			"name" : "OPENGL_gl_LIBRARY",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "OpenGL library for win32"
+				}
+			],
+			"type" : "STRING",
+			"value" : "opengl32"
+		},
+		{
+			"name" : "OPENGL_glu_LIBRARY",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "GLU library for win32"
+				}
+			],
+			"type" : "STRING",
+			"value" : "glu32"
+		},
+		{
+			"name" : "OneHotNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/OneHotNode"
+		},
+		{
+			"name" : "OneHotNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "OneHotNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "OneHotNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/OneHotNode"
+		},
+		{
+			"name" : "OpenCL_INCLUDE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a file."
+				}
+			],
+			"type" : "PATH",
+			"value" : "E:/vcpkg/installed/x64-windows/include"
+		},
+		{
+			"name" : "OpenCL_LIBRARY",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib"
+		},
+		{
+			"name" : "PluginInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/PluginInterface"
+		},
+		{
+			"name" : "PluginInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "PluginInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/DynamicCodeExecutionEngine/PluginInterface"
+		},
+		{
+			"name" : "PositionalEncodingNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/PositionalEncodingNode"
+		},
+		{
+			"name" : "PositionalEncodingNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "PositionalEncodingNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "PositionalEncodingNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/PositionalEncodingNode"
+		},
+		{
+			"name" : "ReLUActivation_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Activations/ReLUActivation"
+		},
+		{
+			"name" : "ReLUActivation_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "ReLUActivation_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/ActivationEngine/Activations/ReLUActivation"
+		},
+		{
+			"name" : "RecurrentLayerNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/RecurrentLayerNode"
+		},
+		{
+			"name" : "RecurrentLayerNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "RecurrentLayerNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "RecurrentLayerNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/RecurrentLayerNode"
+		},
+		{
+			"name" : "RecurrentNetworkNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/RecurrentNetworkNode"
+		},
+		{
+			"name" : "RecurrentNetworkNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "RecurrentNetworkNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "RecurrentNetworkNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/RecurrentNetworkNode"
+		},
+		{
+			"name" : "SQLite3_INCLUDE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a file."
+				}
+			],
+			"type" : "PATH",
+			"value" : "E:/vcpkg/installed/x64-windows/include"
+		},
+		{
+			"name" : "SQLite3_LIBRARY",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a library."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "E:/vcpkg/installed/x64-windows/debug/lib/sqlite3.lib"
+		},
+		{
+			"name" : "ScriptActivation_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Activations/ScriptActivation"
+		},
+		{
+			"name" : "ScriptActivation_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "ScriptActivation_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/ActivationEngine/Activations/ScriptActivation"
+		},
+		{
+			"name" : "ScriptInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/ScriptInterface"
+		},
+		{
+			"name" : "ScriptInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "ScriptInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/DynamicCodeExecutionEngine/ScriptInterface"
+		},
+		{
+			"name" : "ScriptLoss_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Losses/ScriptLoss"
+		},
+		{
+			"name" : "ScriptLoss_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "ScriptLoss_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/LossEngine/Losses/ScriptLoss"
+		},
+		{
+			"name" : "ScriptNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/ScriptNode"
+		},
+		{
+			"name" : "ScriptNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "ScriptNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "ScriptNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/ScriptNode"
+		},
+		{
+			"name" : "SelfAttentionLayerNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/SelfAttentionLayerNode"
+		},
+		{
+			"name" : "SelfAttentionLayerNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "SelfAttentionLayerNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "SelfAttentionLayerNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/SelfAttentionLayerNode"
+		},
+		{
+			"name" : "SerializableInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/SerializableInterface"
+		},
+		{
+			"name" : "SerializableInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "SerializableInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/SerializableInterface"
+		},
+		{
+			"name" : "ServerInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/ServerInterface"
+		},
+		{
+			"name" : "ServerInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "ServerInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/NetworkEngine/Server/ServerInterface"
+		},
+		{
+			"name" : "SigmoidActivation_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Activations/SigmoidActivation"
+		},
+		{
+			"name" : "SigmoidActivation_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "SigmoidActivation_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/ActivationEngine/Activations/SigmoidActivation"
+		},
+		{
+			"name" : "SorterInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/SorterInterface"
+		},
+		{
+			"name" : "SorterInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "SorterInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/GraphEngine/SorterInterface"
+		},
+		{
+			"name" : "SubGraphInputNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/SubGraphInputNode"
+		},
+		{
+			"name" : "SubGraphInputNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "SubGraphInputNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "SubGraphInputNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/SubGraphInputNode"
+		},
+		{
+			"name" : "SubGraphNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/SubGraphNode"
+		},
+		{
+			"name" : "SubGraphNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "SubGraphNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "SubGraphNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/SubGraphNode"
+		},
+		{
+			"name" : "SubGraphOutputNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/SubGraphOutputNode"
+		},
+		{
+			"name" : "SubGraphOutputNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "SubGraphOutputNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "SubGraphOutputNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/SubGraphOutputNode"
+		},
+		{
+			"name" : "UIEngineInterface_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Interfaces/UIEngineInterface"
+		},
+		{
+			"name" : "UIEngineInterface_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "UIEngineInterface_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/UIEngine/UIEngineInterface"
+		},
+		{
+			"name" : "UIEngine_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/UIEngine"
+		},
+		{
+			"name" : "UIEngine_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "UIEngine_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;optimized;E:/vcpkg/installed/x64-windows/lib/glew32.lib;debug;E:/vcpkg/installed/x64-windows/debug/lib/glew32d.lib;general;glfw;general;imgui::imgui;general;glfw;general;unofficial::imgui-node-editor::imgui-node-editor;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;EdgeInterface;general;GraphInterface;general;NodeIOInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "UIEngine_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/UIEngine/UIEngine"
+		},
+		{
+			"name" : "UniqueNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/UniqueNode"
+		},
+		{
+			"name" : "UniqueNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "UniqueNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "UniqueNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/UniqueNode"
+		},
+		{
+			"name" : "VCPKG_APPLOCAL_DEPS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Automatically copy dependencies into the output directory for executables."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "ON"
+		},
+		{
+			"name" : "VCPKG_INSTALLED_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory which contains the installed libraries for each triplet"
+				}
+			],
+			"type" : "PATH",
+			"value" : "E:/vcpkg/installed"
+		},
+		{
+			"name" : "VCPKG_MANIFEST_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The path to the vcpkg manifest directory."
+				}
+			],
+			"type" : "PATH",
+			"value" : ""
+		},
+		{
+			"name" : "VCPKG_MANIFEST_INSTALL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Install the dependencies listed in your manifest:\n    If this is off, you will have to manually install your dependencies.\n    See https://github.com/microsoft/vcpkg/tree/master/docs/specifications/manifests.md for more info.\n"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "VCPKG_MANIFEST_MODE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Use manifest mode, as opposed to classic mode."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "VCPKG_PREFER_SYSTEM_LIBS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Appends the vcpkg paths to CMAKE_PREFIX_PATH, CMAKE_LIBRARY_PATH and CMAKE_FIND_ROOT_PATH so that vcpkg libraries/packages are found after toolchain/system libraries/packages."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "VCPKG_SETUP_CMAKE_PROGRAM_PATH",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Enable the setup of CMAKE_PROGRAM_PATH to vcpkg paths"
+				}
+			],
+			"type" : "BOOL",
+			"value" : "ON"
+		},
+		{
+			"name" : "VCPKG_TARGET_TRIPLET",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Vcpkg target triplet (ex. x86-windows)"
+				}
+			],
+			"type" : "STRING",
+			"value" : "x64-windows"
+		},
+		{
+			"name" : "VCPKG_TRACE_FIND_PACKAGE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Trace calls to find_package()"
+				}
+			],
+			"type" : "BOOL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "VCPKG_VERBOSE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Enables messages from the VCPKG toolchain for debugging purposes."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "ValueNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/ValueNode"
+		},
+		{
+			"name" : "ValueNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "ValueNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "ValueNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/ValueNode"
+		},
+		{
+			"name" : "VectorToMatrixNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/DataToMatrixNode"
+		},
+		{
+			"name" : "VectorToMatrixNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "VectorToMatrixNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "VectorToMatrixNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/DataToMatrixNode"
+		},
+		{
+			"name" : "VectorToTensorNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/DataToTensorNode"
+		},
+		{
+			"name" : "VectorToTensorNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "VectorToTensorNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "VectorToTensorNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/DataToTensorNode"
+		},
+		{
+			"name" : "ViewNode_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/ViewNode"
+		},
+		{
+			"name" : "ViewNode_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "ViewNode_LIB_DEPENDS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dependencies for the target"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "general;E:/vcpkg/installed/x64-windows/debug/lib/OpenCL.lib;general;Boost::filesystem;general;DynamicCodeExecutionEngineInterface;general;GraphEngineInterface;general;GraphInterface;general;NodeInterface;"
+		},
+		{
+			"name" : "ViewNode_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/ViewNode"
+		},
+		{
+			"name" : "WindowsSDK_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for WindowsSDK."
+				}
+			],
+			"type" : "PATH",
+			"value" : "WindowsSDK_DIR-NOTFOUND"
+		},
+		{
+			"name" : "X_VCPKG_APPLOCAL_DEPS_INSTALL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "(experimental) Automatically copy dependencies into the install target directory for executables. Requires CMake 3.14."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "X_VCPKG_APPLOCAL_DEPS_SERIALIZED",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "(experimental) Add USES_TERMINAL to VCPKG_APPLOCAL_DEPS to force serialization."
+				}
+			],
+			"type" : "BOOL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "Z_VCPKG_BUILTIN_POWERSHELL_PATH",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe"
+		},
+		{
+			"name" : "Z_VCPKG_CHECK_MANIFEST_MODE",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Making sure VCPKG_MANIFEST_MODE doesn't change"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "Z_VCPKG_CL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.37.32822/bin/Hostx64/x64/cl.exe"
+		},
+		{
+			"name" : "Z_VCPKG_POWERSHELL_PATH",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The path to the PowerShell implementation to use."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe"
+		},
+		{
+			"name" : "Z_VCPKG_PWSH_PATH",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Path to a program."
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "Z_VCPKG_PWSH_PATH-NOTFOUND"
+		},
+		{
+			"name" : "Z_VCPKG_ROOT_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Vcpkg root directory"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "E:/vcpkg"
+		},
+		{
+			"name" : "_Boost_COMPILER_LAST",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Last used Boost_COMPILER value."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "-vc140"
+		},
+		{
+			"name" : "_Boost_COMPONENTS_SEARCHED",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Components requested for this build tree."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "filesystem;system"
+		},
+		{
+			"name" : "_Boost_INCLUDE_DIR_LAST",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Last used Boost_INCLUDE_DIR value."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "E:/vcpkg/installed/x64-windows/include"
+		},
+		{
+			"name" : "_Boost_LIBRARY_DIR_DEBUG_LAST",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Last used Boost_LIBRARY_DIR_DEBUG value."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "E:/vcpkg/installed/x64-windows/debug/lib"
+		},
+		{
+			"name" : "_Boost_LIBRARY_DIR_RELEASE_LAST",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Last used Boost_LIBRARY_DIR_RELEASE value."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "E:/vcpkg/installed/x64-windows/lib"
+		},
+		{
+			"name" : "_Boost_NAMESPACE_LAST",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Last used Boost_NAMESPACE value."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "boost"
+		},
+		{
+			"name" : "_Boost_USE_MULTITHREADED_LAST",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Last used Boost_USE_MULTITHREADED value."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "ON"
+		},
+		{
+			"name" : "_Boost_USE_STATIC_LIBS_LAST",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Last used Boost_USE_STATIC_LIBS value."
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "_VCPKG_INSTALLED_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory which contains the installed libraries for each triplet"
+				}
+			],
+			"type" : "PATH",
+			"value" : "E:/vcpkg/installed"
+		},
+		{
+			"name" : "glfw3_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for glfw3."
+				}
+			],
+			"type" : "PATH",
+			"value" : "E:/vcpkg/installed/x64-windows/share/glfw3"
+		},
+		{
+			"name" : "glm_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for glm."
+				}
+			],
+			"type" : "PATH",
+			"value" : "E:/vcpkg/installed/x64-windows/share/glm"
+		},
+		{
+			"name" : "imgui_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for imgui."
+				}
+			],
+			"type" : "PATH",
+			"value" : "E:/vcpkg/installed/x64-windows/share/imgui"
+		},
+		{
+			"name" : "nlohmann_json_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for nlohmann_json."
+				}
+			],
+			"type" : "PATH",
+			"value" : "E:/vcpkg/installed/x64-windows/share/nlohmann_json"
+		},
+		{
+			"name" : "sqlite3_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for sqlite3."
+				}
+			],
+			"type" : "PATH",
+			"value" : "sqlite3_DIR-NOTFOUND"
+		},
+		{
+			"name" : "unofficial-imgui-node-editor_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for unofficial-imgui-node-editor."
+				}
+			],
+			"type" : "PATH",
+			"value" : "E:/vcpkg/installed/x64-windows/share/unofficial-imgui-node-editor"
+		},
+		{
+			"name" : "unofficial-kinectsdk1_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for unofficial-kinectsdk1."
+				}
+			],
+			"type" : "PATH",
+			"value" : "E:/vcpkg/installed/x64-windows/share/unofficial-kinectsdk1"
+		},
+		{
+			"name" : "unofficial-lua_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for unofficial-lua."
+				}
+			],
+			"type" : "PATH",
+			"value" : "E:/vcpkg/installed/x64-windows/share/unofficial-lua"
+		},
+		{
+			"name" : "unofficial-sqlite3_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for unofficial-sqlite3."
+				}
+			],
+			"type" : "PATH",
+			"value" : "E:/vcpkg/installed/x64-windows/share/unofficial-sqlite3"
+		},
+		{
+			"name" : "usqlite3_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for usqlite3."
+				}
+			],
+			"type" : "PATH",
+			"value" : "usqlite3_DIR-NOTFOUND"
+		}
+	],
+	"kind" : "cache",
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 0
+	}
+}

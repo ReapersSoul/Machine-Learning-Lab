@@ -167,9 +167,8 @@ public:
 
 
 extern "C" {
-	// Define a function that returns the result of adding two numbers
-	__declspec(dllexport) void CleanUp() {
-
+	__declspec(dllexport) std::string GetTypeID() {
+		return "ControllerNode";
 	}
 
 	// Define a function that returns the result of adding two numbers

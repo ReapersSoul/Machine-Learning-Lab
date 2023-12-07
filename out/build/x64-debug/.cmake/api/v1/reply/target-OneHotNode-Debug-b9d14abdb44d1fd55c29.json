@@ -1,0 +1,562 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "Machine-Learning-Labs-CrossPlatform-V2/Core/Graph/Nodes/OneHotNode.dll"
+		},
+		{
+			"path" : "Implimentations/Nodes/OneHotNode/OneHotNode.lib"
+		},
+		{
+			"path" : "Machine-Learning-Labs-CrossPlatform-V2/Core/Graph/Nodes/OneHotNode.pdb"
+		}
+	],
+	"backtrace" : 2,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"_add_library",
+			"add_library",
+			"target_link_libraries",
+			"target_include_directories",
+			"target_compile_features"
+		],
+		"files" : 
+		[
+			"E:/vcpkg/scripts/buildsystems/vcpkg.cmake",
+			"Implimentations/Engines/GraphEngine/Nodes/OneHotNode/CMakeLists.txt",
+			"Interfaces/Engines/GraphEngine/GraphInterface/CMakeLists.txt",
+			"Interfaces/Engines/DynamicCodeExecutionEngine/DynamicCodeExecutionEngineInterface/CMakeLists.txt",
+			"Interfaces/Engines/GraphEngine/AttributeInterface/CMakeLists.txt",
+			"Interfaces/Engines/GraphEngine/NodeInterface/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 3,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 639,
+				"parent" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 11,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 19,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 40,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 41,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 42,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 44,
+				"parent" : 0
+			},
+			{
+				"file" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 60,
+				"parent" : 9
+			},
+			{
+				"file" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 3,
+				"line" : 16,
+				"parent" : 11
+			},
+			{
+				"file" : 4
+			},
+			{
+				"command" : 2,
+				"file" : 4,
+				"line" : 23,
+				"parent" : 13
+			},
+			{
+				"command" : 2,
+				"file" : 4,
+				"line" : 13,
+				"parent" : 13
+			},
+			{
+				"command" : 2,
+				"file" : 4,
+				"line" : 28,
+				"parent" : 13
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 16,
+				"parent" : 9
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 41,
+				"parent" : 9
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 31,
+				"parent" : 9
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 46,
+				"parent" : 9
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 26,
+				"parent" : 9
+			},
+			{
+				"file" : 5
+			},
+			{
+				"command" : 2,
+				"file" : 5,
+				"line" : 31,
+				"parent" : 22
+			},
+			{
+				"command" : 2,
+				"file" : 5,
+				"line" : 21,
+				"parent" : 22
+			},
+			{
+				"command" : 2,
+				"file" : 5,
+				"line" : 36,
+				"parent" : 22
+			},
+			{
+				"command" : 2,
+				"file" : 5,
+				"line" : 41,
+				"parent" : 22
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 46,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 33,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 34,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 35,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 36,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 37,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 38,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 39,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 10,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 6,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 24,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -std:c++20 -ZI   -w"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 7,
+					"define" : "GLFW_DLL"
+				},
+				{
+					"define" : "OneHotNode_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 28,
+					"path" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/OneHotNode/../../../../../Interfaces/Engines/DynamicCodeExecutionEngine/DynamicCodeExecutionEngineInterface"
+				},
+				{
+					"backtrace" : 29,
+					"path" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/OneHotNode/../../../../../Interfaces/Engines/DynamicCodeExecutionEngine/ScriptInterface"
+				},
+				{
+					"backtrace" : 30,
+					"path" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/OneHotNode/../../../../../Interfaces/Engines/GraphEngine/GraphEngineInterface"
+				},
+				{
+					"backtrace" : 31,
+					"path" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/OneHotNode/../../../../../Interfaces/Engines/GraphEngine/GraphInterface"
+				},
+				{
+					"backtrace" : 32,
+					"path" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/OneHotNode/../../../../../Interfaces/Engines/GraphEngine/NodeInterface"
+				},
+				{
+					"backtrace" : 33,
+					"path" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/OneHotNode/../../../../../Interfaces/Engines/GraphEngine/AttributeInterface"
+				},
+				{
+					"backtrace" : 34,
+					"path" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/OneHotNode/../../../../../Interfaces/Engines/GraphEngine/SorterInterface"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/DynamicCodeExecutionEngine/Languages/LanguageInterface"
+				},
+				{
+					"backtrace" : 35,
+					"isSystem" : true,
+					"path" : "E:/vcpkg/installed/x64-windows/include"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					36,
+					37
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 5,
+			"id" : "LanguageInterface::@7efc6da8a7ec5ff39b0a"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "ScriptInterface::@22604b846f536386cb56"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "DynamicCodeExecutionEngineInterface::@1dc8f802b46a7274a279"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "SerializableInterface::@58f34cfb224ce77f0e77"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "LibraryInterface::@c0b4e4e8fc1e1b88a739"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "EngineInterface::@40c308041c295002a75a"
+		},
+		{
+			"backtrace" : 7,
+			"id" : "PluginInterface::@22e8b9e770a29cd98b86"
+		},
+		{
+			"backtrace" : 7,
+			"id" : "UIEngineInterface::@f4f4fa8d0d0606a934ff"
+		},
+		{
+			"backtrace" : 7,
+			"id" : "GraphInterface::@1937ae627a518b37c745"
+		},
+		{
+			"backtrace" : 6,
+			"id" : "GraphEngineInterface::@e8e5d3c000b2abfeaa82"
+		},
+		{
+			"backtrace" : 7,
+			"id" : "AttributeInterface::@0fff6ed25e9b232ee578"
+		},
+		{
+			"backtrace" : 27,
+			"id" : "SorterInterface::@eccc7d2901bd20e43b11"
+		}
+	],
+	"id" : "OneHotNode::@536a572ef43f2ab53ca1",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "/machine:x64 /debug /INCREMENTAL",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\OpenCL.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\boost_filesystem-vc140-mt-gd.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "Interfaces\\DynamicCodeExecutionEngineInterface\\DynamicCodeExecutionEngineInterface.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "Interfaces\\GraphEngineInterface\\GraphEngineInterface.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "Interfaces\\GraphInterface\\GraphInterface.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 8,
+				"fragment" : "Interfaces\\NodeInterface\\NodeInterface.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "Interfaces\\EdgeInterface\\EdgeInterface.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "Interfaces\\GraphInterface\\GraphInterface.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 8,
+				"fragment" : "Interfaces\\NodeInterface\\NodeInterface.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "Interfaces\\EdgeInterface\\EdgeInterface.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "Interfaces\\DynamicCodeExecutionEngineInterface\\DynamicCodeExecutionEngineInterface.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 12,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\boost_filesystem-vc140-mt-gd.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "Interfaces\\GraphEngineInterface\\GraphEngineInterface.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\OpenCL.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 14,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\imguid.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 15,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\glfw3dll.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 16,
+				"fragment" : "opengl32.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 17,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\boost_filesystem-vc140-mt-gd.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 18,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\imguid.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 19,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\glfw3dll.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 20,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\imgui-node-editor.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 21,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\glew32d.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 23,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\imguid.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 24,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\glfw3dll.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 25,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\imgui-node-editor.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 26,
+				"fragment" : "opengl32.lib",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "OneHotNode",
+	"nameOnDisk" : "OneHotNode.dll",
+	"paths" : 
+	{
+		"build" : "Implimentations/Nodes/OneHotNode",
+		"source" : "Implimentations/Engines/GraphEngine/Nodes/OneHotNode"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				1
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "Implimentations/Engines/GraphEngine/Nodes/OneHotNode/OneHotNode.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 37,
+			"path" : "E:/vcpkg/installed/x64-windows/share/nlohmann_json/nlohmann_json.natvis",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}

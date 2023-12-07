@@ -3,7 +3,7 @@
 #include <NodeInterface.h>
 #include <AttributeInterface.h>
 
-#include <python3.11/Python.h>
+#include <python3.10/Python.h>
 #include <iostream>
 #include <string>
 #include <vector>

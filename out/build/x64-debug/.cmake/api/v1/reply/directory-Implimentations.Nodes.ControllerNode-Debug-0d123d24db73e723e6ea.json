@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "Implimentations/Nodes/ControllerNode",
+		"source" : "Implimentations/Engines/GraphEngine/Nodes/ControllerNode"
+	}
+}

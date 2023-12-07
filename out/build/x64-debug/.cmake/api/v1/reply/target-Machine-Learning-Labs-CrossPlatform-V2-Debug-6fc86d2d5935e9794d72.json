@@ -1,0 +1,425 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "Machine-Learning-Labs-CrossPlatform-V2/Machine-Learning-Labs-CrossPlatform-V2.exe"
+		},
+		{
+			"path" : "Machine-Learning-Labs-CrossPlatform-V2/Machine-Learning-Labs-CrossPlatform-V2.pdb"
+		}
+	],
+	"backtrace" : 2,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"_add_executable",
+			"add_executable",
+			"target_link_libraries",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"E:/vcpkg/scripts/buildsystems/vcpkg.cmake",
+			"Machine-Learning-Labs-CrossPlatform-V2/CMakeLists.txt",
+			"Interfaces/Engines/DynamicCodeExecutionEngine/DynamicCodeExecutionEngineInterface/CMakeLists.txt",
+			"Interfaces/Engines/NetworkEngine/NetworkEngineInterface/CMakeLists.txt",
+			"Interfaces/Engines/NetworkEngine/LedgerInterface/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 3,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 598,
+				"parent" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 15,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 20,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 35,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 25,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 40,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 52,
+				"parent" : 0
+			},
+			{
+				"file" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 11,
+				"parent" : 9
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 16,
+				"parent" : 9
+			},
+			{
+				"file" : 3
+			},
+			{
+				"command" : 2,
+				"file" : 3,
+				"line" : 13,
+				"parent" : 12
+			},
+			{
+				"file" : 4
+			},
+			{
+				"command" : 2,
+				"file" : 4,
+				"line" : 8,
+				"parent" : 14
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 59,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 55,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 51,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 54,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 57,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 58,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 61,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 14,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 45,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -std:c++20 -ZI   -w"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 6,
+					"define" : "GLFW_DLL"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 18,
+					"path" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Machine-Learning-Labs-CrossPlatform-V2/../Interfaces/Engines/DynamicCodeExecutionEngine/DynamicCodeExecutionEngineInterface"
+				},
+				{
+					"backtrace" : 19,
+					"path" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Machine-Learning-Labs-CrossPlatform-V2/../Interfaces/Engines/UIEngine/UIEngineInterface"
+				},
+				{
+					"backtrace" : 20,
+					"path" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Machine-Learning-Labs-CrossPlatform-V2/../Interfaces/Engines/NetworkEngine/NetworkEngineInterface"
+				},
+				{
+					"backtrace" : 21,
+					"path" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Machine-Learning-Labs-CrossPlatform-V2/../Interfaces/Engines/NetworkEngine/LedgerInterface"
+				},
+				{
+					"backtrace" : 22,
+					"path" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Machine-Learning-Labs-CrossPlatform-V2/../Interfaces/SerializableInterface"
+				},
+				{
+					"backtrace" : 8,
+					"path" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/DynamicCodeExecutionEngine/Languages/LanguageInterface"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/NetworkEngine/NetworkEngineInterface/../../../../Interfaces/Engines/DynamicCodeExecutionEngine/DynamicCodeExecutionEngineInterface"
+				},
+				{
+					"backtrace" : 16,
+					"path" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Interfaces/Engines/NetworkEngine/NetworkObjectInterface/../../../../Interfaces/Engines/DynamicCodeExecutionEngine/DynamicCodeExecutionEngineInterface"
+				},
+				{
+					"backtrace" : 23,
+					"isSystem" : true,
+					"path" : "E:/vcpkg/installed/x64-windows/include"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					5,
+					8
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 8,
+			"id" : "LanguageInterface::@7efc6da8a7ec5ff39b0a"
+		},
+		{
+			"backtrace" : 16,
+			"id" : "NetworkObjectInterface::@df2b149bfa6111c54cd2"
+		},
+		{
+			"backtrace" : 8,
+			"id" : "ScriptInterface::@22604b846f536386cb56"
+		},
+		{
+			"backtrace" : 16,
+			"id" : "ClientInterface::@a1c3b991c23b605294c2"
+		},
+		{
+			"backtrace" : 8,
+			"id" : "DynamicCodeExecutionEngineInterface::@1dc8f802b46a7274a279"
+		},
+		{
+			"backtrace" : 8,
+			"id" : "SerializableInterface::@58f34cfb224ce77f0e77"
+		},
+		{
+			"backtrace" : 8,
+			"id" : "LibraryInterface::@c0b4e4e8fc1e1b88a739"
+		},
+		{
+			"backtrace" : 8,
+			"id" : "EngineInterface::@40c308041c295002a75a"
+		},
+		{
+			"backtrace" : 16,
+			"id" : "LedgerInterface::@627001eee11310f517d2"
+		},
+		{
+			"backtrace" : 16,
+			"id" : "ServerInterface::@b59de7cf3e37efef3668"
+		},
+		{
+			"backtrace" : 17,
+			"id" : "UIEngineInterface::@f4f4fa8d0d0606a934ff"
+		},
+		{
+			"backtrace" : 16,
+			"id" : "NetworkEngineInterface::@2f23bd0b3219c7cb5148"
+		}
+	],
+	"id" : "Machine-Learning-Labs-CrossPlatform-V2::@a8575bf8d01aec9b4666",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -ZI",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "/machine:x64 /debug /INCREMENTAL /subsystem:console",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\boost_filesystem-vc140-mt-gd.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\boost_system-vc140-mt-gd.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\glew32d.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\imguid.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\glfw3dll.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "opengl32.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 8,
+				"fragment" : "Interfaces\\DynamicCodeExecutionEngineInterface\\DynamicCodeExecutionEngineInterface.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 8,
+				"fragment" : "Interfaces\\DynamicCodeExecutionEngineInterface\\DynamicCodeExecutionEngineInterface.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 10,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\OpenCL.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 11,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\boost_filesystem-vc140-mt-gd.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 13,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\boost_system-vc140-mt-gd.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 15,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\sqlite3.lib",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "Machine-Learning-Labs-CrossPlatform-V2",
+	"nameOnDisk" : "Machine-Learning-Labs-CrossPlatform-V2.exe",
+	"paths" : 
+	{
+		"build" : "Machine-Learning-Labs-CrossPlatform-V2",
+		"source" : "Machine-Learning-Labs-CrossPlatform-V2"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				1
+			]
+		},
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				2
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "Machine-Learning-Labs-CrossPlatform-V2/Machine-Learning-Labs-CrossPlatform-V2.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "Machine-Learning-Labs-CrossPlatform-V2/Machine-Learning-Labs-CrossPlatform-V2.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 24,
+			"path" : "E:/vcpkg/installed/x64-windows/share/nlohmann_json/nlohmann_json.natvis",
+			"sourceGroupIndex" : 2
+		}
+	],
+	"type" : "EXECUTABLE"
+}

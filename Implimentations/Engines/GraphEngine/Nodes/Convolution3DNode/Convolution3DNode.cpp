@@ -653,6 +653,10 @@ public:
 
 
 extern "C" {
+	__declspec(dllexport) std::string GetTypeID() {
+		return "Convolution3DNode";
+	}
+
 	// Define a function that returns the result of adding two numbers
 	__declspec(dllexport) NodeInterface* GetInstance() {
 		return new ConvolutionNode();

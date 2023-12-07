@@ -1,0 +1,2 @@
+#pragma code_page(65001)
+2 /* CREATEPROCESS_MANIFEST_RESOURCE_ID */ 24 /* RT_MANIFEST */ "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Implimentations/Nodes/AtIndexNode/CMakeFiles/AtIndexNode.dir/embed.manifest"

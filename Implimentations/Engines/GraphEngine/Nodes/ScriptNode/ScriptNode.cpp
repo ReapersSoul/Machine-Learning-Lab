@@ -82,6 +82,10 @@ public:
 
 
 extern "C" {
+    __declspec(dllexport) std::string GetTypeID() {
+        return "ScriptNode";
+    }
+
     __declspec(dllexport) NodeInterface* GetInstance() {
         ScriptNode* node = new ScriptNode();
         return dynamic_cast<NodeInterface*>(node);

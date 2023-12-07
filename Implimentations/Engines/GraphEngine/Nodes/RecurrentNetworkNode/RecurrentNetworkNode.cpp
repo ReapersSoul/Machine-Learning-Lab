@@ -448,6 +448,10 @@ public:
 
 
 extern "C" {
+	__declspec(dllexport) std::string GetTypeID() {
+		return "RecurrentNetworkNode";
+	}
+
 	__declspec(dllexport) NodeInterface* GetInstance() {
 		return new RecurrentNetworkNode();
 	}

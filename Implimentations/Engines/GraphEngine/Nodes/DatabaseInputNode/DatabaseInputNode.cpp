@@ -7,13 +7,13 @@
 #include <GLFW/glfw3.h>
 #include <sqlite3.h>
 
-class DatabaseNode : public NodeInterface {
+class DatabaseInputNode : public NodeInterface {
 	std::string DatabasePath = "mnist_training.db";
 	std::string sql="SELECT DISTINCT IMAGE, LABEL FROM MNIST_DATA;";
 	nlohmann::json data;
 	bool refreshDB = true;
 public:
-	DatabaseNode() {
+	DatabaseInputNode() {
 		TypeID = "DatabaseInputNode";
 	}
 
@@ -127,7 +127,7 @@ public:
 	//void DrawNodeTitle();
 
 	NodeInterface* GetInstance() override {
-		DatabaseNode* node = new DatabaseNode();
+		DatabaseInputNode* node = new DatabaseInputNode();
 
 		return node;
 	}
@@ -151,13 +151,12 @@ public:
 
 
 extern "C" {
-	// Define a function that returns the result of adding two numbers
-	__declspec(dllexport) void CleanUp() {
-
+	__declspec(dllexport) std::string GetTypeID() {
+		return "DatabaseInputNode";
 	}
 
 	// Define a function that returns the result of adding two numbers
 	__declspec(dllexport) NodeInterface* GetInstance() {
-		return new DatabaseNode();
+		return new DatabaseInputNode();
 	}
 }

@@ -1,5 +1,5 @@
 #include <DynamicCodeExecutionEngineInterface.h>
-#include <SubGraphNodeInterface.h>
+#include <NodeInterface.h>
 #include <LanguageInterface.h>
 #include <GraphEngineInterface.h>
 #include <AttributeInterface.h>
@@ -10,7 +10,7 @@
 
 #include <typeinfo>
 
-class SubGraphNode : public SubGraphNodeInterface {
+class SubGraphNode : public NodeInterface {
 	GraphInterface * Graph;
 	std::string FilePath;
 
@@ -61,6 +61,10 @@ public:
 
 
 extern "C" {
+	__declspec(dllexport) std::string GetTypeID() {
+		return "SubGraphNode";
+	}
+
 	// Define a function that returns the result of adding two numbers
 	__declspec(dllexport) NodeInterface* GetInstance() {
 		return new SubGraphNode();

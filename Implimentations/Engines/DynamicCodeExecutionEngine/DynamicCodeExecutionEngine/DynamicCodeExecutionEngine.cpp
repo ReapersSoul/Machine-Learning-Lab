@@ -64,6 +64,9 @@ public:
 		std::ifstream i("Config.json");
 		i >> j;
 		//if the libs folder doesn't exist then create it
+		if (!std::filesystem::exists("Plugins/")) {
+			std::filesystem::create_directory("Plugins/");
+		}
 		if (!std::filesystem::exists("Plugins/Libs/")) {
 			std::filesystem::create_directory("Plugins/Libs/");
 		}
@@ -151,7 +154,7 @@ public:
 
 			// Check if the library loaded successfully
 			if (!myLibrary->IsLoaded()) {
-				std::cerr << "Failed to load the DLL." << std::endl;
+				std::cerr << "Failed to load the DLL. Core/Libs/" + element.get<std::string>() << std::endl;
 				return;
 			}
 
@@ -292,6 +295,17 @@ public:
 		nlohmann::json j;
 		std::ifstream i("Config.json");
 		i >> j;
+
+		//if the plugins folder doesn't exist then create it
+		if (!std::filesystem::exists("Plugins/")) {
+			std::filesystem::create_directory("Plugins/");
+		}
+
+		//if the languages folder doesn't exist then create it
+		if (!std::filesystem::exists("Plugins/Languages/")) {
+			std::filesystem::create_directory("Plugins/Languages/");
+		}
+
 		//find all dlls in the languages folder
 		for (auto& p : std::filesystem::directory_iterator("Plugins/Languages/")) {
 			//check if dll

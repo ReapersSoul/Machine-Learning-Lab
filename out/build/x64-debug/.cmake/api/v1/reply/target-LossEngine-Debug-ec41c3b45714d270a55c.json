@@ -1,0 +1,174 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "Machine-Learning-Labs-CrossPlatform-V2/Core/LossEngine.dll"
+		},
+		{
+			"path" : "Implimentations/LossEngine/LossEngine.lib"
+		},
+		{
+			"path" : "Machine-Learning-Labs-CrossPlatform-V2/Core/LossEngine.pdb"
+		}
+	],
+	"backtrace" : 2,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"_add_library",
+			"add_library",
+			"target_link_libraries",
+			"target_include_directories",
+			"target_compile_features"
+		],
+		"files" : 
+		[
+			"E:/vcpkg/scripts/buildsystems/vcpkg.cmake",
+			"Implimentations/Engines/LossEngine/LossEngine/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 3,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 639,
+				"parent" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 11,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 16,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 10,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 6,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -std:c++20 -ZI   -w"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"define" : "LossEngine_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 5,
+					"path" : "I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/LossEngine/LossEngine/../../../../Interfaces/Engines/LossEngine/LossEngineInterface"
+				},
+				{
+					"backtrace" : 6,
+					"isSystem" : true,
+					"path" : "E:/vcpkg/installed/x64-windows/include"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					7
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"id" : "LossEngine::@530a063d482f0c6d7611",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "/machine:x64 /debug /INCREMENTAL",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\OpenCL.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "E:\\vcpkg\\installed\\x64-windows\\debug\\lib\\boost_filesystem-vc140-mt-gd.lib",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "LossEngine",
+	"nameOnDisk" : "LossEngine.dll",
+	"paths" : 
+	{
+		"build" : "Implimentations/LossEngine",
+		"source" : "Implimentations/Engines/LossEngine/LossEngine"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "Implimentations/Engines/LossEngine/LossEngine/LossEngine.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}

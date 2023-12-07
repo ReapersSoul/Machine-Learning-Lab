@@ -70,6 +70,10 @@ public:
 
 
 extern "C" {
+	__declspec(dllexport) std::string GetTypeID() {
+		return "UniqueNode";
+	}
+
 	// Define a function that returns the result of adding two numbers
 	__declspec(dllexport) NodeInterface* GetInstance() {
 		return new UniqueNode();

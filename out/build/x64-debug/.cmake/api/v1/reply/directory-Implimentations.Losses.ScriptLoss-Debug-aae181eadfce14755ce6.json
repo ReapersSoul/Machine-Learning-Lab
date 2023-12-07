@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "Implimentations/Losses/ScriptLoss",
+		"source" : "Implimentations/Engines/LossEngine/Losses/ScriptLoss"
+	}
+}

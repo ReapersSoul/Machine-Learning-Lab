@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "Implimentations/Nodes/RecurrentLayerNode",
+		"source" : "Implimentations/Engines/GraphEngine/Nodes/RecurrentLayerNode"
+	}
+}

@@ -1,5 +1,5 @@
 #pragma once
-#include "../NetworkObject/NetworkObjectInterface/NetworkObjectInterface.h"
+#include "../NetworkObjectInterface/NetworkObjectInterface.h"
 #include <iostream>
 
 //represents a server's connection to a client

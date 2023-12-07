@@ -1,5 +1,5 @@
 #pragma once
-#include "../../GraphInterface/GraphInterface/GraphInterface.h"
+#include "../GraphInterface/GraphInterface.h"
 
 #include <vector>
 #include <map>

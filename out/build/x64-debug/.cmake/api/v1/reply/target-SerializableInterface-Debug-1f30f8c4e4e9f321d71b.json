@@ -1,0 +1,60 @@
+{
+	"backtrace" : 2,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"_add_library",
+			"add_library"
+		],
+		"files" : 
+		[
+			"E:/vcpkg/scripts/buildsystems/vcpkg.cmake",
+			"Interfaces/SerializableInterface/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 3,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 639,
+				"parent" : 1
+			}
+		]
+	},
+	"id" : "SerializableInterface::@58f34cfb224ce77f0e77",
+	"name" : "SerializableInterface",
+	"paths" : 
+	{
+		"build" : "Interfaces/SerializableInterface",
+		"source" : "Interfaces/SerializableInterface"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 2,
+			"path" : "Interfaces/SerializableInterface/SerializableInterface.h",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "INTERFACE_LIBRARY"
+}

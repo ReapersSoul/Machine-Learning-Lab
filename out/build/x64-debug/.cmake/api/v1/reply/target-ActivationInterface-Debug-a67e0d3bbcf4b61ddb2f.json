@@ -1,0 +1,60 @@
+{
+	"backtrace" : 2,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"_add_library",
+			"add_library"
+		],
+		"files" : 
+		[
+			"E:/vcpkg/scripts/buildsystems/vcpkg.cmake",
+			"Interfaces/Engines/ActivationEngine/ActivationInterface/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 3,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 639,
+				"parent" : 1
+			}
+		]
+	},
+	"id" : "ActivationInterface::@6ea363d4dcc589eba1fb",
+	"name" : "ActivationInterface",
+	"paths" : 
+	{
+		"build" : "Interfaces/ActivationInterface",
+		"source" : "Interfaces/Engines/ActivationEngine/ActivationInterface"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 2,
+			"path" : "Interfaces/Engines/ActivationEngine/ActivationInterface/ActivationInterface.h",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "INTERFACE_LIBRARY"
+}

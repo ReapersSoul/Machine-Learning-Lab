@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "Implimentations/Nodes/ViewNode",
+		"source" : "Implimentations/Engines/GraphEngine/Nodes/ViewNode"
+	}
+}

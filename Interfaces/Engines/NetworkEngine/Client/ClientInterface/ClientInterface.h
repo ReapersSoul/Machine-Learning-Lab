@@ -1,7 +1,6 @@
 #pragma once
-#include "../NetworkObject/NetworkObjectInterface/NetworkObjectInterface.h"
-#include "../../NodeIOs/NodeIOInterface/NodeIOInterface.h"
-#include "../../GraphEngine/Nodes/NodeInterface/NodeInterface.h"
+#include "../NetworkObjectInterface/NetworkObjectInterface.h"
+#include "../../GraphEngine/NodeInterface/NodeInterface.h"
 #include <iostream>
 
 //represents a clients connection to the server

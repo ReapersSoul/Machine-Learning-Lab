@@ -1,0 +1,60 @@
+{
+	"backtrace" : 2,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"_add_library",
+			"add_library"
+		],
+		"files" : 
+		[
+			"E:/vcpkg/scripts/buildsystems/vcpkg.cmake",
+			"Interfaces/Engines/UIEngine/UIEngineInterface/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 3,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 639,
+				"parent" : 1
+			}
+		]
+	},
+	"id" : "UIEngineInterface::@f4f4fa8d0d0606a934ff",
+	"name" : "UIEngineInterface",
+	"paths" : 
+	{
+		"build" : "Interfaces/UIEngineInterface",
+		"source" : "Interfaces/Engines/UIEngine/UIEngineInterface"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 2,
+			"path" : "Interfaces/Engines/UIEngine/UIEngineInterface/UIEngineInterface.h",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "INTERFACE_LIBRARY"
+}

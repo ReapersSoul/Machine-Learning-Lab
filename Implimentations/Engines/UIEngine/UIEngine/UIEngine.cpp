@@ -436,21 +436,6 @@ public:
 		ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 	}
 
-	static inline ImRect ImGui_GetItemRect()
-	{
-		return ImRect(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
-	}
-
-	static inline ImRect ImRect_Expanded(const ImRect& rect, float x, float y)
-	{
-		auto result = rect;
-		result.Min.x -= x;
-		result.Min.y -= y;
-		result.Max.x += x;
-		result.Max.y += y;
-		return result;
-	}
-
 	void Run() override{
 		nlohmann::json Theme;
 
@@ -768,13 +753,19 @@ public:
 				ed::SetCurrentEditor(g_Context);
 				ed::Begin("NodeEditor");
 
-				
 
 				std::map<std::string, GraphInterface*> graphs = GraphEngine->GetGraphs();
 				std::map<unsigned int, NodeInterface*> nodes = graphs["main"]->GetNodes();
 				std::map<unsigned int, EdgeInterface*> edges = graphs["main"]->GetEdges();
 				//draw nodes
 				for (auto node : nodes) {
+					ed::BeginNode(node.second->GetUID());
+					node.second->DrawNodeTitle(ImGui::GetCurrentContext());
+					if (Debug) {
+						ImGui::SameLine();
+						ImGui::Text(std::to_string(node.second->GetUID()).c_str());
+					}
+
 					for (int i = 0; i < node.second->GetDescription().size(); i++) {
 						if (node.second->GetDescription()[i].find("Input") != node.second->GetDescription()[i].end()) {
 							//get color
@@ -869,19 +860,6 @@ public:
 					ImVec2 pos = ed::GetNodePosition(node.second->GetUID());
 					node.second->setXY(pos.x, pos.y);
 				}
-
-
-				ed::BeginNode(200);
-				ed::BeginPin(201, ed::PinKind::Input);
-				ImGui::Text("Input");
-				ed::EndPin();
-				ImGui::SameLine();
-				ed::BeginPin(202, ed::PinKind::Output);
-				ImGui::Text("Output");
-				ed::EndPin();
-				ImGui::TextUnformatted("Group");
-				ed::Group(ImVec2(200,200));
-				ed::EndNode();
 
 				HandleGraphInputEvents();
 				ed::End();

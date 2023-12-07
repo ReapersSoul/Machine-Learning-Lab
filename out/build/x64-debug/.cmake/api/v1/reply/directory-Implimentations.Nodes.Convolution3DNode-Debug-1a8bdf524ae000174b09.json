@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "Implimentations/Nodes/Convolution3DNode",
+		"source" : "Implimentations/Engines/GraphEngine/Nodes/Convolution3DNode"
+	}
+}

@@ -158,7 +158,7 @@ public:
 			printf(" Error building: %s\n", program.getBuildInfo<CL_PROGRAM_BUILD_LOG>(device).c_str());
 			return;
 		}
-		TypeID = "RecurrentLayerNode";
+		SetTypeID("RecurrentLayer");
 		max_threads = device.getInfo<CL_DEVICE_MAX_WORK_GROUP_SIZE>();
 	}
 
@@ -332,6 +332,10 @@ public:
 
 
 extern "C" {
+	__declspec(dllexport) std::string GetTypeID() {
+		return "RecurrentLayer";
+	}
+
 	// Define a function that returns the result of adding two numbers
 	__declspec(dllexport) NodeInterface* GetInstance() {
 		return new RecurrentLayerNode();

@@ -36,17 +36,15 @@ public:
 			if (p.path().extension().string() != ".dll") {
 				continue;
 			}
-
+			if (p.path().filename().string() == "ScriptNode.dll") {
+				continue;
+			}
 			try {
 				LibraryInterface* lib = DCEEngine->LoadLibrary(p.path().string());
-
-
-				if (p.path().filename().string() == "ScriptNode.dll") {
-					continue;
-				}
+				
 				NodeInfo nodeInfo;
 				NodeInterface* node = lib->GetInstance<NodeInterface>();
-				nodeInfo.TypeID = node->GetTypeID();
+				nodeInfo.TypeID = lib->GetLibrary().get<std::string()>("GetTypeID")();
 				nodeInfo.CreateNode = [lib]() {return lib->GetInstance<NodeInterface>(); };
 				node->~NodeInterface();
 				AvailableNodes.push_back(nodeInfo);

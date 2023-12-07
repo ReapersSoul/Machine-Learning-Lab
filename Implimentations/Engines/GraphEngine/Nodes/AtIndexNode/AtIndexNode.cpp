@@ -82,4 +82,8 @@ extern "C" {
 	__declspec(dllexport) NodeInterface* GetInstance() {
 		return new AtIndexNode();
 	}
+
+	__declspec(dllexport) std::string GetTypeID() {
+		return "AtIndexNode";
+	}
 }
