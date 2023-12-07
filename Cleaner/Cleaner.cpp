@@ -7,6 +7,7 @@ void CleanDir(std::string base_path, std::vector<std::string> excluded_folders, 
 	//recursively iterate through the base path and subfolders and delete files
 	for (const auto& entry : std::filesystem::directory_iterator(base_path))
 	{
+
 		//check if the current path is a directory
 		if (entry.is_directory())
 		{
@@ -100,13 +101,28 @@ int main()
 		nlohmann::json j;
 
 		//set the base path
-		j["base_path"] = "C:\\Users\\user\\Desktop\\test";
-
-		//set the excluded folders
-		j["excluded_folders"] = { "C:\\Users\\user\\Desktop\\test\\test2" };
-
-		//set the files to delete
-		j["files_to_delete"] = { "C:\\Users\\user\\Desktop\\test\\test.txt" };
+		j["base_path"] = "I:/Machine-Learning-Lab/out/build/x64-debug/Machine-Learning-Labs-CrossPlatform-V2";
+		j["excluded_folders"] = {
+			"Libs"
+		};
+		j["files_to_delete"] = {
+				"boost_filesystem-vc143-mt-gd-x64-1_83.dll",
+					"glew32d.dll",
+					"glfw3.dll",
+					"OpenCL.dll",
+					"sqlite3.dll",
+					"lua.dll"
+		};
+		j["files_to_ignore_in_main"] = {
+			"boost_filesystem-vc143-mt-gd-x64-1_83.dll"
+		};
+		j["ext_to_delete"] = {};
+		j["files_to_copy"] = {
+			"Core",
+				"Plugins",
+				"Scripts"
+		};
+		j["destenation_to_copy"] = "I:/Machine-Learning-Lab/out/build/x64-debug/Machine-Learning-Labs-CrossPlatform-Server-V2";
 
 		//write the json object to the config file
 		o << j << std::endl;

@@ -1,8 +1,8 @@
-# Install script for directory: I:/Machine-Learning-Labs-CrossPlatform-V2/Implimentations/Engines/GraphEngine/Nodes/DataToMatrixNode
+# Install script for directory: I:/Machine-Learning-Lab/Implimentations/Engines/GraphEngine/Nodes/VectorToMatrixNode
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "I:/Machine-Learning-Labs-CrossPlatform-V2/out/install/x64-debug")
+  set(CMAKE_INSTALL_PREFIX "I:/Machine-Learning-Lab/out/install/x64-debug")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

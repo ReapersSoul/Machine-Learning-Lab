@@ -1,5 +1,5 @@
 {
-    "base_path": "I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Machine-Learning-Labs-CrossPlatform-V2",
+    "base_path": "I:/Machine-Learning-Lab/out/build/x64-debug/Machine-Learning-Labs-CrossPlatform-V2",
     "excluded_folders": [
         "Libs"
     ],
@@ -21,5 +21,5 @@
 		"Plugins",
 		"Scripts"
 	],
-    "destenation_to_copy":"I:/Machine-Learning-Labs-CrossPlatform-V2/out/build/x64-debug/Machine-Learning-Labs-CrossPlatform-Server-V2"
+    "destenation_to_copy":"I:/Machine-Learning-Lab/out/build/x64-debug/Machine-Learning-Labs-CrossPlatform-Server-V2"
 }
