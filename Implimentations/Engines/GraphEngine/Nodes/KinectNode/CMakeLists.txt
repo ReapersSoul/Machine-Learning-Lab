@@ -86,6 +86,8 @@ target_link_libraries(${PROJECT_NAME} PUBLIC ScriptInterface)
 target_link_libraries(${PROJECT_NAME} PUBLIC NodeInterface)
 target_link_libraries(${PROJECT_NAME} PUBLIC AttributeInterface)
 target_link_libraries(${PROJECT_NAME} PUBLIC SorterInterface)
+target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/DynamicCodeExecutionEngine/Languages/LanguageInterface/)
+target_link_libraries(${PROJECT_NAME} PUBLIC LanguageInterface)
 
 
 # Output directory

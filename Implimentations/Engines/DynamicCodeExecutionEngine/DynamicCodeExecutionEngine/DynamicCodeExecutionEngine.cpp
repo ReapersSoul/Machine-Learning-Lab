@@ -34,12 +34,7 @@ public:
 			j["Core Libs Load Order"] = nlohmann::json::array();
 			j["Excluded Core DLLs"] = nlohmann::json::array();
 			j["Engines"] = nlohmann::json::array();
-
-			j["Core Libs Load Order"].push_back("brotlicommon.dll");
-			j["Core Libs Load Order"].push_back("brotlidec.dll");
-			j["Core Libs Load Order"].push_back("bz2d.dll");
-			j["Core Libs Load Order"].push_back("zlibd1.dll");
-			j["Core Libs Load Order"].push_back("libpng16d.dll");
+			j["Core Libs Load Order"]= nlohmann::json::array();
 
 			j["Excluded Core DLLs"].push_back("DynamicCodeExecutionEngine.dll");
 
@@ -59,50 +54,6 @@ public:
 		std::cout << "Registering language..." << std::endl;
 	}
 
-	void LoadPluginLibs() override {
-		nlohmann::json j;
-		std::ifstream i("Config.json");
-		i >> j;
-		//if the libs folder doesn't exist then create it
-		if (!std::filesystem::exists("Plugins/")) {
-			std::filesystem::create_directory("Plugins/");
-		}
-		if (!std::filesystem::exists("Plugins/Libs/")) {
-			std::filesystem::create_directory("Plugins/Libs/");
-		}
-
-		//find all dlls in the languages folder
-		for (auto& p : std::filesystem::directory_iterator("Plugins/Libs/")) {
-			//check if dll
-			if (p.path().extension().string() != ".dll") {
-				continue;
-			}
-
-			//check if the dll is in the excluded list
-			bool excluded = false;
-			for (auto& element : j["Excluded DLLs"]) {
-				if (p.path().filename().string() == element.get<std::string>()) {
-					excluded = true;
-					break;
-				}
-			}
-			if (excluded) {
-				continue;
-			}
-
-			// Load the DLL
-			LibraryInterface* lib = new LibraryInterface(p.path().string());
-			lib->Load();
-
-			// Check if the library loaded successfully
-			if (!lib->IsLoaded()) {
-				std::cerr << "Failed to load the DLL." << std::endl;
-				return;
-			}
-
-			PluginLibs.push_back(lib);
-		}
-	}
 
 	void LoadPlugins() override{
 		nlohmann::json j;
@@ -114,23 +65,16 @@ public:
 		}
 	}
 
-	void LoadCoreLibs() override {
+	void LoadLibs() override {
 		std::vector<std::string> loadedLibs;
 		nlohmann::json j;
 		//if the config file doesn't exist then create it
 		if (!std::filesystem::exists("Config.json")) {
 			std::ofstream o("Config.json");
 			
-			j["Core Libs Load Order"] = nlohmann::json::array();
+			j["Libs Load Order"] = nlohmann::json::array();
 			j["ExcludedDLLs"] = nlohmann::json::array();
 			j["Engines"] = nlohmann::json::array();
-
-			j["Core Libs Load Order"].push_back("brotlicommon.dll");
-			j["Core Libs Load Order"].push_back("brotlidec.dll");
-			j["Core Libs Load Order"].push_back("bz2d.dll");
-			j["Core Libs Load Order"].push_back("zlibd1.dll");
-			j["Core Libs Load Order"].push_back("libpng16d.dll");
-
 			j["ExcludedDLLs"].push_back("DynamicCodeExecutionEngine.dll");
 
 			j["Engines"].push_back("UIEngine.dll");
@@ -142,27 +86,28 @@ public:
 		std::ifstream i("Config.json");
 		i >> j;
 
+
 		//if the core libs folder doesn't exist then create it
-		if (!std::filesystem::exists("Core/Libs/")) {
-			std::filesystem::create_directory("Core/Libs/");
+		if (!std::filesystem::exists("Libs/")) {
+			std::filesystem::create_directory("Libs/");
 		}
 
-		for (auto& element : j["Core Libs Load Order"]) {
+		for (auto& element : j["Libs Load Order"]) {
 			// Load the DLL			
-			LibraryInterface* myLibrary = new LibraryInterface("Core/Libs/" + element.get<std::string>());
+			LibraryInterface* myLibrary = new LibraryInterface("Libs/" + element.get<std::string>());
 			myLibrary->Load();
 
 			// Check if the library loaded successfully
 			if (!myLibrary->IsLoaded()) {
-				std::cerr << "Failed to load the DLL. Core/Libs/" + element.get<std::string>() << std::endl;
-				return;
+				std::cerr << "Failed to load the DLL. Libs/" + element.get<std::string>() << std::endl;
+				continue;
 			}
 
-			CoreLibs.push_back(myLibrary);
+			OtherLibs.push_back(myLibrary);
 			loadedLibs.push_back(element.get<std::string>());
 		}
 
-		for (auto& p : std::filesystem::directory_iterator("Core/Libs/")) {
+		for (auto& p : std::filesystem::directory_iterator("Libs/")) {
 			if (p.is_directory()) {
 				continue;
 			}
@@ -194,18 +139,18 @@ public:
 				continue;
 			}
 			
-
+			printf("Loading %s\n", p.path().filename().string().c_str());
 			// Load the DLL			
 			LibraryInterface* myLibrary = new LibraryInterface(p.path().string());
 			myLibrary->Load();
 
 			// Check if the library loaded successfully
 			if (!myLibrary->IsLoaded()) {
-				std::cerr << "Failed to load the DLL." << std::endl;
-				return;
+				std::cerr << "Failed to load the DLL. Core/Libs/" + p.path().filename().string() << std::endl;
+				continue;
 			}
 
-			CoreLibs.push_back(myLibrary);
+			OtherLibs.push_back(myLibrary);
 		}
 	}
 
@@ -219,12 +164,6 @@ public:
 			j["Core Libs Load Order"] = nlohmann::json::array();
 			j["Excluded DLLs"] = nlohmann::json::array();
 			j["Engines"] = nlohmann::json::array();
-
-			j["Core Libs Load Order"].push_back("brotlicommon.dll");
-			j["Core Libs Load Order"].push_back("brotlidec.dll");
-			j["Core Libs Load Order"].push_back("bz2d.dll");
-			j["Core Libs Load Order"].push_back("zlibd1.dll");
-			j["Core Libs Load Order"].push_back("libpng16d.dll");
 
 			j["Excluded DLLs"].push_back("DynamicCodeExecutionEngine.dll");
 
@@ -269,8 +208,8 @@ public:
 
 			// Check if the library loaded successfully
 			if (!myLibrary->IsLoaded()) {
-				std::cerr << "Failed to load the DLL." << std::endl;
-				return;
+				std::cerr << "Failed to load the DLL. " + p.path().string() << std::endl;
+				continue;
 			}
 
 			//check if the dll is in the engine dlls list
@@ -331,8 +270,8 @@ public:
 
 			// Check if the library loaded successfully
 			if (!myLibrary->IsLoaded()) {
-				std::cerr << "Failed to load the DLL." << std::endl;
-				return;
+				std::cerr << "Failed to load the DLL. Plugins/Languages/" + p.path().filename().string() << std::endl;
+				continue;
 			}
 
 			// Get a instance of the class
@@ -415,9 +354,8 @@ public:
 	}
 
 	void DefaultLoad() {
-		LoadCoreLibs();
+		LoadLibs();
 		LoadCoreEngines();
-		LoadPluginLibs();
 		LoadPlugins();
 		LoadLanguages();
 		RunScripts();

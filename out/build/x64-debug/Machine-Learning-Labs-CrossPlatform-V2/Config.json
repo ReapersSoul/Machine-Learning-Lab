@@ -1,6 +1,5 @@
 {
-    "Core Libs Load Order": [
-    ],
+    "Core Libs Load Order": [],
     "Engines": [
         "UIEngine.dll"
     ],

@@ -42,3 +42,12 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 	LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Machine-Learning-Labs-CrossPlatform-V2/Libs/
 	RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Machine-Learning-Labs-CrossPlatform-V2/Core/Activations/
 )
+
+# move chai dll to ${CMAKE_BINARY_DIR}/Machine-Learning-Labs-CrossPlatform-V2/Libs/
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/Machine-Learning-Labs-CrossPlatform-V2/Core/chaiscript_stdlib.dll ${CMAKE_BINARY_DIR}/Machine-Learning-Labs-CrossPlatform-V2/Libs/
+)
+# remove chai dll from ${CMAKE_BINARY_DIR}/Machine-Learning-Labs-CrossPlatform-V2/Core/
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/Machine-Learning-Labs-CrossPlatform-V2/Core/chaiscript_stdlib.dll
+)

@@ -3,13 +3,7 @@
 		"DynamicCodeExecutionEngine.dll",
 		"APIEngine.dll"
 	],
-	"Core Libs Load Order":[
-		"brotlicommon.dll",
-		"brotlidec.dll",
-		"bz2d.dll",
-		"zlibd1.dll",
-		"libpng16d.dll"
-	],
+	"Core Libs Load Order":null,
 	"Engines":[
 		"UIEngine.dll",
 		"DynamicCodeExecutionEngine.dll",

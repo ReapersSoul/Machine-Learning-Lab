@@ -42,3 +42,12 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 	LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Machine-Learning-Labs-CrossPlatform-V2/Libs/
 	RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Machine-Learning-Labs-CrossPlatform-V2/Plugins/Languages/
 )
+
+# move duktape dll to ${CMAKE_BINARY_DIR}/Machine-Learning-Labs-CrossPlatform-V2/Libs/
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/Machine-Learning-Labs-CrossPlatform-V2/Core/duktape.dll ${CMAKE_BINARY_DIR}/Machine-Learning-Labs-CrossPlatform-V2/Libs/
+)
+# remove duktape dll from ${CMAKE_BINARY_DIR}/Machine-Learning-Labs-CrossPlatform-V2/Plugins/Languages/
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/Machine-Learning-Labs-CrossPlatform-V2/Plugins/Languages/duktape.dll
+)

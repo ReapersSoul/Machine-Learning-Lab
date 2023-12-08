@@ -29,7 +29,7 @@ class ControllerNode : public NodeInterface {
 	bool DPadLeft;
 	bool DPadRight;
 
-	int joystick;
+	int joystick=0;
 
 public:
 	ControllerNode() {
@@ -63,10 +63,6 @@ public:
 		MakeOutput(17, "DPadDown", "bool", false);
 		MakeOutput(18, "DPadLeft", "bool", false);
 		MakeOutput(19, "DPadRight", "bool", false);
-	}
-
-	void StandAloneInit() {
-
 	}
 
 	void Process(bool DirectionForward) override {

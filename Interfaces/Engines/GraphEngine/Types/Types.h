@@ -6,6 +6,12 @@ class IOObject: public SerializableInterface
 
 };
 
+//essentially a vector of IOObjects with some extra functionality
+class IOObjectCollection : public IOObject
+{
+
+};
+
 class Vector: public IOObject
 {
 

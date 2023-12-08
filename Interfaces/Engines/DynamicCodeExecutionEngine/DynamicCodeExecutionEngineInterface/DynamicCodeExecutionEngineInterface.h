@@ -98,9 +98,7 @@ protected:
 	bool isReloading = false;
 	static boost::dll::shared_library* EngineLibrary;
 	static DynamicCodeExecutionEngineInterface* (*GetEngineInstance)();
-	std::vector<LibraryInterface*> CoreLibs;
 	std::vector<LibraryInterface*> Engines;
-	std::vector<LibraryInterface*> PluginLibs;
 	std::vector<LibraryInterface*> Plugins;
 	std::vector<LibraryInterface*> LanguageLibs;
 	std::vector<LibraryInterface*> ScriptLibs;
@@ -171,16 +169,8 @@ public:
 		return EngineLibrary != nullptr && EngineLibrary->is_loaded()&&GetEngineInstance!=nullptr;
 	}
 
-	int GetCoreLibCount() {
-		return CoreLibs.size();
-	}
-
 	int GetEngineCount() {
 		return Engines.size();
-	}
-
-	int GetPluginLibCount() {
-		return PluginLibs.size();
 	}
 
 	int GetPluginCount() {
@@ -189,22 +179,6 @@ public:
 
 	int GetLanguageLibCount() {
 		return LanguageLibs.size();
-	}
-
-	LibraryInterface* LoadCoreLib(std::string path) {
-		//check if already loaded
-		for (int i = 0; i < CoreLibs.size(); i++) {
-			if (CoreLibs[i]->GetPath() == path) {
-				return CoreLibs[i];
-			}
-		}
-		LibraryInterface* lib = new LibraryInterface(path);
-		lib->Load();
-		if (lib->IsLoaded()) {
-			printf("Loaded %s\n", path.c_str());
-		}
-		CoreLibs.push_back(lib);
-		return lib;
 	}
 
 	LibraryInterface* LoadEngine(std::string path) {
@@ -220,22 +194,6 @@ public:
 			printf("Loaded %s\n", path.c_str());
 		}
 		Engines.push_back(lib);
-		return lib;
-	}
-
-	LibraryInterface* LoadPluginLib(std::string path) {
-		//check if already loaded
-		for (int i = 0; i < PluginLibs.size(); i++) {
-			if (PluginLibs[i]->GetPath() == path) {
-				return PluginLibs[i];
-			}
-		}
-		LibraryInterface* lib = new LibraryInterface(path);
-		lib->Load();
-		if (lib->IsLoaded()) {
-			printf("Loaded %s\n", path.c_str());
-		}
-		PluginLibs.push_back(lib);
 		return lib;
 	}
 
@@ -262,19 +220,9 @@ public:
 				return OtherLibs[i];
 			}
 		}
-		for (int i = 0; i < CoreLibs.size(); i++) {
-			if (CoreLibs[i]->GetPath() == path) {
-				return CoreLibs[i];
-			}
-		}
 		for (int i = 0; i < Engines.size(); i++) {
 			if (Engines[i]->GetPath() == path) {
 				return Engines[i];
-			}
-		}
-		for (int i = 0; i < PluginLibs.size(); i++) {
-			if (PluginLibs[i]->GetPath() == path) {
-				return PluginLibs[i];
 			}
 		}
 		for (int i = 0; i < Plugins.size(); i++) {
@@ -293,7 +241,6 @@ public:
 			printf("Loaded %s\n", path.c_str());
 		}
 		bool isEngine = false;
-		bool isPluginLib = false;
 		bool isPlugin = false;
 		bool isLanguageLib = false;
 		bool isScript = false;
@@ -344,9 +291,6 @@ public:
 		if (isEngine) {
 			Engines.push_back(lib);
 		}
-		else if (isPluginLib) {
-			PluginLibs.push_back(lib);
-		}
 		else if (isPlugin) {
 			Plugins.push_back(lib);
 		}
@@ -376,11 +320,9 @@ public:
 
 	virtual void RegisterLanguage(LanguageInterface * language) = 0;
 
-	virtual void LoadCoreLibs() = 0;
+	virtual void LoadLibs() = 0;
 
 	virtual void LoadCoreEngines() = 0;
-
-	virtual void LoadPluginLibs() = 0;
 
 	virtual void LoadPlugins() = 0;
 
@@ -404,28 +346,10 @@ public:
 		return Languages;
 	}
 
-	LibraryInterface* GetCoreLibrary(std::string name) {
-		for (int i = 0; i < CoreLibs.size(); i++) {
-			if (std::filesystem::path(CoreLibs[i]->GetPath()).filename().string() == name) {
-				return CoreLibs[i];
-			}
-		}
-		return nullptr;
-	}
-
 	LibraryInterface* GetEngine(std::string name) {
 		for (int i = 0; i < Engines.size(); i++) {
 			if (std::filesystem::path(Engines[i]->GetPath()).filename().string() == name) {
 				return Engines[i];
-			}
-		}
-		return nullptr;
-	}
-
-	LibraryInterface* GetPluginLib(std::string name) {
-		for (int i = 0; i < PluginLibs.size(); i++) {
-			if (std::filesystem::path(PluginLibs[i]->GetPath()).filename().string() == name) {
-				return PluginLibs[i];
 			}
 		}
 		return nullptr;
@@ -458,16 +382,8 @@ public:
 		return nullptr;
 	}
 
-	std::vector<LibraryInterface*> GetCoreLibraries() {
-		return CoreLibs;
-	}
-
 	std::vector<LibraryInterface*> GetEngines() {
 		return Engines;
-	}
-
-	std::vector<LibraryInterface*> GetPluginLibraries() {
-		return PluginLibs;
 	}
 
 	std::vector<LibraryInterface*> GetPlugins() {
@@ -488,8 +404,26 @@ public:
 
 	virtual ~DynamicCodeExecutionEngineInterface() {
 		//delete libs
-		for(int i = 0; i < CoreLibs.size(); i++) {
-			delete CoreLibs[i];
+		for (int i = 0; i < Engines.size(); i++) {
+			delete Engines[i];
+		}
+		for (int i = 0; i < Plugins.size(); i++) {
+			delete Plugins[i];
+		}
+		for (int i = 0; i < LanguageLibs.size(); i++) {
+			delete LanguageLibs[i];
+		}
+		for (int i = 0; i < OtherLibs.size(); i++) {
+			delete OtherLibs[i];
+		}
+		for (int i = 0; i < Languages.size(); i++) {
+			delete Languages[i];
+		}
+		for (int i = 0; i < Scripts.size(); i++) {
+			delete Scripts[i];
+		}
+		for (int i = 0; i < EngineInstances.size(); i++) {
+			delete EngineInstances[i];
 		}
 	}
 

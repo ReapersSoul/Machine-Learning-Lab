@@ -112,4 +112,4 @@ add_subdirectory(${ENGINE_IM_PATH}/GraphEngine/Nodes/AtIndexNode/ ${CMAKE_BINARY
 
 add_subdirectory("Machine-Learning-Labs-CrossPlatform-V2")
 
-add_subdirectory("Cleaner")
+add_subdirectory(Cleaner)

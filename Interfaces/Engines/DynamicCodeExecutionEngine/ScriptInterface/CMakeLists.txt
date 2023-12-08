@@ -10,6 +10,3 @@ get_filename_component(PINTERFACE ${INTERFACE_PATH} ABSOLUTE)
 get_filename_component(PIMPLIMENTATION ${IMPLIMENTATIONS_PATH} ABSOLUTE)
 get_filename_component(PEINTERFACE ${ENGINE_IN_PATH} ABSOLUTE)
 get_filename_component(PEIMPLIMENTATION ${ENGINE_IM_PATH} ABSOLUTE)
-
-target_include_directories(${PROJECT_NAME} INTERFACE ${PEINTERFACE}/DynamicCodeExecutionEngine/Languages/LanguageInterface/)
-target_link_libraries(${PROJECT_NAME} INTERFACE ${CMAKE_BINARY_DIR}/Interfaces/LanguageInterface/)

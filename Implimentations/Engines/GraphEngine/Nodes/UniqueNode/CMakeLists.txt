@@ -32,6 +32,7 @@ set(ENGINE_IM_PATH ${IMPLIMENTATIONS_PATH}Engines/)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/DynamicCodeExecutionEngine/DynamicCodeExecutionEngineInterface/)
 target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/DynamicCodeExecutionEngine/ScriptInterface/)
+target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/DynamicCodeExecutionEngine/LanguageInterface/)
 target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/GraphEngineInterface/)
 target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/GraphInterface/)
 target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/NodeInterface/)
@@ -44,6 +45,9 @@ target_link_libraries(${PROJECT_NAME} PUBLIC ScriptInterface)
 target_link_libraries(${PROJECT_NAME} PUBLIC NodeInterface)
 target_link_libraries(${PROJECT_NAME} PUBLIC AttributeInterface)
 target_link_libraries(${PROJECT_NAME} PUBLIC SorterInterface)
+target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/DynamicCodeExecutionEngine/Languages/LanguageInterface/)
+target_link_libraries(${PROJECT_NAME} PUBLIC LanguageInterface)
+target_link_libraries(${PROJECT_NAME} PUBLIC LanguageInterface)
 
 
 # Output directory

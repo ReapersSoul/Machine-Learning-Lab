@@ -1,8 +1,8 @@
-# Install script for directory: I:/Machine-Learning-Lab/Interfaces/Engines/NetworkEngine/Client/ClientInterface
+# Install script for directory: C:/Users/Trevor/Desktop/Machine-Learning-Lab/Interfaces/Engines/NetworkEngine/Client/ClientInterface
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "I:/Machine-Learning-Lab/out/install/x64-debug")
+  set(CMAKE_INSTALL_PREFIX "C:/Users/Trevor/Desktop/Machine-Learning-Lab/out/install/x64-debug")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

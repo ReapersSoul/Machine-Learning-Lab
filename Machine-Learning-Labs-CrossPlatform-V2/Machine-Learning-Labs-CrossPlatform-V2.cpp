@@ -26,6 +26,12 @@ int main() {
 	instance->DefaultLoad();
 	printf("Loaded Engines\n");
 
+	if (instance->GetEngine("UIEngine.dll") == nullptr)
+	{
+		printf("UIEngine.dll not found\n");
+		return 1;
+	}
+
 	UIEngineInterface* UIEngine = instance->AddEngineInstance<UIEngineInterface>(instance->GetEngine("UIEngine.dll")->GetInstance<UIEngineInterface>());
 	UIEngine->SetDCEEngine(instance);
 	UIEngine->Init();
