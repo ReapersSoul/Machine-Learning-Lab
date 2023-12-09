@@ -62,4 +62,5 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${INTERFACE_PATH}/Serializable
 target_link_libraries(${PROJECT_NAME} PUBLIC SerializableInterface)
 
 # output
-set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "<1:${CMAKE_BINARY_DIR}/Runtime/Machine-Learning-Lab/>")
+set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/Runtime/Debug/Machine-Learning-Lab/")
+file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/Runtime/Debug/Machine-Learning-Lab/Libs)

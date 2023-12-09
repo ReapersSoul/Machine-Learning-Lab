@@ -4,7 +4,7 @@ add_executable (${PROJECT_NAME} "Cleaner.cpp")
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
 
 # output
-set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "<1:${CMAKE_BINARY_DIR}/Cleaner/>")
+set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/Runtime/Debug/Cleaner/")
 
 # nlohmann_json
 find_package(nlohmann_json REQUIRED)

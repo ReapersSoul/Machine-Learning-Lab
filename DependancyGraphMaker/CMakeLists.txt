@@ -11,4 +11,4 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${unofficial-sqlite3_INCLUDE_D
 target_link_libraries(${PROJECT_NAME} PUBLIC unofficial::sqlite3::sqlite3)
 
 # output
-set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "<1:${CMAKE_BINARY_DIR}/Runtime/DependancyGraphMaker>")
+set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/Runtime/Debug/DependancyGraphMaker")

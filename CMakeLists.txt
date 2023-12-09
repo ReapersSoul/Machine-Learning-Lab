@@ -18,7 +18,7 @@ set(IMPLEMENTATIONS_PATH ${CMAKE_CURRENT_SOURCE_DIR}/Implementations/)
 set(ENGINE_IN_PATH ${INTERFACE_PATH}Engines/)
 set(ENGINE_IM_PATH ${IMPLEMENTATIONS_PATH}Engines/)
 
-## Interfaces ${CMAKE_SOURCE_DIR}/Interfaces/EngineInterface>
+## Interfaces ${CMAKE_SOURCE_DIR}/Interfaces/EngineInterface
 add_subdirectory(${ENGINE_IN_PATH}DynamicCodeExecutionEngine/Languages/LanguageInterface/ ${CMAKE_BINARY_DIR}/Interfaces/LanguageInterface)
 add_subdirectory(${ENGINE_IN_PATH}NetworkEngine/NetworkObjectInterface/ ${CMAKE_BINARY_DIR}/Interfaces/NetworkObjectInterface)
 

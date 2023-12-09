@@ -4,49 +4,49 @@ if [ ! -d "./Runtime" ]; then
   mkdir Runtime
 fi
 
-if [ ! -d "./Runtime/Machine-Learning-Lab/" ]; then
-  mkdir ./Runtime/Machine-Learning-Lab/
+if [ ! -d "./Build/Runtime/Debug/Machine-Learning-Lab/" ]; then
+  mkdir ./Build/Runtime/Debug/Machine-Learning-Lab/
 fi
-cp ./Build/Machine-Learning-Lab/Machine-Learning-Lab ./Runtime/Machine-Learning-Lab/Machine-Learning-Lab
+cp ./Build/Machine-Learning-Lab/Machine-Learning-Lab ./Build/Runtime/Debug/Machine-Learning-Lab/Machine-Learning-Lab
 
-if [ ! -d "./Runtime/Machine-Learning-Lab/Core/" ]; then
-  mkdir ./Runtime/Machine-Learning-Lab/Core/
+if [ ! -d "./Build/Runtime/Debug/Machine-Learning-Lab/Core/" ]; then
+  mkdir ./Build/Runtime/Debug/Machine-Learning-Lab/Core/
 fi
-find ./Build/Implementations/Engines/ -type f \( -name '*.so' \) -exec cp {} ./Runtime/Machine-Learning-Lab/Core/ \; 
+find ./Build/Implementations/Engines/ -type f \( -name '*.so' \) -exec cp {} ./Build/Runtime/Debug/Machine-Learning-Lab/Core/ \; 
 
-if [ ! -d "./Runtime/Machine-Learning-Lab/Core/Activations/" ]; then
-  mkdir ./Runtime/Machine-Learning-Lab/Core/Activations/
+if [ ! -d "./Build/Runtime/Debug/Machine-Learning-Lab/Core/Activations/" ]; then
+  mkdir ./Build/Runtime/Debug/Machine-Learning-Lab/Core/Activations/
 fi
-find ./Build/Implementations/Activations/ -type f \( -name '*.so' \) -exec cp {} ./Runtime/Machine-Learning-Lab/Core/Activations/ \;
+find ./Build/Implementations/Activations/ -type f \( -name '*.so' \) -exec cp {} ./Build/Runtime/Debug/Machine-Learning-Lab/Core/Activations/ \;
 
-if [ ! -d "./Runtime/Machine-Learning-Lab/Core/Losses/" ]; then
-  mkdir ./Runtime/Machine-Learning-Lab/Core/Losses/
+if [ ! -d "./Build/Runtime/Debug/Machine-Learning-Lab/Core/Losses/" ]; then
+  mkdir ./Build/Runtime/Debug/Machine-Learning-Lab/Core/Losses/
 fi
-find ./Build/Implementations/Losses/ -type f \( -name '*.so' \) -exec cp {} ./Runtime/Machine-Learning-Lab/Core/Losses/ \;
+find ./Build/Implementations/Losses/ -type f \( -name '*.so' \) -exec cp {} ./Build/Runtime/Debug/Machine-Learning-Lab/Core/Losses/ \;
 
-if [ ! -d "./Runtime/Machine-Learning-Lab/Core/Graph/" ]; then
-  mkdir ./Runtime/Machine-Learning-Lab/Core/Graph/
-fi
-
-if [ ! -d "./Runtime/Machine-Learning-Lab/Core/Graph/Sorters/" ]; then
-  mkdir ./Runtime/Machine-Learning-Lab/Core/Graph/Sorters/
-fi
-find ./Build/Implementations/Sorters/ -type f \( -name '*.so' \) -exec cp {} ./Runtime/Machine-Learning-Lab/Core/Graph/Sorters/ \;
-
-if [ ! -d "./Runtime/Machine-Learning-Lab/Core/Graph/Nodes/" ]; then
-  mkdir ./Runtime/Machine-Learning-Lab/Core/Graph/Nodes/
-fi
-find ./Build/Implementations/Nodes/ -type f \( -name '*.so' \) -exec cp {} ./Runtime/Machine-Learning-Lab/Core/Graph/Nodes/ \;
-
-if [ ! -d "./Runtime/Machine-Learning-Lab/Plugins/" ]; then
-  mkdir ./Runtime/Machine-Learning-Lab/Plugins/
+if [ ! -d "./Build/Runtime/Debug/Machine-Learning-Lab/Core/Graph/" ]; then
+  mkdir ./Build/Runtime/Debug/Machine-Learning-Lab/Core/Graph/
 fi
 
-if [ ! -d "./Runtime/Machine-Learning-Lab/Plugins/Languages/" ]; then
-  mkdir ./Runtime/Machine-Learning-Lab/Plugins/Languages/
+if [ ! -d "./Build/Runtime/Debug/Machine-Learning-Lab/Core/Graph/Sorters/" ]; then
+  mkdir ./Build/Runtime/Debug/Machine-Learning-Lab/Core/Graph/Sorters/
 fi
-find ./Build/Implementations/Languages/ -type f \( -name '*.so' \) -exec cp {} ./Runtime/Machine-Learning-Lab/Plugins/Languages/ \;
+find ./Build/Implementations/Sorters/ -type f \( -name '*.so' \) -exec cp {} ./Build/Runtime/Debug/Machine-Learning-Lab/Core/Graph/Sorters/ \;
 
-if [ ! -d "./Runtime/Machine-Learning-Lab/Libs/" ]; then
-  mkdir ./Runtime/Machine-Learning-Lab/Libs/
+if [ ! -d "./Build/Runtime/Debug/Machine-Learning-Lab/Core/Graph/Nodes/" ]; then
+  mkdir ./Build/Runtime/Debug/Machine-Learning-Lab/Core/Graph/Nodes/
+fi
+find ./Build/Implementations/Nodes/ -type f \( -name '*.so' \) -exec cp {} ./Build/Runtime/Debug/Machine-Learning-Lab/Core/Graph/Nodes/ \;
+
+if [ ! -d "./Build/Runtime/Debug/Machine-Learning-Lab/Plugins/" ]; then
+  mkdir ./Build/Runtime/Debug/Machine-Learning-Lab/Plugins/
+fi
+
+if [ ! -d "./Build/Runtime/Debug/Machine-Learning-Lab/Plugins/Languages/" ]; then
+  mkdir ./Build/Runtime/Debug/Machine-Learning-Lab/Plugins/Languages/
+fi
+find ./Build/Implementations/Languages/ -type f \( -name '*.so' \) -exec cp {} ./Build/Runtime/Debug/Machine-Learning-Lab/Plugins/Languages/ \;
+
+if [ ! -d "./Build/Runtime/Debug/Machine-Learning-Lab/Libs/" ]; then
+  mkdir ./Build/Runtime/Debug/Machine-Learning-Lab/Libs/
 fi
