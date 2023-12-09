@@ -60,3 +60,6 @@ target_link_libraries(${PROJECT_NAME} PUBLIC NetworkEngineInterface)
 # Serializable interface
 target_include_directories(${PROJECT_NAME} PUBLIC ${INTERFACE_PATH}/SerializableInterface/)
 target_link_libraries(${PROJECT_NAME} PUBLIC SerializableInterface)
+
+# output
+set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "<1:${CMAKE_BINARY_DIR}/Runtime/Machine-Learning-Lab/>")

@@ -25,7 +25,5 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}LossEngine/Lo
 
 # Output directory
 set_target_properties(${PROJECT_NAME} PROPERTIES
-	
-	RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Machine-Learning-Lab/Core/
+	RUNTIME_OUTPUT_DIRECTORY <1:${CMAKE_BINARY_DIR}/Runtime/Machine-Learning-Lab/Core/>
 )
-
