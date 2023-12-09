@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/Build/Runtime/Debug/Machine-Learning-Lab/Machine-Learning-Lab",
-            "additionalSOLibSearchPath": "${workspaceFolder}/Build/*",
+            "additionalSOLibSearchPath": "${workspaceFolder}/Build/Runtime/Debug/Machine-Learning-Lab/*",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/Build/Runtime/Debug/Machine-Learning-Lab/",
