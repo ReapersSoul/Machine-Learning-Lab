@@ -1,0 +1,38 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "script",
+			"scriptType": "batch",
+			"path": "",
+			"fileName": "Build.bat",
+			"scriptFile": true,
+			"script": "bat",
+			"target": "bat",
+			"uri": {
+				"$mid": 1,
+				"fsPath": "c:\\Users\\Trevor\\Desktop\\Machine-Learning-Lab\\Build.bat",
+				"_sep": 1,
+				"external": "file:///c%3A/Users/Trevor/Desktop/Machine-Learning-Lab/Build.bat",
+				"path": "/c:/Users/Trevor/Desktop/Machine-Learning-Lab/Build.bat",
+				"scheme": "file"
+			},
+			"takesArgs": false,
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"label": "Win-Build"
+		},
+		{
+			"label": "Win-Clean",
+			"type": "shell",
+			"command": "Start ./Build/Runtime/Debug/Cleaner/Cleaner.exe",
+			"dependsOn": [
+				"Win-Build"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/Build/Runtime/Debug/Cleaner/Cleaner.exe"
+			},
+		}
+	]
+}

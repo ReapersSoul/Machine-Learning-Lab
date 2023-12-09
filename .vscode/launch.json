@@ -5,14 +5,39 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) Launch",
+            "name": "Machine-Learning-Lab",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/Build/Runtime/Debug/Machine-Learning-Lab/Machine-Learning-Lab",
-            "additionalSOLibSearchPath": "${workspaceFolder}/Build/Runtime/Debug/Machine-Learning-Lab/*",
+            "additionalSOLibSearchPath": "${workspaceFolder}/Build/*",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/Build/Runtime/Debug/Machine-Learning-Lab/",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Cleaner",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/Build/Runtime/Debug/Cleaner/Cleaner",
+            "additionalSOLibSearchPath": "${workspaceFolder}/Build/*",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/Build/Runtime/Debug/Cleaner/",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
