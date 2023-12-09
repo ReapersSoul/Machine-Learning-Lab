@@ -55,9 +55,10 @@ add_subdirectory(${ENGINE_IM_PATH}/UIEngine/UIEngine/ ${CMAKE_BINARY_DIR}/Implem
 add_subdirectory(${ENGINE_IM_PATH}/GraphEngine/GraphEngine/ ${CMAKE_BINARY_DIR}/Implementations/Engines/GraphEngine)
 add_subdirectory(${ENGINE_IM_PATH}/ActivationEngine/ActivationEngine/ ${CMAKE_BINARY_DIR}/Implementations/Engines/ActivationEngine)
 add_subdirectory(${ENGINE_IM_PATH}/LossEngine/LossEngine/ ${CMAKE_BINARY_DIR}/Implementations/Engines/LossEngine)
-add_subdirectory(${ENGINE_IM_PATH}/GraphEngine/Sorters/DefaultSorter/ ${CMAKE_BINARY_DIR}/Implementations/Sorters/DefaultSorter)
 add_subdirectory(${ENGINE_IM_PATH}/NetworkEngine/NetworkEngine/ ${CMAKE_BINARY_DIR}/Implementations/Engines/NetworkEngine)
 add_subdirectory(${ENGINE_IM_PATH}/DebugEngine/DebugEngine/ ${CMAKE_BINARY_DIR}/Implementations/Engines/DebugEngine)
+
+add_subdirectory(${ENGINE_IM_PATH}/GraphEngine/Sorters/DefaultSorter/ ${CMAKE_BINARY_DIR}/Implementations/Sorters/DefaultSorter)
 
 add_subdirectory(${ENGINE_IM_PATH}/ActivationEngine/Activations/LeakyReLUActivation/ ${CMAKE_BINARY_DIR}/Implementations/Activations/LeakyReLUActivation/)
 add_subdirectory(${ENGINE_IM_PATH}/ActivationEngine/Activations/ReLUActivation/ ${CMAKE_BINARY_DIR}/Implementations/Activations/ReLUActivation/)

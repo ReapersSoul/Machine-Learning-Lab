@@ -54,10 +54,8 @@ public:
 				LibraryInterface* lib = DCEEngine->LoadLibrary(p.path().string());
 				
 				NodeInfo nodeInfo;
-				NodeInterface* node = lib->GetInstance<NodeInterface>();
 				nodeInfo.TypeID = lib->GetLibrary().get<std::string()>("GetTypeID")();
 				nodeInfo.CreateNode = [lib]() {return lib->GetInstance<NodeInterface>(); };
-				node->~NodeInterface();
 				AvailableNodes.push_back(nodeInfo);
 			}
 			catch (boost::system::system_error& e) {

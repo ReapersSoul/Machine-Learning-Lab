@@ -10,4 +10,13 @@
 #include <NetworkEngineInterface.hpp>
 
 #include <filesystem>
-#include <thread>=
+#include <thread>
+#include <fstream>
+
+#ifdef _WIN32
+#include <windows.h>
+#define SYSERROR()  GetLastError()
+#else
+#include <errno.h>
+#define SYSERROR()  errno
+#endif

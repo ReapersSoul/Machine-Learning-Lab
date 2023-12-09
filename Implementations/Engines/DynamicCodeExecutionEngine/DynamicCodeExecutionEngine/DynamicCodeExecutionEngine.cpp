@@ -5,6 +5,7 @@
 #include <iostream>
 #include <boost/dll.hpp>
 #include <filesystem>
+#include <fstream>
 #include <nlohmann/json.hpp>
 
 
@@ -75,8 +76,8 @@ public:
 		std::vector<std::string> loadedLibs;
 		nlohmann::json j;
 		//if the config file doesn't exist then create it
-		if (!std::filesystem::exists("Config.json")) {
-			std::ofstream o("Config.json");
+		if (!std::filesystem::exists("./Config.json")) {
+			std::ofstream o("./Config.json");
 			
 			j["Libs Load Order"] = nlohmann::json::array();
 			j["ExcludedDLLs"] = nlohmann::json::array();
@@ -93,7 +94,7 @@ public:
 			o.close();
 		}
 
-		std::ifstream i("Config.json");
+		std::ifstream i("./Config.json");
 		i >> j;
 
 
