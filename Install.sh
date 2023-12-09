@@ -11,7 +11,7 @@ sudo ./vcpkg/vcpkg install glfw3:x64-linux --recurse
 sudo ./vcpkg/vcpkg install glm:x64-linux --recurse
 sudo ./vcpkg/vcpkg install imgui[docking-experimental,opengl3-binding,glfw-binding]:x64-linux --recurse
 sudo ./vcpkg/vcpkg install imgui-node-editor:x64-linux --recurse
-sudo ./vcpkg/vcpkg install lua:x64-linux --recurse --recurse
+sudo ./vcpkg/vcpkg install lua:x64-linux --recurse
 sudo ./vcpkg/vcpkg install chaiscript:x64-linux --recurse
 sudo ./vcpkg/vcpkg install duktape:x64-linux --recurse
 sudo ./vcpkg/vcpkg install python3:x64-linux --recurse
