@@ -1,5 +1,5 @@
-#include "EdgeInterface.h"
-#include "../GraphInterface/GraphInterface.h"
+#include "EdgeInterface.hpp"
+#include "../GraphInterface/GraphInterface.hpp"
 
 //#define DEBUG
 

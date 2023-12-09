@@ -1,6 +1,6 @@
 project(ActivationEngineInterface)
 
-add_library(${PROJECT_NAME} INTERFACE "ActivationEngineInterface.h")
+add_library(${PROJECT_NAME} INTERFACE "ActivationEngineInterface.hpp")
 
 target_link_libraries(${PROJECT_NAME} INTERFACE ActivationInterface)
 

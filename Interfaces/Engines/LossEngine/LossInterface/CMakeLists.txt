@@ -1,3 +1,3 @@
 project(LossInterface)
 
-add_library(${PROJECT_NAME} INTERFACE "LossInterface.h")
+add_library(${PROJECT_NAME} INTERFACE "LossInterface.hpp")

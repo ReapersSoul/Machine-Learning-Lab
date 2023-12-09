@@ -1,6 +1,6 @@
 project(DynamicCodeExecutionEngineInterface)
 
-add_library(${PROJECT_NAME} STATIC "DynamicCodeExecutionEngineInterface.cpp" "DynamicCodeExecutionEngineInterface.h")
+add_library(${PROJECT_NAME} STATIC "DynamicCodeExecutionEngineInterface.cpp" "DynamicCodeExecutionEngineInterface.hpp")
 
 # Set standard to C++20
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
@@ -23,9 +23,9 @@ target_link_libraries(${PROJECT_NAME} PUBLIC nlohmann_json::nlohmann_json)
 # get parent path
 set(ESCAPE_DEPTH /../../../../)
 set(INTERFACE_PATH ${CMAKE_CURRENT_SOURCE_DIR}${ESCAPE_DEPTH}Interfaces/)
-set(IMPLIMENTATIONS_PATH ${CMAKE_CURRENT_SOURCE_DIR}${ESCAPE_DEPTH}Implimentations/)
+set(IMPLEMENTATIONS_PATH ${CMAKE_CURRENT_SOURCE_DIR}${ESCAPE_DEPTH}Implementation/)
 set(ENGINE_IN_PATH ${INTERFACE_PATH}Engines/)
-set(ENGINE_IM_PATH ${IMPLIMENTATIONS_PATH}Engines/)
+set(ENGINE_IM_PATH ${IMPLEMENTATIONS_PATH}Engines/)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC EngineInterface)
 target_link_libraries(${PROJECT_NAME} PUBLIC SerializableInterface)

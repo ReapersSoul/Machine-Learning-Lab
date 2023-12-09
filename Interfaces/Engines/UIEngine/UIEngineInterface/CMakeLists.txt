@@ -1,6 +1,6 @@
 project(UIEngineInterface)
 
-add_library(${PROJECT_NAME} INTERFACE "UIEngineInterface.h")
+add_library(${PROJECT_NAME} INTERFACE "UIEngineInterface.hpp")
 
 # nlohmann-json
 find_package(nlohmann_json REQUIRED)

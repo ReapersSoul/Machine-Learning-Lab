@@ -1,6 +1,6 @@
 project(SerializableInterface)
 
-add_library(${PROJECT_NAME} INTERFACE "SerializableInterface.h")
+add_library(${PROJECT_NAME} INTERFACE "SerializableInterface.hpp")
 
 # nlohmann-json
 find_package(nlohmann_json REQUIRED)

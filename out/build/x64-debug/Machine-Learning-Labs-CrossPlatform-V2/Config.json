@@ -1,9 +1,0 @@
-{
-    "Core Libs Load Order": [],
-    "Engines": [
-        "UIEngine.dll"
-    ],
-    "ExcludedDLLs": [
-        "DynamicCodeExecutionEngine.dll"
-    ]
-}

@@ -1,3 +1,3 @@
 project(LanguageInterface)
 
-add_library(${PROJECT_NAME} INTERFACE "LanguageInterface.h")
+add_library(${PROJECT_NAME} INTERFACE "LanguageInterface.hpp")

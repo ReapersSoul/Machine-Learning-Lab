@@ -1,6 +1,6 @@
 project(GraphEngineInterface)
 
-add_library(${PROJECT_NAME} STATIC "GraphEngineInterface.cpp" "GraphEngineInterface.h")
+add_library(${PROJECT_NAME} STATIC "GraphEngineInterface.cpp" "GraphEngineInterface.hpp")
 
 # Set standard to C++20
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)

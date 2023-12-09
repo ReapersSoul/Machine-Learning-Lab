@@ -1,4 +1,4 @@
-#include "GraphInterface.h"
+#include "GraphInterface.hpp"
 
 void GraphInterface::Clear() {
 	for (auto& Node : Nodes) {
@@ -327,7 +327,11 @@ void GraphInterface::DeSerialize(nlohmann::json data, void* DCEE) {
 
 	//nodes
 	for (int i = 0; i < data["Nodes"].size(); i++) {
-		LibraryInterface * Lib = this->DCEE->GetOtherLib(data["Nodes"][i]["TypeID"].get<std::string>() + ".dll");
+		#if defined(_MSC_VER)
+			LibraryInterface * Lib = this->DCEE->GetOtherLib(data["Nodes"][i]["TypeID"].get<std::string>() + ".dll");
+		#elif defined(__GNUC__)
+			LibraryInterface * Lib = this->DCEE->GetOtherLib("lib" + data["Nodes"][i]["TypeID"].get<std::string>() + ".so");
+		#endif
 		if (Lib != nullptr) {
 			NodeInterface* Node = Lib->GetInstance<NodeInterface>();
 			Node->SetUID(data["Nodes"][i]["UID"]);

@@ -1,6 +1,6 @@
 project(AttributeInterface)
 
-add_library(${PROJECT_NAME} INTERFACE "AttributeInterface.h")
+add_library(${PROJECT_NAME} INTERFACE "AttributeInterface.hpp")
 
 # glew
 find_package(glew REQUIRED)

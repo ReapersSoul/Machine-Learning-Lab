@@ -85,17 +85,27 @@ int main()
 
 		//create the json object
 		nlohmann::json j;
+		#if defined(_MSC_VER)
+			j["Libraries"] = {
+					"boost_filesystem-vc143-mt-gd-x64-1_83.dll",
+					"glew32d.dll",
+					"glfw3.dll",
+					"OpenCL.dll",
+					"sqlite3.dll",
+					"lua.dll"
+			};
+		#elif defined(__GNUC__)
+			j["Libraries"] = {
+					"libboost_filesystem-mgw82-mt-x64-1_73.so",
+					"libglew32d.so",
+					"libglfw3.so",
+					"libOpenCL.so",
+					"libsqlite3.so",
+					"liblua.so"
+			};
+		#endif
 
-		j["Libraries"] = {
-				"boost_filesystem-vc143-mt-gd-x64-1_83.dll",
-				"glew32d.dll",
-				"glfw3.dll",
-				"OpenCL.dll",
-				"sqlite3.dll",
-				"lua.dll"
-		};
-
-		j["ExecutableDir"] = "../Machine-Learning-Labs-CrossPlatform-V2";
+		j["ExecutableDir"] = "../Machine-Learning-Lab";
 
 		//write the json object to the config file
 		o << j << std::endl;

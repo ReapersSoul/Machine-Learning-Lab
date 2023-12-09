@@ -1,6 +1,6 @@
 project(EdgeInterface)
 
-add_library(${PROJECT_NAME} STATIC "EdgeInterface.cpp" "EdgeInterface.h")
+add_library(${PROJECT_NAME} STATIC "EdgeInterface.cpp" "EdgeInterface.hpp")
 
 # Set standard to C++20
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)

@@ -1,6 +1,6 @@
 project(ServerInterface)
 
-add_library(${PROJECT_NAME} INTERFACE "ServerInterface.h")
+add_library(${PROJECT_NAME} INTERFACE "ServerInterface.hpp")
 
 # nlohmann-json
 find_package(nlohmann_json REQUIRED)

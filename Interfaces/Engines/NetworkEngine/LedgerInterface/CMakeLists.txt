@@ -1,6 +1,6 @@
 project(LedgerInterface)
 
-add_library(${PROJECT_NAME} INTERFACE "LedgerInterface.h")
+add_library(${PROJECT_NAME} INTERFACE "LedgerInterface.hpp")
 
 # sqlite3
 find_package(unofficial-sqlite3 CONFIG REQUIRED)
