@@ -3,6 +3,7 @@
 #include <ScriptInterface.hpp>
 #include <NodeInterface.hpp>
 #include <Attribute.hpp>
+#include <Attribute.hpp>
 
 #include <lua.hpp>
 #include <iostream>

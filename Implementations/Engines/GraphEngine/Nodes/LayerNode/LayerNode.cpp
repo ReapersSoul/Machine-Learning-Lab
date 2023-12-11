@@ -4,6 +4,7 @@
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
 #include <Attribute.hpp>
+#include <Attribute.hpp>
 #include <string>
 #include <glm/glm.hpp>
 

@@ -3,6 +3,8 @@
 #include "../Graph/Graph.hpp"
 #include <stack>
 
+namespace NodeInterface {
+
 namespace NS_Node {
 	void NodeInterface::ResetIO()
 	{

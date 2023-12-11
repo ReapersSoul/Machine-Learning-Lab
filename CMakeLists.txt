@@ -10,7 +10,7 @@ if (POLICY CMP0141)
 endif()
 
 add_definitions(-w -fcompare-debug-second)
-add_definitions(-fPIC -g)
+add_definitions(-fPIC -g -g)
 project ("Machine-Learning-Lab")
 
 set(INTERFACE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/Interfaces/)
