@@ -2,7 +2,7 @@
 #include <LanguageInterface.hpp>
 #include <ScriptInterface.hpp>
 #include <NodeInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 
 #include <chaiscript/chaiscript.hpp>
 #include <iostream>

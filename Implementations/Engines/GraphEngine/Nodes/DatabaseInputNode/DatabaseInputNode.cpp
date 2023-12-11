@@ -2,8 +2,8 @@
 #include <DynamicCodeExecutionEngineInterface.hpp>
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
-#include <GraphInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Graph.hpp>
+#include <Attribute.hpp>
 #include <string>
 #include <GLFW/glfw3.h>
 #include <sqlite3.h>
@@ -106,17 +106,17 @@ public:
 		DatabasePath.reserve(255);
 		sql.reserve(255);
 
-		MakeAttribute(0, new AttributeInterface([this]() {
+		MakeAttribute(0, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputText("Database Path", (char*)DatabasePath.c_str(), 255);
 			}));
 
-		MakeAttribute(1, new AttributeInterface([this]() {
+		MakeAttribute(1, new Attribute([this]() {
 			ImGui::PushItemWidth(300);
 			ImGui::InputText("sql statement", (char*)sql.c_str(), 255);
 			}));
 
-		MakeAttribute(2, new AttributeInterface([this]() {
+		MakeAttribute(2, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::Checkbox("Refresh", &refreshDB);
 			}));

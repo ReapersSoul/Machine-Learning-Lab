@@ -3,7 +3,7 @@
 #include <DynamicCodeExecutionEngineInterface.hpp>
 #include <GraphEngineInterface.hpp>
 #include <NodeInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <LibraryInterface.hpp>
 #include <NetworkEngineInterface.hpp>
 #include <DebugEngineInterface.hpp>
@@ -109,7 +109,10 @@ class UIEngine : public UIEngineInterface
 							GraphEngine->GetGraphs()["main"]->GetMutex().lock();
 							int uuid = GraphEngine->GetGraphs()["main"]->AddNode(node.CreateNode());
 							GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
-							ed::SetNodePosition(uuid, ImGui::GetMousePos());
+							ed::Suspend();
+							ImVec2 mousepos=ed::ScreenToCanvas(ImGui::GetMousePos());
+							ed::Resume();
+							ed::SetNodePosition(uuid, mousepos);
 						}
 					}
 				}
@@ -122,7 +125,10 @@ class UIEngine : public UIEngineInterface
 								GraphEngine->GetGraphs()["main"]->GetMutex().lock();
 								int uuid = GraphEngine->GetGraphs()["main"]->AddNode(node.CreateNode());
 								GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
-								ed::SetNodePosition(uuid, ImGui::GetMousePos());
+								ed::Suspend();
+								ImVec2 mousepos = ed::ScreenToCanvas(ImGui::GetMousePos());
+								ed::Resume();
+								ed::SetNodePosition(uuid, mousepos);
 							}
 						}
 					}
@@ -133,7 +139,7 @@ class UIEngine : public UIEngineInterface
 				firstCall = 0;
 			}
 
-			ed::NodeId ContextNode;
+			static ed::NodeId ContextNode;
 			if (ed::ShowNodeContextMenu(&ContextNode)) {
 				//open context menu
 				ImGui::OpenPopup("Node Context Menu");
@@ -279,7 +285,7 @@ class UIEngine : public UIEngineInterface
 			ed::Begin("NodeEditor");
 
 
-			std::map<std::string, GraphInterface*> graphs = GraphEngine->GetGraphs();
+			std::map<std::string, Graph*> graphs = GraphEngine->GetGraphs();
 			std::map<unsigned int, NodeInterface*> nodes = graphs["main"]->GetNodes();
 			std::map<unsigned int, EdgeInterface*> edges = graphs["main"]->GetEdges();
 			//draw nodes
@@ -755,9 +761,9 @@ public:
 						GraphEngine->GetGraphs()["main"]->GetMutex().lock();
 						if (mode == 0 || mode == 2) {
 							if (Debug) {
-								DebugEngine->StartFunctionTimer("GraphInterface", "Process");
+								DebugEngine->StartFunctionTimer("Graph", "Process");
 								GraphEngine->GetGraphs()["main"]->Process(true);
-								DebugEngine->StopFunctionTimer("GraphInterface", "Process");
+								DebugEngine->StopFunctionTimer("Graph", "Process");
 							}
 							else {
 								GraphEngine->GetGraphs()["main"]->Process(true);
@@ -765,9 +771,9 @@ public:
 						}
 						if (mode == 1 || mode == 2) {
 							if (Debug) {
-								DebugEngine->StartFunctionTimer("GraphInterface", "Process");
+								DebugEngine->StartFunctionTimer("Graph", "Process");
 								GraphEngine->GetGraphs()["main"]->Process(false);
-								DebugEngine->StopFunctionTimer("GraphInterface", "Process");
+								DebugEngine->StopFunctionTimer("Graph", "Process");
 							}
 							else {
 								GraphEngine->GetGraphs()["main"]->Process(false);
@@ -784,9 +790,9 @@ public:
 					if (ConstantProcess) {
 						GraphEngine->GetGraphs()["main"]->GetMutex().lock();
 						if (Debug) {
-							DebugEngine->StartFunctionTimer("GraphInterface", "Process");
+							DebugEngine->StartFunctionTimer("Graph", "Process");
 							GraphEngine->GetGraphs()["main"]->Process(true);
-							DebugEngine->StopFunctionTimer("GraphInterface", "Process");
+							DebugEngine->StopFunctionTimer("Graph", "Process");
 						}
 						else {
 							GraphEngine->GetGraphs()["main"]->Process(true);
@@ -796,12 +802,12 @@ public:
 					if (ConstantTrain) {
 						GraphEngine->GetGraphs()["main"]->GetMutex().lock();
 						if (Debug) {
-							DebugEngine->StartFunctionTimer("GraphInterface", "Process");
+							DebugEngine->StartFunctionTimer("Graph", "Process");
 							GraphEngine->GetGraphs()["main"]->Process(true);
-							DebugEngine->StopFunctionTimer("GraphInterface", "Process");
-							DebugEngine->StartFunctionTimer("GraphInterface", "Process");
+							DebugEngine->StopFunctionTimer("Graph", "Process");
+							DebugEngine->StartFunctionTimer("Graph", "Process");
 							GraphEngine->GetGraphs()["main"]->Process(false);
-							DebugEngine->StopFunctionTimer("GraphInterface", "Process");
+							DebugEngine->StopFunctionTimer("Graph", "Process");
 						}
 						else {
 							GraphEngine->GetGraphs()["main"]->Process(true);

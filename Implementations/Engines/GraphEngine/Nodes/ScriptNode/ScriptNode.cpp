@@ -2,7 +2,7 @@
 #include <DynamicCodeExecutionEngineInterface.hpp>
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <ScriptInterface.hpp>
 #include <NodeInterface.hpp>
 #include <string>

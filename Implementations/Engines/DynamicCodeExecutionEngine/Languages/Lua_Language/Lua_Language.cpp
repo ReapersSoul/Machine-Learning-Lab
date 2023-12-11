@@ -2,7 +2,7 @@
 #include <LanguageInterface.hpp>
 #include <ScriptInterface.hpp>
 #include <NodeInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 
 #include <lua.hpp>
 #include <iostream>
@@ -177,7 +177,7 @@ public:
 		ScriptNode* node = (ScriptNode*)lua_touserdata(L, 1);
 		int line = lua_tointeger(L, 2);
 		int function=luaL_ref(L, LUA_REGISTRYINDEX);
-		node->MakeAttribute(line, new AttributeInterface([&L,node,function]() {
+		node->MakeAttribute(line, new Attribute([&L,node,function]() {
 			lua_rawgeti(L, LUA_REGISTRYINDEX, function);
 			if (lua_pcall(L, 0, 0, 0) != 0) {
 				std::cout << lua_tostring(L, -1) << std::endl;

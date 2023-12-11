@@ -3,7 +3,7 @@
 #include <NodeInterface.hpp>
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <UIEngineInterface.hpp>
 #include <string>
 
@@ -295,7 +295,7 @@ public:
 		MakeOutput(4, "Grey-scale", "Tensor", nlohmann::json::array());
 		MakeOutput(5, "Size", "vec2", nlohmann::json::array());
 
-		MakeAttribute(0, new AttributeInterface([this]() {
+		MakeAttribute(0, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			char* tmppath = new char[256] {0};
 			tmppath = (char*)path.c_str();
@@ -312,12 +312,12 @@ public:
 			}
 			}));
 
-		MakeAttribute(1, new AttributeInterface([this]() {
+		MakeAttribute(1, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::Checkbox("Lock Aspect Ratio", &lock_aspect_ratio);
 			}));
 
-		MakeAttribute(2, new AttributeInterface([this]() {
+		MakeAttribute(2, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::InputInt("Width", &desired_image_width, 0, 0, ImGuiInputTextFlags_EnterReturnsTrue)) {
 				//if the aspect ratio is locked then change the height to match the aspect ratio
@@ -328,7 +328,7 @@ public:
 			}
 			}));
 
-		MakeAttribute(3, new AttributeInterface([this]() {
+		MakeAttribute(3, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::InputInt("Height", &desired_image_height, 0, 0, ImGuiInputTextFlags_EnterReturnsTrue)) {
 				//if the aspect ratio is locked then change the width to match the aspect ratio
@@ -339,7 +339,7 @@ public:
 			}
 			}));
 
-		MakeAttribute(6, new AttributeInterface([this]() {
+		MakeAttribute(6, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::CollapsingHeader("Image")) {
 				//radio buttons for the display mode

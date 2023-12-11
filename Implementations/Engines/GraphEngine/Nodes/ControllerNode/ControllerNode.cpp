@@ -3,7 +3,7 @@
 #include <NodeInterface.hpp>
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <UIEngineInterface.hpp>
 #include <string>
 #include <GLFW/glfw3.h>
@@ -38,7 +38,7 @@ public:
 	}
 
 	void Init() override {
-		Attributes.push_back(new AttributeInterface([this]() {
+		Attributes.push_back(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputInt("Joystick", &joystick);
 			}));

@@ -3,8 +3,8 @@
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
 #include <APIEngineInterface.hpp>
-#include <GraphInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Graph.hpp>
+#include <Attribute.hpp>
 #include <string>
 #include <GLFW/glfw3.h>
 
@@ -71,7 +71,7 @@ public:
 		}
 		switch (type) {
 		case Input:
-			MakeAttribute(0,new AttributeInterface([&]() {
+			MakeAttribute(0,new Attribute([&]() {
 				ImGui::PushItemWidth(100);
 				ImGui::InputText("Name", buffer, 256);
 				if (std::string(buffer) != "") {

@@ -3,7 +3,7 @@
 #include <NodeInterface.hpp>
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <string>
 
 class SelfAttentionLayerNode : public NodeInterface {
@@ -121,7 +121,7 @@ public:
 		MakeOutput(0, "Output", "double", nlohmann::json::array());
 
 
-		MakeAttribute(1, new AttributeInterface([this]() {
+		MakeAttribute(1, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::InputInt("Embedding Size", &EmbeddingSize)){
 

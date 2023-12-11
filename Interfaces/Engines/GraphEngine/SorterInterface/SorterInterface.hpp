@@ -2,20 +2,20 @@
 #include <string>
 #include <vector>
 
-class NodeInterface;
-class EdgeInterface;
-class GraphInterface;
+namespace NodeInterface {
+	class NodeInterface;
+}
+class Graph;
 
 struct ProcessingOrder {
-	std::vector<std::vector<NodeInterface*>> Nodes;
-	std::vector<std::vector<EdgeInterface*>> Edges;
+	std::vector<std::vector<NodeInterface::NodeInterface*>> Nodes;
 };
 
 class SorterInterface {
 protected:
 	std::string Name;
 public:
-	virtual ProcessingOrder SortGraph(GraphInterface* Graph, bool DirectionForward) = 0;
+	virtual ProcessingOrder SortGraph(Graph* Graph, bool DirectionForward) = 0;
 	virtual std::string GetName() {
 		return Name;
 	}

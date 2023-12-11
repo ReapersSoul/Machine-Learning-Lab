@@ -2,7 +2,7 @@
 #include <DynamicCodeExecutionEngineInterface.hpp>
 #include <GraphEngineInterface.hpp>
 #include <NodeInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <LibraryInterface.hpp>
 #include <APIEngineInterface.hpp>
 
@@ -28,7 +28,7 @@ class EndPoint {
 	APINodeInterface* InputNode;
 	APINodeInterface* OutputNode;
 	APINodeInterface* ExpectedNode;
-	GraphInterface* graph;
+	Graph* graph;
 public:
 	void SetInputNode(APINodeInterface* InputNode) {
 		this->InputNode = InputNode;
@@ -43,7 +43,7 @@ public:
 		this->ExpectedNode = ExpectedNode;
 	}
 
-	void SetGraph(GraphInterface* graph) {
+	void SetGraph(Graph* graph) {
 		this->graph = graph;
 	}
 

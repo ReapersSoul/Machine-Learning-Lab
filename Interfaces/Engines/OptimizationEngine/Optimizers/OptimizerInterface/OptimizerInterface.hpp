@@ -1,5 +1,5 @@
 #pragma once
-#include "../GraphInterface/GraphInterface.hpp"
+#include "../Graph/Graph.hpp"
 
 class OptimizerInterface
 {
@@ -32,7 +32,7 @@ public:
 		return type;
 	}
 
-	virtual void Optimize(GraphInterface* graph) = 0;
-	virtual double DetermineFitness(GraphInterface* graph) = 0;
-	virtual void ProvideForwardGradient(GraphInterface* graph) = 0;
+	virtual void Optimize(Graph* graph) = 0;
+	virtual double DetermineFitness(Graph* graph) = 0;
+	virtual void ProvideForwardGradient(Graph* graph) = 0;
 };

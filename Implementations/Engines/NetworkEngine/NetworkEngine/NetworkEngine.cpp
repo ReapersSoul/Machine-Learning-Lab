@@ -3,7 +3,7 @@
 #include <DynamicCodeExecutionEngineInterface.hpp>
 #include <GraphEngineInterface.hpp>
 #include <NodeInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <LibraryInterface.hpp>
 
 #include <string>

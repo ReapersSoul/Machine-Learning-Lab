@@ -3,7 +3,7 @@
 #include <NodeInterface.hpp>
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <string>
 #include <glm/glm.hpp>
 #include <GL/glew.h>
@@ -48,12 +48,12 @@ public:
 		MakeOutput(0, "Output", "Any", nlohmann::json::array());
 
 		//width and height attributes
-		MakeAttribute(0, new AttributeInterface([&]() {
+		MakeAttribute(0, new Attribute([&]() {
 			ImGui::PushItemWidth(100);
 				ImGui::InputInt("Width", &width);
 			}));
 
-		MakeAttribute(1, new AttributeInterface([&]() {
+		MakeAttribute(1, new Attribute([&]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputInt("Height", &height);
 			}));

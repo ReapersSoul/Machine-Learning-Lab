@@ -1,5 +1,7 @@
 #pragma once
 #include "../../../SerializableInterface/SerializableInterface.hpp"
+#include "../Input/Input.hpp"
+#include "../Output/Output.hpp"
 
 //imgui
 #define IMGUI_DEFINE_MATH_OPERATORS
@@ -12,159 +14,142 @@
 #include <nlohmann/json.hpp>
 
 //forward declerations
-class GraphInterface;
-class EdgeInterface;
-class AttributeInterface;
+class Graph;
+class Edge;
+class Attribute;
 class DynamicCodeExecutionEngineInterface;
 class ActivationEngineInterface;
 class LossEngineInterface;
 
-class NodeInterface :public SerializableInterface {
-protected:
-	int x, y;
-	unsigned int UID;
-	std::string TypeID;
-	unsigned int Priority;
-	GraphInterface* ParentGraph;
-	bool IsInput;
-	bool IsOutput;
-	bool Visited;
-	nlohmann::json Description;
-	std::vector<EdgeInterface*> InputEdges;
-	std::vector<AttributeInterface*> Attributes;
-	std::vector<EdgeInterface*> OutputEdges;
-	DynamicCodeExecutionEngineInterface* DCEE;
-	ActivationEngineInterface* AE;
-	LossEngineInterface* LE;
-public:
-	void PrintIOUID();
+namespace NodeInterface {
+	static std::unordered_map<std::string, unsigned int> TypeIDs = { {"Invalid", 0} };
+	static std::unordered_map<unsigned int, std::string> TypeIDsReverse = { {0, "Invalid"} };
+	void RegisterType(std::string TypeID) {
+		if (TypeIDs.find(TypeID) != TypeIDs.end()) throw std::runtime_error("TypeID already registered");
+		TypeIDs[TypeID] = std::hash<std::string>{}(TypeID);
+		TypeIDsReverse[std::hash<std::string>{}(TypeID)] = TypeID;
+	}
+	unsigned int GetTypeID(std::string TypeID) {
+		return TypeIDs[TypeID];
+	}
+	std::string GetTypeID(unsigned int TypeID) {
+		return TypeIDsReverse[TypeID];
+	}
+	bool TypeIDExists(std::string TypeID) {
+		return TypeIDs.find(TypeID) != TypeIDs.end();
+	}
 
-	bool HasInput(unsigned int UID);
+	class NodeInterface :public SerializableInterface {
+	protected:
+		int x, y;
+		unsigned int UID;
+		std::string TypeID;
+		unsigned int Priority;
+		Graph* ParentGraph;
+		bool IsInput;
+		bool IsOutput;
+		bool Visited;
 
-	bool HasOutput(unsigned int UID);
+		std::vector<Input> Inputs;
+		std::vector<Attribute*> Attributes;
+		std::vector<Output> Outputs;
 
-	void ChangeIOUID(unsigned int OldUID, unsigned int NewUID);
+		std::vector<Edge*> InputEdges;
+		std::vector<Edge*> OutputEdges;
 
-	void setXY(int x, int y);
+		struct Line {
+			int InputUID = -1;
+			int AttributeIndex = -1;
+			int OutputUID = -1;
+		};
+		std::vector<Line> Lines;
 
-	void setX(int x);
+		DynamicCodeExecutionEngineInterface* DCEE;
+		ActivationEngineInterface* AE;
+		LossEngineInterface* LE;
+	public:
+		void PrintIOUID();
 
-	void setY(int y);
+		bool HasInput(unsigned int UID);
 
-	int getX();
+		bool HasOutput(unsigned int UID);
 
-	int getY();
+		void ChangeIOUID(unsigned int OldUID, unsigned int NewUID);
 
-	void ResetInputs();
+		void setXY(int x, int y);
 
-	void ResetOutputs();
+		void setX(int x);
 
-	void ResetIO();
+		void setY(int y);
 
-	void SetDCEE(DynamicCodeExecutionEngineInterface* DCEE);
+		int getX();
 
-	void SetAE(ActivationEngineInterface* AE);
+		int getY();
 
-	void SetLE(LossEngineInterface* LE);
+		void SetDCEE(DynamicCodeExecutionEngineInterface* DCEE);
 
-	void Visit();
+		void SetAE(ActivationEngineInterface* AE);
 
-	void Unvisit();
+		void SetLE(LossEngineInterface* LE);
 
-	bool IsVisited();
+		void Visit();
 
-	void SetParentGraph(GraphInterface* ParentGraph);
+		void Unvisit();
 
-	nlohmann::json FlattenData(nlohmann::json Data);
+		bool IsVisited();
 
-	nlohmann::json CreateMatrixData(std::vector<double> Data, int Rows, int Columns);
+		void SetParentGraph(Graph* ParentGraph);
 
-	nlohmann::json CreateMatrixData(std::vector<std::vector<double>> Data);
+		Graph* GetParentGraph();
 
-	nlohmann::json CreateTensorData(std::vector<double> Data, int Rows, int Columns, int Depth);
+		void SetUID(unsigned int UID);
 
-	nlohmann::json CreateTensorData(std::vector<std::vector<std::vector<double>>> Data);
+		unsigned int GetUID();
 
-	std::vector<std::vector<double>> GetMatrixFromData(nlohmann::json Data);
+		std::string GetTypeID();
 
-	std::vector<std::vector<std::vector<double>>> GetTensorFromData(nlohmann::json Data);
+		void SetTypeID(std::string TypeID);
 
-	std::vector<double> GetFirstVectorFromData(nlohmann::json Data);
+		void MakeLine(Input Input, Attribute* Attribute, Output Output);
 
-	std::vector<std::vector<double>> GetFirstMatrixFromData(nlohmann::json Data);
+		std::vector<Edge*>& GetInputEdges();
 
-	std::vector<std::vector<std::vector<double>>> GetFirstTensorFromData(nlohmann::json Data);
+		std::vector<Attribute*>& GetAttributes();
 
-	GraphInterface* GetParentGraph();
+		Input* GetInputByUID(unsigned int UID);
+		Output* GetOutputByUID(unsigned int UID);
 
-	void SetUID(unsigned int UID);
+		std::vector<Edge*>& GetOutputEdges();
 
-	unsigned int GetUID();
+		std::vector<Input>& GetInputs();
 
-	std::string GetTypeID();
+		std::vector<Output>& GetOutputs();
 
-	void SetTypeID(std::string TypeID);
+		virtual void Init() = 0;
 
-	virtual nlohmann::json& GetDescription();
+		virtual void Process(bool Direction) = 0;
 
-	void MakeInput(int line, std::string Name, std::string TypeID, nlohmann::json Data);
-	void MakeOutput(int line, std::string Name, std::string TypeID, nlohmann::json Data);
-	void MakeAttribute(int line, AttributeInterface* attribute);
+		virtual void Update() {};
 
-	void RemoveAttribute(int line);
-	void RemoveInput(int line);
-	void RemoveOutput(int line);
+		virtual void DrawNodeTitle(ImGuiContext* Context);
 
-	nlohmann::json& GetInputByIndex(int i);
-	nlohmann::json& GetInputByUID(unsigned int UID);
-	nlohmann::json& GetInputByName(std::string Name);
+		virtual void DrawNodeProperties(ImGuiContext* Context);
 
-	std::vector<EdgeInterface*>& GetInputEdges();
+		virtual NodeInterface* GetInstance() = 0;
 
-	std::vector<AttributeInterface*>& GetAttributes();
+		virtual nlohmann::json Serialize();
+		virtual void DeSerialize(nlohmann::json data, void* DCEE);
 
-	nlohmann::json& GetOutputByIndex(int i);
-	nlohmann::json& GetOutputByUID(unsigned int UID);
-	nlohmann::json& GetOutputByName(std::string Name);
+		//virtual destructor	
+		virtual ~NodeInterface() {};
+	};
 
-	void ClearOutputData(int i);
-	void ClearOutputData(std::string Name);
-	void ClearInputData(int i);
-	void ClearInputData(std::string Name);
-	void ClearAllInputData();
-	void ClearAllOutputData();
-
-	void SetOutputByIndexData(int i, nlohmann::json Data);
-	void SetOutputByUIDData(int i, nlohmann::json Data);
-	void SetOutputByNameData(std::string Name, nlohmann::json Data);
-	void SetInputByIndexData(int i, nlohmann::json Data);
-	void SetInputByUIDData(int i, nlohmann::json Data);
-	void SetInputByNameData(std::string Name, nlohmann::json Data);
-
-	nlohmann::json& GetOutputDataByIndex(int i);
-	nlohmann::json& GetOutputDataByUID(int i);
-	nlohmann::json& GetOutputDataByName(std::string Name);
-	nlohmann::json& GetInputDataByIndex(int i);
-	nlohmann::json& GetInputDataByUID(int i);
-	nlohmann::json& GetInputDataByName(std::string Name);
-
-	std::vector<EdgeInterface*>& GetOutputEdges();
-
-	virtual void Init() = 0;
-
-	virtual void Process(bool Direction) = 0;
-
-	virtual void Update() {};
-
-	virtual void DrawNodeTitle(ImGuiContext* Context);
-
-	virtual void DrawNodeProperties(ImGuiContext* Context);
-
-	virtual NodeInterface* GetInstance() = 0;
-
-	virtual nlohmann::json Serialize();
-	virtual void DeSerialize(nlohmann::json data, void* DCEE);
-
-	//virtual destructor	
-	virtual ~NodeInterface() {};
-};
+	static std::unordered_map<unsigned int, std::function<NodeInterface* ()>> Constructors = { {0, []() {return nullptr; }} };
+	void RegisterConstructor(unsigned int TypeID, std::function<NodeInterface* ()> Constructor) {
+		if (Constructors.find(TypeID) != Constructors.end()) throw std::runtime_error("Constructor already registered");
+		Constructors[TypeID] = Constructor;
+	}
+	NodeInterface* Construct(unsigned int TypeID) {
+		return Constructors[TypeID]();
+	}
+}

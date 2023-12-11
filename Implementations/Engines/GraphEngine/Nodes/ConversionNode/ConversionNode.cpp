@@ -3,7 +3,7 @@
 #include <NodeInterface.hpp>
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <string>
 #include <glm/glm.hpp>
 

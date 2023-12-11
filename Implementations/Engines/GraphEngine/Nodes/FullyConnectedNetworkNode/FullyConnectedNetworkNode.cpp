@@ -3,7 +3,7 @@
 #include <NodeInterface.hpp>
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <string>
 #include <glm/glm.hpp>
 
@@ -267,7 +267,7 @@ public:
 		MakeOutput(0, "Output", "double", nlohmann::json::array());
 
 		Activation = AE->GetAvailableActivations()[0];
-		MakeAttribute(0,new AttributeInterface([this]() {
+		MakeAttribute(0,new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::BeginCombo("Activation", Activation->GetName().c_str())) {
 				for (int i = 0; i < AE->GetAvailableActivations().size(); i++)
@@ -282,7 +282,7 @@ public:
 			}
 			}));
 
-		MakeAttribute(1, new AttributeInterface([this]() {
+		MakeAttribute(1, new Attribute([this]() {
 			//attribute for layer sizes
 			ImGui::PushItemWidth(100);
 			if (ImGui::InputText("Layers", tmp_layers, 256, ImGuiInputTextFlags_EnterReturnsTrue)) {
@@ -296,12 +296,12 @@ public:
 				RandomizeWeights();
 			}
 			}));
-		MakeAttribute(2, new AttributeInterface([this]() {
+		MakeAttribute(2, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputDouble("Learning Rate", &LearningRate);
 			}));
 
-		MakeAttribute(4, new AttributeInterface([this]() {
+		MakeAttribute(4, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			//imgui table
 			if (ImGui::BeginTable("MyTable", 3)) {

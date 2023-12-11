@@ -3,7 +3,7 @@
 #include <NodeInterface.hpp>
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <string>
 #include <glm/glm.hpp>
 #include <GL/glew.h>
@@ -22,7 +22,7 @@ class FileVisualizationNode : public NodeInterface {
 		Logarithmic,
 		Boolean,
 		Threshold
-	}Scaling = Exponential;
+	}Scaling = Logarithmic;
 	int d_Threshold = 5;
 
 public:
@@ -45,7 +45,7 @@ public:
 			//clear the image
 			ClearData();
 
-			if (!GetInputDataByIndex(0).is_string()) {
+			if (GetInputDataByIndex(0).is_string()) {
 				FileName = GetInputDataByIndex(0).get<std::string>();
 			}
 
@@ -188,17 +188,17 @@ public:
 			Image[i].resize(ImageSize,0);
 		}
 
-		MakeAttribute(2, new AttributeInterface([this]() {
+		MakeAttribute(2, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::Image((void*)(intptr_t)texture, ImVec2(ImageSize, ImageSize));
 			}));
 
-		MakeAttribute(0, new AttributeInterface([this]() {
+		MakeAttribute(0, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputText("File Path", (char*)FileName.data(),256);
 			}));
 
-		MakeAttribute(1, new AttributeInterface([this]() {
+		MakeAttribute(1, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::Combo("Scaling", (int*)&Scaling, "Linear\0Exponential\0Logarithmic\0Boolean\0Threshold\0");
 			if (Scaling == Threshold) {

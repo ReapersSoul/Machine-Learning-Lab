@@ -3,7 +3,7 @@
 #include <NodeInterface.hpp>
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <string>
 #include <glm/glm.hpp>
 #include <GL/glew.h>
@@ -452,17 +452,17 @@ public:
 		Activation = AE->GetAvailableActivations()[0];
 		MakeInput(0, "Input", "Tensor", nlohmann::json::array());
 
-		MakeAttribute(0, new AttributeInterface([this]() {
+		MakeAttribute(0, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputDouble("Learning Rate", &LearningRate);
 			}));
 
-		MakeAttribute(1, new AttributeInterface([this]() {
+		MakeAttribute(1, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::Checkbox("GPU?", &GPU);
 			}));
 
-		MakeAttribute(2, new AttributeInterface([this]() {
+		MakeAttribute(2, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::Checkbox("Cap Derivatives?", &CapDerivative);
 			ImGui::SameLine();
@@ -471,7 +471,7 @@ public:
 			ImGui::InputDouble("Derivative Floor", &DerivativeFloor);
 			}));
 
-		MakeAttribute(3, new AttributeInterface([this]() {
+		MakeAttribute(3, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::InputInt3("Kernel Size", &K_size[0])) {
 				K.resize(K_size.x * K_size.y * K_size.z, 0.01);
@@ -499,7 +499,7 @@ public:
 			ImGui::InputInt3("Threads", &threads[0]);
 			ImGui::InputText("Filepath", filepath.data(), filepath.size());
 			}));
-		MakeAttribute(4, new AttributeInterface([this]() {
+		MakeAttribute(4, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::BeginCombo("Activation", Activation->GetName().c_str())) {
 				for (int i = 0; i < AE->GetAvailableActivations().size(); i++)
@@ -513,7 +513,7 @@ public:
 				ImGui::EndCombo();
 			}
 			}));
-		MakeAttribute(5, new AttributeInterface([this]() {
+		MakeAttribute(5, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::BeginTable("MyTable", 1)) {
 				ImGui::TableSetupColumn("Column 1", ImGuiTableColumnFlags_WidthFixed, 100.0f);
@@ -530,7 +530,7 @@ public:
 				ImGui::EndTable();
 			}
 			}));
-		MakeAttribute(6, new AttributeInterface([this]() {
+		MakeAttribute(6, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::BeginTable("MyTable", 1)) {
 				ImGui::TableSetupColumn("Column 1", ImGuiTableColumnFlags_WidthFixed, Y_size.x);

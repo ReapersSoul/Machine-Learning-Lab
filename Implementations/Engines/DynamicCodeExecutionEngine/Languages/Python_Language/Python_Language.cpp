@@ -1,7 +1,7 @@
 #include <LanguageInterface.hpp>
 #include <ScriptInterface.hpp>
 #include <NodeInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 
 #include <python3.10/Python.h>
 #include <iostream>

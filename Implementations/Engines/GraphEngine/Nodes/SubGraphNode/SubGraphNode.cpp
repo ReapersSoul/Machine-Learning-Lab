@@ -3,7 +3,7 @@
 #include <NodeInterface.hpp>
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <string>
 #include <glm/glm.hpp>
 #include <GL/glew.h>
@@ -12,7 +12,7 @@
 #include <typeinfo>
 
 class SubGraphNode : public NodeInterface {
-	GraphInterface * Graph;
+	Graph * Graph;
 	std::string FilePath;
 
 public:

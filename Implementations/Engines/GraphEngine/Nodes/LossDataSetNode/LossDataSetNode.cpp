@@ -3,7 +3,7 @@
 #include <NodeInterface.hpp>
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <UIEngineInterface.hpp>
 #include <LossInterface.hpp>
 #include <string>
@@ -75,7 +75,7 @@ public:
 		Loss = LE->GetAvailableLosses()[0];
 
 		//loss
-		MakeAttribute(0, new AttributeInterface([this]() {
+		MakeAttribute(0, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::BeginCombo("Loss", Loss->GetName().c_str())) {
 				for (int i = 0; i < LE->GetAvailableLosses().size(); i++)
@@ -90,7 +90,7 @@ public:
 			}
 			}));
 
-		MakeAttribute(1, new AttributeInterface([this]() {
+		MakeAttribute(1, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			int size = values.size();
 			if (ImGui::InputInt("Size", &size)) {
@@ -104,7 +104,7 @@ public:
 			}
 			}));
 
-		MakeAttribute(2, new AttributeInterface([this]() {
+		MakeAttribute(2, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			//get size of container
 			ImVec2 size = ImGui::GetItemRectSize();

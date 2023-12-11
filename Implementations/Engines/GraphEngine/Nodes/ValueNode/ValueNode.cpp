@@ -3,7 +3,7 @@
 #include <NodeInterface.hpp>
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <string>
 
 class ValueNode : public NodeInterface {
@@ -28,7 +28,7 @@ public:
     void Init() override {
         MakeOutput(0, "Output", "Any", nlohmann::json::array());
 
-        MakeAttribute(0,new AttributeInterface([this]() {
+        MakeAttribute(0,new Attribute([this]() {
             ImGui::PushItemWidth(100);
             ImGui::InputDouble("Value", &value);
             }));
@@ -54,7 +54,7 @@ public:
 
         value = data["value"];
 
-        Attributes.push_back(new AttributeInterface([this]() {
+        Attributes.push_back(new Attribute([this]() {
             ImGui::PushItemWidth(100);
             ImGui::InputDouble("Value", &value);
             }));

@@ -3,7 +3,7 @@
 #include <NodeInterface.hpp>
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <string>
 
 //kinect nui api and other includes
@@ -394,25 +394,25 @@ public:
 			MakeOutput(i + 1, JointNames[i], "vec4", { 0,0,0,0 });
 		}
 
-		MakeAttribute(0, new AttributeInterface([this]() {
+		MakeAttribute(0, new Attribute([this]() {
 			ImGui::Text("Joints: ");
 			}));
 
 
 		for (int i = 0; i < NUI_SKELETON_POSITION_COUNT; i++)
 		{
-			MakeAttribute(i + 1, new AttributeInterface([this, i]() {
+			MakeAttribute(i + 1, new Attribute([this, i]() {
 				ImGui::Text((JointNames[i] + ": X:" + std::to_string(joints[i].x) + " Y:" + std::to_string(joints[i].y) + " Z:" + std::to_string(joints[i].z) + " W:" + std::to_string(joints[i].w)).c_str());
 				}));
 		}
 
-		MakeAttribute(NUI_SKELETON_POSITION_COUNT + 2, new AttributeInterface([this]() {
+		MakeAttribute(NUI_SKELETON_POSITION_COUNT + 2, new Attribute([this]() {
 			//angle
 			ImGui::PushItemWidth(100);
 			ImGui::InputFloat("Angle", &angle, -27, 27);
 			}));
 
-		MakeAttribute(NUI_SKELETON_POSITION_COUNT+3, new AttributeInterface([this]() {
+		MakeAttribute(NUI_SKELETON_POSITION_COUNT+3, new Attribute([this]() {
 			ImGui::Text("Skeleton Image: ");
 			DrawSkeletonTexture(SkeletonFrameBuffer);
 			ImGui::Image((void*)(intptr_t)SkeletonFrameBuffer->getColorTexture(), ImVec2(SkeletonFrameBuffer->getSize().x, SkeletonFrameBuffer->getSize().y));

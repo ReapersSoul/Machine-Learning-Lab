@@ -1,0 +1,3 @@
+project(DataObjectInterface)
+
+add_library(DataObjectInterface INTERFACE DataObjectInterface.hpp)

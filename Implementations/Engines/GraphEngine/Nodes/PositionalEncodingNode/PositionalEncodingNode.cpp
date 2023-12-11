@@ -3,7 +3,7 @@
 #include <NodeInterface.hpp>
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <string>
 
 class PositionalEncodingNode : public NodeInterface {
@@ -40,7 +40,7 @@ public:
 		MakeInput(0, "Input", "double", nlohmann::json::array());
 		MakeOutput(0, "Output", "double", nlohmann::json::array());
 
-		MakeAttribute(1, new AttributeInterface([this]() {
+		MakeAttribute(1, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputInt("Embedding Size", &EmbeddingSize);
 			}));

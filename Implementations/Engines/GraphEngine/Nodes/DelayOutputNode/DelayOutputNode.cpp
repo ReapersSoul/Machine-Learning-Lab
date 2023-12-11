@@ -3,7 +3,7 @@
 #include <NodeInterface.hpp>
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <string>
 #include <glm/glm.hpp>
 
@@ -25,12 +25,12 @@ public:
 	}
 
 	void Init() override {
-		Attributes.push_back(new AttributeInterface([this]() {
+		Attributes.push_back(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputInt("DelaySteps", &DelaySteps);
 			if(DelaySteps < 0) DelaySteps = 0;
 			}));
-		Attributes.push_back(new AttributeInterface([this]() {
+		Attributes.push_back(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::Combo("Type", &Type, "Double\0Float\0Int\0Bool\0Vec2\0Vec3\0Vec4\0\0");
 			}));
@@ -72,12 +72,12 @@ public:
 			values.push_back(data["Values"][i]);
 		}
 
-		Attributes.push_back(new AttributeInterface([this]() {
+		Attributes.push_back(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputInt("DelaySteps", &DelaySteps);
 			if (DelaySteps < 0) DelaySteps = 0;
 			}));
-		Attributes.push_back(new AttributeInterface([this]() {
+		Attributes.push_back(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::Combo("Type", &Type, "Double\0Float\0Int\0Bool\0Vec2\0Vec3\0Vec4\0\0");
 			}));

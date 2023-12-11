@@ -3,7 +3,7 @@
 #include <NodeInterface.hpp>
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <UIEngineInterface.hpp>
 #include <string>
 
@@ -28,7 +28,7 @@ public:
         //json array
         Description=nlohmann::json::array();
         MakeOutput(0, "Output", "double", 0);
-        MakeAttribute(0, new AttributeInterface([this]() {
+        MakeAttribute(0, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			int size = values.size();
 			ImGui::InputInt("Size", &size);
@@ -36,7 +36,7 @@ public:
 			values.resize(size);
 			}));
 
-        MakeAttribute(1, new AttributeInterface([this]() {
+        MakeAttribute(1, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
             for (int i = 0; i < values.size(); i++) {
                 ImGui::InputDouble(std::to_string(i).c_str(), &values[i]);
@@ -72,7 +72,7 @@ public:
             values.push_back(value);
         }
 
-        Attributes.push_back(new AttributeInterface([this]() {
+        Attributes.push_back(new Attribute([this]() {
             ImGui::PushItemWidth(100);
             int size = values.size();
             ImGui::InputInt("Size", &size);
@@ -80,7 +80,7 @@ public:
             values.resize(size);
             }));
 
-        Attributes.push_back(new AttributeInterface([this]() {
+        Attributes.push_back(new Attribute([this]() {
             ImGui::PushItemWidth(100);
             for (int i = 0; i < values.size(); i++) {
                 ImGui::InputDouble(std::to_string(i).c_str(), &values[i]);

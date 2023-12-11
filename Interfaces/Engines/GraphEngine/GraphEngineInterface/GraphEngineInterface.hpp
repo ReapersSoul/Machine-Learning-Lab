@@ -1,22 +1,15 @@
 #pragma once
-#include "../GraphInterface/GraphInterface.hpp"
+#include "../Graph/Graph.hpp"
 
 #include <vector>
 #include <map>
 #include <string>
 #include <filesystem>
 
-struct NodeInfo {
-	std::string TypeID;
-	std::function<NodeInterface*()> CreateNode;
-
-};
-
 //TODO: change how loading AvailableNodes works were using too much memory storing instances of the nodes. maybe just store functions to create the nodes instead of the nodes themselves
 class GraphEngineInterface: public EngineInterface {
 protected:
-	std::map<std::string,GraphInterface*> Graphs;
-	std::vector<NodeInfo> AvailableNodes;
+	std::map<std::string,Graph*> Graphs;
 	std::vector<SorterInterface*> AvailableSorters;
 	ActivationEngineInterface* AE;
 	LossEngineInterface* LE;
@@ -43,12 +36,12 @@ public:
 	}
 
 	//getters
-	std::map<std::string,GraphInterface*> GetGraphs() {
+	std::map<std::string,Graph*> GetGraphs() {
 		return Graphs;
 	}
 
 	void CreateGraph(std::string name) {
-		GraphInterface* graph = new GraphInterface();
+		Graph* graph = new Graph();
 		graph->SetDCEE(DCEEngine);
 		graph->SetAE(AE);
 		graph->SetLE(LE);
@@ -56,6 +49,7 @@ public:
 		Graphs[name] = graph;
 	}
 
+	virtual void LoadAvailableDataObjects() = 0;
 	virtual void LoadAvailableNodes() = 0;
 	virtual void LoadAvailableScriptNodes() = 0;
 	virtual void LoadAvailableSorters() = 0;

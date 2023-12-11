@@ -3,7 +3,7 @@
 #include <NodeInterface.hpp>
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <string>
 #include <glm/glm.hpp>
 #include <GL/glew.h>
@@ -37,7 +37,7 @@ public:
 
 	void Init() override {
 		MakeInput(0, "Input", "Any", {});
-		MakeAttribute(0, new AttributeInterface([&]() {
+		MakeAttribute(0, new Attribute([&]() {
 				ImGui::PushItemWidth(100);
 				char buf[100];
 				memcpy(buf, ColumnName.c_str(), 100);

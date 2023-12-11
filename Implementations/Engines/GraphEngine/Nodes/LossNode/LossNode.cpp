@@ -3,7 +3,7 @@
 #include <NodeInterface.hpp>
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <string>
 
 
@@ -41,7 +41,7 @@ public:
 	void Init() override {
 		Loss = LE->GetAvailableLosses()[0];
 		//loss
-		Attributes.push_back(new AttributeInterface([this]() {
+		Attributes.push_back(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::BeginCombo("Loss", LE->GetAvailableLosses()[0]->GetName().c_str())) {
 				for (int i = 0; i < LE->GetAvailableLosses().size(); i++)
@@ -56,15 +56,15 @@ public:
 			}
 			}));
 
-		Attributes.push_back(new AttributeInterface([this]() {
+		Attributes.push_back(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputDouble("Target", &target);
 			}));
-		Attributes.push_back(new AttributeInterface([this]() {
+		Attributes.push_back(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputDouble("Derivative", &derivative);
 			}));
-		Attributes.push_back(new AttributeInterface([this]() {
+		Attributes.push_back(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputDouble("Loss", &loss);
 			}));
@@ -114,7 +114,7 @@ public:
 			}
 		}
 
-		Attributes.push_back(new AttributeInterface([this]() {
+		Attributes.push_back(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::BeginCombo("Loss", LE->GetAvailableLosses()[0]->GetName().c_str())) {
 				for (int i = 0; i < LE->GetAvailableLosses().size(); i++)
@@ -129,15 +129,15 @@ public:
 			}
 			}));
 
-		Attributes.push_back(new AttributeInterface([this]() {
+		Attributes.push_back(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputDouble("Target", &target);
 			}));
-		Attributes.push_back(new AttributeInterface([this]() {
+		Attributes.push_back(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputDouble("Derivative", &derivative);
 			}));
-		Attributes.push_back(new AttributeInterface([this]() {
+		Attributes.push_back(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputDouble("Loss", &loss);
 			}));

@@ -4,7 +4,7 @@
 
 class DefaultSorter : public SorterInterface {
 public:
-	ProcessingOrder SortGraph(GraphInterface* graph,bool DirectionForward) override {
+	ProcessingOrder SortGraph(Graph* graph,bool DirectionForward) override {
 		ProcessingOrder order;
 		std::map<unsigned int, NodeInterface*> nodes = graph->GetNodes();
 		std::map<unsigned int,EdgeInterface*> Edges=graph->GetEdges();

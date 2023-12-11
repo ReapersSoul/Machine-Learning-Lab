@@ -3,7 +3,7 @@
 #include <NodeInterface.hpp>
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <string>
 #include <glm/glm.hpp>
 
@@ -36,7 +36,7 @@ public:
 	void Init() override {
 		MakeInput(0, "Input", "Any", nlohmann::json::array());
 		MakeOutput(0, "Input", "Any", nlohmann::json::array());
-		MakeAttribute(0, new AttributeInterface([this]() {
+		MakeAttribute(0, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			//scrollable region
 			if (ImGui::BeginChild("scrolling", ImVec2(300, 300), false, ImGuiWindowFlags_HorizontalScrollbar||ImGuiWindowFlags_AlwaysVerticalScrollbar)){

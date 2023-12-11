@@ -3,7 +3,7 @@
 #include <NodeInterface.hpp>
 #include <LanguageInterface.hpp>
 #include <GraphEngineInterface.hpp>
-#include <AttributeInterface.hpp>
+#include <Attribute.hpp>
 #include <string>
 
 class MathNode : public NodeInterface {
@@ -42,12 +42,12 @@ public:
 
     void Init() override {
         ////load script
-        Attributes.push_back(new AttributeInterface([this]() {
+        Attributes.push_back(new Attribute([this]() {
             ImGui::PushItemWidth(100);
             ImGui::InputDouble("Value", &value);
             }));
 
-        Attributes.push_back(new AttributeInterface([this]() {
+        Attributes.push_back(new Attribute([this]() {
             ImGui::PushItemWidth(100);
             //combo box
             const char* items[] = { "Add", "Subtract", "Multiply", "Divide" };
@@ -82,12 +82,12 @@ public:
 
         operation = data["operation"];
 
-        Attributes.push_back(new AttributeInterface([this]() {
+        Attributes.push_back(new Attribute([this]() {
             ImGui::PushItemWidth(100);
             ImGui::InputDouble("Value", &value);
             }));
 
-        Attributes.push_back(new AttributeInterface([this]() {
+        Attributes.push_back(new Attribute([this]() {
             ImGui::PushItemWidth(100);
             //combo box
             const char* items[] = { "Add", "Subtract", "Multiply", "Divide" };
