@@ -8,7 +8,7 @@
 #include <string>
 #include <GLFW/glfw3.h>
 
-class ControllerNode : public NodeInterface {
+class ControllerNode : public NS_Node::NodeInterface {
 	bool A;
 	bool B;
 	bool X;
@@ -149,7 +149,7 @@ public:
 	}
 
 	nlohmann::json Serialize() override {
-		nlohmann::json data = NodeInterface::Serialize();
+		nlohmann::json data = NS_Node::NodeInterface::Serialize();
 		return data;
 	}
 
@@ -169,7 +169,7 @@ extern "C" {
 	}
 
 	// Define a function that returns the result of adding two numbers
-	EXPORT NodeInterface* GetInstance() {
+	EXPORT NS_Node::NodeInterface* GetInstance() {
 		return new ControllerNode();
 	}
 }

@@ -11,7 +11,7 @@
 
 #include <CL/opencl.hpp>
 
-class FullyConnectedNetworkNode : public NodeInterface {
+class FullyConnectedNetworkNode : public NS_Node::NodeInterface {
 	std::vector<double>x;
 	std::vector<std::vector<double>> b;
 	std::vector<std::vector<std::vector<double>>> w;
@@ -417,7 +417,7 @@ public:
 	}
 
 	nlohmann::json Serialize() override {
-		nlohmann::json data = NodeInterface::Serialize();
+		nlohmann::json data = NS_Node::NodeInterface::Serialize();
 
 		return data;
 	}
@@ -439,7 +439,7 @@ extern "C" {
 		return "FullyConnectedNetworkNode";
 	}
 
-	EXPORT NodeInterface* GetInstance() {
+	EXPORT NS_Node::NodeInterface* GetInstance() {
 		return new FullyConnectedNetworkNode();
 	}
 }

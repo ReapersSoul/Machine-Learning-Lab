@@ -37,20 +37,20 @@ Edge* Graph::CreateEdge(unsigned int First, unsigned int Second, unsigned int Fi
 	unsigned int FirstType = Nodes[First]->GetOutputByUID(FirstIO)->GetTypeID();
 	unsigned int SecondType = Nodes[Second]->GetInputByUID(SecondIO)->GetTypeID();
 
-	if (FirstType != DataObjectInterface::GetTypeID("Any") || SecondType != DataObjectInterface::GetTypeID("Any")) {
+	if (FirstType != NS_DataObject::GetTypeID("Any") || SecondType != NS_DataObject::GetTypeID("Any")) {
 		if (FirstType != SecondType) {
 			return nullptr;
 		}
 	}
-
-	Nodes[Second]->GetInputByUID(SecondIO)->AddData(Nodes[First]->GetOutputByUID(FirstIO)->GetData());
+	for (auto& dataObj : Nodes[First]->GetOutputByUID(FirstIO)->GetData()) {
+		Nodes[Second]->GetInputByUID(SecondIO)->AddData(dataObj);
+	}
 
 	Edge edge;
 	edge.SetFirst(First);
 	edge.SetSecond(Second);
 	edge.SetFirstIO(FirstIO);
 	edge.SetSecondIO(SecondIO);
-	edge.SetParent(this);
 	int UID = 0;
 	while (Edges.find(UID) != Edges.end()) {
 		UID++;
@@ -64,7 +64,41 @@ void Graph::DeleteEdge(unsigned int Edge) {
 	Edges.erase(Edge);
 }
 
-int Graph::AddNode(NodeInterface* Node) {
+unsigned int Graph::CreateInput(unsigned int TypeID, std::function<void()> DrawFunction) {
+	IO Input;
+	Input.SetTypeID(TypeID);
+	Input.SetDrawFunction(DrawFunction);
+	int UID = 0;
+	while (Inputs.find(UID) != Inputs.end()) {
+		UID++;
+	}
+	Input.SetUID(UID);
+	Inputs[UID] = Input;
+	return UID;
+}
+
+void Graph::DeleteInput(unsigned int Input) {
+	Inputs.erase(Input);
+}
+
+unsigned int Graph::CreateOutput(unsigned int TypeID, std::function<void()> DrawFunction) {
+	IO Output;
+	Output.SetTypeID(TypeID);
+	Output.SetDrawFunction(DrawFunction);
+	int UID = 0;
+	while (Outputs.find(UID) != Outputs.end()) {
+		UID++;
+	}
+	Output.SetUID(UID);
+	Outputs[UID] = Output;
+	return UID;
+}
+
+void Graph::DeleteOutput(unsigned int Output) {
+	Outputs.erase(Output);
+}
+
+unsigned int Graph::AddNode(NS_Node::NodeInterface* Node) {
 	unsigned int UID = GetNextUID();
 	Node->SetUID(UID);
 	Node->SetParentGraph(this);
@@ -83,12 +117,12 @@ void Graph::DeleteNode(unsigned int NodeUID) {
 
 void Graph::ChangeNodeUID(unsigned int OldUID, unsigned int NewUID)
 {
-	NodeInterface* Node = Nodes[OldUID];
+	NS_Node::NodeInterface* Node = Nodes[OldUID];
 	for (auto& Edge : Edges) {
-		if (Edge.second.GetFirst()->GetUID() == OldUID) {
+		if (Edge.second.GetFirst() == OldUID) {
 			Edge.second.SetFirst(NewUID);
 		}
-		if (Edge.second.GetSecond()->GetUID() == OldUID) {
+		if (Edge.second.GetSecond() == OldUID) {
 			Edge.second.SetSecond(NewUID);
 		}
 	}
@@ -106,20 +140,36 @@ void Graph::ChangeEdgeUID(unsigned int OldUID, unsigned int NewUID)
 	Edge.SetUID(NewUID);
 }
 
-void Graph::ChangeIOUID(unsigned int OldUID, unsigned int NewUID)
+void Graph::ChangeInputUID(unsigned int OldUID, unsigned int NewUID)
 {
-	unsigned int NodeUID= IOUIDs[OldUID];
-	for (auto& Node : Nodes) {
-		if (Node.second->HasInput(OldUID) || Node.second->HasOutput(OldUID)) {
-			Node.second->ChangeIOUID(OldUID, NewUID);
-		}
+	auto it = std::find_if(Inputs.begin(), Inputs.end(), [OldUID](std::pair<unsigned int, IO> Input) {return Input.second.GetUID() == OldUID; });
+	if (it == Inputs.end()) {
+		throw std::runtime_error("Input not found");
 	}
-	IOUIDs.erase(OldUID);
-	IOUIDs[NewUID] = NodeUID;
+	unsigned int NodeUID= it->second.GetParentNodeUID();
+	Nodes[NodeUID]->ChangeInputUID(OldUID, NewUID);
+}
+
+void Graph::ChangeOutputUID(unsigned int OldUID, unsigned int NewUID)
+{
+	auto it = std::find_if(Outputs.begin(), Outputs.end(), [OldUID](std::pair<unsigned int, IO> Output) {return Output.second.GetUID() == OldUID; });
+	if (it == Outputs.end()) {
+		throw std::runtime_error("Output not found");
+	}
+	unsigned int NodeUID = it->second.GetParentNodeUID();
+	Nodes[NodeUID]->ChangeOutputUID(OldUID, NewUID);
 }
 
 void Graph::Process(bool DirectionForward, std::vector<unsigned int> SelectedNodes, std::vector<unsigned int> SelectedEdges) {
-	ProcessingOrder PO = Sorter->SortGraph(this, DirectionForward);
+	NS_Sorter::ProcessingOrder PO = Sorter->SortGraph(this, DirectionForward);
+
+	for (int i = 0; i < PO.Nodes.size(); i++)
+	{
+		for (int j = 0; j < PO.Nodes[i].size(); j++)
+		{
+			PO.Nodes[i][j]->ResetIO();
+		}
+	}
 
 	for (int i = 0; i < PO.Nodes.size(); i++)
 	{
@@ -143,12 +193,12 @@ void Graph::Process(bool DirectionForward, std::vector<unsigned int> SelectedNod
 	}
 }
 
-void Graph::SetSorter(SorterInterface* Sorter) {
+void Graph::SetSorter(NS_Sorter::SorterInterface* Sorter) {
 	this->Sorter = Sorter;
 }
 
 //getters
-std::map<unsigned int, NodeInterface*>& Graph::GetNodes() {
+std::map<unsigned int, NS_Node::NodeInterface*>& Graph::GetNodes() {
 	return Nodes;
 }
 
@@ -156,10 +206,28 @@ std::map<unsigned int, Edge>& Graph::GetEdges() {
 	return Edges;
 }
 
-unsigned int Graph::GetNextIOUID(unsigned int nodeID) {
-	unsigned int UID = GetNextUID();
-	IOUIDs[UID] = nodeID;
-	return UID;
+std::map<unsigned int, IO>& Graph::GetInputs() {
+	return Inputs;
+}
+
+std::map<unsigned int, IO>& Graph::GetOutputs() {
+	return Outputs;
+}
+
+NS_Node::NodeInterface* Graph::GetNodeByUID(unsigned int UID) {
+	return Nodes[UID];
+}
+
+Edge* Graph::GetEdgeByUID(unsigned int UID) {
+	return &Edges[UID];
+}
+
+IO* Graph::GetInputByUID(unsigned int UID) {
+	return &Inputs[UID];
+}
+
+IO* Graph::GetOutputByUID(unsigned int UID) {
+	return &Outputs[UID];
 }
 
 unsigned int Graph::GetNextUID()
@@ -172,47 +240,98 @@ unsigned int Graph::GetNextUID()
 	return UID;
 }
 
-void Graph::RemoveIOUID(unsigned int UID) {
-	IOUIDs.erase(UID);
-}
-
-unsigned int Graph::GetIOAssociatedWith(unsigned int UID)
-{
-	return IOUIDs[UID];
-}
-
 std::string Graph::GetCurrentVersion() {
 	return "0.0.1";
+}
+
+std::vector<IO*> Graph::GetUnconnectedInputs() {
+	std::vector<IO*> UnconnectedInputs;
+	for (auto& Input : Inputs) {
+		bool found = false;
+		for (auto& Edge : Edges) {
+			if (Edge.second.GetSecondIO() == Input.second.GetUID()) {
+				found = true;
+				break;
+			}
+		}
+		if (!found) {
+			UnconnectedInputs.push_back(&Input.second);
+		}
+	}
+	return UnconnectedInputs;
+}
+
+std::vector<IO*> Graph::GetUnconnectedOutputs() {
+	std::vector<IO*> UnconnectedOutputs;
+	for (auto& Output : Outputs) {
+		bool found = false;
+		for (auto& Edge : Edges) {
+			if (Edge.second.GetFirstIO() == Output.second.GetUID()) {
+				found = true;
+				break;
+			}
+		}
+		if (!found) {
+			UnconnectedOutputs.push_back(&Output.second);
+		}
+	}
+	return UnconnectedOutputs;
+}
+
+std::vector<IO*> Graph::GetInputNodeOutputs() {
+	std::vector<IO*> InputNodeOutputs;
+	for (auto& node : Nodes) {
+		if (node.second->GetInputs().size() == 0) {
+			for (auto& output : node.second->GetOutputs()) {
+				InputNodeOutputs.push_back(output);
+			}
+		}
+	}
+	return InputNodeOutputs;
+}
+
+std::vector<IO*> Graph::GetOutputNodeInputs() {
+	std::vector<IO*> OutputNodeInputs;
+	for (auto& node : Nodes) {
+		if (node.second->GetOutputs().size() == 0) {
+			for (auto& input : node.second->GetInputs()) {
+				OutputNodeInputs.push_back(input);
+			}
+		}
+	}
+	return OutputNodeInputs;
+}
+
+std::vector<IO*> Graph::GetUnconnectedInputsAndInputNodeOutputs() {
+	std::vector<IO*> UnconnectedInputsAndInputNodeOutputs;
+	std::vector<IO*> UnconnectedInputs = GetUnconnectedInputs();
+	std::vector<IO*> InputNodeOutputs = GetInputNodeOutputs();
+	for (auto& Input : UnconnectedInputs) {
+		UnconnectedInputsAndInputNodeOutputs.push_back(Input);
+	}
+	for (auto& Input : InputNodeOutputs) {
+		UnconnectedInputsAndInputNodeOutputs.push_back(Input);
+	}
+	return UnconnectedInputsAndInputNodeOutputs;
+}
+
+std::vector<IO*> Graph::GetUnconnectedOutputsAndOutputNodeInputs() {
+	std::vector<IO*> UnconnectedOutputsAndOutputNodeInputs;
+	std::vector<IO*> UnconnectedOutputs = GetUnconnectedOutputs();
+	std::vector<IO*> OutputNodeInputs = GetOutputNodeInputs();
+	for (auto& Output : UnconnectedOutputs) {
+		UnconnectedOutputsAndOutputNodeInputs.push_back(Output);
+	}
+	for (auto& Output : OutputNodeInputs) {
+		UnconnectedOutputsAndOutputNodeInputs.push_back(Output);
+	}
+	return UnconnectedOutputsAndOutputNodeInputs;
 }
 
 void Graph::UpdateSaveForCurrentVersion(std::string oldversion)
 {
 	if (oldversion == GetCurrentVersion()) {
 		return;
-	}
-
-	if (oldversion == "0.0.0") {
-		int starting_uid = Edges.size();
-
-		std::map<unsigned int, unsigned int> oldIOUID = IOUIDs;
-
-		for (auto& IO : oldIOUID) {
-			ChangeIOUID(IO.first, starting_uid);
-			starting_uid++;
-		}
-
-		std::vector<NodeInterface*> nNodes;
-		for (auto& Node : this->Nodes) {
-			nNodes.push_back(Node.second);
-		}
-
-		//update to 0.0.1
-		for (auto& Node : nNodes) {
-			ChangeNodeUID(Node->GetUID(), starting_uid);
-			starting_uid++;
-		}
-
-
 	}
 }
 
@@ -257,7 +376,6 @@ void Graph::DeSerialize(nlohmann::json data, void* DCEE) {
 	for (int i = 0; i < data["Edges"].size(); i++) {
 		Edge Edge;
 		Edge.SetUID(data["Edges"][i]["UID"]);
-		Edge.SetParent(this);
 		Edge.DeSerialize(data["Edges"][i], DCEE);
 		Edges[data["Edges"][i]["UID"]] = Edge;
 	}
@@ -283,7 +401,7 @@ void Graph::DeSerialize(nlohmann::json data, void* DCEE) {
 			LibraryInterface * Lib = this->DCEE->GetOtherLib("lib" + data["Nodes"][i]["TypeID"].get<std::string>() + ".so");
 		#endif
 		if (Lib != nullptr) {
-			NodeInterface* Node = Lib->GetInstance<NodeInterface>();
+			NS_Node::NodeInterface* Node = Lib->GetInstance<NS_Node::NodeInterface>();
 			Node->SetUID(data["Nodes"][i]["UID"]);
 			Node->SetParentGraph(this);
 			Node->DeSerialize(data["Nodes"][i], DCEE);

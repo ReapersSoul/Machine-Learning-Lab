@@ -109,4 +109,12 @@ public:
 	T* GetInstance() {
 		return library.get<T * ()>("GetInstance")();
 	}
+
+	void Register() {
+		//if has register function
+		if (library.has("Register")) {
+			//call register function
+			library.get<void()>("Register")();
+		}
+	}
 };

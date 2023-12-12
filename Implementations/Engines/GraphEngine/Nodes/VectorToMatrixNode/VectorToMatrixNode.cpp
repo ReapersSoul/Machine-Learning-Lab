@@ -11,7 +11,7 @@
 
 #include <typeinfo>
 
-class DataToMatrixNode : public NodeInterface {
+class DataToMatrixNode : public NS_Node::NodeInterface {
 	int width = 28;
 	int height = 28;
 
@@ -64,7 +64,7 @@ public:
 	}
 
 	nlohmann::json Serialize() override {
-		nlohmann::json data = NodeInterface::Serialize();
+		nlohmann::json data = NS_Node::NodeInterface::Serialize();
 
 		return data;
 	}
@@ -87,7 +87,7 @@ extern "C" {
 	}
 
 	// Define a function that returns the result of adding two numbers
-	EXPORT NodeInterface* GetInstance() {
+	EXPORT NS_Node::NodeInterface* GetInstance() {
 		return new DataToMatrixNode();
 	}
 }

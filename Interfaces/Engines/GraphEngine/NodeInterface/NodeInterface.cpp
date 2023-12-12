@@ -3,35 +3,47 @@
 #include "../Graph/Graph.hpp"
 #include <stack>
 
-namespace NodeInterface {
+namespace NS_Node {
+	void NodeInterface::ResetIO()
+	{
+		for (auto input : Inputs) {
+			input->ClearData();
+		}
+		for (auto output : Outputs) {
+			output->ClearData();
+		}
+	}
 
 	bool NodeInterface::HasInput(unsigned int UID)
 	{
-		return std::find_if(Inputs.begin(), Inputs.end(), [UID](Input IO) {return IO.GetUID() == UID; }) != Inputs.end();
-	}
-
-	void NodeInterface::PrintIOUID() {
-
+		return std::find_if(Inputs.begin(), Inputs.end(), [UID](IO* IO) {return IO->GetUID() == UID; }) != Inputs.end();
 	}
 
 	bool NodeInterface::HasOutput(unsigned int UID)
 	{
-		return std::find_if(Outputs.begin(), Outputs.end(), [UID](Output IO) {return IO.GetUID() == UID; }) != Outputs.end();
+		return std::find_if(Outputs.begin(), Outputs.end(), [UID](IO* IO) {return IO->GetUID() == UID; }) != Outputs.end();
 	}
 
-	void NodeInterface::ChangeIOUID(unsigned int OldUID, unsigned int NewUID)
+	void NodeInterface::ChangeInputUID(unsigned int OldUID, unsigned int NewUID)
 	{
-		if (HasInput(OldUID))
-			Inputs[std::find_if(Inputs.begin(), Inputs.end(), [OldUID](Input IO) {return IO.GetUID() == OldUID; }) - Inputs.begin()].SetUID(NewUID);
-		if (HasOutput(OldUID))
-			Outputs[std::find_if(Outputs.begin(), Outputs.end(), [OldUID](Output IO) {return IO.GetUID() == OldUID; }) - Outputs.begin()].SetUID(NewUID);
+		if (HasInput(OldUID)) {
+			auto it = std::find_if(Inputs.begin(), Inputs.end(), [OldUID](IO* IO) {return IO->GetUID() == OldUID; });
+			(*it)->SetUID(NewUID);
+		}
 
-
-		std::vector<EdgeInterface*>::iterator inputEdge = std::find_if(InputEdges.begin(), InputEdges.end(), [OldUID](EdgeInterface* Edge) {return Edge->GetSecondIO()->GetUID() == OldUID; });
+		std::vector<Edge*>::iterator inputEdge = std::find_if(InputEdges.begin(), InputEdges.end(), [OldUID](Edge* Edge) {return Edge->GetSecondIO() == OldUID; });
 		if (inputEdge != InputEdges.end())
 			(*inputEdge)->SetSecondIO(NewUID);
+	}
 
-		std::vector<EdgeInterface*>::iterator outputEdge = std::find_if(OutputEdges.begin(), OutputEdges.end(), [OldUID](EdgeInterface* Edge) {return Edge->GetFirstIO()->GetUID() == OldUID; });
+	void NodeInterface::ChangeOutputUID(unsigned int OldUID, unsigned int NewUID)
+	{
+		if (HasOutput(OldUID)) {
+			auto it = std::find_if(Outputs.begin(), Outputs.end(), [OldUID](IO* IO) {return IO->GetUID() == OldUID; });
+			(*it)->SetUID(NewUID);
+		}
+
+		std::vector<Edge*>::iterator outputEdge = std::find_if(OutputEdges.begin(), OutputEdges.end(), [OldUID](Edge* Edge) {return Edge->GetFirstIO() == OldUID; });
 		if (outputEdge != OutputEdges.end())
 			(*outputEdge)->SetFirstIO(NewUID);
 	}
@@ -105,25 +117,40 @@ namespace NodeInterface {
 		this->TypeID = TypeID;
 	}
 
-	void NodeInterface::MakeLine(Input Input, Attribute* Attribute, Output Output)
+	unsigned int NodeInterface::MakeInput(unsigned int TypeID, std::function<void()> DrawFunction)
+	{
+		return ParentGraph->CreateInput(TypeID, DrawFunction);
+	}
+
+	unsigned int NodeInterface::MakeOutput(unsigned int TypeID, std::function<void()> DrawFunction)
+	{
+		return ParentGraph->CreateOutput(TypeID, DrawFunction);
+	}
+
+	unsigned int NodeInterface::MakeAttribute(Attribute* Attribute)
+	{
+		Attributes.push_back(Attribute);
+		return Attributes.size() - 1;
+	}
+
+	void NodeInterface::MakeLine(unsigned int Input, unsigned int Attribute, unsigned int Output)
 	{
 		Line line;
-		if (Input.GetUID() != -1) {
-			Inputs.push_back(Input);
-			line.InputUID = Input.GetUID();
-		}
-		if (Attribute != nullptr) {
-			Attributes.push_back(Attribute);
-			line.AttributeIndex = Attributes.size() - 1;
-		}
-		if (Output.GetUID() != -1) {
-			Outputs.push_back(Output);
-			line.OutputUID = Output.GetUID();
-		}
+		line.InputUID = Input;
+		line.AttributeIndex = Attribute;
+		line.OutputUID = Output;
 		Lines.push_back(line);
 	}
 
-	std::vector<EdgeInterface*>& NodeInterface::GetInputEdges() {
+	int NodeInterface::GetLineCount() {
+		return Lines.size();
+	}
+
+	std::vector<NodeInterface::Line>& NodeInterface::GetLines() {
+		return Lines;
+	}
+
+	std::vector<Edge*>& NodeInterface::GetInputEdges() {
 		return InputEdges;
 	}
 
@@ -131,34 +158,44 @@ namespace NodeInterface {
 		return Attributes;
 	}
 
-	Input* NodeInterface::GetInputByUID(unsigned int UID)
+	IO* NodeInterface::GetInputByUID(unsigned int UID)
 	{
-		std::vector<Input>::iterator it = std::find_if(Inputs.begin(), Inputs.end(), [UID](Input IO) {return IO.GetUID() == UID; });
+		std::vector<IO*>::iterator it = std::find_if(Inputs.begin(), Inputs.end(), [UID](IO* IO) {return IO->GetUID() == UID; });
 		if (it != Inputs.end()) {
-			return &(*it);
+			return (*it);
 		}
 		return nullptr;
 	}
 
-	Output* NodeInterface::GetOutputByUID(unsigned int UID)
+	IO* NodeInterface::GetInputByLine(unsigned int LineIndex)
 	{
-		std::vector<Output>::iterator it = std::find_if(Outputs.begin(), Outputs.end(), [UID](Output IO) {return IO.GetUID() == UID; });
+		return Lines[LineIndex].InputUID == -1 ? nullptr : Inputs[Lines[LineIndex].InputUID];
+	}
+
+	IO* NodeInterface::GetOutputByUID(unsigned int UID)
+	{
+		std::vector<IO*>::iterator it = std::find_if(Outputs.begin(), Outputs.end(), [UID](IO* IO) {return IO->GetUID() == UID; });
 		if (it != Outputs.end()) {
-			return &(*it);
+			return (*it);
 		}
 		return nullptr;
 	}
 
-	std::vector<EdgeInterface*>& NodeInterface::GetOutputEdges() {
+	IO* NodeInterface::GetOutputByLine(unsigned int LineIndex)
+	{
+		return Lines[LineIndex].OutputUID == -1 ? nullptr : Outputs[Lines[LineIndex].OutputUID];
+	}
+
+	std::vector<Edge*>& NodeInterface::GetOutputEdges() {
 		return OutputEdges;
 	}
 
-	std::vector<Input>& NodeInterface::GetInputs()
+	std::vector<IO*>& NodeInterface::GetInputs()
 	{
 		return Inputs;
 	}
 
-	std::vector<Output>& NodeInterface::GetOutputs()
+	std::vector<IO*>& NodeInterface::GetOutputs()
 	{
 		return Outputs;
 	}
@@ -209,10 +246,10 @@ namespace NodeInterface {
 		//set Description?
 
 		for (auto inputEdge : data["InputEdges"]) {
-			InputEdges.push_back(ParentGraph->GetEdges()[inputEdge]);
+			InputEdges.push_back(&ParentGraph->GetEdges()[inputEdge]);
 		}
 		for (auto outputEdge : data["OutputEdges"]) {
-			OutputEdges.push_back(ParentGraph->GetEdges()[outputEdge]);
+			OutputEdges.push_back(&ParentGraph->GetEdges()[outputEdge]);
 		}
 	}
 }

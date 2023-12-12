@@ -1,0 +1,5 @@
+project(IO)
+
+set(CMAKE_CXX_STANDARD 20)
+
+add_library(${PROJECT_NAME} INTERFACE ${PROJECT_NAME}.hpp)

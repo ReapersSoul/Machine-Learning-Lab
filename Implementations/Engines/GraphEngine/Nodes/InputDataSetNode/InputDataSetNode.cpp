@@ -8,7 +8,7 @@
 #include <string>
 
 
-class InputDataSetNode : public NodeInterface {
+class InputDataSetNode : public NS_Node::NodeInterface {
     std::vector<double> values = { 0 };
 public:
     InputDataSetNode() {
@@ -46,13 +46,13 @@ public:
 
     //void DrawNodeTitle();
 
-    NodeInterface* GetInstance() {
+    NS_Node::NodeInterface* GetInstance() {
         InputDataSetNode* node = new InputDataSetNode();
         return node;
     }
 
     nlohmann::json Serialize() override {
-        nlohmann::json data = NodeInterface::Serialize();
+        nlohmann::json data = NS_Node::NodeInterface::Serialize();
 
         //values
         data["values"] = nlohmann::json::array();
@@ -64,7 +64,7 @@ public:
     }
 
     void DeSerialize(nlohmann::json data, void* DCEE) override {
-        NodeInterface::DeSerialize(data, DCEE);
+        NS_Node::NodeInterface::DeSerialize(data, DCEE);
 
 		//values
 		values.clear();
@@ -96,7 +96,7 @@ extern "C" {
 	}
 
     // Define a function that returns the result of adding two numbers
-    EXPORT NodeInterface* GetInstance() {
+    EXPORT NS_Node::NodeInterface* GetInstance() {
         return new InputDataSetNode();
     }
 }

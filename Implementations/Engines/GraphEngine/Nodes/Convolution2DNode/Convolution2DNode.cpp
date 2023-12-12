@@ -35,7 +35,7 @@ struct CustomException : public std::exception {
 	}
 };
 
-class Convolution2DNode : public NodeInterface {
+class Convolution2DNode : public NS_Node::NodeInterface {
 	std::vector<double> K;
 	std::vector<double> Y;
 	std::vector<double> X;
@@ -669,7 +669,7 @@ public:
 	}
 
 	nlohmann::json Serialize() override {
-		nlohmann::json data = NodeInterface::Serialize();
+		nlohmann::json data = NS_Node::NodeInterface::Serialize();
 
 		//stride
 		data["Stride"]["X"] = stride.x;
@@ -774,7 +774,7 @@ extern "C" {
 	}
 
 	// Define a function that returns the result of adding two numbers
-	EXPORT NodeInterface* GetInstance() {
+	EXPORT NS_Node::NodeInterface* GetInstance() {
 		return new Convolution2DNode();
 	}
 }

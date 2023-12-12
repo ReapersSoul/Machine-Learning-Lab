@@ -233,7 +233,7 @@ public:
 	}
 };
 
-class KinectNode : public NodeInterface {
+class KinectNode : public NS_Node::NodeInterface {
 	std::vector<glm::vec4> joints;
 	float angle = 0;
 
@@ -425,7 +425,7 @@ public:
 	}
 
 	nlohmann::json Serialize() override {
-		nlohmann::json data = NodeInterface::Serialize();
+		nlohmann::json data = NS_Node::NodeInterface::Serialize();
 
 		return data;
 	}
@@ -451,7 +451,7 @@ extern "C" {
 	}
 
 	// Define a function that returns the result of adding two numbers
-	EXPORT NodeInterface* GetInstance() {
+	EXPORT NS_Node::NodeInterface* GetInstance() {
 		if (sensor == NULL) {
 			initKinect();
 		}

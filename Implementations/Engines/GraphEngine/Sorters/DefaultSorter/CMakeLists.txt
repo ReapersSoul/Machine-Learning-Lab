@@ -30,20 +30,12 @@ set(IMPLEMENTATIONS_PATH ${CMAKE_CURRENT_SOURCE_DIR}${ESCAPE_DEPTH}Implementatio
 set(ENGINE_IN_PATH ${INTERFACE_PATH}Engines/)
 set(ENGINE_IM_PATH ${IMPLEMENTATIONS_PATH}Engines/)
 
-target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/DynamicCodeExecutionEngine/DynamicCodeExecutionEngineInterface/)
-target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/DynamicCodeExecutionEngine/ScriptInterface/)
 target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/GraphEngineInterface/)
-target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/Graph/)
-target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/NodeInterface/)
 target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/SorterInterface/)
-target_link_libraries(${PROJECT_NAME} PUBLIC DynamicCodeExecutionEngineInterface)
-target_link_libraries(${PROJECT_NAME} PUBLIC GraphEngineInterface)
-target_link_libraries(${PROJECT_NAME} PUBLIC Graph)
-target_link_libraries(${PROJECT_NAME} PUBLIC ScriptInterface)
-target_link_libraries(${PROJECT_NAME} PUBLIC NodeInterface)
 target_link_libraries(${PROJECT_NAME} PUBLIC SorterInterface)
-target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/DynamicCodeExecutionEngine/Languages/LanguageInterface/)
-target_link_libraries(${PROJECT_NAME} PUBLIC LanguageInterface)
+target_link_libraries(${PROJECT_NAME} PUBLIC Edge)
+target_link_libraries(${PROJECT_NAME} PUBLIC NodeInterface)
+target_link_libraries(${PROJECT_NAME} PUBLIC Graph)
 
 
 # Output directory
@@ -51,6 +43,4 @@ set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG 
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/Runtime/Release/Machine-Learning-Lab/Core/Graph/Sorters/)
 set_target_properties(${PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/Runtime/Debug/Machine-Learning-Lab/Core/Graph/Sorters/)
 set_target_properties(${PROJECT_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/Runtime/Release/Machine-Learning-Lab/Core/Graph/Sorters/)
-
-
 

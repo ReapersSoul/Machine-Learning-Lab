@@ -9,7 +9,7 @@
 
 #include <typeinfo>
 
-class ViewNode : public NodeInterface {
+class ViewNode : public NS_Node::NodeInterface {
 	std::string display;
 public:
 	ViewNode() {
@@ -18,25 +18,20 @@ public:
 
 	void Process(bool DirectionForward) override {
 		if (DirectionForward) {
-			if (!GetInputDataByIndex(0).is_null()) {
-				if (!GetInputDataByIndex(0).empty()) {
-					display = GetInputDataByIndex(0).dump(4).c_str();
-				}
-			}
+			std::vector<NS_DataObject::DataObjectInterface*> input = GetInputByLine(0)->GetData();
+			
 		}
 		else {
-			if (!GetOutputDataByIndex(0).is_null()) {
-				if (!GetOutputDataByIndex(0).empty()) {
-					display = GetOutputDataByIndex(0).dump(4).c_str();
-				}
-			}
+			std::vector<NS_DataObject::DataObjectInterface*> output = GetOutputByLine(0)->GetData();
+			
 		}
 	}
 
 	void Init() override {
-		MakeInput(0, "Input", "Any", nlohmann::json::array());
-		MakeOutput(0, "Input", "Any", nlohmann::json::array());
-		MakeAttribute(0, new Attribute([this]() {
+		unsigned int input = MakeInput(NS_DataObject::GetTypeID("Any"), []() {
+			ImGui::Text("Input");
+			});
+		unsigned int attribute = MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			//scrollable region
 			if (ImGui::BeginChild("scrolling", ImVec2(300, 300), false, ImGuiWindowFlags_HorizontalScrollbar||ImGuiWindowFlags_AlwaysVerticalScrollbar)){
@@ -46,6 +41,11 @@ public:
 			ImGui::EndChild();
 
 			}));
+		unsigned int output = MakeOutput(NS_DataObject::GetTypeID("Any"), []() {
+			ImGui::Text("Output");
+			});
+
+		MakeLine(input, attribute, output);
 	}
 
 	void StandAloneInit() {
@@ -62,7 +62,7 @@ public:
 	}
 
 	nlohmann::json Serialize() override {
-		nlohmann::json data = NodeInterface::Serialize();
+		nlohmann::json data = NS_Node::NodeInterface::Serialize();
 		return data;
 	}
 
@@ -78,7 +78,7 @@ extern "C" {
 	}
 
 	// Define a function that returns the result of adding two numbers
-	EXPORT NodeInterface* GetInstance() {
+	EXPORT NS_Node::NodeInterface* GetInstance() {
 		return new ViewNode();
 	}
 }

@@ -11,7 +11,7 @@
 
 #include <typeinfo>
 
-class UniqueNode : public NodeInterface {
+class UniqueNode : public NS_Node::NodeInterface {
 public:
 	UniqueNode() {
 		TypeID = "UniqueNode";
@@ -19,33 +19,22 @@ public:
 
 	void Process(bool DirectionForward) override {
 		if (DirectionForward) {
-			nlohmann::json data = nlohmann::json::object();
-			//find all unique values in the input
-			nlohmann::json input = GetInputDataByIndex(0)[0]["Data"];
-			nlohmann::json output= std::vector<nlohmann::json>();
-
-			for (auto& element : input) {
-				bool found = false;
-				for (auto& element2 : output) {
-					if (element == element2) {
-						found = true;
-						break;
-					}
-				}
-				if (!found) {
-					output.push_back(element);
-				}
-			}
-
-			data["Data"] = output;
-			data["Type"] = "Vector";
-			GetOutputDataByIndex(0) = data;
+			NS_DataObject::DataObjectInterface* input=GetInputByLine(0)->GetData(0);
+		}
+		else {
+			NS_DataObject::DataObjectInterface* output=GetOutputByLine(0)->GetData(0);
 		}
 	}
 
 	void Init() override {
-		MakeInput(0, "Input", "Any", {});
-		MakeOutput(0, "Output", "Any", {});
+		unsigned int input = MakeInput(NS_DataObject::GetTypeID("Any"), []() {
+			ImGui::Text("Input");
+			});
+		unsigned int output = MakeOutput(NS_DataObject::GetTypeID("Any"), []() {
+			ImGui::Text("Output");
+			});
+
+		MakeLine(input, -1, output);
 	}
 
 	void Update() override {
@@ -53,7 +42,7 @@ public:
 	}
 
 	nlohmann::json Serialize() override {
-		nlohmann::json data = NodeInterface::Serialize();
+		nlohmann::json data = NS_Node::NodeInterface::Serialize();
 
 		return data;
 	}
@@ -76,7 +65,7 @@ extern "C" {
 	}
 
 	// Define a function that returns the result of adding two numbers
-	EXPORT NodeInterface* GetInstance() {
+	EXPORT NS_Node::NodeInterface* GetInstance() {
 		return new UniqueNode();
 	}
 }

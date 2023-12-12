@@ -79,7 +79,7 @@ public:
 	void CallFunction(const char* name, std::vector<void*> args, std::vector<std::string> types, void* ret) override {
 	}
 
-	class ScriptNode : public ScriptInterface, public NodeInterface {};
+	class ScriptNode : public ScriptInterface, public NS_Node::NodeInterface {};
 
 	//Activation
 	double Activation_Activate(double input) override {

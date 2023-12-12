@@ -9,7 +9,7 @@
 
 #include <typeinfo>
 
-class DelayOutputNode : public NodeInterface {
+class DelayOutputNode : public NS_Node::NodeInterface {
 	int DelaySteps = 1;
 	int Type = 0;
 	int LastType = 0;
@@ -46,7 +46,7 @@ public:
 	}
 
 	nlohmann::json Serialize() override {
-		nlohmann::json data = NodeInterface::Serialize();
+		nlohmann::json data = NS_Node::NodeInterface::Serialize();
 
 		data["DelaySteps"] = DelaySteps;
 		data["Type"] = Type;
@@ -97,7 +97,7 @@ extern "C" {
 	}
 
 	// Define a function that returns the result of adding two numbers
-	EXPORT NodeInterface* GetInstance() {
+	EXPORT NS_Node::NodeInterface* GetInstance() {
 		return new DelayOutputNode();
 	}
 }

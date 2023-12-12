@@ -11,7 +11,7 @@
 
 #include <typeinfo>
 
-class ColumnNode : public NodeInterface {
+class ColumnNode : public NS_Node::NodeInterface {
 	std::string ColumnName;
 public:
 	ColumnNode() {
@@ -52,7 +52,7 @@ public:
 	}
 
 	nlohmann::json Serialize() override {
-		nlohmann::json data = NodeInterface::Serialize();
+		nlohmann::json data = NS_Node::NodeInterface::Serialize();
 		data["ColumnName"] = ColumnName;
 		return data;
 	}
@@ -73,7 +73,7 @@ public:
 
 extern "C" {
 	// Define a function that returns the result of adding two numbers
-	EXPORT NodeInterface* GetInstance() {
+	EXPORT NS_Node::NodeInterface* GetInstance() {
 		return new ColumnNode();
 	}
 	EXPORT std::string GetTypeID() {

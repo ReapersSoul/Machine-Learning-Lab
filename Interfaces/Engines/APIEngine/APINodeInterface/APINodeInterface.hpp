@@ -1,6 +1,6 @@
 #include "../NodeInterface/NodeInterface.hpp"
 
-class APINodeInterface : public NodeInterface
+class APINodeInterface : public NS_Node::NodeInterface
 {
 public:
 	virtual void SetIO(nlohmann::json IO) = 0;

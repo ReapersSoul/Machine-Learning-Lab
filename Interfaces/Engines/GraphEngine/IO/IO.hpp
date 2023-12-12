@@ -15,15 +15,15 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-class Input {
+class IO {
+	unsigned int ParentNodeUID=-1;
 	unsigned int UID=-1;
 	unsigned int TypeID=0;
-	std::vector<DataObjectInterface::DataObjectInterface*> Data;
+	std::vector<NS_DataObject::DataObjectInterface*> Data;
 	std::function<void()> m_DrawFunction;
 public:
-
-	Input()=default;
-	Input(unsigned int UID,unsigned int TypeID) {
+	IO()=default;
+	IO(unsigned int UID,unsigned int TypeID) {
 		this->UID = UID;
 		this->TypeID = TypeID;
 	}
@@ -54,21 +54,49 @@ public:
 		return UID;
 	}
 
-	void AddData(DataObjectInterface::DataObjectInterface* Data) {
+	void SetParentNodeUID(unsigned int ParentNodeUID) {
+		this->ParentNodeUID = ParentNodeUID;
+	}
+
+	unsigned int GetParentNodeUID() {
+		return ParentNodeUID;
+	}
+
+	void AddData(NS_DataObject::DataObjectInterface* Data) {
 		if(Data==nullptr) throw std::runtime_error("Data is nullptr");
 		if(Data->GetTypeID()!=TypeID) throw std::runtime_error("Data type mismatch");
 		this->Data.push_back(Data);
 	}
 
-	void RemoveData(DataObjectInterface::DataObjectInterface* Data) {
+	void RemoveData(NS_DataObject::DataObjectInterface* Data) {
 		if(Data==nullptr) throw std::runtime_error("Data is nullptr");
-		std::vector<DataObjectInterface::DataObjectInterface*>::iterator it = std::find(this->Data.begin(), this->Data.end(), Data);
+		std::vector<NS_DataObject::DataObjectInterface*>::iterator it = std::find(this->Data.begin(), this->Data.end(), Data);
 		if(it==this->Data.end()) throw std::runtime_error("Data not found");
 		this->Data.erase(it);
 	}
 
-	std::vector<DataObjectInterface::DataObjectInterface*>& GetData() {
+	std::vector<NS_DataObject::DataObjectInterface*>& GetData() {
 		return Data;
+	}
+
+	NS_DataObject::DataObjectInterface* GetData(unsigned int Index) {
+		if(Index>=Data.size()) throw std::runtime_error("Index out of range");
+		return Data[Index];
+	}
+
+	template<typename T>
+	std::vector<T*> GetData() {
+		std::vector<T*> Data;
+		for (NS_DataObject::DataObjectInterface* DataObject : this->Data) {
+			Data.push_back(dynamic_cast<T*>(DataObject));
+		}
+		return Data;
+	}
+
+	template<typename T>
+	T* GetData(unsigned int Index) {
+		if(Index>=Data.size()) throw std::runtime_error("Index out of range");
+		return dynamic_cast<T*>(Data[Index]);
 	}
 
 	void ClearData() {

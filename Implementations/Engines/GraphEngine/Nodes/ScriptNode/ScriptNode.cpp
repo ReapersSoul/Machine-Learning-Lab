@@ -7,7 +7,7 @@
 #include <NodeInterface.hpp>
 #include <string>
 
-class ScriptNode : public ScriptInterface,public NodeInterface {
+class ScriptNode : public ScriptInterface,public NS_Node::NodeInterface {
     
 
     ScriptNode(std::string scriptPath)
@@ -54,7 +54,7 @@ public:
 		}
 	}
 
-    NodeInterface* GetInstance() {
+    NS_Node::NodeInterface* GetInstance() {
         ScriptNode* node = new ScriptNode();
         if (path != "") {
             node->SetPath(path);
@@ -63,7 +63,7 @@ public:
     }
 
     nlohmann::json Serialize() override {
-        nlohmann::json data = NodeInterface::Serialize();
+        nlohmann::json data = NS_Node::NodeInterface::Serialize();
 
         data["Language"] = Language->GetName();
 
@@ -73,7 +73,7 @@ public:
     }
 
     void DeSerialize(nlohmann::json data, void* DCEE) override {
-        NodeInterface::DeSerialize(data, DCEE);
+        NS_Node::NodeInterface::DeSerialize(data, DCEE);
 
         Language = DCEEngine->GetLanguage(data["Language"]);
 
@@ -87,8 +87,8 @@ extern "C" {
         return "ScriptNode";
     }
 
-    EXPORT NodeInterface* GetInstance() {
+    EXPORT NS_Node::NodeInterface* GetInstance() {
         ScriptNode* node = new ScriptNode();
-        return dynamic_cast<NodeInterface*>(node);
+        return dynamic_cast<NS_Node::NodeInterface*>(node);
     }
 }

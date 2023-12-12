@@ -4,7 +4,7 @@
 #include <math.h>
 #include <filesystem>
 
-class ScriptActivation : public ScriptInterface, public ActivationInterface
+class ScriptActivation : public ScriptInterface, public NS_Activation::ActivationInterface
 {
 
     ScriptActivation(std::string scriptPath)
@@ -57,7 +57,7 @@ public:
 
 extern "C" {
     // Define a function that returns the result of adding two numbers
-    EXPORT ActivationInterface* GetInstance() {
+    EXPORT NS_Activation::ActivationInterface* GetInstance() {
         return new ScriptActivation();
     }
 }

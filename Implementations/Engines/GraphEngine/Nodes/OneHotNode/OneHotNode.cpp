@@ -11,7 +11,7 @@
 
 #include <typeinfo>
 
-class OneHotNode : public NodeInterface {
+class OneHotNode : public NS_Node::NodeInterface {
 public:
 	OneHotNode() {
 		TypeID = "OneHotNode";
@@ -19,32 +19,24 @@ public:
 
 	void Process(bool DirectionForward) override {
 		if (DirectionForward) {
-			std::vector<double> output(GetInputDataByIndex(1)[0]["Data"].size(), 0.0);
-			for (int i = 0; i < output.size(); i++)
-			{
-				if (GetInputDataByIndex(0)[0]["Data"].is_array()) {
-					if (GetInputDataByIndex(0)[0]["Data"][0] == GetInputDataByIndex(1)[0]["Data"][i])
-						output[i] = 1.0;
-					else
-						output[i] = 0.0;
-				}
-				else {
-					if (GetInputDataByIndex(0)[0]["Data"] == GetInputDataByIndex(1)[0]["Data"][i])
-						output[i] = 1.0;
-					else
-						output[i] = 0.0;
-				}
-			}
-			GetOutputDataByIndex(0)=nlohmann::json::object();
-			GetOutputDataByIndex(0)["Data"] = output;
-			GetOutputDataByIndex(0)["Type"] = "Vector";
+			NS_DataObject::DataObjectInterface* input = GetInputByLine(0)->GetData(0);
+			
 		}
 	}
 
 	void Init() override {
-		MakeInput(0, "Input", "Any", nlohmann::json::array());
-		MakeInput(1, "Dictionary", "Any", nlohmann::json::array());
-		MakeOutput(0, "Output", "Any", nlohmann::json::array());
+		unsigned int input = MakeInput(NS_DataObject::GetTypeID("Any"), []() {
+			ImGui::Text("Input");
+			});
+		unsigned int input2 = MakeInput(NS_DataObject::GetTypeID("Any"), []() {
+			ImGui::Text("Dictionary");
+			});
+		unsigned int output = MakeOutput(NS_DataObject::GetTypeID("Any"), []() {
+			ImGui::Text("Output");
+			});
+
+		MakeLine(input,-1, output);
+		MakeLine(input2, -1,-1);
 	}
 
 	void Update() override {
@@ -52,7 +44,7 @@ public:
 	}
 
 	nlohmann::json Serialize() override {
-		nlohmann::json data = NodeInterface::Serialize();
+		nlohmann::json data = NS_Node::NodeInterface::Serialize();
 
 		return data;
 	}
@@ -75,7 +67,7 @@ extern "C" {
 	}
 
 	// Define a function that returns the result of adding two numbers
-	EXPORT NodeInterface* GetInstance() {
+	EXPORT NS_Node::NodeInterface* GetInstance() {
 		return new OneHotNode();
 	}
 }

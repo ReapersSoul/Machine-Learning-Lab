@@ -1,7 +1,6 @@
 #pragma once
 #include "../../../SerializableInterface/SerializableInterface.hpp"
-#include "../Input/Input.hpp"
-#include "../Output/Output.hpp"
+#include "../IO/IO.hpp"
 
 //imgui
 #define IMGUI_DEFINE_MATH_OPERATORS
@@ -21,21 +20,23 @@ class DynamicCodeExecutionEngineInterface;
 class ActivationEngineInterface;
 class LossEngineInterface;
 
-namespace NodeInterface {
+namespace NS_Node {
 	static std::unordered_map<std::string, unsigned int> TypeIDs = { {"Invalid", 0} };
 	static std::unordered_map<unsigned int, std::string> TypeIDsReverse = { {0, "Invalid"} };
-	void RegisterType(std::string TypeID) {
+	static unsigned int RegisterType(std::string TypeID) {
 		if (TypeIDs.find(TypeID) != TypeIDs.end()) throw std::runtime_error("TypeID already registered");
-		TypeIDs[TypeID] = std::hash<std::string>{}(TypeID);
-		TypeIDsReverse[std::hash<std::string>{}(TypeID)] = TypeID;
+		unsigned int UID = std::hash<std::string>{}(TypeID);
+		TypeIDs[TypeID] = UID;
+		TypeIDsReverse[UID] = TypeID;
+		return UID;
 	}
-	unsigned int GetTypeID(std::string TypeID) {
+	static unsigned int GetTypeID(std::string TypeID) {
 		return TypeIDs[TypeID];
 	}
-	std::string GetTypeID(unsigned int TypeID) {
+	static std::string GetTypeID(unsigned int TypeID) {
 		return TypeIDsReverse[TypeID];
 	}
-	bool TypeIDExists(std::string TypeID) {
+	static bool TypeIDExists(std::string TypeID) {
 		return TypeIDs.find(TypeID) != TypeIDs.end();
 	}
 
@@ -50,9 +51,9 @@ namespace NodeInterface {
 		bool IsOutput;
 		bool Visited;
 
-		std::vector<Input> Inputs;
+		std::vector<IO*> Inputs;
 		std::vector<Attribute*> Attributes;
-		std::vector<Output> Outputs;
+		std::vector<IO*> Outputs;
 
 		std::vector<Edge*> InputEdges;
 		std::vector<Edge*> OutputEdges;
@@ -68,13 +69,15 @@ namespace NodeInterface {
 		ActivationEngineInterface* AE;
 		LossEngineInterface* LE;
 	public:
-		void PrintIOUID();
+		void ResetIO();
 
 		bool HasInput(unsigned int UID);
 
 		bool HasOutput(unsigned int UID);
 
-		void ChangeIOUID(unsigned int OldUID, unsigned int NewUID);
+		void ChangeInputUID(unsigned int OldUID, unsigned int NewUID);
+		
+		void ChangeOutputUID(unsigned int OldUID, unsigned int NewUID);
 
 		void setXY(int x, int y);
 
@@ -110,20 +113,32 @@ namespace NodeInterface {
 
 		void SetTypeID(std::string TypeID);
 
-		void MakeLine(Input Input, Attribute* Attribute, Output Output);
+		unsigned int MakeInput(unsigned int TypeID, std::function<void()> DrawFunction);
+
+		unsigned int MakeOutput(unsigned int TypeID, std::function<void()> DrawFunction);
+
+		unsigned int MakeAttribute(Attribute* Attribute);
+
+		void MakeLine(unsigned int Input, unsigned int Attribute, unsigned int Output);
+
+		int GetLineCount();
+
+		std::vector<Line>& GetLines();
 
 		std::vector<Edge*>& GetInputEdges();
 
 		std::vector<Attribute*>& GetAttributes();
 
-		Input* GetInputByUID(unsigned int UID);
-		Output* GetOutputByUID(unsigned int UID);
+		IO* GetInputByUID(unsigned int UID);
+		IO* GetInputByLine(unsigned int LineIndex);
+		IO* GetOutputByUID(unsigned int UID);
+		IO* GetOutputByLine(unsigned int LineIndex);
 
 		std::vector<Edge*>& GetOutputEdges();
 
-		std::vector<Input>& GetInputs();
+		std::vector<IO*>& GetInputs();
 
-		std::vector<Output>& GetOutputs();
+		std::vector<IO*>& GetOutputs();
 
 		virtual void Init() = 0;
 
@@ -135,7 +150,7 @@ namespace NodeInterface {
 
 		virtual void DrawNodeProperties(ImGuiContext* Context);
 
-		virtual NodeInterface* GetInstance() = 0;
+		virtual NS_Node::NodeInterface* GetInstance() = 0;
 
 		virtual nlohmann::json Serialize();
 		virtual void DeSerialize(nlohmann::json data, void* DCEE);
@@ -145,11 +160,11 @@ namespace NodeInterface {
 	};
 
 	static std::unordered_map<unsigned int, std::function<NodeInterface* ()>> Constructors = { {0, []() {return nullptr; }} };
-	void RegisterConstructor(unsigned int TypeID, std::function<NodeInterface* ()> Constructor) {
+	static void RegisterConstructor(unsigned int TypeID, std::function<NodeInterface* ()> Constructor) {
 		if (Constructors.find(TypeID) != Constructors.end()) throw std::runtime_error("Constructor already registered");
 		Constructors[TypeID] = Constructor;
 	}
-	NodeInterface* Construct(unsigned int TypeID) {
+	static NodeInterface* Construct(unsigned int TypeID) {
 		return Constructors[TypeID]();
 	}
 }

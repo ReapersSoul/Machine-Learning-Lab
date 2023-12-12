@@ -8,7 +8,7 @@
 #include <GLFW/glfw3.h>
 #include <sqlite3.h>
 
-class DatabaseInputNode : public NodeInterface {
+class DatabaseInputNode : public NS_Node::NodeInterface {
 	std::string DatabasePath = "mnist_training.db";
 	std::string sql="SELECT DISTINCT IMAGE, LABEL FROM MNIST_DATA;";
 	nlohmann::json data;
@@ -134,7 +134,7 @@ public:
 	}
 
 	nlohmann::json Serialize() override {
-		nlohmann::json data= NodeInterface::Serialize();
+		nlohmann::json data= NS_Node::NodeInterface::Serialize();
 		data["DatabasePath"] = DatabasePath;
 		data["Sql"] = sql;
 		return data;
@@ -157,7 +157,7 @@ extern "C" {
 	}
 
 	// Define a function that returns the result of adding two numbers
-	EXPORT NodeInterface* GetInstance() {
+	EXPORT NS_Node::NodeInterface* GetInstance() {
 		return new DatabaseInputNode();
 	}
 }

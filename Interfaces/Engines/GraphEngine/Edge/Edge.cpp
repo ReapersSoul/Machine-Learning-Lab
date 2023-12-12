@@ -1,32 +1,24 @@
 #include "Edge.hpp"
+#include "../NodeInterface/NodeInterface.hpp"
 #include "../Graph/Graph.hpp"
+
 
 //#define DEBUG
 
-namespace NodeInterface {
-	class NodeInterface;
-}
-
 Edge::Edge() {
 	UID = 0;
-	TypeID = "Edge";
-	Priority = 0;
 	First = -1;
 	Second = -1;
 	FirstIO = -1;
 	SecondIO = -1;
-	Parent = nullptr;
 }
 
 Edge::Edge(unsigned int First, unsigned int Second, unsigned int FirstIO, unsigned int SecondIO) {
 	UID = 0;
-	TypeID = "Edge";
-	Priority = 0;
 	this->First = First;
 	this->Second = Second;
 	this->FirstIO = FirstIO;
 	this->SecondIO = SecondIO;
-	Parent = nullptr;
 }
 
 void Edge::SetUID(unsigned int UID) {
@@ -35,10 +27,6 @@ void Edge::SetUID(unsigned int UID) {
 
 unsigned int Edge::GetUID() {
 	return UID;
-}
-
-std::string Edge::GetTypeID() {
-	return TypeID;
 }
 
 void Edge::SetFirst(unsigned int First) {
@@ -57,35 +45,25 @@ void Edge::SetSecondIO(unsigned int SecondIO) {
 	this->SecondIO = SecondIO;
 }
 
-void Edge::SetParent(Graph* Parent) {
-	this->Parent = Parent;
+unsigned int Edge::GetFirst() {
+	return First;
 }
 
-Graph* Edge::GetParent() {
-	return Parent;
+unsigned int Edge::GetSecond() {
+	return Second;
 }
 
-NodeInterface::NodeInterface* Edge::GetFirst() {
-	return Parent->GetNodes()[First];
+unsigned int Edge::GetFirstIO() {
+	return FirstIO;
 }
 
-NodeInterface::NodeInterface* Edge::GetSecond() {
-	return Parent->GetNodes()[Second];
-}
-
-Output* Edge::GetFirstIO() {
-	return Parent->GetNodes()[First]->GetOutputByUID(FirstIO);
-}
-
-Input* Edge::GetSecondIO() {
-	return Parent->GetNodes()[Second]->GetInputByUID(SecondIO);
+unsigned int Edge::GetSecondIO() {
+	return SecondIO;
 }
 
 nlohmann::json Edge::Serialize() {
 	nlohmann::json data;
 	data["UID"] = UID;
-	data["TypeID"] = TypeID;
-	data["Priority"] = Priority;
 	data["First"] = First;
 	data["Second"] = Second;
 	data["FirstIO"] = FirstIO;
@@ -95,8 +73,6 @@ nlohmann::json Edge::Serialize() {
 
 void Edge::DeSerialize(nlohmann::json data, void* DCEE) {
 	UID = data["UID"];
-	TypeID = data["TypeID"];
-	Priority = data["Priority"];
 	First = data["First"];
 	Second = data["Second"];
 	FirstIO = data["FirstIO"];

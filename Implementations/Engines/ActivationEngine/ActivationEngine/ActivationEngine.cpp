@@ -1,13 +1,10 @@
 #include "../../../Util/Exports.hpp"
 #include <ActivationEngineInterface.hpp>
+#include <filesystem>
 
 class ActivationEngine : public ActivationEngineInterface
 {
 public:
-	std::vector<ActivationInterface*>& GetAvailableActivations() override {
-		return AvailableActivations;
-	}
-
 	void LoadActivationCore() override {
 		//if the core doesn't have a folder then create one
 		if (!std::filesystem::exists("Core/")) {
@@ -25,25 +22,19 @@ public:
 				if (p.path().extension().string() != ".dll") {
 					continue;
 				}
-			#elif defined(__GNUC__)
-				if (p.path().extension().string() != ".so") {
-					continue;
-				}
-			#endif
-
-			ActivationInterface* activation = DCEEngine->LoadLibrary(p.path().string())->GetInstance<ActivationInterface>();
-			
-			#if defined(_MSC_VER)
 				if (p.path().filename().string() == "ScriptActivation.dll") {
 					continue;
 				}
 			#elif defined(__GNUC__)
+				if (p.path().extension().string() != ".so") {
+					continue;
+				}
 				if (p.path().filename().string() == "ScriptActivation.so") {
 					continue;
 				}
 			#endif
 
-			AvailableActivations.push_back(activation);
+			DCEEngine->LoadLibrary(p.path().string())->Register();
 		}
 	}
 	void LoadActivationPlugins() override {
@@ -69,7 +60,7 @@ public:
 				}
 			#endif
 
-			AvailableActivations.push_back(DCEEngine->LoadLibrary(p.path().string())->GetInstance<ActivationInterface>());
+			DCEEngine->LoadLibrary(p.path().string())->Register();
 		}
 	}
 
@@ -97,16 +88,18 @@ public:
 					if (p.path().extension().string() != language->GetExtension()) {
 						continue;
 					}
+					NS_Activation::ActivationInterface* scriptActivation = DCEEngine->GetOtherLib("ScriptActivation.dll")->GetInstance<NS_Activation::ActivationInterface>();
 				#elif defined(__GNUC__)
 					if (p.path().extension().string() != language->GetExtension()) {
 						continue;
 					}
+					NS_Activation::ActivationInterface* scriptActivation = DCEEngine->GetOtherLib("libScriptActivation.so")->GetInstance<NS_Activation::ActivationInterface>();
 				#endif
 
-				AvailableActivations.push_back(DCEEngine->GetOtherLib("ScriptActivation.dll")->GetInstance<ActivationInterface>());
-				dynamic_cast<ScriptInterface*>(AvailableActivations.back())->SetDCEEngine(DCEEngine);
-				dynamic_cast<ScriptInterface*>(AvailableActivations.back())->SetLanguage(language);
-				dynamic_cast<ScriptInterface*>(AvailableActivations.back())->SetPath(p.path().string());
+				dynamic_cast<ScriptInterface*>(scriptActivation)->SetDCEEngine(DCEEngine);
+				dynamic_cast<ScriptInterface*>(scriptActivation)->SetLanguage(language);
+				dynamic_cast<ScriptInterface*>(scriptActivation)->SetPath(p.path().string());
+				NS_Activation::RegisterActivation(scriptActivation->GetName(), scriptActivation);
 			}
 		}
 	}

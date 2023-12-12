@@ -11,7 +11,7 @@
 
 #include <typeinfo>
 
-class SubGraphNode : public NodeInterface {
+class SubGraphNode : public NS_Node::NodeInterface {
 	Graph * Graph;
 	std::string FilePath;
 
@@ -22,21 +22,22 @@ public:
 
 	void Process(bool DirectionForward) override {
 		if (DirectionForward) {
-			nlohmann::json data = nlohmann::json::object();
-			data["Data"] = GetInputDataByIndex(0)[0]["Data"];
-			data["Type"] = "Vector";
-			GetOutputDataByIndex(0) = data;
+
 		}
 		else {
-			nlohmann::json data = nlohmann::json::object();
-			data["Data"] = GetOutputDataByIndex(0)[0]["Data"];
-			GetInputDataByIndex(0) = data;
+
 		}
 	}
 
 	void Init() override {
-		MakeInput(0, "Input", "Any", {});
-		MakeOutput(0, "Output", "Any", {});
+		unsigned int input = MakeInput(NS_DataObject::GetTypeID("Any"), []() {
+			ImGui::Text("Input");
+			});
+		unsigned int output = MakeOutput(NS_DataObject::GetTypeID("Any"), []() {
+			ImGui::Text("Output");
+			});
+
+		MakeLine(input, -1, output);
 	}
 
 	void Update() override {
@@ -44,7 +45,7 @@ public:
 	}
 
 	nlohmann::json Serialize() override {
-		nlohmann::json data = NodeInterface::Serialize();
+		nlohmann::json data = NS_Node::NodeInterface::Serialize();
 
 		return data;
 	}
@@ -67,7 +68,7 @@ extern "C" {
 	}
 
 	// Define a function that returns the result of adding two numbers
-	EXPORT NodeInterface* GetInstance() {
+	EXPORT NS_Node::NodeInterface* GetInstance() {
 		return new SubGraphNode();
 	}
 }

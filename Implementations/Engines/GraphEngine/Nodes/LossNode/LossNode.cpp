@@ -7,7 +7,7 @@
 #include <string>
 
 
-class LossNode : public NodeInterface {
+class LossNode : public NS_Node::NodeInterface {
 	double value = 0;
 	double target = 0;
 	double derivative = 0;
@@ -82,7 +82,7 @@ public:
 	}
 
 	nlohmann::json Serialize() override {
-		nlohmann::json data = NodeInterface::Serialize();
+		nlohmann::json data = NS_Node::NodeInterface::Serialize();
 
 		data["value"] = value;
 
@@ -161,7 +161,7 @@ extern "C" {
 	}
 
 	// Define a function that returns the result of adding two numbers
-	EXPORT NodeInterface* GetInstance() {
+	EXPORT NS_Node::NodeInterface* GetInstance() {
 		return new LossNode();
 	}
 }

@@ -3,17 +3,12 @@
 
 class LossEngine : public LossEngineInterface
 {
-protected:
-	std::vector<LossInterface*> AvailableLosses;
 public:
 
 	LossEngine() {
 		Name = "LossEngine";
 	}
 
-	std::vector<LossInterface*> &GetAvailableLosses() override{
-		return AvailableLosses;
-	}
 	void LoadLossCore() override {
 		//if the core doesn't have a folder then create one
 		if (!std::filesystem::exists("Core/")) {
@@ -36,7 +31,7 @@ public:
 					continue;
 				}
 			#endif
-			LossInterface* loss = DCEEngine->LoadLibrary(p.path().string())->GetInstance<LossInterface>();
+			NS_Loss::LossInterface* loss = DCEEngine->LoadLibrary(p.path().string())->GetInstance<NS_Loss::LossInterface>();
 
 			#if defined(_MSC_VER)
 				if (p.path().filename().string() == "ScriptLoss.dll") {
@@ -48,7 +43,7 @@ public:
 				}
 			#endif
 
-			AvailableLosses.push_back(loss);
+			DCEEngine->LoadLibrary(p.path().string())->Register();
 		}
 	}
 	void LoadLossPlugins()override {
@@ -74,7 +69,7 @@ public:
 				}
 			#endif
 
-			AvailableLosses.push_back(DCEEngine->LoadLibrary(p.path().string())->GetInstance<LossInterface>());
+			DCEEngine->LoadLibrary(p.path().string())->Register();
 		}
 	}
 	void LoadLossScripts() override {
@@ -101,16 +96,18 @@ public:
 					if (p.path().extension().string() != language->GetExtension()) {
 						continue;
 					}
-					AvailableLosses.push_back(DCEEngine->GetOtherLib("ScriptLoss.dll")->GetInstance<LossInterface>());
+					NS_Loss::LossInterface* scriptLoss = DCEEngine->GetOtherLib("ScriptLoss.dll")->GetInstance<NS_Loss::LossInterface>();
 				#elif defined(__GNUC__)
 					if (p.path().extension().string() != language->GetExtension()) {
 						continue;
 					}
-					AvailableLosses.push_back(DCEEngine->GetOtherLib("libScriptLoss.so")->GetInstance<LossInterface>());
+					NS_Loss::LossInterface* scriptLoss = DCEEngine->GetOtherLib("libScriptLoss.so")->GetInstance<NS_Loss::LossInterface>();
 				#endif
-				dynamic_cast<ScriptInterface*>(AvailableLosses.back())->SetDCEEngine(DCEEngine);
-				dynamic_cast<ScriptInterface*>(AvailableLosses.back())->SetLanguage(language);
-				dynamic_cast<ScriptInterface*>(AvailableLosses.back())->SetPath(p.path().string());
+				
+				dynamic_cast<ScriptInterface*>(scriptLoss)->SetDCEEngine(DCEEngine);
+				dynamic_cast<ScriptInterface*>(scriptLoss)->SetLanguage(language);
+				dynamic_cast<ScriptInterface*>(scriptLoss)->SetPath(p.path().string());
+				NS_Loss::RegisterLoss(scriptLoss->GetName(), scriptLoss);
 			}
 		}
 	}

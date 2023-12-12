@@ -9,7 +9,7 @@
 #include <string>
 #include <glm/glm.hpp>
 
-class LossDataSetNode : public NodeInterface {
+class LossDataSetNode : public NS_Node::NodeInterface {
 	std::vector<double> values = { 0 };
 	std::vector<double> targets = { 0 };
 	std::vector<double> derivatives = { 0 };
@@ -202,7 +202,7 @@ public:
 	}
 
 	nlohmann::json Serialize() override {
-		nlohmann::json data = NodeInterface::Serialize();
+		nlohmann::json data = NS_Node::NodeInterface::Serialize();
 
 		return data;
 	}
@@ -221,7 +221,7 @@ extern "C" {
 	}
 
 	// Define a function that returns the result of adding two numbers
-	EXPORT NodeInterface* GetInstance() {
+	EXPORT NS_Node::NodeInterface* GetInstance() {
 		return new LossDataSetNode();
 	}
 }

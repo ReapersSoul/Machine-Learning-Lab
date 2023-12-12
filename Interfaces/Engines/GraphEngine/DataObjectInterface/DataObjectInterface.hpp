@@ -4,23 +4,43 @@
 #include <typeinfo>
 #include <functional>
 #include <stdexcept>
+namespace NS_DataObject {
+	struct ConversionDescriptor {
+		unsigned int From;
+		unsigned int To;
 
+		bool operator==(const ConversionDescriptor& other) const
+		{
+			return From == other.From && To == other.To;
+		}
+	};
+}
 
-namespace DataObjectInterface {
+template <>
+struct std::hash<NS_DataObject::ConversionDescriptor>
+{
+	std::size_t operator()(const NS_DataObject::ConversionDescriptor& k) const
+	{
+		return ((std::hash<unsigned int>()(k.From)
+						^ (std::hash<unsigned int>()(k.To) << 1)) >> 1);
+	}
+};
+
+namespace NS_DataObject {
 	static std::unordered_map<std::string, unsigned int> TypeIDs={{"Invalid", 0}};
 	static std::unordered_map<unsigned int, std::string> TypeIDsReverse={{0, "Invalid"}};
-	void RegisterType(std::string TypeID) {
+	static void RegisterType(std::string TypeID) {
 		if(TypeIDs.find(TypeID) != TypeIDs.end()) throw std::runtime_error("TypeID already registered");
 		TypeIDs[TypeID] = std::hash<std::string>{}(TypeID);
 		TypeIDsReverse[std::hash<std::string>{}(TypeID)] = TypeID;
 	}
-	unsigned int GetTypeID(std::string TypeID) {
+	static unsigned int GetTypeID(std::string TypeID) {
 		return TypeIDs[TypeID];
 	}
-	std::string GetTypeID(unsigned int TypeID) {
+	static std::string GetTypeID(unsigned int TypeID) {
 		return TypeIDsReverse[TypeID];
 	}
-	bool TypeIDExists(std::string TypeID) {
+	static bool TypeIDExists(std::string TypeID) {
 		return TypeIDs.find(TypeID) != TypeIDs.end();
 	}
 
@@ -63,17 +83,13 @@ namespace DataObjectInterface {
 		}
 	};
 
-	struct ConversionDescriptor {
-		unsigned int From;
-		unsigned int To;
-	};
 	static std::unordered_map<ConversionDescriptor, std::function<DataObjectInterface* (DataObjectInterface*, unsigned int)>> ConversionFunctions;
-	void RegisterConversion(ConversionDescriptor CD, std::function<DataObjectInterface* (DataObjectInterface*, unsigned int)> ConversionFunction) {
+	static void RegisterConversion(ConversionDescriptor CD, std::function<DataObjectInterface* (DataObjectInterface*, unsigned int)> ConversionFunction) {
 		if (CD.From == 0 || CD.To == 0) throw std::runtime_error("Invalid ConversionDescriptor");
 		if(ConversionFunctions.find(CD) != ConversionFunctions.end()) throw std::runtime_error("Conversion already registered");
 		ConversionFunctions[CD] = ConversionFunction;
 	}
-	void RegisterConversion(std::string From, std::string To, std::function<DataObjectInterface* (DataObjectInterface*, unsigned int)> ConversionFunction) {
+	static void RegisterConversion(std::string From, std::string To, std::function<DataObjectInterface* (DataObjectInterface*, unsigned int)> ConversionFunction) {
 		if(From == "Invalid" || To == "Invalid") throw std::runtime_error("Invalid ConversionDescriptor");
 		if (ConversionFunctions.find(ConversionDescriptor{ GetTypeID(From), GetTypeID(To) }) != ConversionFunctions.end()) throw std::runtime_error("Conversion already registered");
 		ConversionDescriptor CD;
@@ -81,7 +97,7 @@ namespace DataObjectInterface {
 		CD.To = GetTypeID(To);
 		ConversionFunctions[CD] = ConversionFunction;
 	}
-	DataObjectInterface* Convert(DataObjectInterface* DO, unsigned int To) {
+	static DataObjectInterface* Convert(DataObjectInterface* DO, unsigned int To) {
 		ConversionDescriptor CD;
 		CD.From = DO->GetTypeID();
 		CD.To = To;
@@ -89,11 +105,11 @@ namespace DataObjectInterface {
 	}
 
 	static std::unordered_map<unsigned int, std::function<DataObjectInterface* ()>> Constructors={{0, []() {return nullptr;}}};
-	void RegisterConstructor(unsigned int TypeID, std::function<DataObjectInterface* ()> Constructor) {
+	static void RegisterConstructor(unsigned int TypeID, std::function<DataObjectInterface* ()> Constructor) {
 		if (Constructors.find(TypeID) != Constructors.end()) throw std::runtime_error("Constructor already registered");
 		Constructors[TypeID] = Constructor;
 	}
-	DataObjectInterface* Construct(unsigned int TypeID) {
+	static DataObjectInterface* Construct(unsigned int TypeID) {
 		return Constructors[TypeID]();
 	}
 }

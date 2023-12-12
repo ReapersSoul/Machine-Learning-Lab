@@ -11,7 +11,7 @@
 
 #include <typeinfo>
 
-class FlattenNode : public NodeInterface {
+class FlattenNode : public NS_Node::NodeInterface {
 public:
 	FlattenNode() {
 		TypeID = "FlattenNode";
@@ -41,7 +41,7 @@ public:
 	}
 
 	nlohmann::json Serialize() override {
-		nlohmann::json data = NodeInterface::Serialize();
+		nlohmann::json data = NS_Node::NodeInterface::Serialize();
 
 		return data;
 	}
@@ -64,7 +64,7 @@ extern "C" {
 	}
 
 	// Define a function that returns the result of adding two numbers
-	EXPORT NodeInterface* GetInstance() {
+	EXPORT NS_Node::NodeInterface* GetInstance() {
 		return new FlattenNode();
 	}
 }

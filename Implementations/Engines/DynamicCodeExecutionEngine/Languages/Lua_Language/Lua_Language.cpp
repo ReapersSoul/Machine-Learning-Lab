@@ -136,7 +136,7 @@ public:
 		ret = lua_touserdata(L, -1);
 	}
 
-	class ScriptNode : public ScriptInterface, public NodeInterface {};
+	class ScriptNode : public ScriptInterface, public NS_Node::NodeInterface {};
 
 	void CreateNode(void* node) {
 		ScriptNode* snode = (ScriptNode*)node;
@@ -153,104 +153,103 @@ public:
 		lua_setfield(L, -2, std::to_string(snode->GetUID()).c_str());
 		//pop the table
 		lua_pop(L, 1);
-
 	}
 
-	static int Node_MakeInput(lua_State* L) {
-		//get the node
-		ScriptNode* node = (ScriptNode*)lua_touserdata(L, 1);
-		node->MakeInput(lua_tointeger(L, 2), lua_tostring(L, 3), lua_tostring(L, 4), nlohmann::json::parse(lua_tostring(L, 5)));
-		return 0; //number of return values to lua, 0 means no return values to lua
-	}
+	//static int Node_MakeInput(lua_State* L) {
+	//	//get the node
+	//	ScriptNode* node = (ScriptNode*)lua_touserdata(L, 1);
+	//	node->MakeInput(lua_tointeger(L, 2), lua_tostring(L, 3), lua_tostring(L, 4), nlohmann::json::parse(lua_tostring(L, 5)));
+	//	return 0; //number of return values to lua, 0 means no return values to lua
+	//}
 
-	static int Node_MakeOutput(lua_State* L) {
-		//get the node
-		ScriptNode* node = (ScriptNode*)lua_touserdata(L, 1);
-		node->MakeOutput(lua_tointeger(L, 2), lua_tostring(L, 3), lua_tostring(L, 4), nlohmann::json::parse(lua_tostring(L, 5)));
-		return 0; //number of return values to lua, 0 means no return values to lua
-	}
+	//static int Node_MakeOutput(lua_State* L) {
+	//	//get the node
+	//	ScriptNode* node = (ScriptNode*)lua_touserdata(L, 1);
+	//	node->MakeOutput(lua_tointeger(L, 2), lua_tostring(L, 3), lua_tostring(L, 4), nlohmann::json::parse(lua_tostring(L, 5)));
+	//	return 0; //number of return values to lua, 0 means no return values to lua
+	//}
 
 
 
-	static int Node_MakeAttribute(lua_State* L) {
-		//get the node
-		ScriptNode* node = (ScriptNode*)lua_touserdata(L, 1);
-		int line = lua_tointeger(L, 2);
-		int function=luaL_ref(L, LUA_REGISTRYINDEX);
-		node->MakeAttribute(line, new Attribute([&L,node,function]() {
-			lua_rawgeti(L, LUA_REGISTRYINDEX, function);
-			if (lua_pcall(L, 0, 0, 0) != 0) {
-				std::cout << lua_tostring(L, -1) << std::endl;
-			}
-			}));
-		return 0; //number of return values to lua, 0 means no return values to lua
-	}
+	//static int Node_MakeAttribute(lua_State* L) {
+	//	//get the node
+	//	ScriptNode* node = (ScriptNode*)lua_touserdata(L, 1);
+	//	int line = lua_tointeger(L, 2);
+	//	int function=luaL_ref(L, LUA_REGISTRYINDEX);
+	//	node->MakeAttribute(line, new Attribute([&L,node,function]() {
+	//		lua_rawgeti(L, LUA_REGISTRYINDEX, function);
+	//		if (lua_pcall(L, 0, 0, 0) != 0) {
+	//			std::cout << lua_tostring(L, -1) << std::endl;
+	//		}
+	//		}));
+	//	return 0; //number of return values to lua, 0 means no return values to lua
+	//}
 
-	static int Node_GetInputDataByIndex(lua_State* L) {
-		//get the node
-		ScriptNode* node = (ScriptNode*)lua_touserdata(L, 1);
-		int index = lua_tointeger(L, 2);
-		std::string json=node->GetInputDataByIndex(index).dump();
-		lua_pushstring(L, json.c_str());
-		return 1; //number of return values to lua, 0 means no return values to lua
-	}
+	//static int Node_GetInputDataByIndex(lua_State* L) {
+	//	//get the node
+	//	ScriptNode* node = (ScriptNode*)lua_touserdata(L, 1);
+	//	int index = lua_tointeger(L, 2);
+	//	std::string json=node->GetInputDataByIndex(index).dump();
+	//	lua_pushstring(L, json.c_str());
+	//	return 1; //number of return values to lua, 0 means no return values to lua
+	//}
 
-	static int Node_GetOutputDataByIndex(lua_State* L) {
-		//get the node
-		ScriptNode* node = (ScriptNode*)lua_touserdata(L, 1);
-		int index = lua_tointeger(L, 2);
-		std::string json = node->GetOutputDataByIndex(index).dump();
-		lua_pushstring(L, json.c_str());
-		return 1; //number of return values to lua, 0 means no return values to lua
-	}
+	//static int Node_GetOutputDataByIndex(lua_State* L) {
+	//	//get the node
+	//	ScriptNode* node = (ScriptNode*)lua_touserdata(L, 1);
+	//	int index = lua_tointeger(L, 2);
+	//	std::string json = node->GetOutputDataByIndex(index).dump();
+	//	lua_pushstring(L, json.c_str());
+	//	return 1; //number of return values to lua, 0 means no return values to lua
+	//}
 
-	static int Node_SetInputDataByIndex(lua_State* L) {
-		//get the node
-		ScriptNode* node = (ScriptNode*)lua_touserdata(L, 1);
-		int index = lua_tointeger(L, 2);
-		std::string json = lua_tostring(L, 3);
-		node->GetInputDataByIndex(index) = nlohmann::json::parse(json);
-		return 0; //number of return values to lua, 0 means no return values to lua
-	}
+	//static int Node_SetInputDataByIndex(lua_State* L) {
+	//	//get the node
+	//	ScriptNode* node = (ScriptNode*)lua_touserdata(L, 1);
+	//	int index = lua_tointeger(L, 2);
+	//	std::string json = lua_tostring(L, 3);
+	//	node->GetInputDataByIndex(index) = nlohmann::json::parse(json);
+	//	return 0; //number of return values to lua, 0 means no return values to lua
+	//}
 
-	static int Node_SetOutputDataByIndex(lua_State* L) {
-		//get the node
-		ScriptNode* node = (ScriptNode*)lua_touserdata(L, 1);
-		int index = lua_tointeger(L, 2);
-		std::string json = lua_tostring(L, 3);
-		node->GetOutputDataByIndex(index) = nlohmann::json::parse(json);
-		return 0; //number of return values to lua, 0 means no return values to lua
-	}
+	//static int Node_SetOutputDataByIndex(lua_State* L) {
+	//	//get the node
+	//	ScriptNode* node = (ScriptNode*)lua_touserdata(L, 1);
+	//	int index = lua_tointeger(L, 2);
+	//	std::string json = lua_tostring(L, 3);
+	//	node->GetOutputDataByIndex(index) = nlohmann::json::parse(json);
+	//	return 0; //number of return values to lua, 0 means no return values to lua
+	//}
 
-	static int Node_ImGuiPushItemWidth(lua_State* L) {
-		//get the node
-		ScriptNode* node = (ScriptNode*)lua_touserdata(L, 1);
-		float width = lua_tonumber(L, 2);
-		ImGui::PushItemWidth(width);
-		return 0; //number of return values to lua, 0 means no return values to lua
-	}
+	//static int Node_ImGuiPushItemWidth(lua_State* L) {
+	//	//get the node
+	//	ScriptNode* node = (ScriptNode*)lua_touserdata(L, 1);
+	//	float width = lua_tonumber(L, 2);
+	//	ImGui::PushItemWidth(width);
+	//	return 0; //number of return values to lua, 0 means no return values to lua
+	//}
 
-	static int Node_ImGuiInputInt(lua_State* L) {
-		//get the node
-		ScriptNode* node = (ScriptNode*)lua_touserdata(L, 1);
-		int index = lua_tointeger(L, 2);
-		std::string label = lua_tostring(L, 3);
-		int v = node->GetInputDataByIndex(index).get<int>();
-		ImGui::InputInt(label.c_str(), &v);
-		node->GetInputDataByIndex(index) = v;
-		return 0; //number of return values to lua, 0 means no return values to lua
-	}
+	//static int Node_ImGuiInputInt(lua_State* L) {
+	//	//get the node
+	//	ScriptNode* node = (ScriptNode*)lua_touserdata(L, 1);
+	//	int index = lua_tointeger(L, 2);
+	//	std::string label = lua_tostring(L, 3);
+	//	int v = node->GetInputDataByIndex(index).get<int>();
+	//	ImGui::InputInt(label.c_str(), &v);
+	//	node->GetInputDataByIndex(index) = v;
+	//	return 0; //number of return values to lua, 0 means no return values to lua
+	//}
 
-	static int Node_ImGuiInputFloat(lua_State* L) {
-		//get the node
-		ScriptNode* node = (ScriptNode*)lua_touserdata(L, 1);
-		int index = lua_tointeger(L, 2);
-		std::string label = lua_tostring(L, 3);
-		float v = node->GetInputDataByIndex(index).get<float>();
-		ImGui::InputFloat(label.c_str(), &v);
-		node->GetInputDataByIndex(index) = v;
-		return 0; //number of return values to lua, 0 means no return values to lua{
-	}
+	//static int Node_ImGuiInputFloat(lua_State* L) {
+	//	//get the node
+	//	ScriptNode* node = (ScriptNode*)lua_touserdata(L, 1);
+	//	int index = lua_tointeger(L, 2);
+	//	std::string label = lua_tostring(L, 3);
+	//	float v = node->GetInputDataByIndex(index).get<float>();
+	//	ImGui::InputFloat(label.c_str(), &v);
+	//	node->GetInputDataByIndex(index) = v;
+	//	return 0; //number of return values to lua, 0 means no return values to lua{
+	//}
 
 	
 	//Activation
@@ -316,27 +315,26 @@ public:
 
 
 	void RegisterFunctions() {
-		lua_pushcfunction(L, Node_MakeInput);
-		lua_setglobal(L, "Node_MakeInput");
-		lua_pushcfunction(L, Node_MakeOutput);
-		lua_setglobal(L, "Node_MakeOutput");
-		lua_pushcfunction(L, Node_MakeAttribute);
-		lua_setglobal(L, "Node_MakeAttribute");
-		lua_pushcfunction(L, Node_GetInputDataByIndex);
-		lua_setglobal(L, "Node_GetInputDataByIndex");
-		lua_pushcfunction(L, Node_GetOutputDataByIndex);
-		lua_setglobal(L, "Node_GetOutputDataByIndex");
-		lua_pushcfunction(L, Node_SetInputDataByIndex);
-		lua_setglobal(L, "Node_SetInputDataByIndex");
-		lua_pushcfunction(L, Node_SetOutputDataByIndex);
-		lua_setglobal(L, "Node_SetOutputDataByIndex");
-		lua_pushcfunction(L, Node_ImGuiPushItemWidth);
-		lua_setglobal(L, "Node_ImGuiPushItemWidth");
-		lua_pushcfunction(L, Node_ImGuiInputInt);
-		lua_setglobal(L, "Node_ImGuiInputInt");
-		lua_pushcfunction(L, Node_ImGuiInputFloat);
-		lua_setglobal(L, "Node_ImGuiInputFloat");
-
+		//lua_pushcfunction(L, Node_MakeInput);
+		//lua_setglobal(L, "Node_MakeInput");
+		//lua_pushcfunction(L, Node_MakeOutput);
+		//lua_setglobal(L, "Node_MakeOutput");
+		//lua_pushcfunction(L, Node_MakeAttribute);
+		//lua_setglobal(L, "Node_MakeAttribute");
+		//lua_pushcfunction(L, Node_GetInputDataByIndex);
+		//lua_setglobal(L, "Node_GetInputDataByIndex");
+		//lua_pushcfunction(L, Node_GetOutputDataByIndex);
+		//lua_setglobal(L, "Node_GetOutputDataByIndex");
+		//lua_pushcfunction(L, Node_SetInputDataByIndex);
+		//lua_setglobal(L, "Node_SetInputDataByIndex");
+		//lua_pushcfunction(L, Node_SetOutputDataByIndex);
+		//lua_setglobal(L, "Node_SetOutputDataByIndex");
+		//lua_pushcfunction(L, Node_ImGuiPushItemWidth);
+		//lua_setglobal(L, "Node_ImGuiPushItemWidth");
+		//lua_pushcfunction(L, Node_ImGuiInputInt);
+		//lua_setglobal(L, "Node_ImGuiInputInt");
+		//lua_pushcfunction(L, Node_ImGuiInputFloat);
+		//lua_setglobal(L, "Node_ImGuiInputFloat");
 	}
 
 	void Node_Init(void* node) override {

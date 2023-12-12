@@ -2,7 +2,7 @@
 #include <LossInterface.hpp>
 #include <math.h>
 
-class MSELoss : public LossInterface
+class MSELoss : public NS_Loss::LossInterface
 {
 public:
     double CalculateLoss(double input, double target) override{
@@ -20,7 +20,7 @@ public:
 
 extern "C" {
     // Define a function that returns the result of adding two numbers
-    EXPORT LossInterface* GetInstance() {
+    EXPORT NS_Loss::LossInterface* GetInstance() {
         return new MSELoss();
     }
 }

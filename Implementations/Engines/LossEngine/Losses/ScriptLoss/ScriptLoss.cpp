@@ -4,7 +4,7 @@
 #include <math.h>
 #include <filesystem>
 
-class ScriptLoss : public ScriptInterface, public LossInterface
+class ScriptLoss : public ScriptInterface, public NS_Loss::LossInterface
 {
 
     ScriptLoss(std::string scriptPath)
@@ -56,7 +56,7 @@ public:
 
 extern "C" {
     // Define a function that returns the result of adding two numbers
-    EXPORT LossInterface* GetInstance() {
+    EXPORT NS_Loss::LossInterface* GetInstance() {
         return new ScriptLoss();
     }
 }

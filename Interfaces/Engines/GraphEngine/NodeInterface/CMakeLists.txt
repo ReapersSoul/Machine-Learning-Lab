@@ -40,8 +40,6 @@ find_package(OpenGL REQUIRED)
 target_include_directories(${PROJECT_NAME} PUBLIC ${OPENGL_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} PUBLIC OpenGL::GL)
 
-target_link_libraries(${PROJECT_NAME} PUBLIC SerializableInterface)
-target_link_libraries(${PROJECT_NAME} PUBLIC EdgeInterface)
 
 # Output directory
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/Runtime/Debug/Machine-Learning-Lab/Core/)

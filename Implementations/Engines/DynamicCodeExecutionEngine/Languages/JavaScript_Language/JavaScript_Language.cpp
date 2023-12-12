@@ -80,7 +80,7 @@ public:
 	void CallFunction(const char* name, std::vector<void*> args, std::vector<std::string> types, void* ret) override {
 	}
 
-	class ScriptNode : public ScriptInterface, public NodeInterface {};
+	class ScriptNode : public ScriptInterface, public NS_Node::NodeInterface {};
 
 	static int Node_MakeInput(duk_context* ctx) {
 		ScriptNode* node = (ScriptNode*)duk_get_pointer(ctx, 0);

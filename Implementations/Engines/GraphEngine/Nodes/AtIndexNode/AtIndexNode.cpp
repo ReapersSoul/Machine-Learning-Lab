@@ -11,7 +11,7 @@
 
 #include <typeinfo>
 
-class AtIndexNode : public NodeInterface {
+class AtIndexNode : public NS_Node::NodeInterface {
 	int index = 0;
 	int itteration=0;
 	int increment_after = 1;
@@ -54,7 +54,7 @@ public:
 	}
 
 	nlohmann::json Serialize() override {
-		nlohmann::json data = NodeInterface::Serialize();
+		nlohmann::json data = NS_Node::NodeInterface::Serialize();
 		data["index"] = index;
 		data["autoincrement"] = autoincrement;
 		data["increment after"] = increment_after;
@@ -81,7 +81,7 @@ public:
 
 extern "C" {
 	// Define a function that returns the result of adding two numbers
-	EXPORT NodeInterface* GetInstance() {
+	EXPORT NS_Node::NodeInterface* GetInstance() {
 		return new AtIndexNode();
 	}
 

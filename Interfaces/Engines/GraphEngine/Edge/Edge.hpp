@@ -1,20 +1,11 @@
 #pragma once
 #include "../../../SerializableInterface/SerializableInterface.hpp"
-#include "../Input/Input.hpp"
-#include "../Output/Output.hpp"
 #include <string>
-class Graph;
-namespace NodeInterface {
-	class NodeInterface;
-}
 
 class Edge : public SerializableInterface
 {
 protected:
 	unsigned int UID;
-	std::string TypeID;
-	unsigned int Priority;
-	Graph * Parent;
 	unsigned int First;
 	unsigned int Second;
 	unsigned int FirstIO;
@@ -28,7 +19,7 @@ public:
 
 	unsigned int GetUID();
 
-	std::string GetTypeID();
+	unsigned int GetTypeID();
 
 	void SetFirst(unsigned int First);
 
@@ -38,17 +29,13 @@ public:
 
 	void SetSecondIO(unsigned int SecondIO);
 
-	void SetParent(Graph* Parent);
+	unsigned int GetFirst();
 
-	Graph* GetParent();
+	unsigned int GetSecond();
 
-	NodeInterface::NodeInterface* GetFirst();
+	unsigned int GetFirstIO();
 
-	NodeInterface::NodeInterface* GetSecond();
-
-	Output* GetFirstIO();
-
-	Input* GetSecondIO();
+	unsigned int GetSecondIO();
 
 	nlohmann::json Serialize()override;
 

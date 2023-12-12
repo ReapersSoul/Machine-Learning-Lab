@@ -66,20 +66,21 @@ target_link_libraries(${PROJECT_NAME} PUBLIC ScriptInterface)
 # UIE
 target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/UIEngine/UIEngineInterface/)
 
-# GraphEngine
-target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/GraphEngineInterface/)
-target_link_libraries(${PROJECT_NAME} PUBLIC GraphEngineInterface)
 
-target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/EdgeInterface/)
-target_link_libraries(${PROJECT_NAME} PUBLIC EdgeInterface)
+target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/Edge/)
+target_link_libraries(${PROJECT_NAME} PUBLIC Edge)
 
-target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/Graph/)
-target_link_libraries(${PROJECT_NAME} PUBLIC Graph)
+target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/Attribute/)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/NodeInterface/)
 target_link_libraries(${PROJECT_NAME} PUBLIC NodeInterface)
 
-target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/Attribute/)
+target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/Graph/)
+target_link_libraries(${PROJECT_NAME} PUBLIC Graph)
+
+target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/GraphEngineInterface/)
+target_link_libraries(${PROJECT_NAME} PUBLIC GraphEngineInterface)
+
 
 # Output directory
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/Runtime/Debug/Machine-Learning-Lab/Plugins/Languages/)

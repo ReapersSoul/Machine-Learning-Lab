@@ -102,12 +102,12 @@ class UIEngine : public UIEngineInterface
 				//check if SearchText is full of \0
 				//loop through all available nodes
 				if (SearchText.empty()) {
-					for (auto node : GraphEngine->GetAvailableNodes()) {
+					for (auto node : NS_Node::TypeIDs) {
 						//if node is clicked
-						if (ImGui::MenuItem(node.TypeID.c_str())) {
+						if (ImGui::MenuItem(node.first.c_str())) {
 							//add node to graph
 							GraphEngine->GetGraphs()["main"]->GetMutex().lock();
-							int uuid = GraphEngine->GetGraphs()["main"]->AddNode(node.CreateNode());
+							int uuid = GraphEngine->GetGraphs()["main"]->AddNode(NS_Node::Construct(node.second));
 							GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
 							ed::Suspend();
 							ImVec2 mousepos=ed::ScreenToCanvas(ImGui::GetMousePos());
@@ -117,13 +117,13 @@ class UIEngine : public UIEngineInterface
 					}
 				}
 				else {
-					for (auto node : GraphEngine->GetAvailableNodes()) {
-						if (RegexMatch(SearchText + ".*", node.TypeID)) {
+					for (auto node : NS_Node::TypeIDs) {
+						if (RegexMatch(SearchText + ".*", node.first.c_str())) {
 							//if node is clicked
-							if (ImGui::MenuItem(node.TypeID.c_str())) {
+							if (ImGui::MenuItem(node.first.c_str())) {
 								//add node to graph
 								GraphEngine->GetGraphs()["main"]->GetMutex().lock();
-								int uuid = GraphEngine->GetGraphs()["main"]->AddNode(node.CreateNode());
+								int uuid = GraphEngine->GetGraphs()["main"]->AddNode(NS_Node::Construct(node.second));
 								GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
 								ed::Suspend();
 								ImVec2 mousepos = ed::ScreenToCanvas(ImGui::GetMousePos());
@@ -220,7 +220,7 @@ class UIEngine : public UIEngineInterface
 								if (ed::AcceptNewItem())
 								{
 									//create edge
-									EdgeInterface* edge = GraphEngine->GetGraphs()["main"]->CreateEdge(inputNode, outputNode, inputIO, outputIO);
+									Edge* edge = GraphEngine->GetGraphs()["main"]->CreateEdge(inputNode, outputNode, inputIO, outputIO);
 									if (edge != nullptr) {
 										GraphEngine->GetGraphs()["main"]->GetNodes()[inputNode]->GetOutputEdges().push_back(edge);
 										GraphEngine->GetGraphs()["main"]->GetNodes()[outputNode]->GetInputEdges().push_back(edge);
@@ -286,8 +286,8 @@ class UIEngine : public UIEngineInterface
 
 
 			std::map<std::string, Graph*> graphs = GraphEngine->GetGraphs();
-			std::map<unsigned int, NodeInterface*> nodes = graphs["main"]->GetNodes();
-			std::map<unsigned int, EdgeInterface*> edges = graphs["main"]->GetEdges();
+			std::map<unsigned int, NS_Node::NodeInterface*> nodes = graphs["main"]->GetNodes();
+			std::map<unsigned int, Edge> edges = graphs["main"]->GetEdges();
 			//draw nodes
 			for (auto node : nodes) {
 				ed::BeginNode(node.second->GetUID());
@@ -297,10 +297,10 @@ class UIEngine : public UIEngineInterface
 					ImGui::Text(std::to_string(node.second->GetUID()).c_str());
 				}
 
-				for (int i = 0; i < node.second->GetDescription().size(); i++) {
-					if (node.second->GetDescription()[i].find("Input") != node.second->GetDescription()[i].end()) {
+				for (auto& line : node.second->GetLines()) {
+					if (line.InputUID != -1) {
 						//get color
-						if (IoTypeColors.find(node.second->GetDescription()[i]["Input"]["TypeID"]) == IoTypeColors.end()) {
+						if (IoTypeColors.find(node.second->GetInputByUID(line.InputUID)->GetTypeID()) == IoTypeColors.end()) {
 							ImColor col = ImColor(RandRange(0, 255), RandRange(0, 255), RandRange(0, 255));
 							while (true) {
 								bool valid = true;
@@ -315,38 +315,29 @@ class UIEngine : public UIEngineInterface
 								}
 								col = ImColor(RandRange(0, 255), RandRange(0, 255), RandRange(0, 255));
 							}
-							IoTypeColors[node.second->GetDescription()[i]["Input"]["TypeID"]] = col;
+							IoTypeColors[node.second->GetInputByUID(line.InputUID)->GetTypeID()] = col;
 						}
 
 						//TODO:: color and icon
-						ed::BeginPin((ed::PinId)node.second->GetInputByIndex(i)["UID"].get<unsigned int>(), ed::PinKind::Input);
-						ImGui::Text(node.second->GetInputByIndex(i)["Name"].get<std::string>().c_str());
-						if (Debug) {
-							ImGui::SameLine();
-							if (node.second->GetInputByIndex(i).contains("UID")) {
-								ImGui::Text(std::to_string(node.second->GetInputByIndex(i)["UID"].get<unsigned int>()).c_str());
-							}
-							else {
-								ImGui::Text("N/A");
-							}
-						}
+						ed::BeginPin((ed::PinId)line.InputUID, ed::PinKind::Input);
+						node.second->GetInputByUID(line.InputUID)->Draw(ImGui::GetCurrentContext(), window);
 						ed::EndPin();
 
 					}
-					if (node.second->GetDescription()[i].find("Attribute") != node.second->GetDescription()[i].end() && node.second->GetDescription()[i].find("Input") != node.second->GetDescription()[i].end()) {
+					if (line.AttributeIndex != -1 && line.InputUID != -1) {
 						ImGui::SameLine();
 					}
-					if (node.second->GetDescription()[i].find("Attribute") != node.second->GetDescription()[i].end()) {
+					if (line.AttributeIndex != -1) {
 						//pass imgui context to attribute and opengl context to attribute
-						node.second->GetAttributes()[node.second->GetDescription()[i]["Attribute"]]->Draw(ImGui::GetCurrentContext(), window);
+						node.second->GetAttributes()[line.AttributeIndex]->Draw(ImGui::GetCurrentContext(), window);
 					}
-					if (node.second->GetDescription()[i].find("Output") != node.second->GetDescription()[i].end() && node.second->GetDescription()[i].find("Attribute") != node.second->GetDescription()[i].end() ||
-						node.second->GetDescription()[i].find("Output") != node.second->GetDescription()[i].end() && node.second->GetDescription()[i].find("Input") != node.second->GetDescription()[i].end()) {
+					if (line.OutputUID != -1 && line.AttributeIndex != -1 ||
+						line.OutputUID != -1 && line.InputUID != -1) {
 						ImGui::SameLine();
 					}
-					if (node.second->GetDescription()[i].find("Output") != node.second->GetDescription()[i].end()) {
+					if (line.OutputUID != -1) {
 						//get color
-						if (IoTypeColors.find(node.second->GetDescription()[i]["Output"]["TypeID"]) == IoTypeColors.end()) {
+						if (IoTypeColors.find(node.second->GetOutputByUID(line.OutputUID)->GetTypeID()) == IoTypeColors.end()) {
 							ImColor col = ImColor(RandRange(0, 255), RandRange(0, 255), RandRange(0, 255));
 							while (true) {
 								bool valid = true;
@@ -361,21 +352,12 @@ class UIEngine : public UIEngineInterface
 								}
 								col = ImColor(RandRange(0, 255), RandRange(0, 255), RandRange(0, 255));
 							}
-							IoTypeColors[node.second->GetDescription()[i]["Output"]["TypeID"]] = col;
+							IoTypeColors[node.second->GetOutputByUID(line.OutputUID)->GetTypeID()] = col;
 						}
 
 						//TODO: color and icon
-						ed::BeginPin((ed::PinId)node.second->GetOutputByIndex(i)["UID"].get<unsigned int>(), ed::PinKind::Output);
-						ImGui::Text(node.second->GetOutputByIndex(i)["Name"].get<std::string>().c_str());
-						if (Debug) {
-							ImGui::SameLine();
-							if (node.second->GetOutputByIndex(i).contains("UID")) {
-								ImGui::Text(std::to_string(node.second->GetOutputByIndex(i)["UID"].get<unsigned int>()).c_str());
-							}
-							else {
-								ImGui::Text("N/A");
-							}
-						}
+						ed::BeginPin((ed::PinId)line.OutputUID, ed::PinKind::Output);
+						node.second->GetOutputByUID(line.OutputUID)->Draw(ImGui::GetCurrentContext(), window);
 						ed::EndPin();
 					}
 				}
@@ -385,7 +367,7 @@ class UIEngine : public UIEngineInterface
 			//draw links
 			for (auto edge : edges)
 			{
-				ed::Link(edge.second->GetUID(), (ed::PinId)edge.second->GetFirstIO()["UID"].get<unsigned int>(), (ed::PinId)edge.second->GetSecondIO()["UID"]);
+				ed::Link(edge.second.GetUID(), (ed::PinId)edge.second.GetFirstIO(), (ed::PinId)edge.second.GetSecondIO());
 			}
 			for (auto node : nodes) {
 				ImVec2 pos = ed::GetNodePosition(node.second->GetUID());
@@ -641,15 +623,15 @@ class UIEngine : public UIEngineInterface
 
 			//sorters
 			ImGui::Text("Available Sorters:");
-			std::vector<SorterInterface*> sorters = GraphEngine->GetAvailableSorters();
-			if (ImGui::BeginCombo("Sorter", sorters[0]->GetName().c_str())) {
-				for (int i = 0; i < sorters.size(); i++)
+			static std::string SelectedSorter{"DefaultSorter"};
+			if (ImGui::BeginCombo("Sorter", SelectedSorter.c_str())) {
+				for (std::unordered_map<std::string, NS_Sorter::SorterInterface*>::value_type& TMP_sorter : NS_Sorter::Sorters)
 				{
 					bool selected = false;
-					ImGui::Selectable(sorters[i]->GetName().c_str(), &selected);
+					ImGui::Selectable(TMP_sorter.first.c_str(), &selected);
 					if (selected) {
 						GraphEngine->GetGraphs()["main"]->GetMutex().lock();
-						GraphEngine->GetGraphs()["main"]->SetSorter(sorters[i]);
+						GraphEngine->GetGraphs()["main"]->SetSorter(TMP_sorter.second);
 						GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
 					}
 				}
@@ -696,26 +678,21 @@ class UIEngine : public UIEngineInterface
 			ImGui::Separator();
 			ImGui::Text("Available Nodes:");
 			//nodes
-			std::vector<NodeInfo> nodes = GraphEngine->GetAvailableNodes();
-			for (int i = 0; i < nodes.size(); i++)
+			for (auto& node: NS_Node::TypeIDs)
 			{
-				ImGui::Text(nodes[i].TypeID.c_str());
+				ImGui::Text(node.first.c_str());
 			}
 			ImGui::Separator();
 			ImGui::Text("Available Activations:");
-			//nodes
-			std::vector<ActivationInterface*> activations = GraphEngine->GetAvailableActivations();
-			for (int i = 0; i < activations.size(); i++)
+			for (auto& activation : NS_Activation::Activations)
 			{
-				ImGui::Text(activations[i]->GetName().c_str());
+				ImGui::Text(activation.first.c_str());
 			}
 			ImGui::Separator();
 			ImGui::Text("Available Losses:");
-			//nodes
-			std::vector<LossInterface*> losses = GraphEngine->GetAvailableLosses();
-			for (int i = 0; i < losses.size(); i++)
+			for (auto& loss : NS_Loss::Losses)
 			{
-				ImGui::Text(losses[i]->GetName().c_str());
+				ImGui::Text(loss.first.c_str());
 			}
 		}
 		ImGui::End();
@@ -727,7 +704,7 @@ class UIEngine : public UIEngineInterface
 		ImGui::End();
 	}
 
-	std::map<std::string, ImColor> IoTypeColors;
+	std::map<unsigned int, ImColor> IoTypeColors;
 	double ColorDistance = .05;
 
 	ImColor Distance(ImColor Color1, ImColor Color2) {
@@ -899,7 +876,7 @@ public:
 		GraphEngine->LoadAvailableScriptNodes();
 		GraphEngine->LoadAvailableSorters();
 		GraphEngine->CreateGraph("main");
-		GraphEngine->GetGraphs()["main"]->SetSorter(GraphEngine->GetAvailableSorters()[0]);
+		GraphEngine->GetGraphs()["main"]->SetSorter(NS_Sorter::Sorters["DefaultSorter"]);
 
 		//init network engine
 		#if defined(_MSC_VER)

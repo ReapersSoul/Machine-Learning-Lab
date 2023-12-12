@@ -8,11 +8,11 @@
 #include <filesystem>
 
 class GraphEngine : public GraphEngineInterface {
-	struct ScriptNode : public ScriptInterface, public NodeInterface {};
+	struct ScriptNode : public ScriptInterface, public NS_Node::NodeInterface {};
 public:
 	GraphEngine() {
-		Name="GraphEngine";
-		
+		Name = "GraphEngine";
+
 	}
 	~GraphEngine() {}
 
@@ -34,36 +34,23 @@ public:
 				continue;
 			}
 			//check if dll
-			#if defined(_MSC_VER)
-				if (p.path().extension().string() != ".dll") {
-					continue;
-				}
-				if (p.path().filename().string() == "ScriptNode.dll") {
-					continue;
-				}
-			#elif defined(__GNUC__)
-				if (p.path().extension().string() != ".so") {
-					continue;
-				}
-				if (p.path().filename().string() == "libScriptNode.so") {
-					continue;
-				}
-			#endif
-
-			try {
-				LibraryInterface* lib = DCEEngine->LoadLibrary(p.path().string());
-				
-				NodeInfo nodeInfo;
-				nodeInfo.TypeID = lib->GetLibrary().get<std::string()>("GetTypeID")();
-				nodeInfo.CreateNode = [lib]() {return lib->GetInstance<NodeInterface>(); };
-				AvailableNodes.push_back(nodeInfo);
-			}
-			catch (boost::system::system_error& e) {
-				printf("Error: %s\n", e.what());
-			}
-			catch (std::exception e) {
+#if defined(_MSC_VER)
+			if (p.path().extension().string() != ".dll") {
 				continue;
 			}
+			if (p.path().filename().string() == "ScriptNode.dll") {
+				continue;
+			}
+#elif defined(__GNUC__)
+			if (p.path().extension().string() != ".so") {
+				continue;
+			}
+			if (p.path().filename().string() == "libScriptNode.so") {
+				continue;
+			}
+#endif
+
+			DCEEngine->LoadLibrary(p.path().string())->Register();
 		}
 	}
 
@@ -93,12 +80,10 @@ public:
 				if (p.path().extension().string() != language->GetExtension()) {
 					continue;
 				}
-				NodeInfo nodeInfo;
-				//remove the extension
-				nodeInfo.TypeID = p.path().filename().string().substr(0, p.path().filename().string().size() - language->GetExtension().size());
-				nodeInfo.CreateNode = [&,language,p]() {
+				unsigned int uid = NS_Node::RegisterType(language->GetName() + p.path().stem().string());
+				NS_Node::RegisterConstructor(uid, [&, language, p]() {
 					#if defined(_MSC_VER)
-						NodeInterface* scriptNode = DCEEngine->GetOtherLib("ScriptNode.dll")->GetInstance<NodeInterface>();
+						NS_Node::NodeInterface* scriptNode = DCEEngine->GetOtherLib("ScriptNode.dll")->GetInstance<NS_Node::NodeInterface>();
 					#elif defined(__GNUC__)
 						NodeInterface* scriptNode = DCEEngine->GetOtherLib("libScriptNode.so")->GetInstance<NodeInterface>();
 					#endif
@@ -106,8 +91,7 @@ public:
 					dynamic_cast<ScriptInterface*>(scriptNode)->SetLanguage(language);
 					dynamic_cast<ScriptInterface*>(scriptNode)->SetPath(p.path().string());
 					return scriptNode;
-				};
-				AvailableNodes.push_back(nodeInfo);
+					});
 			}
 		}
 	}
@@ -138,10 +122,39 @@ public:
 				}
 			#endif
 
-			AvailableSorters.push_back(DCEEngine->LoadLibrary(p.path().string())->GetInstance<SorterInterface>());
+			DCEEngine->LoadLibrary(p.path().string())->Register();
 		}
 	}
 
+	void LoadAvailableDataObjects() override{
+		//if the core doesn't have a folder then create one
+		if (!std::filesystem::exists("Core/")) {
+			std::filesystem::create_directory("Core/");
+		}
+		if (!std::filesystem::exists("Core/Graph/")) {
+			std::filesystem::create_directory("Core/Graph/");
+		}
+		if (!std::filesystem::exists("Core/Graph/DataObjects")) {
+			std::filesystem::create_directory("Core/Graph/DataObjects");
+		}
+		for (auto& p : std::filesystem::directory_iterator("Core/Graph/DataObjects/")) {
+			if (p.is_directory()) {
+				continue;
+			}
+			//check if dll
+#if defined(_MSC_VER)
+			if (p.path().extension().string() != ".dll") {
+				continue;
+			}
+#elif defined(__GNUC__)
+			if (p.path().extension().string() != ".so") {
+				continue;
+			}
+#endif
+
+			DCEEngine->LoadLibrary(p.path().string())->Register();
+		}
+	}
 };
 
 

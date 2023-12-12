@@ -28,7 +28,7 @@
 #define STB_IMAGE_RESIZE_IMPLEMENTATION
 #include <stb_image_resize.h>
 
-class ImageLossNode : public NodeInterface {
+class ImageLossNode : public NS_Node::NodeInterface {
 	std::vector<double> red_values = { 0 };
 	std::vector<double> red_targets = { 0 };
 	std::vector<double> red_derivatives = { 0 };
@@ -49,7 +49,7 @@ class ImageLossNode : public NodeInterface {
 	std::vector<double> grey_targets = { 0 };
 	std::vector<double> grey_derivatives = { 0 };
 	std::vector<double> grey_losses = { 0 };
-	LossInterface* Loss;
+	NS_Loss::LossInterface* Loss;
 
 	std::string path;
 	int image_width = 0;
@@ -298,10 +298,10 @@ public:
 	}
 
 	void Init() override {
-		Loss = LE->GetAvailableLosses()[0];
+		Loss = NS_Loss::Losses["MeanSquaredError"];
 
 		//loss
-		MakeAttribute(0, new Attribute([this]() {
+		unsigned int att=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::BeginCombo("Loss", LE->GetAvailableLosses()[0]->GetName().c_str())) {
 				for (int i = 0; i < LE->GetAvailableLosses().size(); i++)
@@ -600,7 +600,7 @@ public:
 	}
 
 	nlohmann::json Serialize() override {
-		nlohmann::json data = NodeInterface::Serialize();
+		nlohmann::json data = NS_Node::NodeInterface::Serialize();
 
 		return data;
 	}
@@ -627,7 +627,7 @@ extern "C" {
 	}
 
 	// Define a function that returns the result of adding two numbers
-	EXPORT NodeInterface* GetInstance() {
+	EXPORT NS_Node::NodeInterface* GetInstance() {
 		return new ImageLossNode();
 	}
 }

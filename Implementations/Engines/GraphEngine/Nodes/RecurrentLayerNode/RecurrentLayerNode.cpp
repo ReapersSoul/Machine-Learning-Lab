@@ -6,7 +6,7 @@
 #include <Attribute.hpp>
 #include <string>
 
-class RecurrentLayerNode : public NodeInterface {
+class RecurrentLayerNode : public NS_Node::NodeInterface {
 	std::vector<double> x;
 	std::vector<double> b;
 	std::vector<std::vector<double>> w;
@@ -319,7 +319,7 @@ public:
 	}
 
 	nlohmann::json Serialize() override {
-		nlohmann::json data = NodeInterface::Serialize();
+		nlohmann::json data = NS_Node::NodeInterface::Serialize();
 
 		return data;
 	}
@@ -338,7 +338,7 @@ extern "C" {
 	}
 
 	// Define a function that returns the result of adding two numbers
-	EXPORT NodeInterface* GetInstance() {
+	EXPORT NS_Node::NodeInterface* GetInstance() {
 		return new RecurrentLayerNode();
 	}
 }

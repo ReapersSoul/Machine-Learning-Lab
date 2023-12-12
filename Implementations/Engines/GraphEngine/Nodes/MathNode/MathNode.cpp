@@ -6,7 +6,7 @@
 #include <Attribute.hpp>
 #include <string>
 
-class MathNode : public NodeInterface {
+class MathNode : public NS_Node::NodeInterface {
     double value = 0;
     int operation = 0;
 public:
@@ -61,13 +61,13 @@ public:
 
     //void DrawNodeTitle();
 
-    NodeInterface* GetInstance() {
+    NS_Node::NodeInterface* GetInstance() {
         MathNode* node = new MathNode();
         return node;
     }
 
     nlohmann::json Serialize() override {
-        nlohmann::json data = NodeInterface::Serialize();
+        nlohmann::json data = NS_Node::NodeInterface::Serialize();
 
         data["value"] = value;
         data["operation"] = operation;
@@ -76,7 +76,7 @@ public:
     }
 
     void DeSerialize(nlohmann::json data, void* DCEE) override {
-        NodeInterface::DeSerialize(data, DCEE);
+        NS_Node::NodeInterface::DeSerialize(data, DCEE);
 
         value = data["value"];
 
@@ -104,7 +104,7 @@ extern "C" {
     }
 
     // Define a function that returns the result of adding two numbers
-    EXPORT NodeInterface* GetInstance() {
+    EXPORT NS_Node::NodeInterface* GetInstance() {
         return new MathNode();
     }
 }

@@ -2,18 +2,18 @@
 #include <SorterInterface.hpp>
 #include <GraphEngineInterface.hpp>
 
-class DefaultSorter : public SorterInterface {
+class DefaultSorter : public NS_Sorter::SorterInterface {
 public:
-	ProcessingOrder SortGraph(Graph* graph,bool DirectionForward) override {
-		ProcessingOrder order;
-		std::map<unsigned int, NodeInterface*> nodes = graph->GetNodes();
-		std::map<unsigned int,EdgeInterface*> Edges=graph->GetEdges();
-		std::vector<std::vector<NodeInterface*>> NodeOrder;
-		std::vector<std::vector<EdgeInterface*>> EdgeOrder;
+	NS_Sorter::ProcessingOrder SortGraph(Graph* graph,bool DirectionForward) override {
+		NS_Sorter::ProcessingOrder order;
+		std::map<unsigned int, NS_Node::NodeInterface*> nodes = graph->GetNodes();
+		std::map<unsigned int,Edge> Edges=graph->GetEdges();
+		std::vector<std::vector<NS_Node::NodeInterface*>> NodeOrder;
+		std::vector<std::vector<Edge*>> EdgeOrder;
 
 		if (DirectionForward) {
 			//first node layer
-			std::vector<NodeInterface*> FirstLayer;
+			std::vector<NS_Node::NodeInterface*> FirstLayer;
 			for (int i = 0; i < nodes.size(); i++)
 			{
 				if (nodes[i]->GetInputEdges().size() == 0) {
@@ -24,26 +24,27 @@ public:
 			NodeOrder.push_back(FirstLayer);
 
 			while (true) {
-				std::vector<NodeInterface*> PrevLayer = NodeOrder.back();
-				std::vector<NodeInterface*> NextLayer;
-				std::vector<EdgeInterface*> NextLayerEdges;
+				std::vector<NS_Node::NodeInterface*> PrevLayer = NodeOrder.back();
+				std::vector<NS_Node::NodeInterface*> NextLayer;
+				std::vector<Edge*> NextLayerEdges;
 				for (int i = 0; i < PrevLayer.size(); i++) {
-					std::vector<EdgeInterface*> Edges = PrevLayer[i]->GetOutputEdges();
+					std::vector<Edge*> Edges = PrevLayer[i]->GetOutputEdges();
 					for (int j = 0; j < Edges.size(); j++) {
 						NextLayerEdges.push_back(Edges[j]);
-						if (std::find(NextLayer.begin(), NextLayer.end(), Edges[j]->GetSecond()) == NextLayer.end()) {
-							std::vector<EdgeInterface*> inEdges = Edges[j]->GetSecond()->GetInputEdges();
+						std::vector<NS_Node::NodeInterface*>::iterator it = std::find_if(NextLayer.begin(), NextLayer.end(), [&](NS_Node::NodeInterface* node) {return node->GetUID() == Edges[j]->GetSecond(); });
+						if (it == NextLayer.end()) {
+							std::vector<Edge*> inEdges = graph->GetNodes()[Edges[j]->GetSecond()]->GetInputEdges();
 							bool HasUnvisitedInputs = false;
 							for (int l = 0; l < inEdges.size(); l++)
 							{
-								if (!inEdges[l]->GetFirst()->IsVisited()) {
+								if (!graph->GetNodes()[inEdges[l]->GetFirst()]->IsVisited()) {
 									HasUnvisitedInputs = true;
 								}
 							}
 
 							if (!HasUnvisitedInputs) {
-								if (Edges[j]->GetSecond()->IsVisited() == false) {
-									NextLayer.push_back(Edges[j]->GetSecond());
+								if (graph->GetNodes()[Edges[j]->GetSecond()]->IsVisited() == false) {
+									NextLayer.push_back(graph->GetNodes()[Edges[j]->GetSecond()]);
 								}
 							}
 						}
@@ -67,13 +68,12 @@ public:
 			}
 
 			order.Nodes = NodeOrder;
-			order.Edges = EdgeOrder;
 
 			return order;
 		}
 		else {
 			//first node layer
-			std::vector<NodeInterface*> FirstLayer;
+			std::vector<NS_Node::NodeInterface*> FirstLayer;
 			for (int i = 0; i < nodes.size(); i++)
 			{
 				if (nodes[i]->GetOutputEdges().size() == 0) {
@@ -84,26 +84,27 @@ public:
 			NodeOrder.push_back(FirstLayer);
 
 			while (true) {
-				std::vector<NodeInterface*> PrevLayer = NodeOrder.back();
-				std::vector<NodeInterface*> NextLayer;
-				std::vector<EdgeInterface*> NextLayerEdges;
+				std::vector<NS_Node::NodeInterface*> PrevLayer = NodeOrder.back();
+				std::vector<NS_Node::NodeInterface*> NextLayer;
+				std::vector<Edge*> NextLayerEdges;
 				for (int i = 0; i < PrevLayer.size(); i++) {
-					std::vector<EdgeInterface*> Edges = PrevLayer[i]->GetInputEdges();
+					std::vector<Edge*> Edges = PrevLayer[i]->GetInputEdges();
 					for (int j = 0; j < Edges.size(); j++) {
 						NextLayerEdges.push_back(Edges[j]);
-						if (std::find(NextLayer.begin(), NextLayer.end(), Edges[j]->GetFirst()) == NextLayer.end()) {
-							std::vector<EdgeInterface*> inEdges = Edges[j]->GetFirst()->GetOutputEdges();
+						std::vector<NS_Node::NodeInterface*>::iterator it = std::find_if(NextLayer.begin(), NextLayer.end(), [&](NS_Node::NodeInterface* node) {return node->GetUID() == Edges[j]->GetFirst(); });
+						if (it == NextLayer.end()) {
+							std::vector<Edge*> inEdges = graph->GetNodes()[Edges[j]->GetFirst()]->GetOutputEdges();
 							bool HasUnvisitedInputs = false;
 							for (int l = 0; l < inEdges.size(); l++)
 							{
-								if (!inEdges[l]->GetSecond()->IsVisited()) {
+								if (!graph->GetNodes()[inEdges[l]->GetSecond()]->IsVisited()) {
 									HasUnvisitedInputs = true;
 								}
 							}
 
 							if (!HasUnvisitedInputs) {
-								if (Edges[j]->GetFirst()->IsVisited() == false) {
-									NextLayer.push_back(Edges[j]->GetFirst());
+								if (graph->GetNodes()[Edges[j]->GetFirst()]->IsVisited() == false) {
+									NextLayer.push_back(graph->GetNodes()[Edges[j]->GetFirst()]);
 								}
 							}
 						}
@@ -127,7 +128,6 @@ public:
 			}
 
 			order.Nodes = NodeOrder;
-			order.Edges = EdgeOrder;
 
 			return order;
 		}
@@ -140,7 +140,7 @@ public:
 
 extern "C" {
 	// Define a function that returns the result of adding two numbers
-	EXPORT SorterInterface* GetInstance() {
+	EXPORT NS_Sorter::SorterInterface* GetInstance() {
 		return new DefaultSorter();
 	}
 }

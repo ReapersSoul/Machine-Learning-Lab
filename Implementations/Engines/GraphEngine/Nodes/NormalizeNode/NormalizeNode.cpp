@@ -11,7 +11,7 @@
 
 #include <typeinfo>
 
-class NormalizeNode : public NodeInterface {
+class NormalizeNode : public NS_Node::NodeInterface {
 	std::vector<double> input;
 
 	std::vector<double> Normalize(std::vector<double> data) {
@@ -74,7 +74,7 @@ public:
 	}
 
 	nlohmann::json Serialize() override {
-		nlohmann::json data = NodeInterface::Serialize();
+		nlohmann::json data = NS_Node::NodeInterface::Serialize();
 
 		return data;
 	}
@@ -97,7 +97,7 @@ extern "C" {
 	}
 
 	// Define a function that returns the result of adding two numbers
-	EXPORT NodeInterface* GetInstance() {
+	EXPORT NS_Node::NodeInterface* GetInstance() {
 		return new NormalizeNode();
 	}
 }

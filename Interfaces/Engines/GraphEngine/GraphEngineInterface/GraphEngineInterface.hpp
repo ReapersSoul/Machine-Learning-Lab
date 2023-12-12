@@ -10,7 +10,6 @@
 class GraphEngineInterface: public EngineInterface {
 protected:
 	std::map<std::string,Graph*> Graphs;
-	std::vector<SorterInterface*> AvailableSorters;
 	ActivationEngineInterface* AE;
 	LossEngineInterface* LE;
 public:
@@ -53,21 +52,4 @@ public:
 	virtual void LoadAvailableNodes() = 0;
 	virtual void LoadAvailableScriptNodes() = 0;
 	virtual void LoadAvailableSorters() = 0;
-
-	//getters
-	std::vector<NodeInfo>& GetAvailableNodes() {
-		return AvailableNodes;
-	}
-
-	std::vector<SorterInterface*>& GetAvailableSorters() {
-		return AvailableSorters;
-	}
-
-	std::vector<ActivationInterface*>& GetAvailableActivations() {
-		return AE->GetAvailableActivations();
-	}
-
-	std::vector<LossInterface*>& GetAvailableLosses() {
-		return LE->GetAvailableLosses();
-	}
 };
