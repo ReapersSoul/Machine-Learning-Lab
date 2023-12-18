@@ -8,12 +8,8 @@
             "name": "Machine-Learning-Lab",
             "type": "cppdbg",
             "request": "launch",
-<<<<<<< Updated upstream
-            "program": "${workspaceFolder}/Build/Runtime/Debug/Machine-Learning-Lab/Machine-Learning-Lab",
-=======
             "program": "${workspaceFolder}/build/Runtime/Debug/Machine-Learning-Lab/Machine-Learning-Lab",
             "additionalSOLibSearchPath": "${workspaceFolder}/build/*",
->>>>>>> Stashed changes
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/build/Runtime/Debug/Machine-Learning-Lab/",
@@ -37,13 +33,8 @@
             "name": "Cleaner",
             "type": "cppdbg",
             "request": "launch",
-<<<<<<< Updated upstream
-            "program": "${workspaceFolder}/Build/Runtime/Debug/Cleaner/Cleaner",
-            "additionalSOLibSearchPath": "${workspaceFolder}/Build/Runtime/Debug/Cleaner/",
-=======
             "program": "${workspaceFolder}/build/Runtime/Debug/Cleaner/Cleaner",
             "additionalSOLibSearchPath": "${workspaceFolder}/build/*",
->>>>>>> Stashed changes
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/build/Runtime/Debug/Cleaner/",
