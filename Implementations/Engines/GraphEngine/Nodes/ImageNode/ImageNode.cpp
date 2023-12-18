@@ -288,14 +288,26 @@ public:
 
 	void Init() override {
 		path.reserve(256);
-		MakeOutput(0, "Red", "Tensor", nlohmann::json::array());
-		MakeOutput(1, "Green", "Tensor", nlohmann::json::array());
-		MakeOutput(2, "Blue", "Tensor", nlohmann::json::array());
-		MakeOutput(3, "Image", "Tensor", nlohmann::json::array());
-		MakeOutput(4, "Grey-scale", "Tensor", nlohmann::json::array());
-		MakeOutput(5, "Size", "vec2", nlohmann::json::array());
+		unsigned int Output_one=MakeOutput("Tensor", [](){
+			ImGui::Text("Red");
+		});
+		unsigned int Output_two=MakeOutput("Tensor", [](){
+			ImGui::Text("Green");
+		});
+		unsigned int Output_three=MakeOutput("Tensor", [](){
+			ImGui::Text("Blue");
+		});
+		unsigned int Output_four=MakeOutput("Tensor", [](){
+			ImGui::Text("Image");
+		});
+		unsigned int Output_five=MakeOutput("Tensor", [](){
+			ImGui::Text("Grey-scale");
+		});
+		unsigned int Output_six=MakeOutput("vec2", [](){
+			ImGui::Text("Size");
+		});
 
-		MakeAttribute(0, new Attribute([this]() {
+		unsigned int Attribute_one=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			char* tmppath = new char[256] {0};
 			tmppath = (char*)path.c_str();
@@ -312,12 +324,12 @@ public:
 			}
 			}));
 
-		MakeAttribute(1, new Attribute([this]() {
+		unsigned int Attribute_two=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::Checkbox("Lock Aspect Ratio", &lock_aspect_ratio);
 			}));
 
-		MakeAttribute(2, new Attribute([this]() {
+		unsigned int Attribute_three=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::InputInt("Width", &desired_image_width, 0, 0, ImGuiInputTextFlags_EnterReturnsTrue)) {
 				//if the aspect ratio is locked then change the height to match the aspect ratio
@@ -328,7 +340,7 @@ public:
 			}
 			}));
 
-		MakeAttribute(3, new Attribute([this]() {
+		unsigned int Attribute_four=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::InputInt("Height", &desired_image_height, 0, 0, ImGuiInputTextFlags_EnterReturnsTrue)) {
 				//if the aspect ratio is locked then change the width to match the aspect ratio
@@ -339,7 +351,7 @@ public:
 			}
 			}));
 
-		MakeAttribute(6, new Attribute([this]() {
+		unsigned int Attribute_five=MakeAttribute(6, new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::CollapsingHeader("Image")) {
 				//radio buttons for the display mode
@@ -387,22 +399,18 @@ public:
 					break;
 				}
 			}
-			}));
+		}));
+		MakeLine(-1, Attribute_one, Output_one);
+		MakeLine(-1, Attribute_two, Output_two);
+		MakeLine(-1, Attribute_three, Output_three);
+		MakeLine(-1, Attribute_four, Output_four);
+		MakeLine(-1, Attribute_five, Output_five);
+		MakeLine(-1, -1, Output_six);
 	}
 
 	void Process(bool DirectionForward) override {
 		if (DirectionForward) {
-
-			//Outputs[0]->GetData().push_back(AsTensor(red_data, image_width, image_height));
-			//Outputs[1]->GetData().push_back(AsTensor(green_data, image_width, image_height));
-			//Outputs[2]->GetData().push_back(AsTensor(blue_data, image_width, image_height));
-			//Outputs[3]->GetData().push_back(AsTensor(image_data, image_width, image_height));
-			//Outputs[4]->GetData().push_back(AsTensor(grey_data, image_width, image_height));
-			GetOutputDataByIndex(0) = AsTensor(red_data, image_width, image_height,1);
-			GetOutputDataByIndex(1) = AsTensor(green_data, image_width, image_height,1);
-			GetOutputDataByIndex(2) = AsTensor(blue_data, image_width, image_height,1);
-			GetOutputDataByIndex(3) = AsTensor(image_data, image_width, image_height,1);
-			GetOutputDataByIndex(4) = AsTensor(grey_data, image_width, image_height,1);
+			
 		}
 	}
 

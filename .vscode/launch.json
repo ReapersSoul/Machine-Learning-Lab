@@ -8,10 +8,15 @@
             "name": "Machine-Learning-Lab",
             "type": "cppdbg",
             "request": "launch",
+<<<<<<< Updated upstream
             "program": "${workspaceFolder}/Build/Runtime/Debug/Machine-Learning-Lab/Machine-Learning-Lab",
+=======
+            "program": "${workspaceFolder}/build/Runtime/Debug/Machine-Learning-Lab/Machine-Learning-Lab",
+            "additionalSOLibSearchPath": "${workspaceFolder}/build/*",
+>>>>>>> Stashed changes
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/Build/Runtime/Debug/Machine-Learning-Lab/",
+            "cwd": "${workspaceFolder}/build/Runtime/Debug/Machine-Learning-Lab/",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
@@ -32,11 +37,16 @@
             "name": "Cleaner",
             "type": "cppdbg",
             "request": "launch",
+<<<<<<< Updated upstream
             "program": "${workspaceFolder}/Build/Runtime/Debug/Cleaner/Cleaner",
             "additionalSOLibSearchPath": "${workspaceFolder}/Build/Runtime/Debug/Cleaner/",
+=======
+            "program": "${workspaceFolder}/build/Runtime/Debug/Cleaner/Cleaner",
+            "additionalSOLibSearchPath": "${workspaceFolder}/build/*",
+>>>>>>> Stashed changes
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/Build/Runtime/Debug/Cleaner/",
+            "cwd": "${workspaceFolder}/build/Runtime/Debug/Cleaner/",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",

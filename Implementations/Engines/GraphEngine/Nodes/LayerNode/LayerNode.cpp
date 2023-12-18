@@ -15,7 +15,7 @@ class LayerNode : public NS_Node::NodeInterface {
 	std::vector<double> ForwardGradient;
 	int inputs=1, outputs=1;
 	double LearningRate=0.1;
-	ActivationInterface* Activation;
+	NS_Activation::ActivationInterface* Activation;
 	int max_threads;
 
 	bool CapDerivative = false;
@@ -252,13 +252,19 @@ public:
 	}
 
 	void Init() override {
-		MakeInput(0, "Input", "double", nlohmann::json::array());
-		MakeInput(1, "Output Size", "double", nlohmann::json::array());
-		MakeOutput(0, "Output", "double", nlohmann::json::array());
+		unsigned int Input_one=MakeInput("double", [](){
+			ImGui::Text("Input");
+			});
+		unsigned int Input_two=MakeInput("double", []() {
+			ImGui::Text("Weights");
+			});
+		unsigned int Output_one=MakeOutput("double", []() {
+			ImGui::Text("Output");
+			});
 
 		Activation = AE->GetAvailableActivations()[0];
 
-		MakeAttribute(0, new Attribute([this]() {
+		unsigned int Attribute_one=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::Checkbox("Cap Derivatives?", &CapDerivative);
 			ImGui::SameLine();
@@ -267,28 +273,28 @@ public:
 			ImGui::InputDouble("Derivative Floor", &DerivativeFloor);
 			}));
 
-		MakeAttribute(1, new Attribute([this]() {
+		unsigned int Attribute_two=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if(ImGui::Button("Randomize Weights"))
 				RandomizeWeights();
 			}));
 
-		MakeAttribute(2, new Attribute([this]() {
+		unsigned int Attribute_three=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::Checkbox("Use GPU?", &GPU);
 			}));
 
-		MakeAttribute(3, new Attribute([this]() {
+		unsigned int Attribute_four=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputInt("Outputs", &outputs);
 			}));
 
-		MakeAttribute(4,new Attribute([this]() {
+		unsigned int Attribute_five=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputDouble("Learning Rate", &LearningRate);
 			}));
 
-		MakeAttribute(5,new Attribute([this]() {
+		unsigned int Attribute_six=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::BeginCombo("Activation", Activation->GetName().c_str())) {
 				for (int i = 0; i < AE->GetAvailableActivations().size(); i++)
@@ -302,7 +308,7 @@ public:
 				ImGui::EndCombo();
 			}
 			}));
-		MakeAttribute(6,new Attribute([this]() {
+		unsigned int Attribute_seven=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			//imgui table
 			if (ImGui::BeginTable("MyTable", 3)) {

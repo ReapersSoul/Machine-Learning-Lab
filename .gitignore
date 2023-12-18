@@ -3,3 +3,4 @@ vcpkg/
 out/
 Build/
 Runtime/
+build/

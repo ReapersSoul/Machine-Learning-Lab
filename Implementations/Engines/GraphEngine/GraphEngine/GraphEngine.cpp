@@ -85,7 +85,7 @@ public:
 					#if defined(_MSC_VER)
 						NS_Node::NodeInterface* scriptNode = DCEEngine->GetOtherLib("ScriptNode.dll")->GetInstance<NS_Node::NodeInterface>();
 					#elif defined(__GNUC__)
-						NodeInterface* scriptNode = DCEEngine->GetOtherLib("libScriptNode.so")->GetInstance<NodeInterface>();
+						NS_Node::NodeInterface* scriptNode = DCEEngine->GetOtherLib("libScriptNode.so")->GetInstance<NS_Node::NodeInterface>();
 					#endif
 					dynamic_cast<ScriptInterface*>(scriptNode)->SetDCEEngine(DCEEngine);
 					dynamic_cast<ScriptInterface*>(scriptNode)->SetLanguage(language);
