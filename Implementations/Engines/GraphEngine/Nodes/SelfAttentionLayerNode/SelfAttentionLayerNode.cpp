@@ -117,16 +117,22 @@ public:
 	}
 
 	void Init() override {
-		MakeInput(0, "Input", "double", nlohmann::json::array());
-		MakeOutput(0, "Output", "double", nlohmann::json::array());
+		unsigned int input_one=MakeInput(NS_DataObject::GetTypeID("Scalar"), [](){
+			ImGui::Text("Input");
+		});
+		unsigned int output_one=MakeOutput(NS_DataObject::GetTypeID("Scalar"), [](){
+			ImGui::Text("Output");
+		});
 
 
-		MakeAttribute(1, new Attribute([this]() {
+		unsigned int attribute_one=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::InputInt("Embedding Size", &EmbeddingSize)){
 
 			}
 			}));
+
+		MakeLine(input_one, attribute_one, output_one);
 	}
 
 	void Process(bool DirectionForward) override {
@@ -139,19 +145,19 @@ public:
 			similarity.clear();
 			attention_output.clear();
 
-			std::vector<double> Input = GetInputDataByIndex(0)[0].get<std::vector<double>>();
+			//std::vector<double> Input = GetInputDataByIndex(0)[0].get<std::vector<double>>();
 			//split input into vectors of size EmbeddingSize
 			std::vector<std::vector<double>> InputSplit;
-			for (int i = 0; i < Input.size(); i += EmbeddingSize)
-			{
-				std::vector<double> temp;
-				for (int j = 0; j < EmbeddingSize; j++)
-				{
-					temp.push_back(Input[i + j]);
-				}
-				InputSplit.push_back(temp);
-				X.push_back(temp);
-			}
+			// for (int i = 0; i < Input.size(); i += EmbeddingSize)
+			// {
+			// 	std::vector<double> temp;
+			// 	for (int j = 0; j < EmbeddingSize; j++)
+			// 	{
+			// 		temp.push_back(Input[i + j]);
+			// 	}
+			// 	InputSplit.push_back(temp);
+			// 	X.push_back(temp);
+			// }
 
 			if (InputSplit.size() != query_weights.size()) {
 				ResizeWeights(InputSplit.size(), EmbeddingSize);
@@ -195,16 +201,16 @@ public:
 					OutputFlattened.push_back(attention_output[i][j]);
 				}
 			}
-			GetOutputDataByIndex(0) = OutputFlattened;
+			//GetOutputDataByIndex(0) = OutputFlattened;
 		}
 		else {
 			std::vector<double> FG;
-			if (GetOutputDataByIndex(0)[0].is_array()) {
-				FG= GetOutputDataByIndex(0)[0].get<std::vector<double>>();
-			}
-			else {
-				FG.push_back(GetOutputDataByIndex(0)[0].get<double>());
-			}
+			// if (GetOutputDataByIndex(0)[0].is_array()) {
+			// 	FG= GetOutputDataByIndex(0)[0].get<std::vector<double>>();
+			// }
+			// else {
+			// 	FG.push_back(GetOutputDataByIndex(0)[0].get<double>());
+			// }
 
 
 			for (int i = 0; i < value_weights.size(); i++)
@@ -218,7 +224,7 @@ public:
 					for (int k = 0; k < query_weights[i][j].size(); k++)
 					{
 						query_weights[i][j][k] += LearningRate * FG[i] * Z_Prime[j] * X[i][j] * X[i][k];
-						GetInputDataByIndex(0)[i] = FG[i] * Z_Prime[i] * key_weights[i][j] * value_weights[i][j] * query_weights[i][j][k];
+						//GetInputDataByIndex(0)[i] = FG[i] * Z_Prime[i] * key_weights[i][j] * value_weights[i][j] * query_weights[i][j][k];
 					}
 				}
 				

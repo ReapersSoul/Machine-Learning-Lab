@@ -15,7 +15,7 @@ class LossDataSetNode : public NS_Node::NodeInterface {
 	std::vector<double> derivatives = { 0 };
 	std::vector<double> losses = { 0 };
 
-	LossInterface* Loss;
+	NS_Loss::LossInterface* Loss;
 	int page = 0;
 	int chunk_size = 10;
 public:
@@ -26,71 +26,75 @@ public:
 	void Process(bool DirectionForward) override {
 		if (!DirectionForward) {
 			//clear inputs
-			GetInputDataByIndex(0).clear();
-			GetInputDataByIndex(0) = nlohmann::json::object();
-			GetInputDataByIndex(0)["Data"] = nlohmann::json::array();
-			GetInputDataByIndex(0)["Type"] = "Vector";
+			//GetInputDataByIndex(0).clear();
+			//GetInputDataByIndex(0) = nlohmann::json::object();
+			//GetInputDataByIndex(0)["Data"] = nlohmann::json::array();
+			//GetInputDataByIndex(0)["Type"] = "Vector";
 			for (int i = 0; i < values.size(); i++)
 			{
 				double L = -Loss->CalculateLossDerivative(values[i], targets[i]);
 				derivatives[i] = L;
-				GetInputDataByIndex(0)["Data"].push_back(derivatives[i]);
+				//GetInputDataByIndex(0)["Data"].push_back(derivatives[i]);
 			}
 		}
 		else {
-			if (GetInputDataByIndex(0)[0]["Data"].size() != values.size()) {
-				values.resize(GetInputDataByIndex(0)[0]["Data"].size());
-				targets.resize(GetInputDataByIndex(0)[0]["Data"].size());
-				derivatives.resize(GetInputDataByIndex(0)[0]["Data"].size());
-				losses.resize(GetInputDataByIndex(0)[0]["Data"].size());
-			}
+			// if (GetInputDataByIndex(0)[0]["Data"].size() != values.size()) {
+			// 	values.resize(GetInputDataByIndex(0)[0]["Data"].size());
+			// 	targets.resize(GetInputDataByIndex(0)[0]["Data"].size());
+			// 	derivatives.resize(GetInputDataByIndex(0)[0]["Data"].size());
+			// 	losses.resize(GetInputDataByIndex(0)[0]["Data"].size());
+			// }
 
-			if (!GetInputDataByIndex(1).is_null()) {
-				if (GetInputDataByIndex(1)[0]["Data"].size() != targets.size()) {
-					targets.resize(GetInputDataByIndex(1)[0]["Data"].size());
-				}
-				//copy targets
-				for (int i = 0; i < GetInputDataByIndex(1)[0]["Data"].size(); i++)
-				{
-					targets[i] = GetInputDataByIndex(1)[0]["Data"][i].get<double>();
-				}
-			}
+			// if (!GetInputDataByIndex(1).is_null()) {
+			// 	if (GetInputDataByIndex(1)[0]["Data"].size() != targets.size()) {
+			// 		targets.resize(GetInputDataByIndex(1)[0]["Data"].size());
+			// 	}
+			// 	//copy targets
+			// 	for (int i = 0; i < GetInputDataByIndex(1)[0]["Data"].size(); i++)
+			// 	{
+			// 		targets[i] = GetInputDataByIndex(1)[0]["Data"][i].get<double>();
+			// 	}
+			// }
 
-			for (int i = 0; i < GetInputDataByIndex(0)[0]["Data"].size(); i++)
-			{
-				values[i] = GetInputDataByIndex(0)[0]["Data"][i].get<double>();
-			}
+			// for (int i = 0; i < GetInputDataByIndex(0)[0]["Data"].size(); i++)
+			// {
+			// 	values[i] = GetInputDataByIndex(0)[0]["Data"][i].get<double>();
+			// }
 
-			for (int i = 0; i < values.size(); i++)
-			{
-				losses[i] = Loss->CalculateLoss(values[i], targets[i]);
-			}
+			// for (int i = 0; i < values.size(); i++)
+			// {
+			// 	losses[i] = Loss->CalculateLoss(values[i], targets[i]);
+			// }
 		}
 	}
 
 	void Init() override {
-		MakeInput(0, "Input", "double", nlohmann::json::array());
-		MakeInput(1, "Expected", "double", nlohmann::json::array());
+		unsigned int input_one=MakeInput(NS_DataObject::GetTypeID("Scalar"), [](){
+			ImGui::Text("Input");
+		});
+		unsigned int input_two=MakeInput(NS_DataObject::GetTypeID("Scalar"), [](){
+			ImGui::Text("Target");
+		});
 
-		Loss = LE->GetAvailableLosses()[0];
+		//Loss = LE->GetAvailableLosses()[0];
 
 		//loss
-		MakeAttribute(0, new Attribute([this]() {
-			ImGui::PushItemWidth(100);
-			if (ImGui::BeginCombo("Loss", Loss->GetName().c_str())) {
-				for (int i = 0; i < LE->GetAvailableLosses().size(); i++)
-				{
-					bool selected = false;
-					ImGui::Selectable(LE->GetAvailableLosses()[i]->GetName().c_str(), &selected);
-					if (selected) {
-						Loss = LE->GetAvailableLosses()[i];
-					}
-				}
-				ImGui::EndCombo();
-			}
+		unsigned int attribute_one=MakeAttribute(new Attribute([this]() {
+			// ImGui::PushItemWidth(100);
+			// if (ImGui::BeginCombo("Loss", Loss->GetName().c_str())) {
+			// 	for (int i = 0; i < LE->GetAvailableLosses().size(); i++)
+			// 	{
+			// 		bool selected = false;
+			// 		ImGui::Selectable(LE->GetAvailableLosses()[i]->GetName().c_str(), &selected);
+			// 		if (selected) {
+			// 			Loss = LE->GetAvailableLosses()[i];
+			// 		}
+			// 	}
+			// 	ImGui::EndCombo();
+			// }
 			}));
 
-		MakeAttribute(1, new Attribute([this]() {
+		unsigned int attribute_two=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			int size = values.size();
 			if (ImGui::InputInt("Size", &size)) {
@@ -104,7 +108,7 @@ public:
 			}
 			}));
 
-		MakeAttribute(2, new Attribute([this]() {
+		unsigned int attribute_three=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			//get size of container
 			ImVec2 size = ImGui::GetItemRectSize();

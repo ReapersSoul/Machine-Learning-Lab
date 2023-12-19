@@ -23,7 +23,7 @@ class RecurrentNetworkNode : public NS_Node::NodeInterface {
 	int inputSize = 1;
 	std::vector<int> layers = { 2,1 };
 	double LearningRate = 0.1;
-	ActivationInterface* Activation;
+	NS_Activation::ActivationInterface* Activation;
 	int max_threads;
 
 	cl::Program program;
@@ -268,26 +268,30 @@ public:
 	void Init() override {
 		ResizeNetwork(inputSize, layers);
 		RandomizeWeights();
-		MakeInput(0, "Input", "double", nlohmann::json::array());
-		MakeOutput(0, "Output", "double", nlohmann::json::array());
+		unsigned int input_one=MakeInput(NS_DataObject::GetTypeID("Scalar"), [](){
+			ImGui::Text("Input");
+		});
+		unsigned int input_two=MakeOutput(NS_DataObject::GetTypeID("Scalar"), [](){
+			ImGui::Text("Output");
+		});
 
-		Activation = AE->GetAvailableActivations()[0];
-		MakeAttribute(0, new Attribute([this]() {
-			ImGui::PushItemWidth(100);
-			if (ImGui::BeginCombo("Activation", Activation->GetName().c_str())) {
-				for (int i = 0; i < AE->GetAvailableActivations().size(); i++)
-				{
-					bool selected = false;
-					ImGui::Selectable(AE->GetAvailableActivations()[i]->GetName().c_str(), &selected);
-					if (selected) {
-						Activation = AE->GetAvailableActivations()[i];
-					}
-				}
-				ImGui::EndCombo();
-			}
+		//Activation = AE->GetAvailableActivations()[0];
+		unsigned int attribute_one=MakeAttribute(new Attribute([this]() {
+			// ImGui::PushItemWidth(100);
+			// if (ImGui::BeginCombo("Activation", Activation->GetName().c_str())) {
+			// 	for (int i = 0; i < AE->GetAvailableActivations().size(); i++)
+			// 	{
+			// 		bool selected = false;
+			// 		ImGui::Selectable(AE->GetAvailableActivations()[i]->GetName().c_str(), &selected);
+			// 		if (selected) {
+			// 			Activation = AE->GetAvailableActivations()[i];
+			// 		}
+			// 	}
+			// 	ImGui::EndCombo();
+			// }
 			}));
 
-		MakeAttribute(1, new Attribute([this]() {
+		unsigned int attribute_two=MakeAttribute(new Attribute([this]() {
 			//attribute for layer sizes
 			ImGui::PushItemWidth(100);
 			if (ImGui::InputText("Layers", tmp_layers, 256, ImGuiInputTextFlags_EnterReturnsTrue)) {
@@ -301,12 +305,12 @@ public:
 				RandomizeWeights();
 			}
 			}));
-		MakeAttribute(2, new Attribute([this]() {
+		unsigned int attribute_three=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputDouble("Learning Rate", &LearningRate);
 			}));
 
-		MakeAttribute(4, new Attribute([this]() {
+		unsigned int attribute_four=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			//imgui table
 			if (ImGui::BeginTable("MyTable", 3)) {
@@ -316,11 +320,11 @@ public:
 				ImGui::TableNextRow();
 				// Data for Column 1
 				ImGui::TableNextColumn();
-				for (int i = 0; i < Description.size(); i++) {
-					if (Description[i].find("Input") != Description[i].end()) {
-						ImGui::Text(Description[i]["Input"]["Data"].dump().c_str());
-					}
-				}
+				// for (int i = 0; i < Description.size(); i++) {
+				// 	if (Description[i].find("Input") != Description[i].end()) {
+				// 		ImGui::Text(Description[i]["Input"]["Data"].dump().c_str());
+				// 	}
+				// }
 
 				// Data for Column 2
 				ImGui::TableNextColumn();
@@ -347,13 +351,13 @@ public:
 
 				// Data for Column 3
 				ImGui::TableNextColumn();
-				for (int i = 0; i < Description.size(); i++) {
-					if (Description[i].find("Output") != Description[i].end()) {
-						//right align text
-						ImGui::Indent(10);
-						ImGui::Text(Description[i]["Output"]["Data"].dump().c_str());
-					}
-				}
+				// for (int i = 0; i < Description.size(); i++) {
+				// 	if (Description[i].find("Output") != Description[i].end()) {
+				// 		//right align text
+				// 		ImGui::Indent(10);
+				// 		ImGui::Text(Description[i]["Output"]["Data"].dump().c_str());
+				// 	}
+				// }
 
 				ImGui::EndTable();
 			}
@@ -364,72 +368,72 @@ public:
 	void Process(bool DirectionForward) override {
 		printf("Processing Node %d\n", UID);
 		ResizeNetwork(inputSize, layers);
-		if (DirectionForward) {
-			//get input
-			if (GetInputDataByIndex(0).is_array()) {
-				if (inputSize != GetInputDataByIndex(0).size()) {
-					inputSize = GetInputDataByIndex(0).size();
-					ResizeNetwork(inputSize, layers);
-					RandomizeWeights();
-				}
+		// if (DirectionForward) {
+		// 	//get input
+		// 	if (GetInputDataByIndex(0).is_array()) {
+		// 		if (inputSize != GetInputDataByIndex(0).size()) {
+		// 			inputSize = GetInputDataByIndex(0).size();
+		// 			ResizeNetwork(inputSize, layers);
+		// 			RandomizeWeights();
+		// 		}
 
-				for (int i = 0; i < inputSize; i++) {
-					x[i] = GetInputDataByIndex(0)[i].get<double>();
-				}
-				for (int i = layers[0]; i < layers[0]*2; i++)
-				{
-					x[i] = a[0][i - (size_t)layers[0]];
-				}
-			}
-			else {
-				x[0] = GetInputDataByIndex(0).get<double>();
-			}
+		// 		for (int i = 0; i < inputSize; i++) {
+		// 			x[i] = GetInputDataByIndex(0)[i].get<double>();
+		// 		}
+		// 		for (int i = layers[0]; i < layers[0]*2; i++)
+		// 		{
+		// 			x[i] = a[0][i - (size_t)layers[0]];
+		// 		}
+		// 	}
+		// 	else {
+		// 		x[0] = GetInputDataByIndex(0).get<double>();
+		// 	}
 
-			a[0] = GPUForwardLayer(x, w[0], z[0], b[0]);
-			for (int i = layers[0]; i < layers[0]*2; i++)
-			{
-				a[0][i] = a[1][i-(size_t)layers[0]];
-			}
+		// 	a[0] = GPUForwardLayer(x, w[0], z[0], b[0]);
+		// 	for (int i = layers[0]; i < layers[0]*2; i++)
+		// 	{
+		// 		a[0][i] = a[1][i-(size_t)layers[0]];
+		// 	}
 
-			for (int l = 1; l < layers.size(); l++) {
-				a[l] = GPUForwardLayer(a[l - (size_t)1], w[l], z[l], b[l]);
-				if (l < layers.size() - 1) {
-					for (int i = layers[l]; i < layers[l] * 2; i++)
-					{
-						a[l][i] = a[l + (size_t)1][i - (size_t)layers[l]];
-					}
-				}
-			}
+		// 	for (int l = 1; l < layers.size(); l++) {
+		// 		a[l] = GPUForwardLayer(a[l - (size_t)1], w[l], z[l], b[l]);
+		// 		if (l < layers.size() - 1) {
+		// 			for (int i = layers[l]; i < layers[l] * 2; i++)
+		// 			{
+		// 				a[l][i] = a[l + (size_t)1][i - (size_t)layers[l]];
+		// 			}
+		// 		}
+		// 	}
 
-			// push last activation to output
-			GetOutputDataByIndex(0).clear();
-			for (int i = 0; i < a.back().size(); i++) {
-				GetOutputDataByIndex(0).push_back(a.back()[i]);
-			}
-		}
-		else {
-			// Get ForwardGradient from output
-			std::vector<double> ForwardGradient;
-			if (GetOutputDataByIndex(0).is_array()) {
-				for (int i = 0; i < GetOutputDataByIndex(0).size(); i++) {
-					ForwardGradient.push_back(GetOutputDataByIndex(0)[i].get<double>());
-				}
-			}
-			else {
-				ForwardGradient.push_back(GetOutputDataByIndex(0).get<double>());
-			}
+		// 	// push last activation to output
+		// 	GetOutputDataByIndex(0).clear();
+		// 	for (int i = 0; i < a.back().size(); i++) {
+		// 		GetOutputDataByIndex(0).push_back(a.back()[i]);
+		// 	}
+		// }
+		// else {
+		// 	// Get ForwardGradient from output
+		// 	std::vector<double> ForwardGradient;
+		// 	if (GetOutputDataByIndex(0).is_array()) {
+		// 		for (int i = 0; i < GetOutputDataByIndex(0).size(); i++) {
+		// 			ForwardGradient.push_back(GetOutputDataByIndex(0)[i].get<double>());
+		// 		}
+		// 	}
+		// 	else {
+		// 		ForwardGradient.push_back(GetOutputDataByIndex(0).get<double>());
+		// 	}
 
-			for (int l = layers.size() - 1; l > 0; l--) {
-				ForwardGradient = GPUBackwardLayer(a[l - (size_t)1], w[l], z[l], b[l], ForwardGradient);
-			}
-			ForwardGradient = GPUBackwardLayer(x, w[0], z[0], b[0], ForwardGradient);
+		// 	for (int l = layers.size() - 1; l > 0; l--) {
+		// 		ForwardGradient = GPUBackwardLayer(a[l - (size_t)1], w[l], z[l], b[l], ForwardGradient);
+		// 	}
+		// 	ForwardGradient = GPUBackwardLayer(x, w[0], z[0], b[0], ForwardGradient);
 
-			// push ForwardGradient to input
-			GetInputDataByIndex(0).clear();
-			for (int i = 0; i < ForwardGradient.size(); i++) {
-				GetInputDataByIndex(0).push_back(ForwardGradient[i]);
-			}
-		}
+		// 	// push ForwardGradient to input
+		// 	// GetInputDataByIndex(0).clear();
+		// 	// for (int i = 0; i < ForwardGradient.size(); i++) {
+		// 	// 	GetInputDataByIndex(0).push_back(ForwardGradient[i]);
+		// 	// }
+		// }
 	}
 
 	void Update() override {

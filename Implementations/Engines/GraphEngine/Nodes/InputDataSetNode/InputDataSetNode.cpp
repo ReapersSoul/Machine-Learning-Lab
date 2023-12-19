@@ -20,28 +20,28 @@ public:
             nlohmann::json data = nlohmann::json::object();
             data["Data"] = values;
             data["Type"] = "Vector";
-            GetOutputDataByIndex(0) = data;
+            //GetOutputDataByIndex(0) = data;
         }
     }
 
     void Init() override {
         //json array
-        Description=nlohmann::json::array();
-        MakeOutput(0, "Output", "double", 0);
-        MakeAttribute(0, new Attribute([this]() {
-			ImGui::PushItemWidth(100);
-			int size = values.size();
-			ImGui::InputInt("Size", &size);
-			if (size <= 0) size = 1;
-			values.resize(size);
-			}));
+        // Description=nlohmann::json::array();
+        // MakeOutput(0, "Output", "double", 0);
+        // MakeAttribute(0, new Attribute([this]() {
+		// 	ImGui::PushItemWidth(100);
+		// 	int size = values.size();
+		// 	ImGui::InputInt("Size", &size);
+		// 	if (size <= 0) size = 1;
+		// 	values.resize(size);
+		// 	}));
 
-        MakeAttribute(1, new Attribute([this]() {
-			ImGui::PushItemWidth(100);
-            for (int i = 0; i < values.size(); i++) {
-                ImGui::InputDouble(std::to_string(i).c_str(), &values[i]);
-            }
-            }));
+        // MakeAttribute(1, new Attribute([this]() {
+		// 	ImGui::PushItemWidth(100);
+        //     for (int i = 0; i < values.size(); i++) {
+        //         ImGui::InputDouble(std::to_string(i).c_str(), &values[i]);
+        //     }
+        //     }));
     }
 
     //void DrawNodeTitle();

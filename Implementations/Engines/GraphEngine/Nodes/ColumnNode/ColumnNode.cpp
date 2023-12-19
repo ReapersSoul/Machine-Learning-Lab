@@ -24,27 +24,32 @@ public:
 			//printf("%s\n", GetInputDataByIndex(0)[0].dump(4).c_str());
 			//printf("%s\n", GetInputDataByIndex(0)[0]["Columns"].dump(4).c_str());
 			//printf("%s\n", GetInputDataByIndex(0)[0]["Columns"][ColumnName].dump(4).c_str());
-			data["Data"] = GetInputDataByIndex(0)[0]["Columns"][ColumnName]["Data"];
-			data["Type"] = "Vector";
-			GetOutputDataByIndex(0) = data;
+			// data["Data"] = GetInputDataByIndex(0)[0]["Columns"][ColumnName]["Data"];
+			// data["Type"] = "Vector";
+			// GetOutputDataByIndex(0) = data;
 		}
 		else {
-			nlohmann::json data = nlohmann::json::object();
-			data["Data"] = GetOutputDataByIndex(0)[0]["Data"];
-			GetInputDataByIndex(0) = data;
+			// nlohmann::json data = nlohmann::json::object();
+			// data["Data"] = GetOutputDataByIndex(0)[0]["Data"];
+			// GetInputDataByIndex(0) = data;
 		}
 	}
 
 	void Init() override {
-		MakeInput(0, "Input", "Any", {});
-		MakeAttribute(0, new Attribute([&]() {
+		unsigned int input_one=MakeInput(NS_DataObject::GetTypeID("Any"), [](){
+			ImGui::Text("Input");
+		});
+		unsigned int attribute_one=MakeAttribute(new Attribute([&]() {
 				ImGui::PushItemWidth(100);
 				char buf[100];
 				memcpy(buf, ColumnName.c_str(), 100);
 				ImGui::InputText("Column Name", buf, 100);
 				ColumnName = buf;
 			}));
-		MakeOutput(0, "Output", "Any", {});
+		unsigned int output_one = MakeOutput(NS_DataObject::GetTypeID("Any"), [](){
+			ImGui::Text("Output");
+		});
+		MakeLine(input_one, attribute_one, output_one);
 	}
 
 	void Update() override {

@@ -89,7 +89,7 @@ public:
 				}
 				data["Type"] = "DataBase";
 			}
-			GetOutputDataByIndex(0)=data;
+			//GetOutputDataByIndex(0)=data;
 		}
 	}
 
@@ -106,22 +106,22 @@ public:
 		DatabasePath.reserve(255);
 		sql.reserve(255);
 
-		MakeAttribute(0, new Attribute([this]() {
-			ImGui::PushItemWidth(100);
-			ImGui::InputText("Database Path", (char*)DatabasePath.c_str(), 255);
-			}));
+		// MakeAttribute(0, new Attribute([this]() {
+		// 	ImGui::PushItemWidth(100);
+		// 	ImGui::InputText("Database Path", (char*)DatabasePath.c_str(), 255);
+		// 	}));
 
-		MakeAttribute(1, new Attribute([this]() {
-			ImGui::PushItemWidth(300);
-			ImGui::InputText("sql statement", (char*)sql.c_str(), 255);
-			}));
+		// MakeAttribute(1, new Attribute([this]() {
+		// 	ImGui::PushItemWidth(300);
+		// 	ImGui::InputText("sql statement", (char*)sql.c_str(), 255);
+		// 	}));
 
-		MakeAttribute(2, new Attribute([this]() {
-			ImGui::PushItemWidth(100);
-			ImGui::Checkbox("Refresh", &refreshDB);
-			}));
+		// MakeAttribute(2, new Attribute([this]() {
+		// 	ImGui::PushItemWidth(100);
+		// 	ImGui::Checkbox("Refresh", &refreshDB);
+		// 	}));
 
-		MakeOutput(0, "Output","Any", nlohmann::json::array());
+		// MakeOutput(0, "Output","Any", nlohmann::json::array());
 
 	}
 

@@ -44,51 +44,51 @@ public:
 			}));
 
 		//create Outputs
-		MakeOutput(0, "A", "bool", false);
-		MakeOutput(1, "B", "bool", false);
-		MakeOutput(2, "X", "bool", false);
-		MakeOutput(3, "Y", "bool", false);
-		MakeOutput(4, "LB", "bool", false);
-		MakeOutput(5, "RB", "bool", false);
-		MakeOutput(6, "Select", "bool", false);
-		MakeOutput(7, "Start", "bool", false);
-		MakeOutput(8, "L3", "bool", false);
-		MakeOutput(9, "R3", "bool", false);
-		MakeOutput(10, "LX", "float", 0);
-		MakeOutput(11, "LY", "float", 0);
-		MakeOutput(12, "RX", "float", 0);
-		MakeOutput(13, "RY", "float", 0);
-		MakeOutput(14, "LT", "float", 0);
-		MakeOutput(15, "RT", "float", 0);
-		MakeOutput(16, "DPadUp", "bool", false);
-		MakeOutput(17, "DPadDown", "bool", false);
-		MakeOutput(18, "DPadLeft", "bool", false);
-		MakeOutput(19, "DPadRight", "bool", false);
+		// MakeOutput(0, "A", "bool", false);
+		// MakeOutput(1, "B", "bool", false);
+		// MakeOutput(2, "X", "bool", false);
+		// MakeOutput(3, "Y", "bool", false);
+		// MakeOutput(4, "LB", "bool", false);
+		// MakeOutput(5, "RB", "bool", false);
+		// MakeOutput(6, "Select", "bool", false);
+		// MakeOutput(7, "Start", "bool", false);
+		// MakeOutput(8, "L3", "bool", false);
+		// MakeOutput(9, "R3", "bool", false);
+		// MakeOutput(10, "LX", "float", 0);
+		// MakeOutput(11, "LY", "float", 0);
+		// MakeOutput(12, "RX", "float", 0);
+		// MakeOutput(13, "RY", "float", 0);
+		// MakeOutput(14, "LT", "float", 0);
+		// MakeOutput(15, "RT", "float", 0);
+		// MakeOutput(16, "DPadUp", "bool", false);
+		// MakeOutput(17, "DPadDown", "bool", false);
+		// MakeOutput(18, "DPadLeft", "bool", false);
+		// MakeOutput(19, "DPadRight", "bool", false);
 	}
 
 	void Process(bool DirectionForward) override {
 		if (DirectionForward) {
 			//get controller values
-			SetOutputByIndexData(0, A);
-			SetOutputByIndexData(1, B);
-			SetOutputByIndexData(2, X);
-			SetOutputByIndexData(3, Y);
-			SetOutputByIndexData(4, LB);
-			SetOutputByIndexData(5, RB);
-			SetOutputByIndexData(6, Select);
-			SetOutputByIndexData(7, Start);
-			SetOutputByIndexData(8, L3);
-			SetOutputByIndexData(9, R3);
-			SetOutputByIndexData(10, LX);
-			SetOutputByIndexData(11, LY);
-			SetOutputByIndexData(12, RX);
-			SetOutputByIndexData(13, RY);
-			SetOutputByIndexData(14, LT);
-			SetOutputByIndexData(15, RT);
-			SetOutputByIndexData(16, DPadUp);
-			SetOutputByIndexData(17, DPadDown);
-			SetOutputByIndexData(18, DPadLeft);
-			SetOutputByIndexData(19, DPadRight);
+			// SetOutputByIndexData(0, A);
+			// SetOutputByIndexData(1, B);
+			// SetOutputByIndexData(2, X);
+			// SetOutputByIndexData(3, Y);
+			// SetOutputByIndexData(4, LB);
+			// SetOutputByIndexData(5, RB);
+			// SetOutputByIndexData(6, Select);
+			// SetOutputByIndexData(7, Start);
+			// SetOutputByIndexData(8, L3);
+			// SetOutputByIndexData(9, R3);
+			// SetOutputByIndexData(10, LX);
+			// SetOutputByIndexData(11, LY);
+			// SetOutputByIndexData(12, RX);
+			// SetOutputByIndexData(13, RY);
+			// SetOutputByIndexData(14, LT);
+			// SetOutputByIndexData(15, RT);
+			// SetOutputByIndexData(16, DPadUp);
+			// SetOutputByIndexData(17, DPadDown);
+			// SetOutputByIndexData(18, DPadLeft);
+			// SetOutputByIndexData(19, DPadRight);
 		}
 	}
 

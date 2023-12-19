@@ -41,32 +41,36 @@ public:
 	}
 
 	void Process(bool DirectionForward) override {
-		if (DirectionForward) {
-			nlohmann::json data = nlohmann::json::object();
-			input.resize(GetInputDataByIndex(0)[0]["Data"].size());
-			for (int i = 0; i < input.size(); i++) {
-				input[i] = GetInputDataByIndex(0)[0]["Data"][i];
-			}
-			data["Data"] = Normalize(input);
-			data["Type"] = "Vector";
-			GetOutputDataByIndex(0) = data;
-		}
-		else {
-			nlohmann::json data = nlohmann::json::object();
-			std::vector<double> FG=GetOutputDataByIndex(0)[0]["Data"];
-			std::vector<double> derivative = DerivativeNormalize(input);
-			for (int i = 0; i < input.size(); i++) {
-				FG[i] *= derivative[i];
-			}
-			data["Data"] = FG;
-			data["Type"] = "Vector";
-			GetInputDataByIndex(0) = data;
-		}
+		// if (DirectionForward) {
+		// 	nlohmann::json data = nlohmann::json::object();
+		// 	input.resize(GetInputDataByIndex(0)[0]["Data"].size());
+		// 	for (int i = 0; i < input.size(); i++) {
+		// 		input[i] = GetInputDataByIndex(0)[0]["Data"][i];
+		// 	}
+		// 	data["Data"] = Normalize(input);
+		// 	data["Type"] = "Vector";
+		// 	GetOutputDataByIndex(0) = data;
+		// }
+		// else {
+		// 	nlohmann::json data = nlohmann::json::object();
+		// 	std::vector<double> FG=GetOutputDataByIndex(0)[0]["Data"];
+		// 	std::vector<double> derivative = DerivativeNormalize(input);
+		// 	for (int i = 0; i < input.size(); i++) {
+		// 		FG[i] *= derivative[i];
+		// 	}
+		// 	data["Data"] = FG;
+		// 	data["Type"] = "Vector";
+		// 	GetInputDataByIndex(0) = data;
+		// }
 	}
 
 	void Init() override {
-		MakeInput(0, "Input", "Any", {});
-		MakeOutput(0, "Output", "Any", {});
+		unsigned int input_one=MakeInput(NS_DataObject::GetTypeID("Scalar"),[](){
+			ImGui::Text("Input");
+		});
+		unsigned int output_one =MakeOutput(NS_DataObject::GetTypeID("Scalar"),[](){
+			ImGui::Text("Output");
+		});
 	}
 
 	void Update() override {

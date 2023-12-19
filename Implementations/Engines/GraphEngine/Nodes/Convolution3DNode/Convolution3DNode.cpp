@@ -44,7 +44,7 @@ class ConvolutionNode : public NS_Node::NodeInterface {
 	GLuint KTexture;
 	char* YImageData;
 	GLuint YTexture;
-	ActivationInterface* Activation;
+	NS_Activation::ActivationInterface* Activation;
 
 	glm::ivec3 X_size{0, 0,0};
 	glm::ivec3 K_size{3, 3,3};
@@ -402,8 +402,8 @@ public:
 				stbi_image_free(data);
 			}
 			else {
-				X_size = { GetInputDataByIndex(0)[0]["Size"]["X"].get<int>(), GetInputDataByIndex(0)[0]["Size"]["Y"].get<int>(), GetInputDataByIndex(0)[0]["Size"]["Z"].get<int>()};
-				X = GetInputDataByIndex(0)[0]["Data"].get<std::vector<double>>();
+				// X_size = { GetInputDataByIndex(0)[0]["Size"]["X"].get<int>(), GetInputDataByIndex(0)[0]["Size"]["Y"].get<int>(), GetInputDataByIndex(0)[0]["Size"]["Z"].get<int>()};
+				// X = GetInputDataByIndex(0)[0]["Data"].get<std::vector<double>>();
 			}
 			Y_size = GetOutputSize(X_size, K_size, stride, padding);
 			if (GPU) { 
@@ -424,14 +424,14 @@ public:
 				Y[i] = Activation->Activate(Z[i]);
 				data["Data"].push_back(Y[i]);
 			}
-			GetOutputDataByIndex(0) = data;
+			//GetOutputDataByIndex(0) = data;
 		}
 		else {
 			std::vector<double> ZPrime;
 			ZPrime.resize(Y_size.x * Y_size.y);
 			for (int i = 0; i < ZPrime.size(); i++)
 			{
-				ZPrime[i] = Activation->ActivateDerivative(Z[i]) * GetOutputDataByIndex(0)[0]["Data"][i].get<double>() * LearningRate;
+				//ZPrime[i] = Activation->ActivateDerivative(Z[i]) * GetOutputDataByIndex(0)[0]["Data"][i].get<double>() * LearningRate;
 			}
 			std::vector<double> dY_dX;
 			if (GPU) {
@@ -441,28 +441,30 @@ public:
 				//dY_dX = Convolution3DBackProp(X, K, ZPrime, X_size, K_size, Y_size, stride, padding);
 			}
 
-			GetInputDataByIndex(0) = nlohmann::json::object();
-			GetInputDataByIndex(0)["Size"]["X"] = X_size.x;
-			GetInputDataByIndex(0)["Size"]["Y"] = X_size.y;
-			GetInputDataByIndex(0)["Data"] = dY_dX;
+			//GetInputDataByIndex(0) = nlohmann::json::object();
+			//GetInputDataByIndex(0)["Size"]["X"] = X_size.x;
+			//GetInputDataByIndex(0)["Size"]["Y"] = X_size.y;
+			//GetInputDataByIndex(0)["Data"] = dY_dX;
 		}
 	}
 
 	void Init() override {
-		Activation = AE->GetAvailableActivations()[0];
-		MakeInput(0, "Input", "Tensor", nlohmann::json::array());
+		//Activation = AE->GetAvailableActivations()[0];
+		unsigned int input_one=MakeInput(NS_DataObject::GetTypeID("Tensor"), [](){
+			ImGui::Text("Input");
+		});
 
-		MakeAttribute(0, new Attribute([this]() {
+		unsigned int attribute_one = MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputDouble("Learning Rate", &LearningRate);
 			}));
 
-		MakeAttribute(1, new Attribute([this]() {
+		unsigned int attribute_two = MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::Checkbox("GPU?", &GPU);
 			}));
 
-		MakeAttribute(2, new Attribute([this]() {
+		unsigned int attribute_three = MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::Checkbox("Cap Derivatives?", &CapDerivative);
 			ImGui::SameLine();
@@ -471,7 +473,7 @@ public:
 			ImGui::InputDouble("Derivative Floor", &DerivativeFloor);
 			}));
 
-		MakeAttribute(3, new Attribute([this]() {
+		unsigned int attribute_four = MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::InputInt3("Kernel Size", &K_size[0])) {
 				K.resize(K_size.x * K_size.y * K_size.z, 0.01);
@@ -499,21 +501,21 @@ public:
 			ImGui::InputInt3("Threads", &threads[0]);
 			ImGui::InputText("Filepath", filepath.data(), filepath.size());
 			}));
-		MakeAttribute(4, new Attribute([this]() {
-			ImGui::PushItemWidth(100);
-			if (ImGui::BeginCombo("Activation", Activation->GetName().c_str())) {
-				for (int i = 0; i < AE->GetAvailableActivations().size(); i++)
-				{
-					bool selected = false;
-					ImGui::Selectable(AE->GetAvailableActivations()[i]->GetName().c_str(), &selected);
-					if (selected) {
-						Activation = AE->GetAvailableActivations()[i];
-					}
-				}
-				ImGui::EndCombo();
-			}
+		unsigned int attribute_five = MakeAttribute(new Attribute([this]() {
+			// ImGui::PushItemWidth(100);
+			// if (ImGui::BeginCombo("Activation", Activation->GetName().c_str())) {
+			// 	for (int i = 0; i < AE->GetAvailableActivations().size(); i++)
+			// 	{
+			// 		bool selected = false;
+			// 		ImGui::Selectable(AE->GetAvailableActivations()[i]->GetName().c_str(), &selected);
+			// 		if (selected) {
+			// 			Activation = AE->GetAvailableActivations()[i];
+			// 		}
+			// 	}
+			// 	ImGui::EndCombo();
+			// }
 			}));
-		MakeAttribute(5, new Attribute([this]() {
+		unsigned int attribute_six = MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::BeginTable("MyTable", 1)) {
 				ImGui::TableSetupColumn("Column 1", ImGuiTableColumnFlags_WidthFixed, 100.0f);
@@ -530,7 +532,7 @@ public:
 				ImGui::EndTable();
 			}
 			}));
-		MakeAttribute(6, new Attribute([this]() {
+		unsigned int attribute_seven = MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::BeginTable("MyTable", 1)) {
 				ImGui::TableSetupColumn("Column 1", ImGuiTableColumnFlags_WidthFixed, Y_size.x);
@@ -545,7 +547,9 @@ public:
 				ImGui::EndTable();
 			}
 			}));
-		MakeOutput(0, "Output", "Tensor", nlohmann::json::object());
+		unsigned int output_one = MakeOutput(NS_DataObject::GetTypeID("Tensor"), []() {
+			ImGui::Text("Output");
+			});
 	}
 
 	void Update() override {
@@ -635,11 +639,11 @@ public:
 
 		//activation
 		if (!data["Activation"].is_null()) {
-			for (int i = 0; i < AE->GetAvailableActivations().size(); i++) {
-				if (data["Activation"].get<std::string>() == AE->GetAvailableActivations()[i]->GetName()) {
-					Activation = AE->GetAvailableActivations()[i];
-				}
-			}
+			// for (int i = 0; i < AE->GetAvailableActivations().size(); i++) {
+			// 	if (data["Activation"].get<std::string>() == AE->GetAvailableActivations()[i]->GetName()) {
+			// 		Activation = AE->GetAvailableActivations()[i];
+			// 	}
+			// }
 		}
 
 		//gpu

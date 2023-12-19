@@ -15,7 +15,7 @@ class RecurrentLayerNode : public NS_Node::NodeInterface {
 	std::vector<double> ForwardGradient;
 	int inputs = 1, outputs = 1;
 	double LearningRate = 0.1;
-	ActivationInterface* Activation;
+	NS_Activation::ActivationInterface* Activation;
 	int max_threads;
 
 	cl::Program program;
@@ -164,36 +164,40 @@ public:
 	}
 
 	void Init() override {
-		MakeInput(0, "Input", "double", nlohmann::json::array());
-		MakeOutput(0, "Output", "double", nlohmann::json::array());
+		unsigned int input_one=MakeInput(NS_DataObject::GetTypeID("Scalar"),[](){
+			ImGui::Text("Input");
+		});
+		unsigned int output_one=MakeOutput(NS_DataObject::GetTypeID("Scalar"),[](){
+			ImGui::Text("Output");
+		});
 
-		Activation = AE->GetAvailableActivations()[0];
+		//Activation = AE->GetAvailableActivations()[0];
 
-		MakeAttribute(1, new Attribute([this]() {
+		unsigned int attribute_one=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputInt("Outputs", &outputs);
 			}));
 
-		MakeAttribute(2, new Attribute([this]() {
+		unsigned int attribute_two=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputDouble("Learning Rate", &LearningRate);
 			}));
 
-		MakeAttribute(3, new Attribute([this]() {
-			ImGui::PushItemWidth(100);
-			if (ImGui::BeginCombo("Activation", Activation->GetName().c_str())) {
-				for (int i = 0; i < AE->GetAvailableActivations().size(); i++)
-				{
-					bool selected = false;
-					ImGui::Selectable(AE->GetAvailableActivations()[i]->GetName().c_str(), &selected);
-					if (selected) {
-						Activation = AE->GetAvailableActivations()[i];
-					}
-				}
-				ImGui::EndCombo();
-			}
+		unsigned int attribute_three=MakeAttribute(new Attribute([this]() {
+			// ImGui::PushItemWidth(100);
+			// if (ImGui::BeginCombo("Activation", Activation->GetName().c_str())) {
+			// 	for (int i = 0; i < AE->GetAvailableActivations().size(); i++)
+			// 	{
+			// 		bool selected = false;
+			// 		ImGui::Selectable(AE->GetAvailableActivations()[i]->GetName().c_str(), &selected);
+			// 		if (selected) {
+			// 			Activation = AE->GetAvailableActivations()[i];
+			// 		}
+			// 	}
+			// 	ImGui::EndCombo();
+			// }
 			}));
-		MakeAttribute(4, new Attribute([this]() {
+		unsigned int attribute_four=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			//imgui table
 			if (ImGui::BeginTable("MyTable", 3)) {
@@ -203,11 +207,11 @@ public:
 				ImGui::TableNextRow();
 				// Data for Column 1
 				ImGui::TableNextColumn();
-				for (int i = 0; i < Description.size(); i++) {
-					if (Description[i].find("Input") != Description[i].end()) {
-						ImGui::Text(Description[i]["Input"]["Data"].dump().c_str());
-					}
-				}
+				// for (int i = 0; i < Description.size(); i++) {
+				// 	if (Description[i].find("Input") != Description[i].end()) {
+				// 		ImGui::Text(Description[i]["Input"]["Data"].dump().c_str());
+				// 	}
+				// }
 
 				// Data for Column 2
 				ImGui::TableNextColumn();
@@ -219,13 +223,13 @@ public:
 
 				// Data for Column 3
 				ImGui::TableNextColumn();
-				for (int i = 0; i < Description.size(); i++) {
-					if (Description[i].find("Output") != Description[i].end()) {
-						//right align text
-						ImGui::Indent(10);
-						ImGui::Text(Description[i]["Output"]["Data"].dump().c_str());
-					}
-				}
+				// for (int i = 0; i < Description.size(); i++) {
+				// 	if (Description[i].find("Output") != Description[i].end()) {
+				// 		//right align text
+				// 		ImGui::Indent(10);
+				// 		ImGui::Text(Description[i]["Output"]["Data"].dump().c_str());
+				// 	}
+				// }
 
 				ImGui::EndTable();
 			}
@@ -236,54 +240,54 @@ public:
 	void Process(bool DirectionForward) override {
 		printf("Processing Node %d\n", UID);
 		if (DirectionForward) {
-			if (GetInputDataByIndex(0).is_array()) {
-				if (GetInputDataByIndex(0).size() != inputs) {
-					inputs = GetInputDataByIndex(0).size();
-					x.resize(inputs+outputs);
-					b.resize(outputs);
-					w.resize(outputs);
-					z.resize(outputs);
-					a.resize(outputs, 0);
-					ForwardGradient.resize(outputs);
-					for (int i = 0; i < outputs; i++)
-					{
-						w[i].resize(inputs+outputs);
-					}
-					RandomizeWeights();
+			// if (GetInputDataByIndex(0).is_array()) {
+			// 	if (GetInputDataByIndex(0).size() != inputs) {
+			// 		inputs = GetInputDataByIndex(0).size();
+			// 		x.resize(inputs+outputs);
+			// 		b.resize(outputs);
+			// 		w.resize(outputs);
+			// 		z.resize(outputs);
+			// 		a.resize(outputs, 0);
+			// 		ForwardGradient.resize(outputs);
+			// 		for (int i = 0; i < outputs; i++)
+			// 		{
+			// 			w[i].resize(inputs+outputs);
+			// 		}
+			// 		RandomizeWeights();
 
-				}
-				for (int i = 0; i < inputs; i++)
-				{
-					x[i] = GetInputDataByIndex(0)[i].get<double>();
-				}
-				for (int i = inputs; i < inputs+outputs; i++)
-				{
-					x[i] = a[i - inputs];
-				}
-			}
-			else {
-				x[0] = GetInputDataByIndex(0).get<double>();
-			}
+			// 	}
+			// 	for (int i = 0; i < inputs; i++)
+			// 	{
+			// 		x[i] = GetInputDataByIndex(0)[i].get<double>();
+			// 	}
+			// 	for (int i = inputs; i < inputs+outputs; i++)
+			// 	{
+			// 		x[i] = a[i - inputs];
+			// 	}
+			// }
+			// else {
+			// 	x[0] = GetInputDataByIndex(0).get<double>();
+			// }
 
 
 			a= GPUForwardLayer(x, w, z, b);
 
-			GetOutputDataByIndex(0) = a;
+			//GetOutputDataByIndex(0) = a;
 		}
 		else {
 			ForwardGradient.clear();
-			if (GetOutputDataByIndex(0).is_array()) {
-				int j = GetOutputDataByIndex(0).size();
-				for (int i = 0; i < GetOutputDataByIndex(0).size(); i++)
-				{
-					ForwardGradient.push_back(GetOutputDataByIndex(0)[i].get<double>());
-				}
-			}
-			else {
-				ForwardGradient[0] = GetOutputDataByIndex(0).get<double>();
-			}
+			// if (GetOutputDataByIndex(0).is_array()) {
+			// 	int j = GetOutputDataByIndex(0).size();
+			// 	for (int i = 0; i < GetOutputDataByIndex(0).size(); i++)
+			// 	{
+			// 		ForwardGradient.push_back(GetOutputDataByIndex(0)[i].get<double>());
+			// 	}
+			// }
+			// else {
+			// 	ForwardGradient[0] = GetOutputDataByIndex(0).get<double>();
+			// }
 
-			GetInputDataByIndex(0) = GPUBackwardLayer(x, w, z, b, ForwardGradient);
+			// GetInputDataByIndex(0) = GPUBackwardLayer(x, w, z, b, ForwardGradient);
 		}
 	}
 

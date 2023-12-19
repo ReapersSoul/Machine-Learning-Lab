@@ -288,22 +288,22 @@ public:
 
 	void Init() override {
 		path.reserve(256);
-		unsigned int Output_one=MakeOutput("Tensor", [](){
+		unsigned int Output_one=MakeOutput(NS_DataObject::GetTypeID("Tensor"), [](){
 			ImGui::Text("Red");
 		});
-		unsigned int Output_two=MakeOutput("Tensor", [](){
+		unsigned int Output_two=MakeOutput(NS_DataObject::GetTypeID("Tensor"), [](){
 			ImGui::Text("Green");
 		});
-		unsigned int Output_three=MakeOutput("Tensor", [](){
+		unsigned int Output_three=MakeOutput(NS_DataObject::GetTypeID("Tensor"), [](){
 			ImGui::Text("Blue");
 		});
-		unsigned int Output_four=MakeOutput("Tensor", [](){
+		unsigned int Output_four=MakeOutput(NS_DataObject::GetTypeID("Tensor"), [](){
 			ImGui::Text("Image");
 		});
-		unsigned int Output_five=MakeOutput("Tensor", [](){
+		unsigned int Output_five=MakeOutput(NS_DataObject::GetTypeID("Tensor"), [](){
 			ImGui::Text("Grey-scale");
 		});
-		unsigned int Output_six=MakeOutput("vec2", [](){
+		unsigned int Output_six=MakeOutput(NS_DataObject::GetTypeID("Vec2"), [](){
 			ImGui::Text("Size");
 		});
 
@@ -351,7 +351,7 @@ public:
 			}
 			}));
 
-		unsigned int Attribute_five=MakeAttribute(6, new Attribute([this]() {
+		unsigned int Attribute_five=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::CollapsingHeader("Image")) {
 				//radio buttons for the display mode

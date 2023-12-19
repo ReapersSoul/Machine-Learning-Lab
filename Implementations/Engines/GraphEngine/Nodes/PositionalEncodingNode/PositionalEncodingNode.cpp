@@ -37,10 +37,14 @@ public:
 	}
 
 	void Init() override {
-		MakeInput(0, "Input", "double", nlohmann::json::array());
-		MakeOutput(0, "Output", "double", nlohmann::json::array());
+		unsigned int input_one=MakeInput(NS_DataObject::GetTypeID("Scalar"), [](){
+			ImGui::Text("Input");
+		});
+		unsigned int output_one=MakeOutput(NS_DataObject::GetTypeID("Scalar"), [](){
+			ImGui::Text("Output");
+		});
 
-		MakeAttribute(1, new Attribute([this]() {
+		unsigned int attribute_one=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputInt("Embedding Size", &EmbeddingSize);
 			}));
@@ -49,18 +53,18 @@ public:
 	void Process(bool DirectionForward) override {
 		printf("Processing Node %d\n", UID);
 		if (DirectionForward) {
-			std::vector<double> Input = GetInputDataByIndex(0).get<std::vector<double>>();
+			//std::vector<double> Input = GetInputDataByIndex(0).get<std::vector<double>>();
 			//split input into vectors of size EmbeddingSize
 			std::vector<std::vector<double>> InputSplit;
-			for (int i = 0; i < Input.size(); i += EmbeddingSize)
-			{
-				std::vector<double> temp;
-				for (int j = 0; j < EmbeddingSize; j++)
-				{
-					temp.push_back(Input[i + j]);
-				}
-				InputSplit.push_back(temp);
-			}
+			// for (int i = 0; i < Input.size(); i += EmbeddingSize)
+			// {
+			// 	std::vector<double> temp;
+			// 	for (int j = 0; j < EmbeddingSize; j++)
+			// 	{
+			// 		temp.push_back(Input[i + j]);
+			// 	}
+			// 	InputSplit.push_back(temp);
+			// }
 			//for each vector in InputSplit, run PositionalEncoding
 			std::vector<std::vector<double>> OutputSplit;
 			for (int i = 0; i < InputSplit.size(); i++)
@@ -82,10 +86,10 @@ public:
 					OutputFlattened.push_back(Output[i][j]);
 				}
 			}
-			GetOutputDataByIndex(0) = OutputFlattened;			
+			//GetOutputDataByIndex(0) = OutputFlattened;			
 		}
 		else {
-			GetInputDataByIndex(0) = GetOutputDataByIndex(0);
+			//GetInputDataByIndex(0) = GetOutputDataByIndex(0);
 		}
 	}
 

@@ -97,8 +97,6 @@ add_subdirectory(${ENGINE_IM_PATH}/GraphEngine/Nodes/FlattenNode/ ${CMAKE_BINARY
 add_subdirectory(${ENGINE_IM_PATH}/GraphEngine/Nodes/FileVisualizationNode/ ${CMAKE_BINARY_DIR}/Implementations/Nodes/FileVisualizationNode/)
 add_subdirectory(${ENGINE_IM_PATH}/GraphEngine/Nodes/DictionaryNode/ ${CMAKE_BINARY_DIR}/Implementations/Nodes/DictionaryNode/)
 add_subdirectory(${ENGINE_IM_PATH}/GraphEngine/Nodes/DelayOutputNode/ ${CMAKE_BINARY_DIR}/Implementations/Nodes/DelayOutputNode/)
-add_subdirectory(${ENGINE_IM_PATH}/GraphEngine/Nodes/VectorToTensorNode/ ${CMAKE_BINARY_DIR}/Implementations/Nodes/DataToTensorNode/)
-add_subdirectory(${ENGINE_IM_PATH}/GraphEngine/Nodes/VectorToMatrixNode/ ${CMAKE_BINARY_DIR}/Implementations/Nodes/DataToMatrixNode/)
 add_subdirectory(${ENGINE_IM_PATH}/GraphEngine/Nodes/DatabaseInputNode/ ${CMAKE_BINARY_DIR}/Implementations/Nodes/DatabaseInputNode/)
 add_subdirectory(${ENGINE_IM_PATH}/GraphEngine/Nodes/Convolution3DNode/ ${CMAKE_BINARY_DIR}/Implementations/Nodes/Convolution3DNode/)
 add_subdirectory(${ENGINE_IM_PATH}/GraphEngine/Nodes/Convolution2DNode/ ${CMAKE_BINARY_DIR}/Implementations/Nodes/Convolution2DNode/)

@@ -304,27 +304,37 @@ public:
 		//loss
 		unsigned int att=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
-			if (ImGui::BeginCombo("Loss", LE->GetAvailableLosses()[0]->GetName().c_str())) {
-				for (int i = 0; i < LE->GetAvailableLosses().size(); i++)
-				{
-					bool selected = false;
-					ImGui::Selectable(LE->GetAvailableLosses()[i]->GetName().c_str(), &selected);
-					if (selected) {
-						Loss = LE->GetAvailableLosses()[i];
-					}
-				}
-				ImGui::EndCombo();
-			}
+			// if (ImGui::BeginCombo("Loss", LE->GetAvailableLosses()[0]->GetName().c_str())) {
+			// 	for (int i = 0; i < LE->GetAvailableLosses().size(); i++)
+			// 	{
+			// 		bool selected = false;
+			// 		ImGui::Selectable(LE->GetAvailableLosses()[i]->GetName().c_str(), &selected);
+			// 		if (selected) {
+			// 			Loss = LE->GetAvailableLosses()[i];
+			// 		}
+			// 	}
+			// 	ImGui::EndCombo();
+			// }
 			}));
 
 		path.reserve(256);
-		MakeInput(0, "Image", "Tensor", {});
-		MakeInput(1, "Red", "Tensor", {});
-		MakeInput(2, "Green", "Tensor", {});
-		MakeInput(3, "Blue", "Tensor", {});
-		MakeInput(4, "Grey-scale", "Tensor", {});
+		unsigned int Output_one=MakeOutput(NS_DataObject::GetTypeID("Tensor"), [](){
+			ImGui::Text("Red");
+		});
+		unsigned int Output_two=MakeOutput(NS_DataObject::GetTypeID("Tensor"), [](){
+			ImGui::Text("Green");
+		});
+		unsigned int Output_three=MakeOutput(NS_DataObject::GetTypeID("Tensor"), [](){
+			ImGui::Text("Blue");
+		});
+		unsigned int Output_four=MakeOutput(NS_DataObject::GetTypeID("Tensor"), [](){
+			ImGui::Text("Image");
+		});
+		unsigned int Output_five=MakeOutput(NS_DataObject::GetTypeID("Tensor"), [](){
+			ImGui::Text("Grey-scale");
+		});
 
-		MakeAttribute(0, new Attribute([this]() {
+		unsigned int Attribute_one=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			char* tmppath = new char[256] {0};
 			tmppath = (char*)path.c_str();
@@ -341,12 +351,12 @@ public:
 			}
 			}));
 
-		MakeAttribute(1, new Attribute([this]() {
+		unsigned int Attribute_two=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::Checkbox("Lock Aspect Ratio", &lock_aspect_ratio);
 			}));
 
-		MakeAttribute(2, new Attribute([this]() {
+		unsigned int Attribute_three=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::InputInt("Width", &desired_image_width, 0, 0, ImGuiInputTextFlags_EnterReturnsTrue)) {
 				//if the aspect ratio is locked then change the height to match the aspect ratio
@@ -357,7 +367,7 @@ public:
 			}
 			}));
 
-		MakeAttribute(3, new Attribute([this]() {
+		unsigned int Attribute_four=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::InputInt("Height", &desired_image_height, 0, 0, ImGuiInputTextFlags_EnterReturnsTrue)) {
 				//if the aspect ratio is locked then change the width to match the aspect ratio
@@ -368,7 +378,7 @@ public:
 			}
 			}));
 
-		MakeAttribute(6, new Attribute([this]() {
+		unsigned int Attribute_five=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			if (ImGui::CollapsingHeader("Image")) {
 				//radio buttons for the display mode
@@ -435,161 +445,161 @@ public:
 
 	void Process(bool DirectionForward) override {
 		if (!DirectionForward) {
-			if (!GetInputDataByIndex(0).is_null()) {
-				//resize image to required size
-				ResizeTexture(path.c_str(), required_size.x, required_size.y);
-				red_targets = AsVector(red_data, image_width, image_height);
-				GetInputDataByIndex(0).clear();
-				for (int i = 0; i < red_values.size(); i++)
-				{
-					red_derivatives[i] = -Loss->CalculateLossDerivative(red_values[i], red_targets[i]);
-					GetInputDataByIndex(0).push_back(red_derivatives[i]);
-				}
-			}
-			if (!GetInputDataByIndex(1).is_null()) {
-				//resize image to required size
-				ResizeTexture(path.c_str(), required_size.x, required_size.y);
-				green_targets = AsVector(green_data, image_width, image_height);
-				GetInputDataByIndex(1).clear();
-				for (int i = 0; i < green_values.size(); i++)
-				{
-					green_derivatives[i] = -Loss->CalculateLossDerivative(green_values[i], green_targets[i]);
-					GetInputDataByIndex(1).push_back(green_derivatives[i]);
-				}
-			}
-			if (!GetInputDataByIndex(2).is_null()) {
-				//resize image to required size
-				ResizeTexture(path.c_str(), required_size.x, required_size.y);
-				blue_targets = AsVector(blue_data, image_width, image_height);
-				GetInputDataByIndex(2).clear();
-				for (int i = 0; i < blue_values.size(); i++)
-				{
-					blue_derivatives[i] = -Loss->CalculateLossDerivative(blue_values[i], blue_targets[i]);
-					GetInputDataByIndex(2).push_back(blue_derivatives[i]);
-				}
-			}
-			if (!GetInputDataByIndex(3).is_null()) {
-				//resize image to required size
-				ResizeTexture(path.c_str(), required_size.x, required_size.y);
-				image_targets = AsTensor(image_data, image_width, image_height,3);
-				GetInputDataByIndex(3).clear();
-				for (int i = 0; i < image_values.size(); i++)
-				{
-					image_derivatives[i] = -Loss->CalculateLossDerivative(image_values[i], image_targets[i]);
-					GetInputDataByIndex(3).push_back(image_derivatives[i]);
-				}
-			}
-			if (!GetInputDataByIndex(4).is_null()) {
-				//resize image to required size
-				ResizeTexture(path.c_str(), required_size.x, required_size.y);
-				grey_targets = AsVector(grey_data, image_width, image_height);
-				GetInputDataByIndex(4).clear();
-				GetInputDataByIndex(4)= nlohmann::json::object();
-				GetInputDataByIndex(4)["Size"]["X"] = required_size.x;
-				GetInputDataByIndex(4)["Size"]["Y"] = required_size.y;
-				for (int i = 0; i < grey_values.size(); i++)
-				{
-					grey_derivatives[i] = -Loss->CalculateLossDerivative(grey_values[i], grey_targets[i]);
-					GetInputDataByIndex(4)["Data"].push_back(grey_derivatives[i]);
-				}
-			}
+			// if (!GetInputDataByIndex(0).is_null()) {
+			// 	//resize image to required size
+			// 	ResizeTexture(path.c_str(), required_size.x, required_size.y);
+			// 	red_targets = AsVector(red_data, image_width, image_height);
+			// 	GetInputDataByIndex(0).clear();
+			// 	for (int i = 0; i < red_values.size(); i++)
+			// 	{
+			// 		red_derivatives[i] = -Loss->CalculateLossDerivative(red_values[i], red_targets[i]);
+			// 		GetInputDataByIndex(0).push_back(red_derivatives[i]);
+			// 	}
+			// }
+			// if (!GetInputDataByIndex(1).is_null()) {
+			// 	//resize image to required size
+			// 	ResizeTexture(path.c_str(), required_size.x, required_size.y);
+			// 	green_targets = AsVector(green_data, image_width, image_height);
+			// 	GetInputDataByIndex(1).clear();
+			// 	for (int i = 0; i < green_values.size(); i++)
+			// 	{
+			// 		green_derivatives[i] = -Loss->CalculateLossDerivative(green_values[i], green_targets[i]);
+			// 		GetInputDataByIndex(1).push_back(green_derivatives[i]);
+			// 	}
+			// }
+			// if (!GetInputDataByIndex(2).is_null()) {
+			// 	//resize image to required size
+			// 	ResizeTexture(path.c_str(), required_size.x, required_size.y);
+			// 	blue_targets = AsVector(blue_data, image_width, image_height);
+			// 	GetInputDataByIndex(2).clear();
+			// 	for (int i = 0; i < blue_values.size(); i++)
+			// 	{
+			// 		blue_derivatives[i] = -Loss->CalculateLossDerivative(blue_values[i], blue_targets[i]);
+			// 		GetInputDataByIndex(2).push_back(blue_derivatives[i]);
+			// 	}
+			// }
+			// if (!GetInputDataByIndex(3).is_null()) {
+			// 	//resize image to required size
+			// 	ResizeTexture(path.c_str(), required_size.x, required_size.y);
+			// 	image_targets = AsTensor(image_data, image_width, image_height,3);
+			// 	GetInputDataByIndex(3).clear();
+			// 	for (int i = 0; i < image_values.size(); i++)
+			// 	{
+			// 		image_derivatives[i] = -Loss->CalculateLossDerivative(image_values[i], image_targets[i]);
+			// 		GetInputDataByIndex(3).push_back(image_derivatives[i]);
+			// 	}
+			// }
+			// if (!GetInputDataByIndex(4).is_null()) {
+			// 	//resize image to required size
+			// 	ResizeTexture(path.c_str(), required_size.x, required_size.y);
+			// 	grey_targets = AsVector(grey_data, image_width, image_height);
+			// 	GetInputDataByIndex(4).clear();
+			// 	GetInputDataByIndex(4)= nlohmann::json::object();
+			// 	GetInputDataByIndex(4)["Size"]["X"] = required_size.x;
+			// 	GetInputDataByIndex(4)["Size"]["Y"] = required_size.y;
+			// 	for (int i = 0; i < grey_values.size(); i++)
+			// 	{
+			// 		grey_derivatives[i] = -Loss->CalculateLossDerivative(grey_values[i], grey_targets[i]);
+			// 		GetInputDataByIndex(4)["Data"].push_back(grey_derivatives[i]);
+			// 	}
+			// }
 		}
 		else {
-			if (!GetInputDataByIndex(0).is_null()) {
-				printf("%s\n", GetInputDataByIndex(0).dump(4).c_str());
-				int required_size_x = GetInputDataByIndex(4)["Size"]["X"];
-				int required_size_y = GetInputDataByIndex(4)["Size"]["Y"];
-				required_size = glm::ivec2(required_size_x, required_size_y); 
-				red_values.resize(GetInputDataByIndex(0)["Data"].size());
-				red_losses.resize(GetInputDataByIndex(0)["Data"].size());
-				red_derivatives.resize(GetInputDataByIndex(0)["Data"].size());
-				red_targets.resize(GetInputDataByIndex(0)["Data"].size());
-				for (int i = 0; i < GetInputDataByIndex(0)["Data"].size(); i++)
-				{
-					red_values[i] = GetInputDataByIndex(0)["Data"][i].get<double>();
-				}
+			// if (!GetInputDataByIndex(0).is_null()) {
+			// 	printf("%s\n", GetInputDataByIndex(0).dump(4).c_str());
+			// 	int required_size_x = GetInputDataByIndex(4)["Size"]["X"];
+			// 	int required_size_y = GetInputDataByIndex(4)["Size"]["Y"];
+			// 	required_size = glm::ivec2(required_size_x, required_size_y); 
+			// 	red_values.resize(GetInputDataByIndex(0)["Data"].size());
+			// 	red_losses.resize(GetInputDataByIndex(0)["Data"].size());
+			// 	red_derivatives.resize(GetInputDataByIndex(0)["Data"].size());
+			// 	red_targets.resize(GetInputDataByIndex(0)["Data"].size());
+			// 	for (int i = 0; i < GetInputDataByIndex(0)["Data"].size(); i++)
+			// 	{
+			// 		red_values[i] = GetInputDataByIndex(0)["Data"][i].get<double>();
+			// 	}
 
-				for (int i = 0; i < red_values.size(); i++)
-				{
-					red_losses[i] = Loss->CalculateLoss(red_values[i], red_targets[i]);
-				}
-			}
-			if (!GetInputDataByIndex(1).is_null()) {
-				printf("%s\n", GetInputDataByIndex(1).dump(4).c_str());
-				int required_size_x = GetInputDataByIndex(4)["Size"]["X"];
-				int required_size_y = GetInputDataByIndex(4)["Size"]["Y"];
-				required_size = glm::ivec2(required_size_x, required_size_y); 
-				green_values.resize(GetInputDataByIndex(1)["Data"].size());
-				green_losses.resize(GetInputDataByIndex(1)["Data"].size());
-				green_derivatives.resize(GetInputDataByIndex(1)["Data"].size());
-				green_targets.resize(GetInputDataByIndex(1)["Data"].size());
-				for (int i = 0; i < GetInputDataByIndex(1)["Data"].size(); i++)
-				{
-					green_values[i] = GetInputDataByIndex(1)["Data"][i].get<double>();
-				}
+			// 	for (int i = 0; i < red_values.size(); i++)
+			// 	{
+			// 		red_losses[i] = Loss->CalculateLoss(red_values[i], red_targets[i]);
+			// 	}
+			// }
+			// if (!GetInputDataByIndex(1).is_null()) {
+			// 	printf("%s\n", GetInputDataByIndex(1).dump(4).c_str());
+			// 	int required_size_x = GetInputDataByIndex(4)["Size"]["X"];
+			// 	int required_size_y = GetInputDataByIndex(4)["Size"]["Y"];
+			// 	required_size = glm::ivec2(required_size_x, required_size_y); 
+			// 	green_values.resize(GetInputDataByIndex(1)["Data"].size());
+			// 	green_losses.resize(GetInputDataByIndex(1)["Data"].size());
+			// 	green_derivatives.resize(GetInputDataByIndex(1)["Data"].size());
+			// 	green_targets.resize(GetInputDataByIndex(1)["Data"].size());
+			// 	for (int i = 0; i < GetInputDataByIndex(1)["Data"].size(); i++)
+			// 	{
+			// 		green_values[i] = GetInputDataByIndex(1)["Data"][i].get<double>();
+			// 	}
 
-				for (int i = 0; i < green_values.size(); i++)
-				{
-					green_losses[i] = Loss->CalculateLoss(green_values[i], green_targets[i]);
-				}
-			}
-			if (!GetInputDataByIndex(2).is_null()) {
-				printf("%s\n", GetInputDataByIndex(2).dump(4).c_str());
-				int required_size_x = GetInputDataByIndex(4)["Size"]["X"];
-				int required_size_y = GetInputDataByIndex(4)["Size"]["Y"];
-				required_size = glm::ivec2(required_size_x, required_size_y); 
-				blue_values.resize(GetInputDataByIndex(2)["Data"].size());
-				blue_losses.resize(GetInputDataByIndex(2)["Data"].size());
-				blue_derivatives.resize(GetInputDataByIndex(2)["Data"].size());
-				blue_targets.resize(GetInputDataByIndex(2)["Data"].size());
-				for (int i = 0; i < GetInputDataByIndex(2)["Data"].size(); i++)
-				{
-					blue_values[i] = GetInputDataByIndex(2)["Data"][i].get<double>();
-				}
+			// 	for (int i = 0; i < green_values.size(); i++)
+			// 	{
+			// 		green_losses[i] = Loss->CalculateLoss(green_values[i], green_targets[i]);
+			// 	}
+			// }
+			// if (!GetInputDataByIndex(2).is_null()) {
+			// 	printf("%s\n", GetInputDataByIndex(2).dump(4).c_str());
+			// 	int required_size_x = GetInputDataByIndex(4)["Size"]["X"];
+			// 	int required_size_y = GetInputDataByIndex(4)["Size"]["Y"];
+			// 	required_size = glm::ivec2(required_size_x, required_size_y); 
+			// 	blue_values.resize(GetInputDataByIndex(2)["Data"].size());
+			// 	blue_losses.resize(GetInputDataByIndex(2)["Data"].size());
+			// 	blue_derivatives.resize(GetInputDataByIndex(2)["Data"].size());
+			// 	blue_targets.resize(GetInputDataByIndex(2)["Data"].size());
+			// 	for (int i = 0; i < GetInputDataByIndex(2)["Data"].size(); i++)
+			// 	{
+			// 		blue_values[i] = GetInputDataByIndex(2)["Data"][i].get<double>();
+			// 	}
 
-				for (int i = 0; i < blue_values.size(); i++)
-				{
-					blue_losses[i] = Loss->CalculateLoss(blue_values[i], blue_targets[i]);
-				}
-			}
-			if (!GetInputDataByIndex(3).is_null()) {
-				printf("%s\n", GetInputDataByIndex(3).dump(4).c_str());
-				int required_size_x = GetInputDataByIndex(4)["Size"]["X"];
-				int required_size_y = GetInputDataByIndex(4)["Size"]["Y"];
-				required_size = glm::ivec2(required_size_x, required_size_y); 
-				image_values.resize(GetInputDataByIndex(3)["Data"].size());
-				image_losses.resize(GetInputDataByIndex(3)["Data"].size());
-				image_derivatives.resize(GetInputDataByIndex(3)["Data"].size());
-				image_targets.resize(GetInputDataByIndex(3)["Data"].size());
-				for (int i = 0; i < GetInputDataByIndex(3)["Data"].size(); i++)
-				{
-					image_values[i] = GetInputDataByIndex(3)["Data"][i].get<double>();
-				}
+			// 	for (int i = 0; i < blue_values.size(); i++)
+			// 	{
+			// 		blue_losses[i] = Loss->CalculateLoss(blue_values[i], blue_targets[i]);
+			// 	}
+			// }
+			// if (!GetInputDataByIndex(3).is_null()) {
+			// 	printf("%s\n", GetInputDataByIndex(3).dump(4).c_str());
+			// 	int required_size_x = GetInputDataByIndex(4)["Size"]["X"];
+			// 	int required_size_y = GetInputDataByIndex(4)["Size"]["Y"];
+			// 	required_size = glm::ivec2(required_size_x, required_size_y); 
+			// 	image_values.resize(GetInputDataByIndex(3)["Data"].size());
+			// 	image_losses.resize(GetInputDataByIndex(3)["Data"].size());
+			// 	image_derivatives.resize(GetInputDataByIndex(3)["Data"].size());
+			// 	image_targets.resize(GetInputDataByIndex(3)["Data"].size());
+			// 	for (int i = 0; i < GetInputDataByIndex(3)["Data"].size(); i++)
+			// 	{
+			// 		image_values[i] = GetInputDataByIndex(3)["Data"][i].get<double>();
+			// 	}
 
-				for (int i = 0; i < image_values.size(); i++)
-				{
-					image_losses[i] = Loss->CalculateLoss(image_values[i], image_targets[i]);
-				}
-			}
-			if (!GetInputDataByIndex(4).is_null()) {
-				printf("%s\n", GetInputDataByIndex(4)["Size"].dump(4).c_str());
-				int required_size_x = GetInputDataByIndex(4)["Size"]["X"];
-				int required_size_y = GetInputDataByIndex(4)["Size"]["Y"];
-				required_size = glm::ivec2(required_size_x, required_size_y);
-				grey_values.resize(GetInputDataByIndex(4)["Data"].size());
-				grey_losses.resize(GetInputDataByIndex(4)["Data"].size());
-				grey_derivatives.resize(GetInputDataByIndex(4)["Data"].size());
-				grey_targets.resize(GetInputDataByIndex(4)["Data"].size());
-				for (int i = 0; i < GetInputDataByIndex(4)["Data"].size(); i++)
-				{
-					grey_values[i] = GetInputDataByIndex(4)["Data"][i].get<double>();
-				}
+			// 	for (int i = 0; i < image_values.size(); i++)
+			// 	{
+			// 		image_losses[i] = Loss->CalculateLoss(image_values[i], image_targets[i]);
+			// 	}
+			// }
+			// if (!GetInputDataByIndex(4).is_null()) {
+			// 	printf("%s\n", GetInputDataByIndex(4)["Size"].dump(4).c_str());
+			// 	int required_size_x = GetInputDataByIndex(4)["Size"]["X"];
+			// 	int required_size_y = GetInputDataByIndex(4)["Size"]["Y"];
+			// 	required_size = glm::ivec2(required_size_x, required_size_y);
+			// 	grey_values.resize(GetInputDataByIndex(4)["Data"].size());
+			// 	grey_losses.resize(GetInputDataByIndex(4)["Data"].size());
+			// 	grey_derivatives.resize(GetInputDataByIndex(4)["Data"].size());
+			// 	grey_targets.resize(GetInputDataByIndex(4)["Data"].size());
+			// 	for (int i = 0; i < GetInputDataByIndex(4)["Data"].size(); i++)
+			// 	{
+			// 		grey_values[i] = GetInputDataByIndex(4)["Data"][i].get<double>();
+			// 	}
 
-				for (int i = 0; i < grey_values.size(); i++)
-				{
-					grey_losses[i] = Loss->CalculateLoss(grey_values[i], grey_targets[i]);
-				}
-			}
+			// 	for (int i = 0; i < grey_values.size(); i++)
+			// 	{
+			// 		grey_losses[i] = Loss->CalculateLoss(grey_values[i], grey_targets[i]);
+			// 	}
+			// }
 		}
 	}
 
@@ -609,13 +619,13 @@ public:
 	void DeSerialize(nlohmann::json data, void* DCEE) override {
 		NodeInterface::DeSerialize(data, DCEE);
 
-		std::vector<LossInterface*> availableLosses = LE->GetAvailableLosses();
-		for (auto loss : availableLosses) {
-			if (loss->GetName() == data["Loss"].get<std::string>()) {
-				Loss = loss;
-				break;
-			}
-		}
+		// std::vector<NS_Loss::LossInterface*> availableLosses = LE->GetAvailableLosses();
+		// for (auto loss : availableLosses) {
+		// 	if (loss->GetName() == data["Loss"].get<std::string>()) {
+		// 		Loss = loss;
+		// 		break;
+		// 	}
+		// }
 
 		return;
 	}

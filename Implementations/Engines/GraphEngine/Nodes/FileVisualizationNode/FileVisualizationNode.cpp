@@ -45,9 +45,9 @@ public:
 			//clear the image
 			ClearData();
 
-			if (GetInputDataByIndex(0).is_string()) {
-				FileName = GetInputDataByIndex(0).get<std::string>();
-			}
+			// if (GetInputDataByIndex(0).is_string()) {
+			// 	FileName = GetInputDataByIndex(0).get<std::string>();
+			// }
 
 			//read file in binary mode
 			std::ifstream file(FileName, std::ios::binary);
@@ -144,10 +144,10 @@ public:
 			//push image to output
 			for (int i = 0; i < ImageSize; i++)
 			{
-				GetOutputDataByIndex(0).push_back(nlohmann::json::array());
+				//GetOutputDataByIndex(0).push_back(nlohmann::json::array());
 				for (int j = 0; j < ImageSize; j++)
 				{
-					GetOutputDataByIndex(0)[i].push_back(Image[i][j]);
+					//GetOutputDataByIndex(0)[i].push_back(Image[i][j]);
 				}
 			}
 
@@ -188,17 +188,17 @@ public:
 			Image[i].resize(ImageSize,0);
 		}
 
-		MakeAttribute(2, new Attribute([this]() {
+		unsigned int attribute_one=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::Image((void*)(intptr_t)texture, ImVec2(ImageSize, ImageSize));
 			}));
 
-		MakeAttribute(0, new Attribute([this]() {
+		unsigned int attribute_two=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputText("File Path", (char*)FileName.data(),256);
 			}));
 
-		MakeAttribute(1, new Attribute([this]() {
+		unsigned int attribute_three=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::Combo("Scaling", (int*)&Scaling, "Linear\0Exponential\0Logarithmic\0Boolean\0Threshold\0");
 			if (Scaling == Threshold) {
@@ -206,8 +206,12 @@ public:
 			}
 			}));
 
-		MakeOutput(0, "Image", "Tensor", nlohmann::json::array());
-		MakeInput(0, "File Path", "String", "");
+		unsigned int output_one=MakeOutput(NS_DataObject::GetTypeID("Tensor"), [](){
+			ImGui::Text("Output");
+		});
+		unsigned int input_one=MakeInput(NS_DataObject::GetTypeID("Text"), [](){
+			ImGui::Text("File Path");
+		});
 	}
 
 	void StandAloneInit() {

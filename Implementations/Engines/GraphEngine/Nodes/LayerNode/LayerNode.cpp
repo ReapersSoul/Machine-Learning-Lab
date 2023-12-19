@@ -253,17 +253,17 @@ public:
 	}
 
 	void Init() override {
-		unsigned int Input_one=MakeInput("double", [](){
+		unsigned int Input_one=MakeInput(NS_DataObject::GetTypeID("Scalar"), [](){
 			ImGui::Text("Input");
 			});
-		unsigned int Input_two=MakeInput("double", []() {
+		unsigned int Input_two=MakeInput(NS_DataObject::GetTypeID("Scalar"), []() {
 			ImGui::Text("Weights");
 			});
-		unsigned int Output_one=MakeOutput("double", []() {
+		unsigned int Output_one=MakeOutput(NS_DataObject::GetTypeID("Scalar"), []() {
 			ImGui::Text("Output");
 			});
 
-		Activation = AE->GetAvailableActivations()[0];
+		//Activation = AE->GetAvailableActivations()[0];
 
 		unsigned int Attribute_one=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
@@ -296,18 +296,18 @@ public:
 			}));
 
 		unsigned int Attribute_six=MakeAttribute(new Attribute([this]() {
-			ImGui::PushItemWidth(100);
-			if (ImGui::BeginCombo("Activation", Activation->GetName().c_str())) {
-				for (int i = 0; i < AE->GetAvailableActivations().size(); i++)
-				{
-					bool selected = false;
-					ImGui::Selectable(AE->GetAvailableActivations()[i]->GetName().c_str(), &selected);
-					if (selected) {
-						Activation = AE->GetAvailableActivations()[i];
-					}
-				}
-				ImGui::EndCombo();
-			}
+			// ImGui::PushItemWidth(100);
+			// if (ImGui::BeginCombo("Activation", Activation->GetName().c_str())) {
+			// 	for (int i = 0; i < AE->GetAvailableActivations().size(); i++)
+			// 	{
+			// 		bool selected = false;
+			// 		ImGui::Selectable(AE->GetAvailableActivations()[i]->GetName().c_str(), &selected);
+			// 		if (selected) {
+			// 			Activation = AE->GetAvailableActivations()[i];
+			// 		}
+			// 	}
+			// 	ImGui::EndCombo();
+			// }
 			}));
 		unsigned int Attribute_seven=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
@@ -319,13 +319,13 @@ public:
 				ImGui::TableNextRow();
 				// Data for Column 1
 				ImGui::TableNextColumn();
-				if (ImGui::CollapsingHeader("Inputs")) {
-					for (int i = 0; i < Description.size(); i++) {
-						if (Description[i].find("Input") != Description[i].end()) {
-							ImGui::Text(Description[i]["Input"]["Data"].dump().c_str());
-						}
-					}
-				}
+				// if (ImGui::CollapsingHeader("Inputs")) {
+				// 	for (int i = 0; i < Description.size(); i++) {
+				// 		if (Description[i].find("Input") != Description[i].end()) {
+				// 			ImGui::Text(Description[i]["Input"]["Data"].dump().c_str());
+				// 		}
+				// 	}
+				// }
 
 				// Data for Column 2
 				ImGui::TableNextColumn();
@@ -338,16 +338,16 @@ public:
 				}
 
 				// Data for Column 3
-				ImGui::TableNextColumn();
-				if (ImGui::CollapsingHeader("Outputs")) {
-					for (int i = 0; i < Description.size(); i++) {
-						if (Description[i].find("Output") != Description[i].end()) {
-							//right align text
-							ImGui::Indent(10);
-							ImGui::Text(Description[i]["Output"]["Data"].dump().c_str());
-						}
-					}
-				}
+				// ImGui::TableNextColumn();
+				// if (ImGui::CollapsingHeader("Outputs")) {
+				// 	for (int i = 0; i < Description.size(); i++) {
+				// 		if (Description[i].find("Output") != Description[i].end()) {
+				// 			//right align text
+				// 			ImGui::Indent(10);
+				// 			ImGui::Text(Description[i]["Output"]["Data"].dump().c_str());
+				// 		}
+				// 	}
+				// }
 
 				ImGui::EndTable();
 			}
@@ -358,16 +358,16 @@ public:
 	void Process(bool DirectionForward) override {
 		if (DirectionForward) {
 			bool resize = false;
-			if (inputs != GetInputDataByIndex(0)[0]["Data"].size()) {
-				inputs = GetInputDataByIndex(0)[0]["Data"].size();
-				resize = true;
-			}
-			if (!GetInputDataByIndex(1)[0]["Data"].is_null()) {
-				if (outputs != GetInputDataByIndex(1)[0]["Data"].size()) {
-					outputs = GetInputDataByIndex(1)[0]["Data"].size();
-					resize = true;
-				}
-			}
+			// if (inputs != GetInputDataByIndex(0)[0]["Data"].size()) {
+			// 	inputs = GetInputDataByIndex(0)[0]["Data"].size();
+			// 	resize = true;
+			// }
+			// if (!GetInputDataByIndex(1)[0]["Data"].is_null()) {
+			// 	if (outputs != GetInputDataByIndex(1)[0]["Data"].size()) {
+			// 		outputs = GetInputDataByIndex(1)[0]["Data"].size();
+			// 		resize = true;
+			// 	}
+			// }
 			if (resize) {
 				x.resize(inputs);
 				b.resize(outputs);
@@ -382,7 +382,7 @@ public:
 			}
 			for (int i = 0; i < x.size(); i++)
 			{
-				x[i] = GetInputDataByIndex(0)[0]["Data"][i].get<double>();
+				//x[i] = GetInputDataByIndex(0)[0]["Data"][i].get<double>();
 			}
 			nlohmann::json data = nlohmann::json::object();
 			if (GPU) {
@@ -392,22 +392,22 @@ public:
 				data["Data"] = ForwardLayer(x, w, z, b);
 			}
 			data["Type"]= "Vector";
-			GetOutputDataByIndex(0) = data;
+			//GetOutputDataByIndex(0) = data;
 		}
 		else {
 			ForwardGradient.clear();
-			GetInputDataByIndex(0)=nlohmann::json::object();
+			//GetInputDataByIndex(0)=nlohmann::json::object();
 			for (int i = 0; i < outputs; i++)
 			{
-				ForwardGradient.push_back(GetOutputDataByIndex(0)[0]["Data"][i].get<double>()*LearningRate);
+				//ForwardGradient.push_back(GetOutputDataByIndex(0)[0]["Data"][i].get<double>()*LearningRate);
 			}
 			if(GPU){
-				GetInputDataByIndex(0)["Data"] = GPUBackwardLayer(x, w, z, b, ForwardGradient);
+				//GetInputDataByIndex(0)["Data"] = GPUBackwardLayer(x, w, z, b, ForwardGradient);
 			}
 			else {
-				GetInputDataByIndex(0)["Data"] = BackwardLayer(x, w, z, b, ForwardGradient);
+				//GetInputDataByIndex(0)["Data"] = BackwardLayer(x, w, z, b, ForwardGradient);
 			}
-			GetInputDataByIndex(0)["Type"] = "Vector";
+			//GetInputDataByIndex(0)["Type"] = "Vector";
 		}
 	}
 
@@ -494,13 +494,13 @@ public:
 		//activation
 		if (!data["Activation"].is_null()) {
 			//loop through available activations
-			for (int i = 0; i < AE->GetAvailableActivations().size(); i++) {
-				//if the name matches
-				if (AE->GetAvailableActivations()[i]->GetName() == data["Activation"].get<std::string>()) {
-					//set the activation
-					Activation = AE->GetAvailableActivations()[i];
-				}
-			}
+			// for (int i = 0; i < AE->GetAvailableActivations().size(); i++) {
+			// 	//if the name matches
+			// 	if (AE->GetAvailableActivations()[i]->GetName() == data["Activation"].get<std::string>()) {
+			// 		//set the activation
+			// 		Activation = AE->GetAvailableActivations()[i];
+			// 	}
+			// }
 		}
 
 		return;

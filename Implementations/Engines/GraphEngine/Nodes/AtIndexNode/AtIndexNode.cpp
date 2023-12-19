@@ -24,8 +24,8 @@ public:
 	void Process(bool DirectionForward) override {
 		if (DirectionForward) {
 			nlohmann::json data = nlohmann::json::object();
-			data["Data"]=GetInputDataByIndex(0)[0]["Data"][index% GetInputDataByIndex(0)[0]["Data"].size()];
-			GetOutputDataByIndex(0) = data;
+			//data["Data"]=GetInputDataByIndex(0)[0]["Data"][index% GetInputDataByIndex(0)[0]["Data"].size()];
+			//GetOutputDataByIndex(0) = data;
 			if(autoincrement&&(itteration%increment_after==0))
 				index++;
 
@@ -34,15 +34,19 @@ public:
 	}
 
 	void Init() override {
-		MakeInput(0, "Input", "Any", {});
-		MakeOutput(0, "Output", "Any", {});
+		unsigned int input_one=MakeInput(NS_DataObject::GetTypeID("Any"), [](){
+			ImGui::Text("Input");
+		});
+		unsigned int output_one=MakeOutput(NS_DataObject::GetTypeID("Any"), [](){
+			ImGui::Text("Output");
+		});
 
-		MakeAttribute(0, new Attribute([&]() {
+		unsigned int attribute_one=MakeAttribute(new Attribute([&]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputInt("Index", &index);
 			}));
 
-		MakeAttribute(1, new Attribute([&]() {
+		unsigned int attribute_two=MakeAttribute(new Attribute([&]() {
 			ImGui::Checkbox("Auto Increment", &autoincrement);
 			ImGui::SameLine();
 			ImGui::InputInt("Incremment After", &increment_after);

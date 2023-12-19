@@ -20,20 +20,26 @@ public:
 	void Process(bool DirectionForward) override {
 		if (DirectionForward) {
 			nlohmann::json data= nlohmann::json::object();
-			data["Data"] = GetInputDataByIndex(0)[0]["Data"];
+			//data["Data"] = GetInputDataByIndex(0)[0]["Data"];
 			data["Type"]="Vector";
-			GetOutputDataByIndex(0) = data;
+			//GetOutputDataByIndex(0) = data;
 		}
 		else {
 			nlohmann::json data = nlohmann::json::object();
-			data["Data"] = GetOutputDataByIndex(0)[0]["Data"];
-			GetInputDataByIndex(0) = data;
+			//data["Data"] = GetOutputDataByIndex(0)[0]["Data"];
+			//GetInputDataByIndex(0) = data;
 		}
 	}
 
 	void Init() override {
-		MakeInput(0, "Input", "Any", {});
-		MakeOutput(0, "Output", "Any", {});
+		unsigned int input_one=MakeInput(NS_DataObject::GetTypeID("Any"), [](){
+			ImGui::Text("Input");
+		});
+		unsigned int output_one= MakeOutput(NS_DataObject::GetTypeID("Any"), [](){
+			ImGui::Text("Output");
+		});
+
+		MakeLine(input_one, -1, output_one);
 	}
 
 	void Update() override {

@@ -18,7 +18,7 @@ public:
             nlohmann::json data = nlohmann::json::object();
             data["Data"] = value;
             data["Type"] = "Scalar";
-            GetOutputDataByIndex(0) = data;
+            //GetOutputDataByIndex(0) = data;
         }
         else {
 
@@ -26,12 +26,12 @@ public:
     }
 
     void Init() override {
-        MakeOutput(0, "Output", "Any", nlohmann::json::array());
+        // MakeOutput(0, "Output", "Any", nlohmann::json::array());
 
-        MakeAttribute(0,new Attribute([this]() {
-            ImGui::PushItemWidth(100);
-            ImGui::InputDouble("Value", &value);
-            }));
+        // MakeAttribute(0,new Attribute([this]() {
+        //     ImGui::PushItemWidth(100);
+        //     ImGui::InputDouble("Value", &value);
+        //     }));
     }
 
     //void DrawNodeTitle();

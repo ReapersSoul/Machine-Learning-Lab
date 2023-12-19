@@ -12,7 +12,7 @@ class LossNode : public NS_Node::NodeInterface {
 	double target = 0;
 	double derivative = 0;
 	double loss = 0;
-	LossInterface* Loss;
+	NS_Loss::LossInterface* Loss;
 public:
 	LossNode() {
 		TypeID = "LossNode";
@@ -39,21 +39,21 @@ public:
 	}
 
 	void Init() override {
-		Loss = LE->GetAvailableLosses()[0];
+		//Loss = LE->GetAvailableLosses()[0];
 		//loss
 		Attributes.push_back(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
-			if (ImGui::BeginCombo("Loss", LE->GetAvailableLosses()[0]->GetName().c_str())) {
-				for (int i = 0; i < LE->GetAvailableLosses().size(); i++)
-				{
-					bool selected = false;
-					ImGui::Selectable(LE->GetAvailableLosses()[i]->GetName().c_str(), &selected);
-					if (selected) {
-						Loss = LE->GetAvailableLosses()[i];
-					}
-				}
-				ImGui::EndCombo();
-			}
+			// if (ImGui::BeginCombo("Loss", LE->GetAvailableLosses()[0]->GetName().c_str())) {
+			// 	for (int i = 0; i < LE->GetAvailableLosses().size(); i++)
+			// 	{
+			// 		bool selected = false;
+			// 		ImGui::Selectable(LE->GetAvailableLosses()[i]->GetName().c_str(), &selected);
+			// 		if (selected) {
+			// 			Loss = LE->GetAvailableLosses()[i];
+			// 		}
+			// 	}
+			// 	ImGui::EndCombo();
+			// }
 			}));
 
 		Attributes.push_back(new Attribute([this]() {
@@ -108,25 +108,25 @@ public:
 
 		loss = data["loss"];
 
-		for (auto loss : LE->GetAvailableLosses()) {
-			if (loss->GetName() == data["Loss"].get<std::string>()) {
-				Loss = loss;
-			}
-		}
+		// for (auto loss : LE->GetAvailableLosses()) {
+		// 	if (loss->GetName() == data["Loss"].get<std::string>()) {
+		// 		Loss = loss;
+		// 	}
+		// }
 
 		Attributes.push_back(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
-			if (ImGui::BeginCombo("Loss", LE->GetAvailableLosses()[0]->GetName().c_str())) {
-				for (int i = 0; i < LE->GetAvailableLosses().size(); i++)
-				{
-					bool selected = false;
-					ImGui::Selectable(LE->GetAvailableLosses()[i]->GetName().c_str(), &selected);
-					if (selected) {
-						Loss = LE->GetAvailableLosses()[i];
-					}
-				}
-				ImGui::EndCombo();
-			}
+			// if (ImGui::BeginCombo("Loss", LE->GetAvailableLosses()[0]->GetName().c_str())) {
+			// 	for (int i = 0; i < LE->GetAvailableLosses().size(); i++)
+			// 	{
+			// 		bool selected = false;
+			// 		ImGui::Selectable(LE->GetAvailableLosses()[i]->GetName().c_str(), &selected);
+			// 		if (selected) {
+			// 			Loss = LE->GetAvailableLosses()[i];
+			// 		}
+			// 	}
+			// 	ImGui::EndCombo();
+			// }
 			}));
 
 		Attributes.push_back(new Attribute([this]() {
