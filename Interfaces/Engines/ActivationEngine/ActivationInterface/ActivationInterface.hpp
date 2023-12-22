@@ -17,9 +17,24 @@ namespace NS_Activation {
 		virtual double ActivateDerivative(double input) = 0;
 	};
 
-	static std::unordered_map<std::string, ActivationInterface*> Activations;
-	static void RegisterActivation(std::string Name, ActivationInterface* Activation) {
-		if (Activations.find(Name) != Activations.end()) throw std::runtime_error("Activation already registered");
-		Activations[Name] = Activation;
-	}
+	class Registrar {
+		static std::unordered_map<std::string, ActivationInterface*> Activations;
+		Registrar();
+	public:
+		static Registrar* GetRegistrar();
+
+		static std::unordered_map<std::string, ActivationInterface*> &GetActivations() {
+			return Activations;
+		}
+		static void RegisterActivation(std::string Name, ActivationInterface* Activation) {
+			if (Activations.find(Name) != Activations.end()) throw std::runtime_error("Activation already registered");
+			Activations[Name] = Activation;
+		}
+		static ActivationInterface* GetActivation(std::string Name) {
+			if (Activations.find(Name) == Activations.end()) throw std::runtime_error("Activation not registered");
+			return Activations[Name];
+		}
+	};
+
+	static Registrar* GetRegistrar();
 }

@@ -16,11 +16,25 @@ namespace NS_Loss {
 		virtual double CalculateLoss(double input, double target) = 0;
 		virtual double CalculateLossDerivative(double input, double target) = 0;
 	};
-	
-	
-	static std::unordered_map<std::string, LossInterface*> Losses;
-	static void RegisterLoss(std::string Name, LossInterface* Loss) {
-		if (Losses.find(Name) != Losses.end()) throw std::runtime_error("Loss already registered");
-		Losses[Name] = Loss;
-	}
+
+	class Registrar {
+		static std::unordered_map<std::string, LossInterface*> Losses;
+		Registrar();
+	public:
+		static Registrar* GetRegistrar();
+
+		static std::unordered_map<std::string, LossInterface*> &GetLosses() {
+			return Losses;
+		}
+		static void RegisterLoss(std::string Name, LossInterface* Loss) {
+			if (Losses.find(Name) != Losses.end()) throw std::runtime_error("Loss already registered");
+			Losses[Name] = Loss;
+		}
+		static LossInterface* GetLoss(std::string Name) {
+			if (Losses.find(Name) == Losses.end()) throw std::runtime_error("Loss not registered");
+			return Losses[Name];
+		}
+	};
+
+	static Registrar* GetRegistrar();
 }

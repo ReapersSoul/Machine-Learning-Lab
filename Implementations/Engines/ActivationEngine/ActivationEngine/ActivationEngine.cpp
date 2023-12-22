@@ -34,7 +34,7 @@ public:
 				}
 			#endif
 
-			DCEEngine->LoadLibrary(p.path().string())->Register();
+			DCEEngine->LoadLibrary(p.path().string())->Register(NS_Activation::GetRegistrar());
 		}
 	}
 	void LoadActivationPlugins() override {
@@ -60,7 +60,7 @@ public:
 				}
 			#endif
 
-			DCEEngine->LoadLibrary(p.path().string())->Register();
+			DCEEngine->LoadLibrary(p.path().string())->Register(NS_Activation::GetRegistrar());
 		}
 	}
 
@@ -99,7 +99,7 @@ public:
 				dynamic_cast<ScriptInterface*>(scriptActivation)->SetDCEEngine(DCEEngine);
 				dynamic_cast<ScriptInterface*>(scriptActivation)->SetLanguage(language);
 				dynamic_cast<ScriptInterface*>(scriptActivation)->SetPath(p.path().string());
-				NS_Activation::RegisterActivation(scriptActivation->GetName(), scriptActivation);
+				NS_Activation::GetRegistrar()->RegisterActivation(scriptActivation->GetName(), scriptActivation);
 			}
 		}
 	}

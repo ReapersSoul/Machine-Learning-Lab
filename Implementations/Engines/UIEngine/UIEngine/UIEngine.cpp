@@ -102,12 +102,12 @@ class UIEngine : public UIEngineInterface
 				//check if SearchText is full of \0
 				//loop through all available nodes
 				if (SearchText.empty()) {
-					for (auto node : NS_Node::TypeIDs) {
+					for (auto node : NS_Node::GetRegistrar()->GetTypeIDs()) {
 						//if node is clicked
 						if (ImGui::MenuItem(node.first.c_str())) {
 							//add node to graph
 							GraphEngine->GetGraphs()["main"]->GetMutex().lock();
-							int uuid = GraphEngine->GetGraphs()["main"]->AddNode(NS_Node::Construct(node.second));
+							int uuid = GraphEngine->GetGraphs()["main"]->AddNode(NS_Node::GetRegistrar()->Construct(node.second));
 							GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
 							ed::Suspend();
 							ImVec2 mousepos=ed::ScreenToCanvas(ImGui::GetMousePos());
@@ -117,13 +117,13 @@ class UIEngine : public UIEngineInterface
 					}
 				}
 				else {
-					for (auto node : NS_Node::TypeIDs) {
+					for (auto node : NS_Node::GetRegistrar()->GetTypeIDs()) {
 						if (RegexMatch(SearchText + ".*", node.first.c_str())) {
 							//if node is clicked
 							if (ImGui::MenuItem(node.first.c_str())) {
 								//add node to graph
 								GraphEngine->GetGraphs()["main"]->GetMutex().lock();
-								int uuid = GraphEngine->GetGraphs()["main"]->AddNode(NS_Node::Construct(node.second));
+								int uuid = GraphEngine->GetGraphs()["main"]->AddNode(NS_Node::GetRegistrar()->Construct(node.second));
 								GraphEngine->GetGraphs()["main"]->GetMutex().unlock();
 								ed::Suspend();
 								ImVec2 mousepos = ed::ScreenToCanvas(ImGui::GetMousePos());
@@ -678,19 +678,19 @@ class UIEngine : public UIEngineInterface
 			ImGui::Separator();
 			ImGui::Text("Available Nodes:");
 			//nodes
-			for (auto& node: NS_Node::TypeIDs)
+			for (auto& node: NS_Node::GetRegistrar()->GetTypeIDs())
 			{
 				ImGui::Text(node.first.c_str());
 			}
 			ImGui::Separator();
 			ImGui::Text("Available Activations:");
-			for (auto& activation : NS_Activation::Activations)
+			for (auto& activation : NS_Activation::GetRegistrar()->GetActivations())
 			{
 				ImGui::Text(activation.first.c_str());
 			}
 			ImGui::Separator();
 			ImGui::Text("Available Losses:");
-			for (auto& loss : NS_Loss::Losses)
+			for (auto& loss : NS_Loss::GetRegistrar()->GetLosses())
 			{
 				ImGui::Text(loss.first.c_str());
 			}

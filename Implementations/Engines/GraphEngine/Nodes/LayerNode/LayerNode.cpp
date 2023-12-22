@@ -517,4 +517,9 @@ extern "C" {
 	EXPORT NS_Node::NodeInterface* GetInstance() {
 		return new LayerNode();
 	}
+
+	EXPORT void Register(void* Registrar) {
+		NS_Node::Registrar* registrar = (NS_Node::Registrar*)Registrar;
+		registrar->RegisterNode(GetTypeID(), GetInstance);
+	}
 }

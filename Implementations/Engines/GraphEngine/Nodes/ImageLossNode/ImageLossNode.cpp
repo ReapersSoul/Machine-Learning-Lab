@@ -299,7 +299,7 @@ public:
 	}
 
 	void Init() override {
-		Loss = NS_Loss::Losses["MeanSquaredError"];
+		Loss = NS_Loss::GetRegistrar()->GetLoss("MSE");
 
 		//loss
 		unsigned int att=MakeAttribute(new Attribute([this]() {

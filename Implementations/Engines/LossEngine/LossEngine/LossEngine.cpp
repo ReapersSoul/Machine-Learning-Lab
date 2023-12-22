@@ -43,7 +43,7 @@ public:
 				}
 			#endif
 
-			DCEEngine->LoadLibrary(p.path().string())->Register();
+			DCEEngine->LoadLibrary(p.path().string())->Register(NS_Loss::GetRegistrar());
 		}
 	}
 	void LoadLossPlugins()override {
@@ -69,7 +69,7 @@ public:
 				}
 			#endif
 
-			DCEEngine->LoadLibrary(p.path().string())->Register();
+			DCEEngine->LoadLibrary(p.path().string())->Register(NS_Loss::GetRegistrar());
 		}
 	}
 	void LoadLossScripts() override {
@@ -107,7 +107,7 @@ public:
 				dynamic_cast<ScriptInterface*>(scriptLoss)->SetDCEEngine(DCEEngine);
 				dynamic_cast<ScriptInterface*>(scriptLoss)->SetLanguage(language);
 				dynamic_cast<ScriptInterface*>(scriptLoss)->SetPath(p.path().string());
-				NS_Loss::RegisterLoss(scriptLoss->GetName(), scriptLoss);
+				NS_Loss::GetRegistrar()->RegisterLoss(scriptLoss->GetName(), scriptLoss);
 			}
 		}
 	}

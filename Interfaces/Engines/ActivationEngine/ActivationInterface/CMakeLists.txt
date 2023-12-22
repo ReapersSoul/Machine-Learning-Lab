@@ -1,6 +1,6 @@
 project(ActivationInterface)
 
-add_library(${PROJECT_NAME} INTERFACE "ActivationInterface.hpp")
+add_library(${PROJECT_NAME} STATIC "ActivationInterface.hpp" "ActivationInterface.cpp")
 
 # Output directory
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/Runtime/Debug/Machine-Learning-Lab/Core/Acitvations/)

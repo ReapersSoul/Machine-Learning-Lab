@@ -3,6 +3,28 @@
 #include "../Graph/Graph.hpp"
 #include <stack>
 namespace NS_Node {
+
+	std::unordered_map<unsigned int, std::function<NodeInterface *()>> Registrar::Constructors=std::unordered_map<unsigned int, std::function<NodeInterface *()>>();
+	std::unordered_map<std::string, unsigned int> Registrar::TypeIDs=std::unordered_map<std::string, unsigned int>();
+	std::unordered_map<unsigned int, std::string> Registrar::TypeIDsReverse=std::unordered_map<unsigned int, std::string>();
+
+	Registrar::Registrar() 
+	{
+		Constructors = {{0, []()
+							{ return nullptr; }}};
+		TypeIDs = {{"Invalid", 0}};
+		TypeIDsReverse = {{0, "Invalid"}};
+	}
+
+	Registrar* Registrar::GetRegistrar() {
+		static Registrar registrar;
+		return &registrar;
+	}
+
+	Registrar* GetRegistrar() {
+		return Registrar::GetRegistrar();
+	}
+
 	void NodeInterface::ResetIO()
 	{
 		for (auto input : Inputs) {
