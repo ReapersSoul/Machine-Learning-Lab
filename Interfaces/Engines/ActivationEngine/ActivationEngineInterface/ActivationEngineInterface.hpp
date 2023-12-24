@@ -9,4 +9,5 @@ public:
 	virtual void LoadActivationCore() = 0;
 	virtual void LoadActivationPlugins() = 0;
 	virtual void LoadActivationScripts() = 0;
+	virtual NS_Activation::Registrar* GetRegistrar() = 0;
 };

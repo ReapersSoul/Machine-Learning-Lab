@@ -296,24 +296,26 @@ namespace NS_Node
 		}
 	}
 
-	
-	std::unordered_map<unsigned int, std::function<NodeInterface *()>> Registrar::Constructors = std::unordered_map<unsigned int, std::function<NodeInterface *()>>();
-	std::unordered_map<std::string, unsigned int> Registrar::TypeIDs = std::unordered_map<std::string, unsigned int>();
-	std::unordered_map<unsigned int, std::string> Registrar::TypeIDsReverse = std::unordered_map<unsigned int, std::string>();
-
 	std::unordered_map<unsigned int, std::function<NodeInterface *()>> &Registrar::GetConstructors()
 	{
-		return GetRegistrar()->Constructors;
+		return Constructors;
 	}
 
 	std::unordered_map<std::string, unsigned int> &Registrar::GetTypeIDs()
 	{
-		return GetRegistrar()->TypeIDs;
+		return TypeIDs;
 	}
 
 	std::unordered_map<unsigned int, std::string> &Registrar::GetTypeIDsReverse()
 	{
-		return GetRegistrar()->TypeIDsReverse;
+		return TypeIDsReverse;
+	}
+
+	//Registrar* registrar = Registrar::GetRegistrarInstance();
+
+	Registrar* GetRegistrar()
+	{
+		return registrar;
 	}
 
 	Registrar::Registrar(){
@@ -370,13 +372,8 @@ namespace NS_Node
 		return GetConstructors()[TypeID]();
 	}
 
-	Registrar * Registrar::GetRegistrar()
+	Registrar * Registrar::GetRegistrarInstance()
 	{
-		return Registrar::GetRegistrar();
-	}
-
-	Registrar * GetRegistrar()
-	{
-		return Registrar::GetRegistrar();
+		return new Registrar();
 	}
 }

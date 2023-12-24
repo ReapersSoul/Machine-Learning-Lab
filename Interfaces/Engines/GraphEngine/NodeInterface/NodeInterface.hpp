@@ -146,34 +146,36 @@ namespace NS_Node
 
 	class Registrar
 	{
-		static std::unordered_map<unsigned int, std::function<NodeInterface *()>> Constructors;
-		static std::unordered_map<std::string, unsigned int> TypeIDs;
-		static std::unordered_map<unsigned int, std::string> TypeIDsReverse;
+		std::unordered_map<unsigned int, std::function<NodeInterface *()>> Constructors;
+		std::unordered_map<std::string, unsigned int> TypeIDs;
+		std::unordered_map<unsigned int, std::string> TypeIDsReverse;
 
 		Registrar();
 
-		static unsigned int GetTypeID(std::string TypeID);
+		unsigned int GetTypeID(std::string TypeID);
 
-		static std::string GetTypeID(unsigned int TypeID);
+		std::string GetTypeID(unsigned int TypeID);
 
-		static bool TypeIDExists(std::string TypeID);
+		bool TypeIDExists(std::string TypeID);
 
-		static unsigned int RegisterType(std::string TypeID);
+		unsigned int RegisterType(std::string TypeID);
 
-		static void RegisterConstructor(unsigned int TypeID, std::function<NodeInterface *()> Constructor);
+		void RegisterConstructor(unsigned int TypeID, std::function<NodeInterface *()> Constructor);
 	public:
-		static Registrar *GetRegistrar();
+		static Registrar *GetRegistrarInstance();
 
-		static std::unordered_map<unsigned int, std::function<NodeInterface *()>> &GetConstructors();
+		std::unordered_map<unsigned int, std::function<NodeInterface *()>> &GetConstructors();
 
-		static std::unordered_map<std::string, unsigned int> &GetTypeIDs();
+		std::unordered_map<std::string, unsigned int> &GetTypeIDs();
 
-		static std::unordered_map<unsigned int, std::string> &GetTypeIDsReverse();
+		std::unordered_map<unsigned int, std::string> &GetTypeIDsReverse();
 
-		static void RegisterNode(std::string TypeID, std::function<NodeInterface *()> Constructor);
+		void RegisterNode(std::string TypeID, std::function<NodeInterface *()> Constructor);
 
-		static NodeInterface *Construct(unsigned int TypeID);
+		NodeInterface *Construct(unsigned int TypeID);
 	};
 
-	static Registrar* GetRegistrar();
+	static Registrar* registrar = Registrar::GetRegistrarInstance();
+
+	Registrar* GetRegistrar();
 }

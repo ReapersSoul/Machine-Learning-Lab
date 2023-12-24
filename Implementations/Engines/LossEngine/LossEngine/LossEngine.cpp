@@ -3,10 +3,12 @@
 
 class LossEngine : public LossEngineInterface
 {
+	NS_Loss::Registrar Registrar;
 public:
 
 	LossEngine() {
 		Name = "LossEngine";
+		Registrar = NS_Loss::Registrar();
 	}
 
 	void LoadLossCore() override {
@@ -43,7 +45,7 @@ public:
 				}
 			#endif
 
-			DCEEngine->LoadLibrary(p.path().string())->Register(NS_Loss::GetRegistrar());
+			DCEEngine->LoadLibrary(p.path().string())->Register(&Registrar);
 		}
 	}
 	void LoadLossPlugins()override {
@@ -69,7 +71,7 @@ public:
 				}
 			#endif
 
-			DCEEngine->LoadLibrary(p.path().string())->Register(NS_Loss::GetRegistrar());
+			DCEEngine->LoadLibrary(p.path().string())->Register(&Registrar);
 		}
 	}
 	void LoadLossScripts() override {
@@ -107,15 +109,17 @@ public:
 				dynamic_cast<ScriptInterface*>(scriptLoss)->SetDCEEngine(DCEEngine);
 				dynamic_cast<ScriptInterface*>(scriptLoss)->SetLanguage(language);
 				dynamic_cast<ScriptInterface*>(scriptLoss)->SetPath(p.path().string());
-				NS_Loss::GetRegistrar()->RegisterLoss(scriptLoss->GetName(), scriptLoss);
+				Registrar.RegisterLoss(scriptLoss->GetName(), scriptLoss);
 			}
 		}
+	}
+
+	NS_Loss::Registrar* GetRegistrar() override {
+		return Registrar;
 	}
 };
 
 static LossEngine instance;
-
-
 
 extern "C" {
 	// Define a function that returns the result of adding two numbers

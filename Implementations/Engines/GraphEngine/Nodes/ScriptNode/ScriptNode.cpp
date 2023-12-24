@@ -91,4 +91,9 @@ extern "C" {
         ScriptNode* node = new ScriptNode();
         return dynamic_cast<NS_Node::NodeInterface*>(node);
     }
+
+    EXPORT void Register(void* registrar) {
+        NS_Node::Registrar* Registrar = (NS_Node::Registrar*)registrar;
+        Registrar->RegisterNode(GetTypeID(), GetInstance);
+    }
 }

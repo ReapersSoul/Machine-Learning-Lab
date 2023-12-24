@@ -2,18 +2,9 @@
 
 namespace NS_Loss
 {
-
-	std::unordered_map<std::string, LossInterface *> Registrar::Losses = std::unordered_map<std::string, LossInterface *>();
-
 	Registrar::Registrar()
 	{
 		Losses = {};
-	}
-
-	Registrar *Registrar::GetRegistrar()
-	{
-		static Registrar registrar;
-		return &registrar;
 	}
 
 	std::unordered_map<std::string, LossInterface *> &Registrar::GetLosses()
@@ -31,5 +22,17 @@ namespace NS_Loss
 		if (Losses.find(Name) == Losses.end())
 			throw std::runtime_error("Loss not registered");
 		return Losses[Name];
+	}
+
+	Registrar *Registrar::GetRegistrarInstance()
+	{
+		return new Registrar();
+	}
+
+	//Registrar *registrar = Registrar::GetRegistrarInstance();
+
+	Registrar *GetRegistrar()
+	{
+		return registrar;
 	}
 }

@@ -457,4 +457,9 @@ extern "C" {
 		}
 		return new KinectNode();
 	}
+
+	EXPORT void Register(void* registrar) {
+        NS_Node::Registrar* Registrar = (NS_Node::Registrar*)registrar;
+        Registrar->RegisterNode(GetTypeID(), GetInstance);
+    }
 }

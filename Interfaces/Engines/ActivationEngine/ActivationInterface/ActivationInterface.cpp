@@ -3,17 +3,21 @@
 namespace NS_Activation
 {
 
-	std::unordered_map<std::string, ActivationInterface *> Registrar::Activations = std::unordered_map<std::string, ActivationInterface *>();
+	//Registrar *registrar = Registrar::GetRegistrarInstance();
+
+	Registrar* GetRegistrar()
+	{
+		return registrar;
+	}
 
 	Registrar::Registrar()
 	{
 		Activations = {};
 	}
 
-	Registrar *Registrar::GetRegistrar()
+	Registrar *Registrar::GetRegistrarInstance()
 	{
-		static Registrar registrar;
-		return &registrar;
+		return new Registrar();
 	}
 
 	std::unordered_map<std::string, ActivationInterface *> &Registrar::GetActivations()

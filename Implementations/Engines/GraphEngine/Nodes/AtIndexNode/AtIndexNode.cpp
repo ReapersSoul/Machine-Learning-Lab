@@ -92,4 +92,9 @@ extern "C" {
 	EXPORT std::string GetTypeID() {
 		return "AtIndexNode";
 	}
+
+	EXPORT void Register(void* registrar) {
+        NS_Node::Registrar* Registrar = (NS_Node::Registrar*)registrar;
+        Registrar->RegisterNode(GetTypeID(), GetInstance);
+    }
 }

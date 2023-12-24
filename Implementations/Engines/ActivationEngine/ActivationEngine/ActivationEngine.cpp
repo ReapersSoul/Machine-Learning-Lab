@@ -33,7 +33,7 @@ public:
 					continue;
 				}
 			#endif
-			NS_Activation::Registrar* registrar = NS_Activation::GetRegistrar();
+			NS_Activation::Registrar* registrar = NS_Activation::Registrar::GetRegistrar();
 
 			DCEEngine->LoadLibrary(p.path().string())->Register(registrar);
 		}
@@ -61,7 +61,7 @@ public:
 				}
 			#endif
 
-			DCEEngine->LoadLibrary(p.path().string())->Register(NS_Activation::GetRegistrar());
+			DCEEngine->LoadLibrary(p.path().string())->Register(NS_Activation::Registrar::GetRegistrar());
 		}
 	}
 
@@ -100,9 +100,13 @@ public:
 				dynamic_cast<ScriptInterface*>(scriptActivation)->SetDCEEngine(DCEEngine);
 				dynamic_cast<ScriptInterface*>(scriptActivation)->SetLanguage(language);
 				dynamic_cast<ScriptInterface*>(scriptActivation)->SetPath(p.path().string());
-				NS_Activation::GetRegistrar()->RegisterActivation(scriptActivation->GetName(), scriptActivation);
+				NS_Activation::Registrar::GetRegistrar()->RegisterActivation(scriptActivation->GetName(), scriptActivation);
 			}
 		}
+	}
+
+	NS_Activation::Registrar* GetRegistrar() override {
+		return NS_Activation::Registrar::GetRegistrar();
 	}
 
 	ActivationEngine() {

@@ -22,18 +22,17 @@ namespace NS_Loss
 
 	class Registrar
 	{
-		static std::unordered_map<std::string, LossInterface *> Losses;
-		Registrar();
-
+		std::unordered_map<std::string, LossInterface *> Losses;
 	public:
-		static Registrar *GetRegistrar();
+		Registrar();
+		std::unordered_map<std::string, LossInterface *> &GetLosses();
+		void RegisterLoss(std::string Name, LossInterface *Loss);
+		LossInterface *GetLoss(std::string Name);
 
-		static std::unordered_map<std::string, LossInterface *> &GetLosses();
-		static void RegisterLoss(std::string Name, LossInterface *Loss);
-		static LossInterface *GetLoss(std::string Name);
+		static Registrar* GetRegistrarInstance();
 	};
 
-	static Registrar *GetRegistrar(){
-		return Registrar::GetRegistrar();
-	}
+	static Registrar* registrar=Registrar::GetRegistrarInstance();
+
+	Registrar* GetRegistrar();
 }

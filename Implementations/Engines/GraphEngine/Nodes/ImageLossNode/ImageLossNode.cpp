@@ -299,7 +299,7 @@ public:
 	}
 
 	void Init() override {
-		Loss = NS_Loss::GetRegistrar()->GetLoss("MSE");
+		Loss = NS_Loss::Registrar::GetRegistrar()->GetLoss("MSE");
 
 		//loss
 		unsigned int att=MakeAttribute(new Attribute([this]() {
@@ -641,4 +641,9 @@ extern "C" {
 	EXPORT NS_Node::NodeInterface* GetInstance() {
 		return new ImageLossNode();
 	}
+
+	EXPORT void Register(void* registrar) {
+        NS_Node::Registrar* Registrar = (NS_Node::Registrar*)registrar;
+        Registrar->RegisterNode(GetTypeID(), GetInstance);
+    }
 }
