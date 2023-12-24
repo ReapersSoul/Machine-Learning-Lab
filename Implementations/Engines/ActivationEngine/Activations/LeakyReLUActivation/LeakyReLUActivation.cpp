@@ -25,4 +25,9 @@ extern "C" {
     EXPORT NS_Activation::ActivationInterface* GetInstance() {
         return new LeakyReLUActivation();
     }
+
+    EXPORT void Register(void* Registrar) {
+        NS_Activation::Registrar* registrar = (NS_Activation::Registrar*) Registrar;
+        registrar->RegisterActivation("LeakyReLU", new LeakyReLUActivation());
+    }
 }

@@ -21,9 +21,11 @@ set(IMPLEMENTATIONS_PATH ${CMAKE_CURRENT_SOURCE_DIR}${ESCAPE_DEPTH}Implementatio
 set(ENGINE_IN_PATH ${INTERFACE_PATH}Engines/)
 set(ENGINE_IM_PATH ${IMPLEMENTATIONS_PATH}Engines/)
 
+target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/ActivationEngine/ActivationInterface/)
+target_link_libraries(${PROJECT_NAME} PUBLIC ActivationInterface)
+
 target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}ActivationEngine/ActivationEngineInterface/)
 target_link_libraries(${PROJECT_NAME} PUBLIC ActivationEngineInterface)
-
 
 # Output directory
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/Runtime/Debug/Machine-Learning-Lab/Core/)

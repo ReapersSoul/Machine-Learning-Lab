@@ -33,8 +33,9 @@ public:
 					continue;
 				}
 			#endif
+			NS_Activation::Registrar* registrar = NS_Activation::GetRegistrar();
 
-			DCEEngine->LoadLibrary(p.path().string())->Register(NS_Activation::GetRegistrar());
+			DCEEngine->LoadLibrary(p.path().string())->Register(registrar);
 		}
 	}
 	void LoadActivationPlugins() override {

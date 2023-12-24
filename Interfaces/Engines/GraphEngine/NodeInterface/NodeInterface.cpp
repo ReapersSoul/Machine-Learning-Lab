@@ -2,139 +2,145 @@
 #include "../Edge/Edge.hpp"
 #include "../Graph/Graph.hpp"
 #include <stack>
-namespace NS_Node {
-
-	std::unordered_map<unsigned int, std::function<NodeInterface *()>> Registrar::Constructors=std::unordered_map<unsigned int, std::function<NodeInterface *()>>();
-	std::unordered_map<std::string, unsigned int> Registrar::TypeIDs=std::unordered_map<std::string, unsigned int>();
-	std::unordered_map<unsigned int, std::string> Registrar::TypeIDsReverse=std::unordered_map<unsigned int, std::string>();
-
-	Registrar::Registrar() 
-	{
-		Constructors = {{0, []()
-							{ return nullptr; }}};
-		TypeIDs = {{"Invalid", 0}};
-		TypeIDsReverse = {{0, "Invalid"}};
-	}
-
-	Registrar* Registrar::GetRegistrar() {
-		static Registrar registrar;
-		return &registrar;
-	}
-
-	Registrar* GetRegistrar() {
-		return Registrar::GetRegistrar();
-	}
-
+namespace NS_Node
+{
 	void NodeInterface::ResetIO()
 	{
-		for (auto input : Inputs) {
+		for (auto input : Inputs)
+		{
 			input->ClearData();
 		}
-		for (auto output : Outputs) {
+		for (auto output : Outputs)
+		{
 			output->ClearData();
 		}
 	}
 
 	bool NodeInterface::HasInput(unsigned int UID)
 	{
-		return std::find_if(Inputs.begin(), Inputs.end(), [UID](IO* IO) {return IO->GetUID() == UID; }) != Inputs.end();
+		return std::find_if(Inputs.begin(), Inputs.end(), [UID](IO *IO)
+							{ return IO->GetUID() == UID; }) != Inputs.end();
 	}
 
 	bool NodeInterface::HasOutput(unsigned int UID)
 	{
-		return std::find_if(Outputs.begin(), Outputs.end(), [UID](IO* IO) {return IO->GetUID() == UID; }) != Outputs.end();
+		return std::find_if(Outputs.begin(), Outputs.end(), [UID](IO *IO)
+							{ return IO->GetUID() == UID; }) != Outputs.end();
 	}
 
 	void NodeInterface::ChangeInputUID(unsigned int OldUID, unsigned int NewUID)
 	{
-		if (HasInput(OldUID)) {
-			auto it = std::find_if(Inputs.begin(), Inputs.end(), [OldUID](IO* IO) {return IO->GetUID() == OldUID; });
+		if (HasInput(OldUID))
+		{
+			auto it = std::find_if(Inputs.begin(), Inputs.end(), [OldUID](IO *IO)
+								   { return IO->GetUID() == OldUID; });
 			(*it)->SetUID(NewUID);
 		}
 
-		std::vector<Edge*>::iterator inputEdge = std::find_if(InputEdges.begin(), InputEdges.end(), [OldUID](Edge* Edge) {return Edge->GetSecondIO() == OldUID; });
+		std::vector<Edge *>::iterator inputEdge = std::find_if(InputEdges.begin(), InputEdges.end(), [OldUID](Edge *Edge)
+															   { return Edge->GetSecondIO() == OldUID; });
 		if (inputEdge != InputEdges.end())
 			(*inputEdge)->SetSecondIO(NewUID);
 	}
 
 	void NodeInterface::ChangeOutputUID(unsigned int OldUID, unsigned int NewUID)
 	{
-		if (HasOutput(OldUID)) {
-			auto it = std::find_if(Outputs.begin(), Outputs.end(), [OldUID](IO* IO) {return IO->GetUID() == OldUID; });
+		if (HasOutput(OldUID))
+		{
+			auto it = std::find_if(Outputs.begin(), Outputs.end(), [OldUID](IO *IO)
+								   { return IO->GetUID() == OldUID; });
 			(*it)->SetUID(NewUID);
 		}
 
-		std::vector<Edge*>::iterator outputEdge = std::find_if(OutputEdges.begin(), OutputEdges.end(), [OldUID](Edge* Edge) {return Edge->GetFirstIO() == OldUID; });
+		std::vector<Edge *>::iterator outputEdge = std::find_if(OutputEdges.begin(), OutputEdges.end(), [OldUID](Edge *Edge)
+																{ return Edge->GetFirstIO() == OldUID; });
 		if (outputEdge != OutputEdges.end())
 			(*outputEdge)->SetFirstIO(NewUID);
 	}
 
-	void NodeInterface::setXY(int x, int y) {
+	void NodeInterface::setXY(int x, int y)
+	{
 		this->x = x;
 		this->y = y;
 	}
 
-	void NodeInterface::setX(int x) {
+	void NodeInterface::setX(int x)
+	{
 		this->x = x;
 	}
 
-	void NodeInterface::setY(int y) {
+	void NodeInterface::setY(int y)
+	{
 		this->y = y;
 	}
 
-	int  NodeInterface::getX() {
+	int NodeInterface::getX()
+	{
 		return x;
 	}
 
-	int  NodeInterface::getY() {
+	int NodeInterface::getY()
+	{
 		return y;
 	}
 
-	void NodeInterface::SetDCEE(DynamicCodeExecutionEngineInterface* DCEE) {
+	void NodeInterface::SetDCEE(DynamicCodeExecutionEngineInterface *DCEE)
+	{
 		this->DCEE = DCEE;
 	}
 
-	void NodeInterface::SetAE(ActivationEngineInterface* AE) {
+	void NodeInterface::SetAE(ActivationEngineInterface *AE)
+	{
 		this->AE = AE;
 	}
 
-	void NodeInterface::SetLE(LossEngineInterface* LE) {
+	void NodeInterface::SetLE(LossEngineInterface *LE)
+	{
 		this->LE = LE;
 	}
 
-	void NodeInterface::Visit() {
+	void NodeInterface::Visit()
+	{
 		Visited = true;
 	}
 
-	void NodeInterface::Unvisit() {
+	void NodeInterface::Unvisit()
+	{
 		Visited = false;
 	}
 
-	bool  NodeInterface::IsVisited() {
+	bool NodeInterface::IsVisited()
+	{
 		return Visited;
 	}
 
-	void NodeInterface::SetParentGraph(Graph* ParentGraph) {
+	void NodeInterface::SetParentGraph(Graph *ParentGraph)
+	{
 		this->ParentGraph = ParentGraph;
 	}
 
-	Graph* NodeInterface::GetParentGraph() {
+	Graph *NodeInterface::GetParentGraph()
+	{
 		return ParentGraph;
 	}
 
-	void NodeInterface::SetUID(unsigned int UID) {
+	void NodeInterface::SetUID(unsigned int UID)
+	{
 		this->UID = UID;
 	}
 
-	unsigned int  NodeInterface::GetUID() {
+	unsigned int NodeInterface::GetUID()
+	{
 		return UID;
 	}
 
-	std::string  NodeInterface::GetTypeID() {
+	std::string NodeInterface::GetTypeID()
+	{
 		return TypeID;
 	}
 
-	void NodeInterface::SetTypeID(std::string TypeID) {
+	void NodeInterface::SetTypeID(std::string TypeID)
+	{
 		this->TypeID = TypeID;
 	}
 
@@ -148,7 +154,7 @@ namespace NS_Node {
 		return ParentGraph->CreateOutput(TypeID, DrawFunction);
 	}
 
-	unsigned int NodeInterface::MakeAttribute(Attribute* Attribute)
+	unsigned int NodeInterface::MakeAttribute(Attribute *Attribute)
 	{
 		Attributes.push_back(Attribute);
 		return Attributes.size() - 1;
@@ -163,76 +169,87 @@ namespace NS_Node {
 		Lines.push_back(line);
 	}
 
-	int NodeInterface::GetLineCount() {
+	int NodeInterface::GetLineCount()
+	{
 		return Lines.size();
 	}
 
-	std::vector<NodeInterface::Line>& NodeInterface::GetLines() {
+	std::vector<NodeInterface::Line> &NodeInterface::GetLines()
+	{
 		return Lines;
 	}
 
-	std::vector<Edge*>& NodeInterface::GetInputEdges() {
+	std::vector<Edge *> &NodeInterface::GetInputEdges()
+	{
 		return InputEdges;
 	}
 
-	std::vector<Attribute*>& NodeInterface::GetAttributes() {
+	std::vector<Attribute *> &NodeInterface::GetAttributes()
+	{
 		return Attributes;
 	}
 
-	IO* NodeInterface::GetInputByUID(unsigned int UID)
+	IO *NodeInterface::GetInputByUID(unsigned int UID)
 	{
-		std::vector<IO*>::iterator it = std::find_if(Inputs.begin(), Inputs.end(), [UID](IO* IO) {return IO->GetUID() == UID; });
-		if (it != Inputs.end()) {
+		std::vector<IO *>::iterator it = std::find_if(Inputs.begin(), Inputs.end(), [UID](IO *IO)
+													  { return IO->GetUID() == UID; });
+		if (it != Inputs.end())
+		{
 			return (*it);
 		}
 		return nullptr;
 	}
 
-	IO* NodeInterface::GetInputByLine(unsigned int LineIndex)
+	IO *NodeInterface::GetInputByLine(unsigned int LineIndex)
 	{
 		return Lines[LineIndex].InputUID == -1 ? nullptr : Inputs[Lines[LineIndex].InputUID];
 	}
 
-	IO* NodeInterface::GetOutputByUID(unsigned int UID)
+	IO *NodeInterface::GetOutputByUID(unsigned int UID)
 	{
-		std::vector<IO*>::iterator it = std::find_if(Outputs.begin(), Outputs.end(), [UID](IO* IO) {return IO->GetUID() == UID; });
-		if (it != Outputs.end()) {
+		std::vector<IO *>::iterator it = std::find_if(Outputs.begin(), Outputs.end(), [UID](IO *IO)
+													  { return IO->GetUID() == UID; });
+		if (it != Outputs.end())
+		{
 			return (*it);
 		}
 		return nullptr;
 	}
 
-	IO* NodeInterface::GetOutputByLine(unsigned int LineIndex)
+	IO *NodeInterface::GetOutputByLine(unsigned int LineIndex)
 	{
 		return Lines[LineIndex].OutputUID == -1 ? nullptr : Outputs[Lines[LineIndex].OutputUID];
 	}
 
-	std::vector<Edge*>& NodeInterface::GetOutputEdges() {
+	std::vector<Edge *> &NodeInterface::GetOutputEdges()
+	{
 		return OutputEdges;
 	}
 
-	std::vector<IO*>& NodeInterface::GetInputs()
+	std::vector<IO *> &NodeInterface::GetInputs()
 	{
 		return Inputs;
 	}
 
-	std::vector<IO*>& NodeInterface::GetOutputs()
+	std::vector<IO *> &NodeInterface::GetOutputs()
 	{
 		return Outputs;
 	}
 
-	void NodeInterface::DrawNodeTitle(ImGuiContext* Context) {
+	void NodeInterface::DrawNodeTitle(ImGuiContext *Context)
+	{
 		ImGui::SetCurrentContext(Context);
 		ImGui::Text(TypeID.c_str());
 	}
 
-	void NodeInterface::DrawNodeProperties(ImGuiContext* Context)
+	void NodeInterface::DrawNodeProperties(ImGuiContext *Context)
 	{
 		ImGui::SetCurrentContext(Context);
 		ImGui::Text("Node Properties");
 	}
 
-	nlohmann::json NodeInterface::Serialize() {
+	nlohmann::json NodeInterface::Serialize()
+	{
 		nlohmann::json data;
 		data["x"] = getX();
 		data["y"] = getY();
@@ -240,37 +257,126 @@ namespace NS_Node {
 		data["UID"] = UID;
 
 		data["InputEdges"] = nlohmann::json::array();
-		for (auto inputEdge : InputEdges) {
+		for (auto inputEdge : InputEdges)
+		{
 			data["InputEdges"].push_back(inputEdge->GetUID());
 		}
 
 		data["OutputEdges"] = nlohmann::json::array();
-		for (auto outputEdge : OutputEdges) {
+		for (auto outputEdge : OutputEdges)
+		{
 			data["OutputEdges"].push_back(outputEdge->GetUID());
 		}
 		return data;
 	}
 
-	void NodeInterface::DeSerialize(nlohmann::json data, void* DCEE) {
-		//set DCEE
-		this->DCEE = (DynamicCodeExecutionEngineInterface*)DCEE;
-		//set AE
-		this->AE = ((DynamicCodeExecutionEngineInterface*)DCEE)->GetEngineInstanceAs<ActivationEngineInterface>("ActivationEngine");
-		//set LE
-		this->LE = ((DynamicCodeExecutionEngineInterface*)DCEE)->GetEngineInstanceAs<LossEngineInterface>("LossEngine");
+	void NodeInterface::DeSerialize(nlohmann::json data, void *DCEE)
+	{
+		// set DCEE
+		this->DCEE = (DynamicCodeExecutionEngineInterface *)DCEE;
+		// set AE
+		this->AE = ((DynamicCodeExecutionEngineInterface *)DCEE)->GetEngineInstanceAs<ActivationEngineInterface>("ActivationEngine");
+		// set LE
+		this->LE = ((DynamicCodeExecutionEngineInterface *)DCEE)->GetEngineInstanceAs<LossEngineInterface>("LossEngine");
 		setXY(data["x"], data["y"]);
 		UID = data["UID"];
 		InputEdges.clear();
 		OutputEdges.clear();
 		Init();
 
-		//set Description?
+		// set Description?
 
-		for (auto inputEdge : data["InputEdges"]) {
+		for (auto inputEdge : data["InputEdges"])
+		{
 			InputEdges.push_back(&ParentGraph->GetEdges()[inputEdge]);
 		}
-		for (auto outputEdge : data["OutputEdges"]) {
+		for (auto outputEdge : data["OutputEdges"])
+		{
 			OutputEdges.push_back(&ParentGraph->GetEdges()[outputEdge]);
 		}
+	}
+
+	
+	std::unordered_map<unsigned int, std::function<NodeInterface *()>> Registrar::Constructors = std::unordered_map<unsigned int, std::function<NodeInterface *()>>();
+	std::unordered_map<std::string, unsigned int> Registrar::TypeIDs = std::unordered_map<std::string, unsigned int>();
+	std::unordered_map<unsigned int, std::string> Registrar::TypeIDsReverse = std::unordered_map<unsigned int, std::string>();
+
+	std::unordered_map<unsigned int, std::function<NodeInterface *()>> &Registrar::GetConstructors()
+	{
+		return GetRegistrar()->Constructors;
+	}
+
+	std::unordered_map<std::string, unsigned int> &Registrar::GetTypeIDs()
+	{
+		return GetRegistrar()->TypeIDs;
+	}
+
+	std::unordered_map<unsigned int, std::string> &Registrar::GetTypeIDsReverse()
+	{
+		return GetRegistrar()->TypeIDsReverse;
+	}
+
+	Registrar::Registrar(){
+		Constructors = {{0, []()
+						 { return nullptr; }}};
+		TypeIDs = {{"Invalid", 0}};
+		TypeIDsReverse = {{0, "Invalid"}};
+	}
+
+	unsigned int Registrar::GetTypeID(std::string TypeID)
+	{
+		return GetTypeIDs()[TypeID];
+	}
+
+	std::string Registrar::GetTypeID(unsigned int TypeID)
+	{
+		return GetTypeIDsReverse()[TypeID];
+	}
+
+	bool Registrar::TypeIDExists(std::string TypeID)
+	{
+		return GetTypeIDs().find(TypeID) != GetTypeIDs().end();
+	}
+
+	unsigned int Registrar::RegisterType(std::string TypeID)
+	{
+		if (GetTypeIDs().find(TypeID) != GetTypeIDs().end())
+		{
+			return GetTypeIDs()[TypeID];
+		}
+		unsigned int UID = std::hash<std::string>{}(TypeID);
+		GetTypeIDs()[TypeID] = UID;
+		GetTypeIDsReverse()[UID] = TypeID;
+		return UID;
+	}
+
+	void Registrar::RegisterConstructor(unsigned int TypeID, std::function<NodeInterface *()> Constructor)
+	{
+		if (GetConstructors().find(TypeID) != GetConstructors().end())
+			throw std::runtime_error("Constructor already registered");
+		GetConstructors()[TypeID] = Constructor;
+	}
+
+	void Registrar::RegisterNode(std::string TypeID, std::function<NodeInterface *()> Constructor)
+	{
+		if (!TypeIDExists(TypeID))
+			RegisterConstructor(RegisterType(TypeID), Constructor);
+		else
+			RegisterConstructor(GetTypeID(TypeID), Constructor);
+	}
+
+	NodeInterface * Registrar::Construct(unsigned int TypeID)
+	{
+		return GetConstructors()[TypeID]();
+	}
+
+	Registrar * Registrar::GetRegistrar()
+	{
+		return Registrar::GetRegistrar();
+	}
+
+	Registrar * GetRegistrar()
+	{
+		return Registrar::GetRegistrar();
 	}
 }

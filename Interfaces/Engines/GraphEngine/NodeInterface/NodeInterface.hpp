@@ -146,79 +146,33 @@ namespace NS_Node
 
 	class Registrar
 	{
-	private:
 		static std::unordered_map<unsigned int, std::function<NodeInterface *()>> Constructors;
 		static std::unordered_map<std::string, unsigned int> TypeIDs;
 		static std::unordered_map<unsigned int, std::string> TypeIDsReverse;
+
+		Registrar();
+
+		static unsigned int GetTypeID(std::string TypeID);
+
+		static std::string GetTypeID(unsigned int TypeID);
+
+		static bool TypeIDExists(std::string TypeID);
+
+		static unsigned int RegisterType(std::string TypeID);
+
+		static void RegisterConstructor(unsigned int TypeID, std::function<NodeInterface *()> Constructor);
 	public:
 		static Registrar *GetRegistrar();
 
-		static std::unordered_map<unsigned int, std::function<NodeInterface *()>> &GetConstructors()
-		{
-			return GetRegistrar()->Constructors;
-		}
+		static std::unordered_map<unsigned int, std::function<NodeInterface *()>> &GetConstructors();
 
-		static std::unordered_map<std::string, unsigned int> &GetTypeIDs()
-		{
-			return GetRegistrar()->TypeIDs;
-		}
+		static std::unordered_map<std::string, unsigned int> &GetTypeIDs();
 
-		static std::unordered_map<unsigned int, std::string> &GetTypeIDsReverse()
-		{
-			return GetRegistrar()->TypeIDsReverse;
-		}
+		static std::unordered_map<unsigned int, std::string> &GetTypeIDsReverse();
 
-	private:
-		Registrar();
+		static void RegisterNode(std::string TypeID, std::function<NodeInterface *()> Constructor);
 
-		static unsigned int GetTypeID(std::string TypeID)
-		{
-			return GetTypeIDs()[TypeID];
-		}
-
-		static std::string GetTypeID(unsigned int TypeID)
-		{
-			return GetTypeIDsReverse()[TypeID];
-		}
-
-		static bool TypeIDExists(std::string TypeID)
-		{
-			return GetTypeIDs().find(TypeID) != GetTypeIDs().end();
-		}
-
-		static unsigned int RegisterType(std::string TypeID)
-		{
-			if (GetTypeIDs().find(TypeID) != GetTypeIDs().end())
-			{
-				return GetTypeIDs()[TypeID];
-			}
-			unsigned int UID = std::hash<std::string>{}(TypeID);
-			GetTypeIDs()[TypeID] = UID;
-			GetTypeIDsReverse()[UID] = TypeID;
-			return UID;
-		}
-
-		static void RegisterConstructor(unsigned int TypeID, std::function<NodeInterface *()> Constructor)
-		{
-			if (GetConstructors().find(TypeID) != GetConstructors().end())
-				throw std::runtime_error("Constructor already registered");
-			GetConstructors()[TypeID] = Constructor;
-		}
-
-	public:
-
-		static void RegisterNode(std::string TypeID, std::function<NodeInterface *()> Constructor)
-		{
-			if (!TypeIDExists(TypeID))
-				RegisterConstructor(RegisterType(TypeID), Constructor);
-			else
-				RegisterConstructor(GetTypeID(TypeID), Constructor);
-		}
-
-		static NodeInterface *Construct(unsigned int TypeID)
-		{
-			return GetConstructors()[TypeID]();
-		}
+		static NodeInterface *Construct(unsigned int TypeID);
 	};
 
 	static Registrar* GetRegistrar();

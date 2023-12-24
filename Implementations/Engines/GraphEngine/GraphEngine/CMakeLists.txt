@@ -35,10 +35,10 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/DynamicCodeE
 target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/DynamicCodeExecutionEngine/ScriptInterface/)
 target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/GraphEngineInterface/)
 target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/NodeInterface/)
+target_link_libraries(${PROJECT_NAME} PUBLIC NodeInterface)
 target_link_libraries(${PROJECT_NAME} PUBLIC DynamicCodeExecutionEngineInterface)
 target_link_libraries(${PROJECT_NAME} PUBLIC ScriptInterface)
 target_link_libraries(${PROJECT_NAME} PUBLIC Edge)
-target_link_libraries(${PROJECT_NAME} PUBLIC NodeInterface)
 target_link_libraries(${PROJECT_NAME} PUBLIC GraphEngineInterface)
 
 # Output directory

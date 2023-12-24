@@ -1,6 +1,6 @@
 project(NodeInterface)
 
-add_library(${PROJECT_NAME} STATIC "NodeInterface.cpp" "NodeInterface.hpp")
+add_library(${PROJECT_NAME} STATIC "NodeInterface.hpp" "NodeInterface.cpp")
 
 # Set standard to C++20
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)

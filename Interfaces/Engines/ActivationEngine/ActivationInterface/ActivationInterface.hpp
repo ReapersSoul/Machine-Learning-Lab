@@ -23,18 +23,12 @@ namespace NS_Activation {
 	public:
 		static Registrar* GetRegistrar();
 
-		static std::unordered_map<std::string, ActivationInterface*> &GetActivations() {
-			return Activations;
-		}
-		static void RegisterActivation(std::string Name, ActivationInterface* Activation) {
-			if (Activations.find(Name) != Activations.end()) throw std::runtime_error("Activation already registered");
-			Activations[Name] = Activation;
-		}
-		static ActivationInterface* GetActivation(std::string Name) {
-			if (Activations.find(Name) == Activations.end()) throw std::runtime_error("Activation not registered");
-			return Activations[Name];
-		}
+		static std::unordered_map<std::string, ActivationInterface*> &GetActivations();
+		static void RegisterActivation(std::string Name, ActivationInterface* Activation);
+		static ActivationInterface* GetActivation(std::string Name);
 	};
 
-	static Registrar* GetRegistrar();
+	static Registrar* GetRegistrar(){
+		return Registrar::GetRegistrar();
+	}
 }

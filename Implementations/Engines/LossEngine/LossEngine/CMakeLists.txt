@@ -21,6 +21,9 @@ set(IMPLEMENTATIONS_PATH ${CMAKE_CURRENT_SOURCE_DIR}${ESCAPE_DEPTH}Implementatio
 set(ENGINE_IN_PATH ${INTERFACE_PATH}Engines/)
 set(ENGINE_IM_PATH ${IMPLEMENTATIONS_PATH}Engines/)
 
+target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/LossEngine/LossInterface/)
+target_link_libraries(${PROJECT_NAME} PUBLIC LossInterface)
+
 target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}LossEngine/LossEngineInterface/)
 
 # Output directory
