@@ -23,16 +23,4 @@ namespace NS_Loss
 			throw std::runtime_error("Loss not registered");
 		return Losses[Name];
 	}
-
-	Registrar *Registrar::GetRegistrarInstance()
-	{
-		return new Registrar();
-	}
-
-	//Registrar *registrar = Registrar::GetRegistrarInstance();
-
-	Registrar *GetRegistrar()
-	{
-		return registrar;
-	}
 }

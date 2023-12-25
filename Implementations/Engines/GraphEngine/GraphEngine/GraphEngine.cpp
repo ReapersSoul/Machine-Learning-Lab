@@ -12,7 +12,6 @@ class GraphEngine : public GraphEngineInterface {
 public:
 	GraphEngine() {
 		Name = "GraphEngine";
-
 	}
 	~GraphEngine() {}
 
@@ -49,7 +48,7 @@ public:
 				continue;
 			}
 #endif
-			DCEEngine->LoadLibrary(p.path().string())->Register(NS_Node::GetRegistrar());
+			DCEEngine->LoadLibrary(p.path().string())->Register(GetNodeRegistrar());
 		}
 	}
 
@@ -79,7 +78,7 @@ public:
 				if (p.path().extension().string() != language->GetExtension()) {
 					continue;
 				}
-				NS_Node::GetRegistrar()->RegisterNode(language->GetName() + p.path().stem().string(),[&, language, p]() {
+				NodeRegistrar.RegisterNode(language->GetName() + p.path().stem().string(),[&, language, p]() {
 					#if defined(_MSC_VER)
 						NS_Node::NodeInterface* scriptNode = DCEEngine->GetOtherLib("ScriptNode.dll")->GetInstance<NS_Node::NodeInterface>();
 					#elif defined(__GNUC__)
@@ -120,7 +119,7 @@ public:
 				}
 			#endif
 
-			DCEEngine->LoadLibrary(p.path().string())->Register(NS_Node::GetRegistrar());
+			DCEEngine->LoadLibrary(p.path().string())->Register(&NodeRegistrar);
 		}
 	}
 
@@ -150,7 +149,7 @@ public:
 			}
 #endif
 
-			DCEEngine->LoadLibrary(p.path().string())->Register(NS_Node::GetRegistrar());
+			DCEEngine->LoadLibrary(p.path().string())->Register(&NodeRegistrar);
 		}
 	}
 };

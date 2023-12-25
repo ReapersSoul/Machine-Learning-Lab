@@ -3,12 +3,10 @@
 
 class LossEngine : public LossEngineInterface
 {
-	NS_Loss::Registrar Registrar;
 public:
 
 	LossEngine() {
 		Name = "LossEngine";
-		Registrar = NS_Loss::Registrar();
 	}
 
 	void LoadLossCore() override {
@@ -45,7 +43,7 @@ public:
 				}
 			#endif
 
-			DCEEngine->LoadLibrary(p.path().string())->Register(&Registrar);
+			DCEEngine->LoadLibrary(p.path().string())->Register(GetRegistrar());
 		}
 	}
 	void LoadLossPlugins()override {
@@ -71,7 +69,7 @@ public:
 				}
 			#endif
 
-			DCEEngine->LoadLibrary(p.path().string())->Register(&Registrar);
+			DCEEngine->LoadLibrary(p.path().string())->Register(GetRegistrar());
 		}
 	}
 	void LoadLossScripts() override {
@@ -112,10 +110,6 @@ public:
 				Registrar.RegisterLoss(scriptLoss->GetName(), scriptLoss);
 			}
 		}
-	}
-
-	NS_Loss::Registrar* GetRegistrar() override {
-		return Registrar;
 	}
 };
 

@@ -28,11 +28,5 @@ namespace NS_Loss
 		std::unordered_map<std::string, LossInterface *> &GetLosses();
 		void RegisterLoss(std::string Name, LossInterface *Loss);
 		LossInterface *GetLoss(std::string Name);
-
-		static Registrar* GetRegistrarInstance();
 	};
-
-	static Registrar* registrar=Registrar::GetRegistrarInstance();
-
-	Registrar* GetRegistrar();
 }

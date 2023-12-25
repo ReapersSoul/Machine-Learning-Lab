@@ -150,8 +150,6 @@ namespace NS_Node
 		std::unordered_map<std::string, unsigned int> TypeIDs;
 		std::unordered_map<unsigned int, std::string> TypeIDsReverse;
 
-		Registrar();
-
 		unsigned int GetTypeID(std::string TypeID);
 
 		std::string GetTypeID(unsigned int TypeID);
@@ -162,7 +160,7 @@ namespace NS_Node
 
 		void RegisterConstructor(unsigned int TypeID, std::function<NodeInterface *()> Constructor);
 	public:
-		static Registrar *GetRegistrarInstance();
+		Registrar();
 
 		std::unordered_map<unsigned int, std::function<NodeInterface *()>> &GetConstructors();
 
@@ -174,8 +172,4 @@ namespace NS_Node
 
 		NodeInterface *Construct(unsigned int TypeID);
 	};
-
-	static Registrar* registrar = Registrar::GetRegistrarInstance();
-
-	Registrar* GetRegistrar();
 }

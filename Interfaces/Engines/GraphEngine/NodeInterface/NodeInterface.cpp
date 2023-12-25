@@ -311,13 +311,6 @@ namespace NS_Node
 		return TypeIDsReverse;
 	}
 
-	//Registrar* registrar = Registrar::GetRegistrarInstance();
-
-	Registrar* GetRegistrar()
-	{
-		return registrar;
-	}
-
 	Registrar::Registrar(){
 		Constructors = {{0, []()
 						 { return nullptr; }}};
@@ -327,36 +320,36 @@ namespace NS_Node
 
 	unsigned int Registrar::GetTypeID(std::string TypeID)
 	{
-		return GetTypeIDs()[TypeID];
+		return TypeIDs[TypeID];
 	}
 
 	std::string Registrar::GetTypeID(unsigned int TypeID)
 	{
-		return GetTypeIDsReverse()[TypeID];
+		return TypeIDsReverse[TypeID];
 	}
 
 	bool Registrar::TypeIDExists(std::string TypeID)
 	{
-		return GetTypeIDs().find(TypeID) != GetTypeIDs().end();
+		return TypeIDs.find(TypeID) != TypeIDs.end();
 	}
 
 	unsigned int Registrar::RegisterType(std::string TypeID)
 	{
-		if (GetTypeIDs().find(TypeID) != GetTypeIDs().end())
+		if (TypeIDs.find(TypeID) != TypeIDs.end())
 		{
-			return GetTypeIDs()[TypeID];
+			return TypeIDs[TypeID];
 		}
 		unsigned int UID = std::hash<std::string>{}(TypeID);
-		GetTypeIDs()[TypeID] = UID;
-		GetTypeIDsReverse()[UID] = TypeID;
+		TypeIDs[TypeID] = UID;
+		TypeIDsReverse[UID] = TypeID;
 		return UID;
 	}
 
 	void Registrar::RegisterConstructor(unsigned int TypeID, std::function<NodeInterface *()> Constructor)
 	{
-		if (GetConstructors().find(TypeID) != GetConstructors().end())
+		if (Constructors.find(TypeID) != Constructors.end())
 			throw std::runtime_error("Constructor already registered");
-		GetConstructors()[TypeID] = Constructor;
+		Constructors[TypeID] = Constructor;
 	}
 
 	void Registrar::RegisterNode(std::string TypeID, std::function<NodeInterface *()> Constructor)
@@ -364,16 +357,11 @@ namespace NS_Node
 		if (!TypeIDExists(TypeID))
 			RegisterConstructor(RegisterType(TypeID), Constructor);
 		else
-			RegisterConstructor(GetTypeID(TypeID), Constructor);
+			RegisterConstructor(TypeIDs[TypeID], Constructor);
 	}
 
 	NodeInterface * Registrar::Construct(unsigned int TypeID)
 	{
-		return GetConstructors()[TypeID]();
-	}
-
-	Registrar * Registrar::GetRegistrarInstance()
-	{
-		return new Registrar();
+		return Constructors[TypeID]();
 	}
 }

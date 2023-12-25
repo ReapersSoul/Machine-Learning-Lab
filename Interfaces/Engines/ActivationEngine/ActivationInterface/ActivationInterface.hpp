@@ -19,16 +19,10 @@ namespace NS_Activation {
 
 	class Registrar {
 		std::unordered_map<std::string, ActivationInterface*> Activations;
-		Registrar();
 	public:
-		static Registrar* GetRegistrarInstance();
-
+		Registrar();
 		std::unordered_map<std::string, ActivationInterface*> &GetActivations();
 		void RegisterActivation(std::string Name, ActivationInterface* Activation);
 		ActivationInterface* GetActivation(std::string Name);
 	};
-
-	static Registrar* registrar=Registrar::GetRegistrarInstance();
-
-	Registrar* GetRegistrar();
 }

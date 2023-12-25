@@ -299,7 +299,7 @@ public:
 	}
 
 	void Init() override {
-		Loss = NS_Loss::Registrar::GetRegistrar()->GetLoss("MSE");
+		Loss = LE->GetRegistrar()->GetLosses().begin()->second;
 
 		//loss
 		unsigned int att=MakeAttribute(new Attribute([this]() {

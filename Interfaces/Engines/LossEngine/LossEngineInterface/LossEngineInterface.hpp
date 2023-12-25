@@ -4,10 +4,14 @@
 #include "../LossInterface/LossInterface.hpp"
 
 class LossEngineInterface : public EngineInterface {
+protected:
+	NS_Loss::Registrar Registrar;
 public:
 	virtual void LoadLossCore() = 0;
 	virtual void LoadLossPlugins() = 0;
 	virtual void LoadLossScripts() = 0;
-	virtual NS_Loss::Registrar* GetRegistrar() = 0;
+	NS_Loss::Registrar* GetRegistrar() {
+		return &Registrar;
+	}
 };
 
