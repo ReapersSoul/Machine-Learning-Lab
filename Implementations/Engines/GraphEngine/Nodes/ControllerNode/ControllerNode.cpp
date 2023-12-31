@@ -38,32 +38,113 @@ public:
 	}
 
 	void Init() override {
-		Attributes.push_back(new Attribute([this]() {
+		unsigned int attribute_one=MakeAttribute(new Attribute([this]() {
 			ImGui::PushItemWidth(100);
 			ImGui::InputInt("Joystick", &joystick);
 			}));
 
 		//create Outputs
-		// MakeOutput(0, "A", "bool", false);
-		// MakeOutput(1, "B", "bool", false);
-		// MakeOutput(2, "X", "bool", false);
-		// MakeOutput(3, "Y", "bool", false);
-		// MakeOutput(4, "LB", "bool", false);
-		// MakeOutput(5, "RB", "bool", false);
-		// MakeOutput(6, "Select", "bool", false);
-		// MakeOutput(7, "Start", "bool", false);
-		// MakeOutput(8, "L3", "bool", false);
-		// MakeOutput(9, "R3", "bool", false);
-		// MakeOutput(10, "LX", "float", 0);
-		// MakeOutput(11, "LY", "float", 0);
-		// MakeOutput(12, "RX", "float", 0);
-		// MakeOutput(13, "RY", "float", 0);
-		// MakeOutput(14, "LT", "float", 0);
-		// MakeOutput(15, "RT", "float", 0);
-		// MakeOutput(16, "DPadUp", "bool", false);
-		// MakeOutput(17, "DPadDown", "bool", false);
-		// MakeOutput(18, "DPadLeft", "bool", false);
-		// MakeOutput(19, "DPadRight", "bool", false);
+		unsigned int output_one=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+			ImGui::PushItemWidth(100);
+			ImGui::Text("A");
+			});
+		unsigned int output_two=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+			ImGui::PushItemWidth(100);
+			ImGui::Text("B");
+			});
+		unsigned int output_three=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+			ImGui::PushItemWidth(100);
+			ImGui::Text("X");
+			});
+		unsigned int output_four=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+			ImGui::PushItemWidth(100);
+			ImGui::Text("Y");
+			});
+		unsigned int output_five=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+			ImGui::PushItemWidth(100);
+			ImGui::Text("LB");
+			});
+		unsigned int output_six=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+			ImGui::PushItemWidth(100);
+			ImGui::Text("RB");
+			});
+		unsigned int output_seven=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+			ImGui::PushItemWidth(100);
+			ImGui::Text("Select");
+			});
+		unsigned int output_eight=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+			ImGui::PushItemWidth(100);
+			ImGui::Text("Start");
+			});
+		unsigned int output_nine=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+			ImGui::PushItemWidth(100);
+			ImGui::Text("L3");
+			});
+		unsigned int output_ten=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+			ImGui::PushItemWidth(100);
+			ImGui::Text("R3");
+			});
+		unsigned int output_eleven=MakeOutput(NS_DataObject::GetTypeID("float"),[](){
+			ImGui::PushItemWidth(100);
+			ImGui::Text("LX");
+			});
+		unsigned int output_twelve=MakeOutput(NS_DataObject::GetTypeID("float"),[](){
+			ImGui::PushItemWidth(100);
+			ImGui::Text("LY");
+			});
+		unsigned int output_thirteen=MakeOutput(NS_DataObject::GetTypeID("float"),[](){
+			ImGui::PushItemWidth(100);
+			ImGui::Text("RX");
+			});
+		unsigned int output_fourteen=MakeOutput(NS_DataObject::GetTypeID("float"),[](){
+			ImGui::PushItemWidth(100);
+			ImGui::Text("RY");
+			});
+		unsigned int output_fifteen=MakeOutput(NS_DataObject::GetTypeID("float"),[](){
+			ImGui::PushItemWidth(100);
+			ImGui::Text("LT");
+			});
+		unsigned int output_sixteen=MakeOutput(NS_DataObject::GetTypeID("float"),[](){
+			ImGui::PushItemWidth(100);
+			ImGui::Text("RT");
+			});
+		unsigned int output_seventeen=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+			ImGui::PushItemWidth(100);
+			ImGui::Text("DPadUp");
+			});
+		unsigned int output_eighteen=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+			ImGui::PushItemWidth(100);
+			ImGui::Text("DPadDown");
+			});
+		unsigned int output_nineteen=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+			ImGui::PushItemWidth(100);
+			ImGui::Text("DPadLeft");
+			});
+		unsigned int output_twenty=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+			ImGui::PushItemWidth(100);
+			ImGui::Text("DPadRight");
+			});
+		//make lines
+		MakeLine(-1,attribute_one,output_one);
+		MakeLine(-1,-1,output_two);
+		MakeLine(-1,-1,output_three);
+		MakeLine(-1,-1,output_four);
+		MakeLine(-1,-1,output_five);
+		MakeLine(-1,-1,output_six);
+		MakeLine(-1,-1,output_seven);
+		MakeLine(-1,-1,output_eight);
+		MakeLine(-1,-1,output_nine);
+		MakeLine(-1,-1,output_ten);
+		MakeLine(-1,-1,output_eleven);
+		MakeLine(-1,-1,output_twelve);
+		MakeLine(-1,-1,output_thirteen);
+		MakeLine(-1,-1,output_fourteen);
+		MakeLine(-1,-1,output_fifteen);
+		MakeLine(-1,-1,output_sixteen);
+		MakeLine(-1,-1,output_seventeen);
+		MakeLine(-1,-1,output_eighteen);
+		MakeLine(-1,-1,output_nineteen);
+		MakeLine(-1,-1,output_twenty);
 	}
 
 	void Process(bool DirectionForward) override {

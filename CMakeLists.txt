@@ -37,6 +37,7 @@ add_subdirectory(${ENGINE_IN_PATH}UIEngine/UIEngineInterface/ ${CMAKE_BINARY_DIR
 add_subdirectory(${ENGINE_IN_PATH}NetworkEngine/NetworkEngineInterface/ ${CMAKE_BINARY_DIR}/Interfaces/NetworkEngineInterface)
 add_subdirectory(${ENGINE_IN_PATH}LossEngine/LossInterface/ ${CMAKE_BINARY_DIR}/Interfaces/LossInterface)
 add_subdirectory(${ENGINE_IN_PATH}ActivationEngine/ActivationInterface/ ${CMAKE_BINARY_DIR}/Interfaces/ActivationInterface)
+add_subdirectory(${ENGINE_IN_PATH}GraphEngine/DataObjectInterface/ ${CMAKE_BINARY_DIR}/Interfaces/DataObjectInterface)
 add_subdirectory(${ENGINE_IN_PATH}GraphEngine/Graph/ ${CMAKE_BINARY_DIR}/Interfaces/Graph)
 add_subdirectory(${ENGINE_IN_PATH}GraphEngine/IO/ ${CMAKE_BINARY_DIR}/Interfaces/IO)
 add_subdirectory(${ENGINE_IN_PATH}GraphEngine/Edge/ ${CMAKE_BINARY_DIR}/Interfaces/Edge)

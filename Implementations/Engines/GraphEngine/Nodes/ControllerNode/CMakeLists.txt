@@ -38,6 +38,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/
 target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/Attribute/)
 target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/SorterInterface/)
 target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/UIEngine/UIEngineInterface/)
+target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/DataObjectInterface/)
 target_link_libraries(${PROJECT_NAME} PUBLIC DynamicCodeExecutionEngineInterface)
 target_link_libraries(${PROJECT_NAME} PUBLIC GraphEngineInterface)
 target_link_libraries(${PROJECT_NAME} PUBLIC Graph)
@@ -48,6 +49,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC SorterInterface)
 target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/DynamicCodeExecutionEngine/Languages/LanguageInterface/)
 target_link_libraries(${PROJECT_NAME} PUBLIC LanguageInterface)
 target_link_libraries(${PROJECT_NAME} PUBLIC UIEngineInterface)
+target_link_libraries(${PROJECT_NAME} PUBLIC DataObjectInterface)
 
 
 # Output directory
