@@ -21,8 +21,7 @@ struct std::hash<NS_DataObject::ConversionDescriptor>
 {
 	std::size_t operator()(const NS_DataObject::ConversionDescriptor& k) const
 	{
-		return ((std::hash<unsigned int>()(k.From)
-						^ (std::hash<unsigned int>()(k.To) << 1)) >> 1);
+		return ((std::hash<unsigned int>()(k.From) ^ (std::hash<unsigned int>()(k.To) << 1)) >> 1);
 	}
 };
 

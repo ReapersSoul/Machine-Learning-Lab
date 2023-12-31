@@ -6,7 +6,6 @@
 #include <string>
 #include <filesystem>
 
-//TODO: change how loading AvailableNodes works were using too much memory storing instances of the nodes. maybe just store functions to create the nodes instead of the nodes themselves
 class GraphEngineInterface: public EngineInterface {
 protected:
 	std::map<std::string,Graph*> Graphs;
