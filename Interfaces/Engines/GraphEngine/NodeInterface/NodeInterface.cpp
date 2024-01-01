@@ -146,12 +146,16 @@ namespace NS_Node
 
 	unsigned int NodeInterface::MakeInput(unsigned int TypeID, std::function<void()> DrawFunction)
 	{
-		return ParentGraph->CreateInput(TypeID, DrawFunction);
+		unsigned int UID = ParentGraph->CreateInput(TypeID, DrawFunction);
+		Inputs.push_back(ParentGraph->GetInputByUID(UID));
+		return UID;
 	}
 
 	unsigned int NodeInterface::MakeOutput(unsigned int TypeID, std::function<void()> DrawFunction)
 	{
-		return ParentGraph->CreateOutput(TypeID, DrawFunction);
+		unsigned int UID = ParentGraph->CreateOutput(TypeID, DrawFunction);
+		Outputs.push_back(ParentGraph->GetOutputByUID(UID));
+		return UID;
 	}
 
 	unsigned int NodeInterface::MakeAttribute(Attribute *Attribute)
