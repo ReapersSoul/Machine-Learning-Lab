@@ -1,0 +1,20 @@
+{
+	"dependencies": [
+		"nlohmann-json",
+		"sqlite3",
+		"opencl",
+		"opengl",
+		"glew",
+		"glfw3",
+		"glm",
+		{"name": "imgui", "features": ["docking-experimental", "opengl3-binding", "glfw-binding"]},
+		"imgui-node-editor",
+		"lua",
+		"chaiscript",
+		"duktape",
+		"python3",
+		"stb",
+		"boost",
+		"boost-dll"
+	]
+}
