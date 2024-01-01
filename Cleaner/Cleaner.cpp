@@ -50,7 +50,7 @@ void FindLibs(std::string path, std::vector<std::string> Libraries, bool first)
 		{
 			if (entry.path().filename().string() == "Libs")
 			{
-				printf("Found Libs directory %s\n", entry.path().string().c_str());
+				printf("Found Libs directory %s\n", std::filesystem::absolute(entry.path()).string().c_str());
 				LibsPath.push_back(entry.path().string());
 				continue;
 			}
@@ -62,7 +62,7 @@ void FindLibs(std::string path, std::vector<std::string> Libraries, bool first)
 			{
 				if (entry.path().filename().string() == Libraries[i])
 				{
-					printf("Found library %s\n", entry.path().string().c_str());
+					printf("Found library %s\n", std::filesystem::absolute(entry.path()).string().c_str());
 					LibraryFiles.push_back(entry.path().string());
 				}
 			}

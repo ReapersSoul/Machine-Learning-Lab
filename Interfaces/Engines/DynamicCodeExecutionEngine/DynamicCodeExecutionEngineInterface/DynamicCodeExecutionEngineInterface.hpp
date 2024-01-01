@@ -200,7 +200,7 @@ public:
 		LibraryInterface* lib = new LibraryInterface(path);
 		lib->Load();
 		if (lib->IsLoaded()) {
-			printf("Loaded %s\n", path.c_str());
+			printf("Loaded %s\n", std::filesystem::absolute(path).string().c_str());
 		}
 		Engines.push_back(lib);
 		return lib;
@@ -216,7 +216,7 @@ public:
 		LibraryInterface* lib = new LibraryInterface(path);
 		lib->Load();
 		if (lib->IsLoaded()) {
-			printf("Loaded %s\n", path.c_str());
+			printf("Loaded %s\n", std::filesystem::absolute(path).string().c_str());
 		}
 		Plugins.push_back(lib);
 		return lib;
@@ -247,7 +247,7 @@ public:
 		LibraryInterface* lib = new LibraryInterface(path);
 		lib->Load();
 		if (lib->IsLoaded()) {
-			printf("Loaded %s\n", path.c_str());
+			printf("Loaded %s\n", std::filesystem::absolute(path).string().c_str());
 		}
 		bool isEngine = false;
 		bool isPlugin = false;

@@ -156,14 +156,14 @@ public:
 				continue;
 			}
 			
-			printf("Loading %s\n", p.path().filename().string().c_str());
+			printf("Loading %s\n", std::filesystem::absolute(p.path()).string().c_str());
 			// Load the DLL			
 			LibraryInterface* myLibrary = new LibraryInterface(p.path().string());
 			myLibrary->Load();
 
 			// Check if the library loaded successfully
 			if (!myLibrary->IsLoaded()) {
-				std::cerr << "Failed to load the DLL. Core/Libs/" + p.path().filename().string() << std::endl;
+				std::cerr << "Failed to load the DLL. " + std::filesystem::absolute(p.path()).string() << std::endl;
 				continue;
 			}
 

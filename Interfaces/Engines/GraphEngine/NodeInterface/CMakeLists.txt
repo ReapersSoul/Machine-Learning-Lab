@@ -40,6 +40,14 @@ find_package(OpenGL REQUIRED)
 target_include_directories(${PROJECT_NAME} PUBLIC ${OPENGL_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} PUBLIC OpenGL::GL)
 
+set(ESCAPE_DEPTH /../../../../../)
+set(INTERFACE_PATH ${CMAKE_CURRENT_SOURCE_DIR}${ESCAPE_DEPTH}Interfaces/)
+set(IMPLEMENTATIONS_PATH ${CMAKE_CURRENT_SOURCE_DIR}${ESCAPE_DEPTH}Implementation/)
+set(ENGINE_IN_PATH ${INTERFACE_PATH}Engines/)
+set(ENGINE_IM_PATH ${IMPLEMENTATIONS_PATH}Engines/)
+
+target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_IN_PATH}/GraphEngine/Graph/)
+target_link_libraries(${PROJECT_NAME} PUBLIC Graph)
 
 # Output directory
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/Runtime/Debug/Machine-Learning-Lab/Core/)
