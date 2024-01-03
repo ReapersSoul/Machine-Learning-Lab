@@ -51,10 +51,7 @@ Edge* Graph::CreateEdge(unsigned int First, unsigned int Second, unsigned int Fi
 	edge.SetSecond(Second);
 	edge.SetFirstIO(FirstIO);
 	edge.SetSecondIO(SecondIO);
-	int UID = 0;
-	while (Edges.find(UID) != Edges.end()) {
-		UID++;
-	}
+	int UID = GetNextUID();
 	edge.SetUID(UID);
 	Edges[edge.GetUID()] = edge;
 	return &Edges[edge.GetUID()];
@@ -62,16 +59,14 @@ Edge* Graph::CreateEdge(unsigned int First, unsigned int Second, unsigned int Fi
 
 void Graph::DeleteEdge(unsigned int Edge) {
 	Edges.erase(Edge);
+	UsedUIDs.erase(std::remove(UsedUIDs.begin(), UsedUIDs.end(), Edge), UsedUIDs.end());
 }
 
 unsigned int Graph::CreateInput(unsigned int TypeID, std::function<void()> DrawFunction) {
 	IO Input;
 	Input.SetTypeID(TypeID);
 	Input.SetDrawFunction(DrawFunction);
-	int UID = 0;
-	while (Inputs.find(UID) != Inputs.end()) {
-		UID++;
-	}
+	int UID = GetNextUID();
 	Input.SetUID(UID);
 	Inputs[UID] = Input;
 	return UID;
@@ -79,16 +74,14 @@ unsigned int Graph::CreateInput(unsigned int TypeID, std::function<void()> DrawF
 
 void Graph::DeleteInput(unsigned int Input) {
 	Inputs.erase(Input);
+	UsedUIDs.erase(std::remove(UsedUIDs.begin(), UsedUIDs.end(), Input), UsedUIDs.end());
 }
 
 unsigned int Graph::CreateOutput(unsigned int TypeID, std::function<void()> DrawFunction) {
 	IO Output;
 	Output.SetTypeID(TypeID);
 	Output.SetDrawFunction(DrawFunction);
-	int UID = 0;
-	while (Outputs.find(UID) != Outputs.end()) {
-		UID++;
-	}
+	int UID = GetNextUID();
 	Output.SetUID(UID);
 	Outputs[UID] = Output;
 	return UID;
@@ -96,6 +89,7 @@ unsigned int Graph::CreateOutput(unsigned int TypeID, std::function<void()> Draw
 
 void Graph::DeleteOutput(unsigned int Output) {
 	Outputs.erase(Output);
+	UsedUIDs.erase(std::remove(UsedUIDs.begin(), UsedUIDs.end(), Output), UsedUIDs.end());
 }
 
 unsigned int Graph::AddNode(NS_Node::NodeInterface* Node) {
@@ -113,6 +107,7 @@ unsigned int Graph::AddNode(NS_Node::NodeInterface* Node) {
 void Graph::DeleteNode(unsigned int NodeUID) {
 	Nodes[NodeUID]->~NodeInterface();
 	Nodes.erase(NodeUID);
+	UsedUIDs.erase(std::remove(UsedUIDs.begin(), UsedUIDs.end(), NodeUID), UsedUIDs.end());
 }
 
 void Graph::ChangeNodeUID(unsigned int OldUID, unsigned int NewUID)
@@ -128,6 +123,7 @@ void Graph::ChangeNodeUID(unsigned int OldUID, unsigned int NewUID)
 	}
 
 	Nodes.erase(OldUID);
+	UsedUIDs.erase(std::remove(UsedUIDs.begin(), UsedUIDs.end(), OldUID), UsedUIDs.end());
 	Nodes[NewUID] = Node;
 	Node->SetUID(NewUID);
 }
@@ -136,6 +132,7 @@ void Graph::ChangeEdgeUID(unsigned int OldUID, unsigned int NewUID)
 {
 	Edge Edge = Edges[OldUID];
 	Edges.erase(OldUID);
+	UsedUIDs.erase(std::remove(UsedUIDs.begin(), UsedUIDs.end(), OldUID), UsedUIDs.end());
 	Edges[NewUID] = Edge;
 	Edge.SetUID(NewUID);
 }

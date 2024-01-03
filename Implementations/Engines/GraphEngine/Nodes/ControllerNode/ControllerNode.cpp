@@ -44,85 +44,85 @@ public:
 			}));
 
 		//create Outputs
-		unsigned int output_one=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+		unsigned int output_one=MakeOutput(NS_DataObject::GetTypeID("bool"),[this](){
 			ImGui::PushItemWidth(100);
-			ImGui::Text("A");
+			ImGui::Text(("A "+std::string(A?"True":"False")).c_str());
 			});
-		unsigned int output_two=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+		unsigned int output_two=MakeOutput(NS_DataObject::GetTypeID("bool"),[this](){
 			ImGui::PushItemWidth(100);
-			ImGui::Text("B");
+			ImGui::Text(("B "+std::string(B?"True":"False")).c_str());
 			});
-		unsigned int output_three=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+		unsigned int output_three=MakeOutput(NS_DataObject::GetTypeID("bool"),[this](){
 			ImGui::PushItemWidth(100);
-			ImGui::Text("X");
+			ImGui::Text(("X "+ std::to_string(X)).c_str());
 			});
-		unsigned int output_four=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+		unsigned int output_four=MakeOutput(NS_DataObject::GetTypeID("bool"),[this](){
 			ImGui::PushItemWidth(100);
-			ImGui::Text("Y");
+			ImGui::Text(("Y "+std::to_string(Y)).c_str());
 			});
-		unsigned int output_five=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+		unsigned int output_five=MakeOutput(NS_DataObject::GetTypeID("bool"),[this](){
 			ImGui::PushItemWidth(100);
-			ImGui::Text("LB");
+			ImGui::Text(("LB "+std::string(LB?"True":"False")).c_str());
 			});
-		unsigned int output_six=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+		unsigned int output_six=MakeOutput(NS_DataObject::GetTypeID("bool"),[this](){
 			ImGui::PushItemWidth(100);
-			ImGui::Text("RB");
+			ImGui::Text(("RB "+std::string(RB?"True":"False")).c_str());
 			});
-		unsigned int output_seven=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+		unsigned int output_seven=MakeOutput(NS_DataObject::GetTypeID("bool"),[this](){
 			ImGui::PushItemWidth(100);
-			ImGui::Text("Select");
+			ImGui::Text(("Select "+std::string(Select?"True":"False")).c_str());
 			});
-		unsigned int output_eight=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+		unsigned int output_eight=MakeOutput(NS_DataObject::GetTypeID("bool"),[this](){
 			ImGui::PushItemWidth(100);
-			ImGui::Text("Start");
+			ImGui::Text(("Start "+std::string(Start?"True":"False")).c_str());
 			});
-		unsigned int output_nine=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+		unsigned int output_nine=MakeOutput(NS_DataObject::GetTypeID("bool"),[this](){
 			ImGui::PushItemWidth(100);
-			ImGui::Text("L3");
+			ImGui::Text(("L3 "+std::string(L3?"True":"False")).c_str());
 			});
-		unsigned int output_ten=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+		unsigned int output_ten=MakeOutput(NS_DataObject::GetTypeID("bool"),[this](){
 			ImGui::PushItemWidth(100);
-			ImGui::Text("R3");
+			ImGui::Text(("R3 "+std::string(R3?"True":"False")).c_str());
 			});
-		unsigned int output_eleven=MakeOutput(NS_DataObject::GetTypeID("float"),[](){
+		unsigned int output_eleven=MakeOutput(NS_DataObject::GetTypeID("float"),[this](){
 			ImGui::PushItemWidth(100);
-			ImGui::Text("LX");
+			ImGui::Text(("LX "+std::to_string(LX)).c_str());
 			});
-		unsigned int output_twelve=MakeOutput(NS_DataObject::GetTypeID("float"),[](){
+		unsigned int output_twelve=MakeOutput(NS_DataObject::GetTypeID("float"),[this](){
 			ImGui::PushItemWidth(100);
-			ImGui::Text("LY");
+			ImGui::Text(("LY "+std::to_string(LY)).c_str());
 			});
-		unsigned int output_thirteen=MakeOutput(NS_DataObject::GetTypeID("float"),[](){
+		unsigned int output_thirteen=MakeOutput(NS_DataObject::GetTypeID("float"),[this](){
 			ImGui::PushItemWidth(100);
-			ImGui::Text("RX");
+			ImGui::Text(("RX "+std::to_string(RX)).c_str());
 			});
-		unsigned int output_fourteen=MakeOutput(NS_DataObject::GetTypeID("float"),[](){
+		unsigned int output_fourteen=MakeOutput(NS_DataObject::GetTypeID("float"),[this](){
 			ImGui::PushItemWidth(100);
-			ImGui::Text("RY");
+			ImGui::Text(("RY "+std::to_string(RY)).c_str());
 			});
-		unsigned int output_fifteen=MakeOutput(NS_DataObject::GetTypeID("float"),[](){
+		unsigned int output_fifteen=MakeOutput(NS_DataObject::GetTypeID("float"),[this](){
 			ImGui::PushItemWidth(100);
-			ImGui::Text("LT");
+			ImGui::Text(("LT "+std::to_string(LT)).c_str());
 			});
-		unsigned int output_sixteen=MakeOutput(NS_DataObject::GetTypeID("float"),[](){
+		unsigned int output_sixteen=MakeOutput(NS_DataObject::GetTypeID("float"),[this](){
 			ImGui::PushItemWidth(100);
-			ImGui::Text("RT");
+			ImGui::Text(("RT "+std::to_string(RT)).c_str());
 			});
-		unsigned int output_seventeen=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+		unsigned int output_seventeen=MakeOutput(NS_DataObject::GetTypeID("bool"),[this](){
 			ImGui::PushItemWidth(100);
-			ImGui::Text("DPadUp");
+			ImGui::Text(("DPadUp "+std::string(DPadUp?"True":"False")).c_str());
 			});
-		unsigned int output_eighteen=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+		unsigned int output_eighteen=MakeOutput(NS_DataObject::GetTypeID("bool"),[this](){
 			ImGui::PushItemWidth(100);
-			ImGui::Text("DPadDown");
+			ImGui::Text(("DPadDown "+std::string(DPadDown?"True":"False")).c_str());
 			});
-		unsigned int output_nineteen=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+		unsigned int output_nineteen=MakeOutput(NS_DataObject::GetTypeID("bool"),[this](){
 			ImGui::PushItemWidth(100);
-			ImGui::Text("DPadLeft");
+			ImGui::Text(("DPadLeft "+std::string(DPadLeft?"True":"False")).c_str());
 			});
-		unsigned int output_twenty=MakeOutput(NS_DataObject::GetTypeID("bool"),[](){
+		unsigned int output_twenty=MakeOutput(NS_DataObject::GetTypeID("bool"),[this](){
 			ImGui::PushItemWidth(100);
-			ImGui::Text("DPadRight");
+			ImGui::Text(("DPadRight "+std::string(DPadRight?"True":"False")).c_str());
 			});
 		//make lines
 		MakeLine(-1,attribute_one,output_one);
