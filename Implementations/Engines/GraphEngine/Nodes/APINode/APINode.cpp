@@ -128,7 +128,18 @@ public:
 		}
 	}
 
-	void DrawNodeTitle(ImGuiContext* Context) {
+	void Update(ImGuiContext *Context, GLFWwindow* window) override {
+		//set  glfw context
+		glfwMakeContextCurrent(window);
+		//set imgui context
+		ImGui::SetCurrentContext(Context);
+
+	}
+
+	void DrawNodeTitle(ImGuiContext *Context, GLFWwindow* window){
+				//set  glfw context
+		glfwMakeContextCurrent(window);
+		//set imgui context
 		ImGui::SetCurrentContext(Context);
 		switch (type)
 		{
@@ -146,11 +157,13 @@ public:
 		}
 	}
 
-	void Update() override {
-		
+	void DrawNodeProperties(ImGuiContext *Context, GLFWwindow* window){
+		//set  glfw context
+		glfwMakeContextCurrent(window);
+		//set imgui context
+		ImGui::SetCurrentContext(Context);
 	}
 
-	//void DrawNodeTitle();
 
 	NodeInterface* GetInstance() override{
 		APINode* node = new APINode();

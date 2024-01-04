@@ -93,13 +93,26 @@ public:
 		}
 	}
 
-	void DrawNodeTitle(ImGuiContext* Context) {
+	void Update(ImGuiContext *Context, GLFWwindow* window) override {
+		//set  glfw context
+		glfwMakeContextCurrent(window);
+		//set imgui context
 		ImGui::SetCurrentContext(Context);
-		ImGui::Text("Database Node");
+
 	}
 
-	void Update() override {
+	void DrawNodeTitle(ImGuiContext *Context, GLFWwindow* window){
+				//set  glfw context
+		glfwMakeContextCurrent(window);
+		//set imgui context
+		ImGui::SetCurrentContext(Context);
+	}
 
+	void DrawNodeProperties(ImGuiContext *Context, GLFWwindow* window){
+		//set  glfw context
+		glfwMakeContextCurrent(window);
+		//set imgui context
+		ImGui::SetCurrentContext(Context);
 	}
 
 	void Init() override {

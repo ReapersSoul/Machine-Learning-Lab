@@ -129,11 +129,11 @@ namespace NS_Node
 
 		virtual void Process(bool Direction) = 0;
 
-		virtual void Update(){};
+		virtual void Update(ImGuiContext *Context, GLFWwindow* window)=0;
 
-		virtual void DrawNodeTitle(ImGuiContext *Context);
+		virtual void DrawNodeTitle(ImGuiContext *Context, GLFWwindow* window)=0;
 
-		virtual void DrawNodeProperties(ImGuiContext *Context);
+		virtual void DrawNodeProperties(ImGuiContext *Context, GLFWwindow* window)=0;
 
 		virtual NS_Node::NodeInterface *GetInstance() = 0;
 

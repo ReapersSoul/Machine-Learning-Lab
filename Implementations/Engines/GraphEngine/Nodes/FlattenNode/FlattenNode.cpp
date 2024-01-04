@@ -42,8 +42,26 @@ public:
 		MakeLine(input_one, -1, output_one);
 	}
 
-	void Update() override {
+	void Update(ImGuiContext *Context, GLFWwindow* window) override {
+		//set  glfw context
+		glfwMakeContextCurrent(window);
+		//set imgui context
+		ImGui::SetCurrentContext(Context);
 
+	}
+
+	void DrawNodeTitle(ImGuiContext *Context, GLFWwindow* window){
+				//set  glfw context
+		glfwMakeContextCurrent(window);
+		//set imgui context
+		ImGui::SetCurrentContext(Context);
+	}
+
+	void DrawNodeProperties(ImGuiContext *Context, GLFWwindow* window){
+		//set  glfw context
+		glfwMakeContextCurrent(window);
+		//set imgui context
+		ImGui::SetCurrentContext(Context);
 	}
 
 	nlohmann::json Serialize() override {

@@ -48,12 +48,26 @@ public:
 		MakeLine(input, attribute, output);
 	}
 
-	void StandAloneInit() {
+	void Update(ImGuiContext *Context, GLFWwindow* window) override {
+		//set  glfw context
+		glfwMakeContextCurrent(window);
+		//set imgui context
+		ImGui::SetCurrentContext(Context);
 
 	}
 
-	void Update() override {
-		
+	void DrawNodeTitle(ImGuiContext *Context, GLFWwindow* window){
+				//set  glfw context
+		glfwMakeContextCurrent(window);
+		//set imgui context
+		ImGui::SetCurrentContext(Context);
+	}
+
+	void DrawNodeProperties(ImGuiContext *Context, GLFWwindow* window){
+		//set  glfw context
+		glfwMakeContextCurrent(window);
+		//set imgui context
+		ImGui::SetCurrentContext(Context);
 	}
 
 	NodeInterface* GetInstance() override {

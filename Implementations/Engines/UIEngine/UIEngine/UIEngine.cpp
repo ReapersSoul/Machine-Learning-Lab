@@ -185,7 +185,7 @@ class UIEngine : public UIEngineInterface
 						SelectedEdgesUID.push_back(edge.Get());
 					}
 					if (GraphEngine->GetGraphs()["main"]->GetNodes().find(SelectedNodesUID[0]) != GraphEngine->GetGraphs()["main"]->GetNodes().end()) {
-						GraphEngine->GetGraphs()["main"]->GetNodes()[SelectedNodesUID[0]]->DrawNodeProperties(ImGui::GetCurrentContext());
+						GraphEngine->GetGraphs()["main"]->GetNodes()[SelectedNodesUID[0]]->DrawNodeProperties(ImGui::GetCurrentContext(), window);
 					}
 				}
 			}
@@ -291,7 +291,7 @@ class UIEngine : public UIEngineInterface
 			//draw nodes
 			for (auto node : nodes) {
 				ed::BeginNode(node.second->GetUID());
-				node.second->DrawNodeTitle(ImGui::GetCurrentContext());
+				node.second->DrawNodeTitle(ImGui::GetCurrentContext(), window);
 				if (Debug) {
 					ImGui::SameLine();
 					ImGui::Text(std::to_string(node.second->GetUID()).c_str());
@@ -362,7 +362,7 @@ class UIEngine : public UIEngineInterface
 					}
 				}
 				ed::EndNode();
-				node.second->Update();
+				node.second->Update(ImGui::GetCurrentContext(), window);
 			}
 			//draw links
 			for (auto edge : edges)
@@ -695,6 +695,17 @@ class UIEngine : public UIEngineInterface
 			{
 				ImGui::Text(loss.first.c_str());
 			}
+
+			//available controllers
+			ImGui::Separator();
+			ImGui::Text("Available Controllers:");
+			for (int i = GLFW_JOYSTICK_1; i < GLFW_JOYSTICK_16; i++)
+			{
+				if (glfwJoystickPresent(i)) {
+					ImGui::Text(glfwGetJoystickName(i));
+				}
+			}
+			
 		}
 		ImGui::End();
 	}

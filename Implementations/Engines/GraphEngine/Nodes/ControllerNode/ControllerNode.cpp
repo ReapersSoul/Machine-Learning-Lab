@@ -145,6 +145,18 @@ public:
 		MakeLine(-1,-1,output_eighteen);
 		MakeLine(-1,-1,output_nineteen);
 		MakeLine(-1,-1,output_twenty);
+
+		int l= MakeAttribute(new Attribute([this]() {
+			ImGui::PushItemWidth(100);
+			ImGui::Text("Available Controllers:");
+			for (int i = GLFW_JOYSTICK_1; i < GLFW_JOYSTICK_16; i++)
+			{
+				if (glfwJoystickPresent(i)) {
+					ImGui::Text(glfwGetJoystickName(i));
+				}
+			}
+			}));
+		MakeLine(-1,l,-1);
 	}
 
 	void Process(bool DirectionForward) override {
@@ -173,7 +185,11 @@ public:
 		}
 	}
 
-	void Update() override {
+	void Update(ImGuiContext *Context, GLFWwindow* window) override {
+		//set  glfw context
+		glfwMakeContextCurrent(window);
+		//set imgui context
+		ImGui::SetCurrentContext(Context);
 		//get joystick count
 		int present = glfwJoystickPresent(joystick);
 		if (present == GLFW_TRUE) {
@@ -227,6 +243,21 @@ public:
 			DPadLeft = false;
 			DPadRight = false;
 		}
+	}
+
+	void DrawNodeTitle(ImGuiContext *Context, GLFWwindow* window){
+				//set  glfw context
+		glfwMakeContextCurrent(window);
+		//set imgui context
+		ImGui::SetCurrentContext(Context);
+		ImGui::Text("Controller");
+	}
+
+	void DrawNodeProperties(ImGuiContext *Context, GLFWwindow* window){
+		//set  glfw context
+		glfwMakeContextCurrent(window);
+		//set imgui context
+		ImGui::SetCurrentContext(Context);
 	}
 
 	nlohmann::json Serialize() override {

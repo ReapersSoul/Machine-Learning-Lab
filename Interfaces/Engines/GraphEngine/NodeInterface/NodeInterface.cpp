@@ -240,18 +240,6 @@ namespace NS_Node
 		return Outputs;
 	}
 
-	void NodeInterface::DrawNodeTitle(ImGuiContext *Context)
-	{
-		ImGui::SetCurrentContext(Context);
-		ImGui::Text(TypeID.c_str());
-	}
-
-	void NodeInterface::DrawNodeProperties(ImGuiContext *Context)
-	{
-		ImGui::SetCurrentContext(Context);
-		ImGui::Text("Node Properties");
-	}
-
 	nlohmann::json NodeInterface::Serialize()
 	{
 		nlohmann::json data;
