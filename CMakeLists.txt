@@ -1,4 +1,5 @@
-﻿# CMakeList.txt : Top-level CMake project file, do global configuration
+﻿project("Machine-Learning-Lab-Suite")
+# CMakeList.txt : Top-level CMake project file, do global configuration
 # and include sub-projects here.
 #
 cmake_minimum_required (VERSION 3.8)
@@ -11,7 +12,6 @@ endif()
 
 add_definitions(-w -fcompare-debug-second)
 add_definitions(-fPIC -g -g)
-project ("Machine-Learning-Lab")
 
 set(INTERFACE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/Interfaces/)
 set(IMPLEMENTATIONS_PATH ${CMAKE_CURRENT_SOURCE_DIR}/Implementations/)
@@ -112,7 +112,7 @@ add_subdirectory(${ENGINE_IM_PATH}/GraphEngine/Nodes/ColumnNode/ ${CMAKE_BINARY_
 add_subdirectory(${ENGINE_IM_PATH}/GraphEngine/Nodes/AtIndexNode/ ${CMAKE_BINARY_DIR}/Implementations/Nodes/AtIndexNode/)
 #add_subdirectory(${ENGINE_IM_PATH}/GraphEngine/Nodes/APINode/ ${CMAKE_BINARY_DIR}/Implementations/Nodes/APINode/)
 
-add_subdirectory(${PROJECT_NAME})
+add_subdirectory("Machine-Learning-Lab")
 
 add_subdirectory(Cleaner)
 

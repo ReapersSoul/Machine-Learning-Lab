@@ -19,7 +19,6 @@ class Attribute;
 class DynamicCodeExecutionEngineInterface;
 class ActivationEngineInterface;
 class LossEngineInterface;
-
 namespace NS_Node
 {
 	class NodeInterface : public SerializableInterface
@@ -52,7 +51,7 @@ namespace NS_Node
 		DynamicCodeExecutionEngineInterface *DCEE;
 		ActivationEngineInterface *AE;
 		LossEngineInterface *LE;
-
+		NS_DataObject::Registrar * DO_Registrar;
 	public:
 		void ResetIO();
 
@@ -125,7 +124,7 @@ namespace NS_Node
 
 		std::vector<IO *> &GetOutputs();
 
-		virtual void Init() = 0;
+		virtual void Init(NS_DataObject::Registrar* registrar) = 0;
 
 		virtual void Process(bool Direction) = 0;
 
@@ -138,7 +137,7 @@ namespace NS_Node
 		virtual NS_Node::NodeInterface *GetInstance() = 0;
 
 		virtual nlohmann::json Serialize();
-		virtual void DeSerialize(nlohmann::json data, void *DCEE);
+		virtual void DeSerialize(nlohmann::json data, void *DCEE, NS_DataObject::Registrar* regestrar);
 
 		// virtual destructor
 		virtual ~NodeInterface(){};
@@ -146,7 +145,7 @@ namespace NS_Node
 
 	class Registrar
 	{
-		std::unordered_map<unsigned int, std::function<NodeInterface *()>> Constructors;
+		std::unordered_map<unsigned int, std::function<NodeInterface *(NS_DataObject::Registrar*)>> Constructors;
 		std::unordered_map<std::string, unsigned int> TypeIDs;
 		std::unordered_map<unsigned int, std::string> TypeIDsReverse;
 
@@ -158,18 +157,18 @@ namespace NS_Node
 
 		unsigned int RegisterType(std::string TypeID);
 
-		void RegisterConstructor(unsigned int TypeID, std::function<NodeInterface *()> Constructor);
+		void RegisterConstructor(unsigned int TypeID, std::function<NodeInterface *(NS_DataObject::Registrar*)> Constructor);
 	public:
 		Registrar();
 
-		std::unordered_map<unsigned int, std::function<NodeInterface *()>> &GetConstructors();
+		std::unordered_map<unsigned int, std::function<NodeInterface *(NS_DataObject::Registrar*)>> &GetConstructors();
 
 		std::unordered_map<std::string, unsigned int> &GetTypeIDs();
 
 		std::unordered_map<unsigned int, std::string> &GetTypeIDsReverse();
 
-		void RegisterNode(std::string TypeID, std::function<NodeInterface *()> Constructor);
+		void RegisterNode(std::string TypeID, std::function<NodeInterface *(NS_DataObject::Registrar*)> Constructor);
 
-		NodeInterface *Construct(unsigned int TypeID);
+		NodeInterface *Construct(unsigned int TypeID,NS_DataObject::Registrar* registrar);
 	};
 }

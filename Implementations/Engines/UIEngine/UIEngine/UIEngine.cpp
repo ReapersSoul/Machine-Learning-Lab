@@ -362,6 +362,15 @@ class UIEngine : public UIEngineInterface
 					}
 				}
 				ed::EndNode();
+
+				printf("Available Controllers:\n");
+				for (int i = GLFW_JOYSTICK_1; i < GLFW_JOYSTICK_16; i++)
+				{
+					if (glfwJoystickPresent(i)) {
+						printf(glfwGetJoystickName(i));
+						printf("\n");
+					}
+				}
 				node.second->Update(ImGui::GetCurrentContext(), window);
 			}
 			//draw links

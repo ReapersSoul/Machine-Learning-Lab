@@ -162,6 +162,7 @@ public:
 	void Process(bool DirectionForward) override {
 		if (DirectionForward) {
 			//get controller values
+			GetInputByLine(0)->AddData(NS_DataObject::)
 			// SetOutputByIndexData(0, A);
 			// SetOutputByIndexData(1, B);
 			// SetOutputByIndexData(2, X);
@@ -190,6 +191,16 @@ public:
 		glfwMakeContextCurrent(window);
 		//set imgui context
 		ImGui::SetCurrentContext(Context);
+
+		printf("Available Controllers:\n");
+		for (int i = GLFW_JOYSTICK_1; i < GLFW_JOYSTICK_16; i++)
+		{
+			if (glfwJoystickPresent(i)) {
+				printf(glfwGetJoystickName(i));
+				printf("\n");
+			}
+		}
+
 		//get joystick count
 		int present = glfwJoystickPresent(joystick);
 		if (present == GLFW_TRUE) {

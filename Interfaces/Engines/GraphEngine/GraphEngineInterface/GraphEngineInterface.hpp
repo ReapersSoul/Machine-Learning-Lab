@@ -10,6 +10,7 @@ class GraphEngineInterface: public EngineInterface {
 protected:
 	std::map<std::string,Graph*> Graphs;
 	NS_Node::Registrar NodeRegistrar;
+	NS_DataObject::Registrar DataObjectRegistrar;
 	ActivationEngineInterface* AE;
 	NS_Activation::Registrar* ActivationRegistrar;
 	LossEngineInterface* LE;

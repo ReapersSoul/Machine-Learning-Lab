@@ -39,7 +39,7 @@ public:
         this->TypeID = tid;
     }
 
-    void Init() override {
+    void Init(NS_DataObject::Registrar * registrar) override {
         if (this->Language != nullptr) {
             this->Language->LoadScript(this);
             this->Language->CreateNode(this);
@@ -94,8 +94,8 @@ public:
         return data;
     }
 
-    void DeSerialize(nlohmann::json data, void* DCEE) override {
-        NS_Node::NodeInterface::DeSerialize(data, DCEE);
+    void DeSerialize(nlohmann::json data, void *DCEE, void * regestrar) override {
+        NS_Node::NodeInterface::DeSerialize(data, DCEE, (NS_DataObject::Registrar*)regestrar);
 
         Language = DCEEngine->GetLanguage(data["Language"]);
 
@@ -109,7 +109,7 @@ extern "C" {
         return "ScriptNode";
     }
 
-    EXPORT NS_Node::NodeInterface* GetInstance() {
+    EXPORT NS_Node::NodeInterface* GetInstance(NS_DataObject::Registrar * registrar) {
         ScriptNode* node = new ScriptNode();
         return dynamic_cast<NS_Node::NodeInterface*>(node);
     }

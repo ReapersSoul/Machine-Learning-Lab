@@ -262,7 +262,7 @@ namespace NS_Node
 		return data;
 	}
 
-	void NodeInterface::DeSerialize(nlohmann::json data, void *DCEE)
+	void NodeInterface::DeSerialize(nlohmann::json data, void *DCEE,NS_DataObject::Registrar* registrar)
 	{
 		// set DCEE
 		this->DCEE = (DynamicCodeExecutionEngineInterface *)DCEE;
@@ -274,7 +274,7 @@ namespace NS_Node
 		UID = data["UID"];
 		InputEdges.clear();
 		OutputEdges.clear();
-		Init();
+		Init(registrar);
 
 		// set Description?
 
@@ -288,7 +288,7 @@ namespace NS_Node
 		}
 	}
 
-	std::unordered_map<unsigned int, std::function<NodeInterface *()>> &Registrar::GetConstructors()
+	std::unordered_map<unsigned int, std::function<NodeInterface *(NS_DataObject::Registrar*)>> &Registrar::GetConstructors()
 	{
 		return Constructors;
 	}
@@ -304,7 +304,7 @@ namespace NS_Node
 	}
 
 	Registrar::Registrar(){
-		Constructors = {{0, []()
+		Constructors = {{0, [](void*)
 						 { return nullptr; }}};
 		TypeIDs = {{"Invalid", 0}};
 		TypeIDsReverse = {{0, "Invalid"}};
@@ -337,14 +337,14 @@ namespace NS_Node
 		return UID;
 	}
 
-	void Registrar::RegisterConstructor(unsigned int TypeID, std::function<NodeInterface *()> Constructor)
+	void Registrar::RegisterConstructor(unsigned int TypeID, std::function<NodeInterface *(NS_DataObject::Registrar*)> Constructor)
 	{
 		if (Constructors.find(TypeID) != Constructors.end())
 			throw std::runtime_error("Constructor already registered");
 		Constructors[TypeID] = Constructor;
 	}
 
-	void Registrar::RegisterNode(std::string TypeID, std::function<NodeInterface *()> Constructor)
+	void Registrar::RegisterNode(std::string TypeID, std::function<NodeInterface *(NS_DataObject::Registrar*)> Constructor)
 	{
 		if (!TypeIDExists(TypeID))
 			RegisterConstructor(RegisterType(TypeID), Constructor);
@@ -352,8 +352,8 @@ namespace NS_Node
 			RegisterConstructor(TypeIDs[TypeID], Constructor);
 	}
 
-	NodeInterface * Registrar::Construct(unsigned int TypeID)
+	NodeInterface * Registrar::Construct(unsigned int TypeID,NS_DataObject::Registrar* registrar)
 	{
-		return Constructors[TypeID]();
+		return Constructors[TypeID](registrar);
 	}
 }

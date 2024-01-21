@@ -265,13 +265,13 @@ public:
 		max_threads = device.getInfo<CL_DEVICE_MAX_WORK_GROUP_SIZE>();
 	}
 
-	void Init() override {
+	void Init(voic* DataObjectRegisrar) override {
 		ResizeNetwork(inputSize, layers);
 		RandomizeWeights();
-		unsigned int input_one=MakeInput(NS_DataObject::GetTypeID("Scalar"), [](){
+		unsigned int input_one=MakeInput(DataObjectRegisrar->GetTypeID("Scalar"), [](){
 			ImGui::Text("Input");
 		});
-		unsigned int input_two=MakeOutput(NS_DataObject::GetTypeID("Scalar"), [](){
+		unsigned int input_two=MakeOutput(DataObjectRegisrar->GetTypeID("Scalar"), [](){
 			ImGui::Text("Output");
 		});
 

@@ -382,7 +382,7 @@ public:
 		return nullptr;
 	}
 
-	void DeSerialize(nlohmann::json data, void* DCEE) override {
+	void DeSerialize(nlohmann::json data, void* DCEE, void* regestrar) override {
 		return;
 	}
 

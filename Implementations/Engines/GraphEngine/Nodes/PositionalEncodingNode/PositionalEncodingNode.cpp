@@ -36,11 +36,11 @@ public:
 		TypeID = "PositionalEncodingNode";
 	}
 
-	void Init() override {
-		unsigned int input_one=MakeInput(NS_DataObject::GetTypeID("Scalar"), [](){
+	void Init(NS_DataObject::Registrar* registrar) override {
+		unsigned int input_one=MakeInput(registrar->GetTypeID("Scalar"), [](){
 			ImGui::Text("Input");
 		});
-		unsigned int output_one=MakeOutput(NS_DataObject::GetTypeID("Scalar"), [](){
+		unsigned int output_one=MakeOutput(registrar->GetTypeID("Scalar"), [](){
 			ImGui::Text("Output");
 		});
 
@@ -115,8 +115,8 @@ public:
 		ImGui::SetCurrentContext(Context);
 	}
 
-	NodeInterface* GetInstance() {
-		PositionalEncodingNode* node = new PositionalEncodingNode();
+	NodeInterface* GetInstance(NS_DataObject::Registrar* registrar) {
+		PositionalEncodingNode* node = new PositionalEncodingNode(registrar);
 		return node;
 	}
 
@@ -140,8 +140,8 @@ extern "C" {
 	}
 
 	// Define a function that returns the result of adding two numbers
-	EXPORT NS_Node::NodeInterface* GetInstance() {
-		return new PositionalEncodingNode();
+	EXPORT NS_Node::NodeInterface* GetInstance(void* registrar) {
+		return new PositionalEncodingNode(registrar);
 	}
 
 	EXPORT void Register(void* registrar) {
